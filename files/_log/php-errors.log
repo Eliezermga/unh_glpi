@@ -1,0 +1,42 @@
+[2026-01-07 10:12:41] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:12:58] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:13:15] glpiphplog.WARNING:   *** PHP User Warning (512): Missing required intl PHP extension in C:\xampp\htdocs\projet\glpi\src\Session.php at line 694
+  Backtrace :
+  src\Session.php:694                                trigger_error()
+  inc\config.php:69                                  Session::loadLanguage()
+  inc\includes.php:53                                include_once()
+  front\locale.php:41                                include()
+  
+[2026-01-07 10:13:38] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:17:22] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:17:29] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:17:32] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:19:35] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:19:40] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:19:44] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:26:41] glpiphplog.WARNING:   *** PHP User Warning (512): Missing required intl PHP extension in C:\xampp\htdocs\projet\glpi\src\Session.php at line 694
+  Backtrace :
+  src\Session.php:694                                trigger_error()
+  inc\config.php:69                                  Session::loadLanguage()
+  inc\includes.php:53                                include_once()
+  front\locale.php:41                                include()
+  
+[2026-01-07 10:26:49] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:27:21] glpiphplog.WARNING: Test logger  
+[2026-01-07 10:29:00] glpiphplog.CRITICAL:   *** Uncaught Exception mysqli_sql_exception: Unknown database 'glpi' in C:\xampp\htdocs\projet\glpi\install\install.php at line 319
+  Backtrace :
+  install\install.php:319                            mysqli->select_db()
+  install\install.php:598                            step4()
+  
+[2026-01-07 10:29:11] glpiphplog.CRITICAL:   *** Uncaught Exception TypeError: array_sum(): Argument #1 ($array) must be of type array, null given in C:\xampp\htdocs\projet\glpi\src\Html.php at line 760
+  Backtrace :
+  src\Html.php:760                                   array_sum()
+  src\Html.php:1881                                  Html::displayDebugInfos()
+  src\Html.php:2104                                  Html::footer()
+  src\Html.php:888                                   Html::nullFooter()
+  src\Session.php:1537                               Html::displayErrorAndDie()
+  install\install.php:544                            Session::checkCSRF()
+  
+[2026-01-07 10:29:12] glpiphplog.DEBUG: Html::compileScss() in C:\xampp\htdocs\projet\glpi\src\Html.php line 6842
+Compile css/palettes/auror.scss  {"user":"@ELITEBOOKG7"} 
+[2026-01-07 10:29:29] glpiphplog.WARNING: Test logger  

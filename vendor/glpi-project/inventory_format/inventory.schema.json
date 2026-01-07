@@ -1,0 +1,3000 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://glpi-project.org/inventory.json",
+  "type": "object",
+  "title": "GLPI Inventory Schema",
+  "version": "0.1",
+  "definitions": {
+    "datetime": {
+      "type": "string",
+      "examples": [
+        "2018-10-11 04:55:07"
+      ],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}[ |T][0-9]{2}:[0-9]{2}:[0-9]{2}(Z|[+|-][0-9]{2}:[0-9]{2}:[0-9]{2})?$"
+    },
+    "date": {
+      "type": "string",
+      "examples": [
+        "2018-12-31",
+        "2012-01-01"
+      ],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "dateordatetime": {
+      "type": "string",
+      "examples": [
+        "2018-10-11 04:55:07"
+      ],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}([ |T][0-9]{2}:[0-9]{2}:[0-9]{2}(Z|[+|-][0-9]{2}:[0-9]{2}:[0-9]{2})?)?$"
+    }
+  },
+  "required": [
+    "content",
+    "deviceid"
+  ],
+  "properties": {
+    "content": {
+      "type": "object",
+      "required": [
+        "versionclient"
+      ],
+      "properties": {
+        "accesslog": {
+          "type": "object",
+          "required": [
+            "logdate"
+          ],
+          "properties": {
+            "logdate": {
+              "examples": [
+                "2018-10-11 04:55:07"
+              ],
+              "$ref": "#/definitions/datetime"
+            },
+            "userid": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "antivirus": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "company": {
+                "type": "string",
+                "examples": [
+                  "Microsoft Corporation"
+                ]
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "guid": {
+                "type": "string",
+                "examples": [
+                  "{641105E6-77ED-3F35-A304-765193BCB75F}"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "Microsoft Security Essentials"
+                ]
+              },
+              "uptodate": {
+                "type": "boolean"
+              },
+              "version": {
+                "type": "string",
+                "examples": [
+                  "4.3.216.0"
+                ]
+              },
+              "expiration": {
+                "title": "License expiration date",
+                "$ref": "#/definitions/date"
+              },
+              "base_creation": {
+                "$comment": "What type is it? A date?",
+                "type": "string"
+              },
+              "base_version": {
+                "type": "string",
+                "title": "Signatures base version"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "batteries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "capacity": {
+                "type": "integer",
+                "title": "Battery max capacity by design, in mWh"
+              },
+              "real_capacity": {
+                "type": "integer",
+                "title": "Real battery capacity which decreases with battery lifetime, in mWh"
+              },
+              "date": {
+                "$ref": "#/definitions/date"
+              },
+              "chemistry": {
+                "type": "string",
+                "examples": [
+                  "Li-ION"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "TOSHIBA"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "DELL JHXPY53"
+                ]
+              },
+              "serial": {
+                "type": "string"
+              },
+              "voltage": {
+                "type": "integer",
+                "title": "Battery voltage, in mV"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "bios": {
+          "type": "object",
+          "properties": {
+            "assettag": {
+              "type": "string"
+            },
+            "bdate": {
+              "$ref": "#/definitions/dateordatetime"
+            },
+            "bmanufacturer": {
+              "type": "string",
+              "title": "BIOS manufacturer",
+              "examples": [
+                "TOSHIBA"
+              ]
+            },
+            "bversion": {
+              "type": "string",
+              "examples": [
+                "Version 3.70"
+              ]
+            },
+            "mmanufacturer": {
+              "type": "string",
+              "title": "Motherboard manufacturer",
+              "examples": [
+                "TOSHIBA"
+              ]
+            },
+            "mmodel": {
+              "type": "string",
+              "title": "Motherboard Model",
+              "examples": [
+                "PORTEGE Z30-A"
+              ]
+            },
+            "msn": {
+              "type": "string",
+              "title": "Motherboard Serial Number",
+              "examples": [
+                "C0366791B0E970YU"
+              ]
+            },
+            "skunumber": {
+              "type": "string",
+              "examples": [
+                "PT243E"
+              ]
+            },
+            "smanufacturer": {
+              "type": "string",
+              "title": "System manufacturer",
+              "examples": [
+                "TOSHIBA"
+              ]
+            },
+            "smodel": {
+              "type": "string",
+              "title": "System model",
+              "examples": [
+                "PORTEGE Z30-A"
+              ]
+            },
+            "ssn": {
+              "type": "string",
+              "title": "System Serial Number",
+              "examples": [
+                "9E113232H"
+              ]
+            },
+            "biosserial": {
+              "type": "string"
+            },
+            "enclosureserial": {
+              "type": "string"
+            },
+            "secure_boot": {
+              "type": "string",
+              "pattern": "^(enabled|disabled|unsupported)$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "controllers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "Haswell-ULT DRAM Controller"
+                ]
+              },
+              "driver": {
+                "type": "string",
+                "examples": [
+                  "hsw_uncore"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "Intel Corporation"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "Haswell-ULT DRAM Controller"
+                ]
+              },
+              "pcisubsystemid": {
+                "type": "string",
+                "examples": [
+                  "8086:2a40"
+                ]
+              },
+              "pciclass": {
+                "type": "string",
+                "examples": [
+                  "0600"
+                ]
+              },
+              "pcislot": {
+                "type": "string",
+                "examples": [
+                  "00:02.1"
+                ]
+              },
+              "productid": {
+                "type": "string",
+                "examples": [
+                  "0a04"
+                ]
+              },
+              "rev": {
+                "type": "string",
+                "examples": [
+                  "08"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "Host bridge"
+                ]
+              },
+              "vendorid": {
+                "type": "string",
+                "examples": [
+                  "8086"
+                ]
+              },
+              "model": {
+                "type": "string",
+                "examples": [
+                  "099GTM"
+                ]
+              },
+              "serial": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "cpus": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "arch": {
+                "type": "string",
+                "examples": [
+                  "i386",
+                  "i586",
+                  "i686",
+                  "sparc"
+                ],
+                "pattern": "^(mips|mips64|alpha|sparc|sparc64|m68k|i\\d86|x86_64|powerpc|powerpc64|arm.*|aarch64)$"
+              },
+              "core": {
+                "type": "integer",
+                "title": "Enabled number of cores",
+                "examples": [
+                  "2"
+                ]
+              },
+              "corecount": {
+                "type": "integer",
+                "title": "Total number of cores",
+                "examples": [
+                  "4"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "examples": [
+                  "Intel64 Family 6 Model 47 Stepping 2"
+                ]
+              },
+              "external_clock": {
+                "type": "integer",
+                "title": "Frequency in MHz",
+                "examples": [
+                  "100"
+                ]
+              },
+              "familyname": {
+                "type": "string",
+                "examples": [
+                  "Core i5"
+                ]
+              },
+              "familynumber": {
+                "type": "string",
+                "examples": [
+                  "6"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "examples": [
+                  "51 06 04 00 FF FB EB BF"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "Intel"
+                ]
+              },
+              "model": {
+                "type": "string",
+                "examples": [
+                  "69"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz"
+                ]
+              },
+              "serial": {
+                "type": "string",
+                "examples": [
+                  "To Be Filled By O.E.M."
+                ]
+              },
+              "speed": {
+                "type": "integer",
+                "title": "CPU frequency in MHz",
+                "examples": [
+                  "1700"
+                ]
+              },
+              "stepping": {
+                "type": "integer",
+                "examples": [
+                  "1"
+                ]
+              },
+              "thread": {
+                "type": "integer",
+                "title": "Number of threads per core",
+                "examples": [
+                  "4"
+                ]
+              },
+              "cache": {
+                "$comment": "Never seen",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "drives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "examples": [
+                  "Lecteur de disquettes 3 ½ pouces"
+                ]
+              },
+              "letter": {
+                "type": "string",
+                "title": "Filesystem letter (Windows only)",
+                "examples": [
+                  "A:"
+                ]
+              },
+              "systemdrive": {
+                "type": "boolean",
+                "title": "Wether it is the system partition (Windows only)"
+              },
+              "filesystem": {
+                "type": "string",
+                "examples": [
+                  "ext4"
+                ]
+              },
+              "free": {
+                "type": "integer",
+                "title": "Free space in MB",
+                "default": "",
+                "examples": [
+                  "7914"
+                ]
+              },
+              "serial": {
+                "type": "string",
+                "examples": [
+                  "444ea44f-6801-4ad2-9778-0321c2079dab"
+                ]
+              },
+              "total": {
+                "type": "integer",
+                "title": "Total space in MB",
+                "examples": [
+                  "150268"
+                ]
+              },
+              "type": {
+                "$comment": "Should be renamed, 'mount_point' as example",
+                "type": "string",
+                "title": "Mount point (*nix only)",
+                "examples": [
+                  "/"
+                ]
+              },
+              "volumn": {
+                "type": "string",
+                "title": "Filesystem system name, ie '/dev/sda1' or 'host:/path' for NFS",
+                "examples": [
+                  "/dev/mapper/fedora-root"
+                ]
+              },
+              "createdate": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "encrypt_name": {
+                "type": "string",
+                "title": "Supported encryption",
+                "examples": [
+                  "BitLocker",
+                  "cryptsetup",
+                  "FileVault"
+                ]
+              },
+              "encrypt_algo": {
+                "type": "string",
+                "title": "Used encryption algorithm",
+                "examples": [
+                  "AES_128",
+                  "AES_256",
+                  "HARDWARE_ENCRYPTION"
+                ]
+              },
+              "encrypt_status": {
+                "type": "string",
+                "title": "Encryption status",
+                "examples": [
+                  "Yes",
+                  "No",
+                  "Partially"
+                ]
+              },
+              "encrypt_type": {
+                "type": "string",
+                "title": "Encryption type",
+                "examples": [
+                  "hardware",
+                  "software"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "envs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "val"
+            ],
+            "properties": {
+              "key": {
+                "type": "string",
+                "examples": [
+                  "TERM"
+                ]
+              },
+              "val": {
+                "type": "string",
+                "examples": [
+                  "xterm"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "firewalls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "description": {
+                "type": "string",
+                "title": "Active connection's interface (Windows only)"
+              },
+              "ipaddress": {
+                "type": "string",
+                "title": "Active connection's ip (Windows only)",
+                "format": "ipv4"
+              },
+              "ipaddress6": {
+                "type": "string",
+                "title": "Active connection's ip (Windows only)",
+                "format": "ipv6"
+              },
+              "profile": {
+                "type": "string",
+                "title": "Firewall profile (Windows only)",
+                "examples": [
+                  "PublicProfile"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "on"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "hardware": {
+          "type": "object",
+          "properties": {
+            "chassis_type": {
+              "type": "string",
+              "title": "Computer chassis format, ie 'Notebook', 'Laptop', 'Server', etc.",
+              "examples": [
+                "Notebook"
+              ]
+            },
+            "datelastloggeduser": {
+              "type": "string"
+            },
+            "defaultgateway": {
+              "type": "string",
+              "examples": [
+                "192.168.1.1"
+              ]
+            },
+            "dns": {
+              "type": "string",
+              "examples": [
+                "172.28.200.20/172.21.201.241/192.168.1.1"
+              ]
+            },
+            "lastloggeduser": {
+              "type": "string",
+              "examples": [
+                "john"
+              ]
+            },
+            "memory": {
+              "type": "integer",
+              "title": "Total system memory in MB",
+              "examples": [
+                "7908"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "examples": [
+                "LF014"
+              ]
+            },
+            "swap": {
+              "type": "integer",
+              "title": "Swap memory in MB",
+              "default": "",
+              "examples": [
+                "7935"
+              ]
+            },
+            "uuid": {
+              "type": "string",
+              "title": "Computer unique identifier",
+              "examples": [
+                "0055ADC9-1D3A-E411-8043-B05D95113232"
+              ]
+            },
+            "vmsystem": {
+              "type": "string",
+              "examples": [
+                "Physical",
+                "Docker",
+                "lxc"
+              ]
+            },
+            "workgroup": {
+              "type": "string",
+              "examples": [
+                "ad.example.com"
+              ]
+            },
+            "type": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "winprodid": {
+              "type": "string",
+              "examples": [
+                "ID-1000010051"
+              ]
+            },
+            "winowner": {
+              "type": "string"
+            },
+            "winprodkey": {
+              "type": "string"
+            },
+            "wincompany": {
+              "type": "string"
+            },
+            "winlang": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "AT Translated Set 2 keyboard"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "examples": [
+                  "AT Translated Set 2 keyboard"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "sysrq"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "interface": {
+                "type": "string"
+              },
+              "layout": {
+                "type": "string"
+              },
+              "pointingtype": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "local_groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "examples": [
+                  "10"
+                ]
+              },
+              "members": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "examples": [
+                    "builder",
+                    "jdoe@ad.example.com",
+                    "john"
+                  ]
+                }
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "wheel"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "local_users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "home": {
+                "type": "string",
+                "examples": [
+                  "/root"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "login": {
+                "type": "string",
+                "examples": [
+                  "root"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "root"
+                ]
+              },
+              "shell": {
+                "type": "string",
+                "examples": [
+                  "/bin/zsh"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "physical_volumes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "device",
+              "format",
+              "free",
+              "pv_pe_count",
+              "pv_uuid",
+              "size"
+            ],
+            "properties": {
+              "attr": {
+                "type": "string",
+                "examples": [
+                  "a--"
+                ]
+              },
+              "device": {
+                "type": "string",
+                "examples": [
+                  "/dev/mapper/luks-cb6a71cc-593e-4490-9c75-3e4d652ed366"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "examples": [
+                  "lvm2"
+                ]
+              },
+              "free": {
+                "type": "integer",
+                "title": "Free size, in MB",
+                "examples": [
+                  "4"
+                ]
+              },
+              "pe_size": {
+                "type": "integer",
+                "title": "Physical Extent size, in MB",
+                "examples": [
+                  "4"
+                ]
+              },
+              "pv_pe_count": {
+                "type": "integer",
+                "title": "Number of physical elements",
+                "examples": [
+                  "60923"
+                ]
+              },
+              "pv_uuid": {
+                "type": "string",
+                "examples": [
+                  "1CmGuH-0Vwr-H3O6-dhgy-wEHS-P2jC-NuhuPS"
+                ]
+              },
+              "size": {
+                "type": "integer",
+                "title": "Volume size, in MB",
+                "examples": [
+                  "255529"
+                ]
+              },
+              "vg_uuid": {
+                "type": "string",
+                "examples": [
+                  "tZSsF8-wsLg-ZoAt-jjFY-GwGn-y2q3-QOP60c"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "volume_groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "free",
+              "lv_count",
+              "pv_count",
+              "size",
+              "vg_extent_size",
+              "vg_name",
+              "vg_uuid"
+            ],
+            "properties": {
+              "attr": {
+                "type": "string",
+                "examples": [
+                  "wz--n-"
+                ]
+              },
+              "free": {
+                "type": "integer",
+                "title": "Free size, in MB",
+                "examples": [
+                  "4"
+                ]
+              },
+              "lv_count": {
+                "type": "integer",
+                "title": "Number of logical volumes",
+                "examples": [
+                  "3"
+                ]
+              },
+              "pv_count": {
+                "type": "integer",
+                "title": "Number of physical elements",
+                "examples": [
+                  "1"
+                ]
+              },
+              "size": {
+                "type": "integer",
+                "title": "Size, in MB",
+                "examples": [
+                  "255529"
+                ]
+              },
+              "vg_extent_size": {
+                "type": "string",
+                "examples": [
+                  "4.19"
+                ]
+              },
+              "vg_name": {
+                "type": "string",
+                "examples": [
+                  "fedora"
+                ]
+              },
+              "vg_uuid": {
+                "type": "string",
+                "examples": [
+                  "tZSsF8-wsLg-ZoAt-jjFY-GwGn-y2q3-QOP60c"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "logical_volumes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "lv_name",
+              "lv_uuid",
+              "size"
+            ],
+            "properties": {
+              "attr": {
+                "type": "string",
+                "examples": [
+                  "-wi-ao----"
+                ]
+              },
+              "lv_name": {
+                "type": "string",
+                "examples": [
+                  "home"
+                ]
+              },
+              "lv_uuid": {
+                "type": "string",
+                "examples": [
+                  "BskNPA-2ece-cWgR-cLon-iFjr-EH2e-c6Cg39"
+                ]
+              },
+              "seg_count": {
+                "type": "integer",
+                "title": "Number of segments",
+                "examples": [
+                  "1"
+                ]
+              },
+              "size": {
+                "type": "integer",
+                "title": "Size in MB",
+                "examples": [
+                  "193516"
+                ]
+              },
+              "vg_uuid": {
+                "type": "string",
+                "examples": [
+                  "tZSsF8-wsLg-ZoAt-jjFY-GwGn-y2q3-QOP60c"
+                ]
+              },
+              "vg_name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "memories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "capacity": {
+                "type": "integer",
+                "title": "Memory capacity in MB",
+                "examples": [
+                  "8192"
+                ]
+              },
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "DIMM0"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "examples": [
+                  "DIMM"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "Samsung"
+                ]
+              },
+              "memorycorrection": {
+                "type": "string",
+                "examples": [
+                  "None"
+                ]
+              },
+              "numslots": {
+                "type": "integer",
+                "examples": [
+                  "1"
+                ]
+              },
+              "serialnumber": {
+                "type": "string",
+                "examples": [
+                  "23853943"
+                ]
+              },
+              "model": {
+                "type": "string",
+                "examples": [
+                  "EDFA232A2MA-JD-F-R"
+                ]
+              },
+              "speed": {
+                "type": "string",
+                "examples": [
+                  "1600 MT/s"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "DDR3"
+                ]
+              },
+              "formfactor": {
+                "type": "string",
+                "title": "See Win32_PhysicalMemory documentation"
+              },
+              "purpose": {
+                "type": "string",
+                "title": "See Win32_PhysicalMemory documentation"
+              },
+              "removable": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "monitors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "base64": {
+                "$comment": "Guess this is a base64 encoded",
+                "type": "string",
+                "title": "uuencoded EDID trame",
+                "examples": [
+                  "AP///////wANrlUTAAAAAAsXAQSVHRF4AlPVmFhSkCchUFQAAAABAQEBAQEBAQEBAQEBAQEB2h1W4lAAIDBELUcAJaUQAAAYAAAA/gBOMTMzQkdFLUVBQQogAAAA/gBDTU4KICAgICAgICAgAAAA/gBOMTMzQkdFLUVBQQogAGw="
+                ]
+              },
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "N133BGE-EAA CMN N133BGE-EAA"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "examples": [
+                  "11/2013"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "CMN"
+                ]
+              },
+              "serial": {
+                "type": "string"
+              },
+              "altserial": {
+                "type": "string",
+                "title": "Alternative monitor serial number computed from known manufacter formula and if different from SERIAL"
+              },
+              "port": {
+                "type": "string"
+              },
+              "uuencode": {
+                "type": "string",
+                "title": "uuencoded EDID trame"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "description"
+            ],
+            "properties": {
+              "description": {
+                "type": "string",
+                "title": "Interface name, ie 'eth0' on Linux, 'AMD PCNET Family Ethernet Adapter' on Windows",
+                "examples": [
+                  "eth0",
+                  "AMD PCNET Family Ethernet Adapter",
+                  "bmc"
+                ]
+              },
+              "management": {
+                "type": "boolean",
+                "title": "Wether it is a remote management interface such as HP iLO, Sun SC, HP MP"
+              },
+              "ipaddress": {
+                "type": "string",
+                "examples": [
+                  "127.0.0.1"
+                ],
+                "format": "ipv4"
+              },
+              "ipaddress6": {
+                "type": "string"
+              },
+              "ipdhcp": {
+                "type": "string",
+                "examples": [
+                  "172.28.200.22"
+                ]
+              },
+              "ipgateway": {
+                "type": "string",
+                "examples": [
+                  "172.28.211.1"
+                ]
+              },
+              "ipmask": {
+                "type": "string",
+                "examples": [
+                  "255.0.0.0"
+                ]
+              },
+              "ipmask6": {
+                "type": "string"
+              },
+              "ipsubnet": {
+                "type": "string",
+                "examples": [
+                  "127.0.0.0"
+                ]
+              },
+              "ipsubnet6": {
+                "type": "string"
+              },
+              "mac": {
+                "type": "string",
+                "examples": [
+                  "00:00:00:00:00:00"
+                ]
+              },
+              "pciid": {
+                "type": "string",
+                "examples": [
+                  "8086:100E:001E:8086"
+                ]
+              },
+              "pnpdeviceid": {
+                "type": "string",
+                "title": "PCI device ID (windows only)",
+                "examples": [
+                  "PCI\\VEN_8086&DEV_100E&SUBSYS_001E8086&REV_02\\3&267A616A&0&18"
+                ]
+              },
+              "speed": {
+                "type": "string",
+                "title": "Interface speed in MHz",
+                "examples": [
+                  "1000"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "down",
+                  "dormant"
+                ],
+                "pattern": "^(up|down|dormant|notpresent|lowerlayerdown|unknown|testing)$"
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "ethernet",
+                  "loopback"
+                ],
+                "pattern": "^(ethernet|wifi|infiniband|aggregate|alias|dialup|loopback|bridge|fibrechannel|bluetooth)$"
+              },
+              "virtualdev": {
+                "type": "boolean",
+                "title": "Wether is is a virtual interface"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "wwn": {
+                "type": "string",
+                "title": "World Wide Name http://fr.wikipedia.org/wiki/World_Wide_Name"
+              },
+              "driver": {
+                "type": "string"
+              },
+              "firmware": {
+                "type": "string"
+              },
+              "pcislot": {
+                "type": "string",
+                "examples": [
+                  "00:02.1"
+                ]
+              },
+              "mtu": {
+                "type": "integer",
+                "title": "MTU size in bytes"
+              },
+              "slaves": {
+                "type": "string",
+                "tile": "list of component interfaces, for aggregate and bridges, with ',' as delimiter"
+              },
+              "base": {
+                "type": "string",
+                "title": "Actual interface for aliases"
+              },
+              "wifi_ssid": {
+                "type": "string"
+              },
+              "wifi_bssid": {
+                "type": "string"
+              },
+              "wifi_mode": {
+                "type": "string"
+              },
+              "wifi_version": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "operatingsystem": {
+          "type": "object",
+          "properties": {
+            "arch": {
+              "type": "string",
+              "examples": [
+                "x86_64"
+              ]
+            },
+            "boot_time": {
+              "examples": [
+                "2017-06-08 07:06:47"
+              ],
+              "$ref": "#/definitions/datetime"
+            },
+            "dns_domain": {
+              "type": "string",
+              "examples": [
+                "ad.example.com"
+              ]
+            },
+            "fqdn": {
+              "type": "string",
+              "examples": [
+                "skynet.ad.example.com"
+              ]
+            },
+            "full_name": {
+              "type": "string",
+              "examples": [
+                "Fedora release 25 (Twenty Five)",
+                "Debian GNU/Linux unstable (sid)",
+                "Microsoft(R) Windows(R) Server 2003, Enterprise Edition x64"
+              ]
+            },
+            "hostid": {
+              "type": "string",
+              "examples": [
+                "007f0100"
+              ]
+            },
+            "install_date": {
+              "examples": [
+                "2013-08-09 12:00:21"
+              ],
+              "$ref": "#/definitions/dateordatetime"
+            },
+            "kernel_name": {
+              "type": "string",
+              "examples": [
+                "linux",
+                "freebsd",
+                "hpux",
+                "win32"
+              ]
+            },
+            "kernel_version": {
+              "type": "string",
+              "examples": [
+                "4.11.3-200.fc25.x86_64",
+                "5.2.10.4"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "title": "Operating system name ('Distributor ID' in LSB terms)",
+              "examples": [
+                "Fedora",
+                "Debian",
+                "Ubuntu",
+                "CentOS",
+                "SUSE LINUX",
+                "Windows",
+                "OS X",
+                "FreeBSD",
+                "AIX",
+                "Android"
+              ]
+            },
+            "ssh_key": {
+              "type": "string",
+              "examples": [
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgGz/LeCPvEeLKgqfDaG0EywPb0dgjSwW9JuAV2YMOcSX8PbyUuX+DxIth9OOjfQqFF/TRY1UshKMjVoQxKk1HzKiE9bk1FOgxmkhwjQWmRU64DcBqZqxkDNgqgz3YPzR7W46O3AuMOKsm/9lv4biwLd32ENPdezloiUrsS05OtzBbZWtlPCu0+t2MwhDAodF7rphf2Cj8ygNjavmFheFupRp3M7LxtyUhLPfp23t1ddT3U4iJtioW1PsWzxdkBD5wbrZ5THMjhhKP1/HjMUP8GSo1Jj0nDGu8m0qZq10pcVZxr5ZZ10QRqnpbgV1tYCTaVklzKFRZEiO2myGAWryD"
+              ]
+            },
+            "service_pack": {
+              "type": "string",
+              "examples": [
+                "Service Pack 1"
+              ]
+            },
+            "timezone": {
+              "type": "object",
+              "required": [
+                "name",
+                "offset"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "examples": [
+                    "CEST"
+                  ]
+                },
+                "offset": {
+                  "type": "string",
+                  "examples": [
+                    "+0200"
+                  ],
+                  "pattern": "^[+-][0-9]{4}$"
+                }
+              }
+            },
+            "version": {
+              "type": "string",
+              "title": "Operating system version ('Release' in LSB terms)",
+              "examples": [
+                "25",
+                "5.4",
+                "2003",
+                "11.04"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "DB-15 female"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "examples": [
+                  "None"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "JUSB1"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "Other",
+                  "USB"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "printers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "description": {
+                "type": "string",
+                "examples": [
+                  "Deskjet-2540"
+                ]
+              },
+              "driver": {
+                "type": "string",
+                "examples": [
+                  "HP Deskjet 2540 Series, hpcups 3.17.4"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "Deskjet-2540"
+                ]
+              },
+              "network": {
+                "type": "boolean"
+              },
+              "port": {
+                "$comment": "Should be an integer?",
+                "type": "string",
+                "examples": [
+                  "Deskjet-2540"
+                ]
+              },
+              "printprocessor": {
+                "type": "string",
+                "examples": [
+                  "winprint"
+                ]
+              },
+              "resolution": {
+                "type": "string",
+                "examples": [
+                  "200x200"
+                ]
+              },
+              "shared": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "Idle"
+                ]
+              },
+              "comment": {
+                "type": "string"
+              },
+              "errstatus": {
+                "type": "string"
+              },
+              "servername": {
+                "type": "string"
+              },
+              "sharename": {
+                "type": "string"
+              },
+              "serial": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "processes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "cmd",
+              "pid",
+              "user"
+            ],
+            "properties": {
+              "cmd": {
+                "type": "string",
+                "examples": [
+                  "/usr/lib/systemd/systemd --switched-root --system --deserialize 24"
+                ]
+              },
+              "cpuusage": {
+                "type": "string",
+                "examples": [
+                  "0.0"
+                ]
+              },
+              "mem": {
+                "type": "string",
+                "examples": [
+                  "0.1"
+                ]
+              },
+              "pid": {
+                "type": "integer",
+                "examples": [
+                  "1567"
+                ]
+              },
+              "started": {
+                "examples": [
+                  "2017-06-08 07:06"
+                ],
+                "$ref": "#/definitions/datetime"
+              },
+              "tty": {
+                "type": "string",
+                "examples": [
+                  "?"
+                ]
+              },
+              "user": {
+                "type": "string",
+                "examples": [
+                  "root"
+                ]
+              },
+              "virtualmemory": {
+                "type": "integer",
+                "title": "Virtual memory size in KiB",
+                "examples": [
+                  "215324"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "remote_mgmt": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "examples": [
+                  "700873443"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "teamviewer"
+                ]
+              },
+              "version": {
+                "type": "string",
+                "title": "Remote management software or firmware version"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "title": "A physical connection points including ports, motherboard slots and peripherals, and proprietary connection points",
+            "required": [
+              "description",
+              "name"
+            ],
+            "properties": {
+              "description": {
+                "type": "string",
+                "examples": [
+                  "x16 PCI Express",
+                  "Other"
+                ]
+              },
+              "designation": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "SD CARD"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "used"
+                ],
+                "pattern": "^(free|used)$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "softwares": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "arch": {
+                "type": "string",
+                "examples": [
+                  "noarch"
+                ]
+              },
+              "comments": {
+                "type": "string",
+                "examples": [
+                  "Java XML parser"
+                ]
+              },
+              "filesize": {
+                "type": "integer",
+                "title": "Installed size in bytes",
+                "examples": [
+                  "1373517"
+                ]
+              },
+              "from": {
+                "type": "string",
+                "examples": [
+                  "rpm"
+                ]
+              },
+              "guid": {
+                "type": "string",
+                "title": "Software GUID (Windows only)",
+                "examples": [
+                  "0980-9176-5329-7814"
+                ]
+              },
+              "install_date": {
+                "$ref": "#/definitions/dateordatetime"
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "xerces-j2"
+                ]
+              },
+              "publisher": {
+                "type": "string",
+                "examples": [
+                  "Fedora Project"
+                ]
+              },
+              "system_category": {
+                "type": "string",
+                "examples": [
+                  "Development/Libraries"
+                ]
+              },
+              "uninstall_string": {
+                "type": "string",
+                "examples": [
+                  "\"C:\\Program Files\\Barracuda\\SSL VPN Agent\\uninstall.exe\""
+                ]
+              },
+              "url_info_about": {
+                "type": "string",
+                "examples": [
+                  "http://www.barracuda.com"
+                ]
+              },
+              "version": {
+                "type": "string",
+                "examples": [
+                  "2.11.0-24.fc24"
+                ]
+              },
+              "folder": {
+                "type": "string"
+              },
+              "helplink": {
+                "type": "string",
+                "title": "Information source (registry, rpm, deb, ...)"
+              },
+              "no_remove": {
+                "type": "boolean"
+              },
+              "release_type": {
+                "type": "string"
+              },
+              "version_minor": {
+                "type": "string"
+              },
+              "version_major": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "userid": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "sounds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "Périphérique High Definition Audio"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "examples": [
+                  "rev 21"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "Intel Corporation Haswell-ULT HD Audio Controller"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "Audio device"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "storages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "examples": [
+                  "SATA"
+                ]
+              },
+              "disksize": {
+                "type": "integer",
+                "title": "Disk size in MB",
+                "examples": [
+                  "250059"
+                ]
+              },
+              "firmware": {
+                "type": "string",
+                "examples": [
+                  "0101"
+                ]
+              },
+              "interface": {
+                "type": "string",
+                "examples": [
+                  "IDE"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "Toshiba"
+                ]
+              },
+              "model": {
+                "type": "string",
+                "examples": [
+                  "TOSHIBATHNSNJ25"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "sda",
+                  "\\\\.\\PHYSICALDRIVE0"
+                ]
+              },
+              "scsi_coid": {
+                "type": "string",
+                "examples": [
+                  "2"
+                ]
+              },
+              "scsi_lun": {
+                "type": "string"
+              },
+              "scsi_unid": {
+                "type": "string"
+              },
+              "scsi_chid": {
+                "type": "string"
+              },
+              "serial": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "examples": [
+                  "disk"
+                ]
+              },
+              "wwn": {
+                "type": "string",
+                "title": "World Wide Name http://fr.wikipedia.org/wiki/World_Wide_Name"
+              },
+              "encrypt_name": {
+                "type": "string",
+                "title": "Supported encryption"
+              },
+              "encrypt_algo": {
+                "type": "string",
+                "title": "Used encryption algorithm"
+              },
+              "encrypt_status": {
+                "type": "string",
+                "title": "Encryption status"
+              },
+              "encrypt_type": {
+                "type": "string",
+                "title": "Encryption type"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "usbdevices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caption": {
+                "type": "string",
+                "examples": [
+                  "3.0 root hub"
+                ]
+              },
+              "class": {
+                "type": "string",
+                "examples": [
+                  "9"
+                ]
+              },
+              "manufacturer": {
+                "type": "string",
+                "examples": [
+                  "Intel Corp."
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "SCR335 SmartCard Reader"
+                ]
+              },
+              "productid": {
+                "type": "string",
+                "examples": [
+                  "8000"
+                ]
+              },
+              "subclass": {
+                "type": "string"
+              },
+              "vendorid": {
+                "type": "string",
+                "examples": [
+                  "8087"
+                ]
+              },
+              "serial": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "domain": {
+                "type": "string",
+                "examples": [
+                  "AD"
+                ]
+              },
+              "login": {
+                "type": "string",
+                "examples": [
+                  "john"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "examples": [
+                  "VirtualBox Graphics Adapter"
+                ]
+              },
+              "chipset": {
+                "type": "string"
+              },
+              "memory": {
+                "type": "integer",
+                "title": "Memory size in MB"
+              },
+              "resolution": {
+                "type": "string",
+                "examples": [
+                  "1024x768"
+                ]
+              },
+              "pcislot": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "virtualmachines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "image": {
+                "type": "string",
+                "ttile": "Image used for creation (Docker image for instance)",
+                "examples": [
+                  "redash/redash"
+                ]
+              },
+              "memory": {
+                "type": "integer",
+                "title": "Memory size in MB",
+                "examples": [
+                  "1048"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "examples": [
+                  "centos7.0"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "examples": [
+                  "off"
+                ],
+                "pattern": "^(running|blocked|idle|paused|shutdown|crashed|dying|off)$"
+              },
+              "subsystem": {
+                "type": "string",
+                "examples": [
+                  "kvm",
+                  "VmWare ESX"
+                ]
+              },
+              "uuid": {
+                "type": "string",
+                "examples": [
+                  "c37f7ce8-af95-4676-b454-0959f2c5e162"
+                ]
+              },
+              "vcpu": {
+                "type": "integer",
+                "examples": [
+                  "1"
+                ]
+              },
+              "vmtype": {
+                "type": "string",
+                "examples": [
+                  "libvirt"
+                ]
+              },
+              "mac": {
+                "type": "string"
+              },
+              "comment": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "serial": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "licenseinfos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "fullname": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "components": {
+                "$comment": "What type of element is this? Would need examples.",
+                "type": "string"
+              },
+              "trial": {
+                "type": "boolean"
+              },
+              "update": {
+                "type": "string"
+              },
+              "activation_date": {
+                "$ref": "#/definitions/datetime"
+              },
+              "productid": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "modems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "serial": {
+                "type": "string"
+              },
+              "imei": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "firmwares": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "date": {
+                "$ref": "#/definitions/date"
+              },
+              "manufacturer": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "simcards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "imsi": {
+                "type": "string"
+              },
+              "phone_number": {
+                "type": "string"
+              },
+              "iccid": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "operator_code": {
+                "type": "string"
+              },
+              "operator_name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "sensors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "powersupplies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "power_max": {
+                "type": "integer",
+                "title": "Max power in Watt"
+              },
+              "serialnumber": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "partnum": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "hotreplaceable": {
+                "type": "boolean"
+              },
+              "plugged": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "cameras": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resolution": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "lensfacing": {
+                "type": "string"
+              },
+              "designation": {
+                "type": "string"
+              },
+              "flashunit": {
+                "type": "boolean"
+              },
+              "imageformats": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "orientation": {
+                "type": "string"
+              },
+              "focallength": {
+                "type": "string"
+              },
+              "sensorsize": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "resolutionvideo": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "model": {
+                "type": "string"
+              },
+              "supports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "network_ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "connections": {
+                "type": "array",
+                "items": {
+                  "mac": {
+                    "type": "string",
+                    "title": "Remote device mac address ",
+                    "examples": [
+                      "00:00:00:00:00:00"
+                    ]
+                  },
+                  "ifnumber": {
+                    "type": "integer",
+                    "title": "Remote device ifindex, from CDP/LLDP"
+                  },
+                  "sysmac": {
+                    "type": "string",
+                    "title": "Remote device mac address, from CDP/LLDP",
+                    "examples": [
+                      "00:00:00:00:00:00"
+                    ]
+                  },
+                  "ifdescr": {
+                    "type": "string",
+                    "title": "Remote device port description, from CDP/LLDP"
+                  },
+                  "ip": {
+                    "type": "string",
+                    "title": "Remote device IP address, from CDP/LLDP"
+                  },
+                  "sysdescr": {
+                    "type": "string",
+                    "title": "Remote device system description, from CDP/LLDP"
+                  },
+                  "sysname": {
+                    "type": "string",
+                    "title": "Remote device name, from CDP/LLDP"
+                  }
+                }
+              },
+              "lldp": {
+                "type": "boolean",
+                "title": "Is a LLDP (Link Layer Discovery Protocol) or CDP (Cisco Discovery Protocol) connection"
+              },
+              "aggregate": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "title": "Aggregated port ifindex"
+                }
+              },
+              "ifdescr": {
+                "type": "string"
+              },
+              "ifalias": {
+                "type": "string"
+              },
+              "ifinerrors": {
+                "type": "integer",
+                "title": "Number of input errors"
+              },
+              "ifinbytes": {
+                "type": "integer",
+                "title": "Number of input bytes"
+              },
+              "ifinternalstatus": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "iflastchange": {
+                "type": "string",
+                "title": "Time since last status change ('X days, HH:MM::SS' format)"
+              },
+              "ifmtu": {
+                "type": "integer",
+                "title": "MTU"
+              },
+              "ifname": {
+                "type": "string",
+                "title": "Port name"
+              },
+              "ifnumber": {
+                "type": "integer",
+                "title": "Index of the interface"
+              },
+              "ifouterrors": {
+                "type": "integer",
+                "title": "Number of output errors"
+              },
+              "ifoutbytes": {
+                "type": "integer",
+                "title": "Number of output bytes"
+              },
+              "ifspeed": {
+                "type": "integer",
+                "title": "Speed in bytes"
+              },
+              "ifportduplex": {
+                "type": "integer",
+                "title": "Duplex status",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "ifstatus": {
+                "type": "integer",
+                "title": "Port status (up(1), down(2), testing(3), unknown(4), dormant(5), notPresent(6), lowerLayerDown(7))",
+                "minimum": 1,
+                "maximum": 7
+              },
+              "iftype": {
+                "type": "integer",
+                "title": "Port type"
+              },
+              "mac": {
+                "type": "string",
+                "examples": [
+                  "00:00:00:00:00:00"
+                ]
+              },
+              "ips": {
+                "type": "array",
+                "title": "IP addresses",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "ipv4",
+                      "examples": [
+                        "127.0.0.1",
+                        "172.28.211.1"
+                      ]
+                    }, {
+                      "type": "string",
+                      "format": "ipv6",
+                      "examples": ["::1"]
+                    }
+                  ]
+                }
+              },
+              "trunk": {
+                "type": "boolean",
+                "title": "Trunk port flag"
+              },
+              "vlans": {
+                "type": "array",
+                "items": {
+                  "vlan": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "title": "VLAN identifier"
+                    }
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "network_components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "contained_index": {
+                "type": "integer",
+                "title": "Index of the parent component"
+              },
+              "description": {
+                "type": "string"
+              },
+              "fru": {
+                "type": "integer"
+              },
+              "index": {
+                "type": "integer"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "serial": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "firmware": {
+                "type": "string",
+                "title": "Component firmware version"
+              },
+              "mac": {
+                "type": "string",
+                "examples": [
+                  "00:00:00:00:00:00"
+                ]
+              },
+              "ip": {
+                "type": "string",
+                "title": "IP address",
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "ipv4",
+                    "examples": [
+                      "127.0.0.1",
+                      "172.28.211.1"
+                    ]
+                  }, {
+                    "type": "string",
+                    "format": "ipv6",
+                    "examples": ["::1"]
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "pagecounters": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "black": {
+              "type": "integer"
+            },
+            "color": {
+              "type": "integer"
+            },
+            "rectoverso": {
+              "type": "integer"
+            },
+            "scanned": {
+              "type": "integer"
+            },
+            "printtotal": {
+              "type": "integer"
+            },
+            "printblack": {
+              "type": "integer"
+            },
+            "printcolor": {
+              "type": "integer"
+            },
+            "copytotal": {
+              "type": "integer"
+            },
+            "copyblack": {
+              "type": "integer"
+            },
+            "copyblack_a3": {
+              "type": "integer"
+            },
+            "copycolor": {
+              "type": "integer"
+            },
+            "copycolor_a3": {
+              "type": "integer"
+            },
+            "faxtotal": {
+              "type": "integer"
+            },
+            "duplex": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "cartridges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "consumables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "max": {
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "versionclient": {
+          "type": "string",
+          "examples": [
+            "FusionInventory-Agent_v2.3.20"
+          ]
+        },
+        "versionprovider": {
+          "type": "object",
+          "properties": {
+            "comments": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "examples": [
+                  "Platform  : linux buildvm-14.phx2.fedoraproject.org 4.16.6-302.fc28.x86_64 1 smp wed may 2 00:07:06 utc 2018 x86_64 x86_64 x86_64 gnulinux ",
+                  "Build date: Tue Jul 10 11:21:41 2018 GMT"
+                ]
+              }
+            },
+            "name": {
+              "type": "string",
+              "examples": [
+                "FusionInventory"
+              ]
+            },
+            "perl_args": {
+              "type": "string",
+              "examples": [
+                "--debug --debug"
+              ]
+            },
+            "perl_config": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "default": "",
+                "examples": [
+                  "gccversion: 6.3.1 20161221 (Red Hat 6.3.1-1)",
+                  "defines: use64bitall use64bitint usedl usedtrace useithreads uselargefiles usemallocwrap usemultiplicity usemymalloc=n usenm=false useopcode useperlio useposix useshrplib usesitecustomize usethreads usevendorprefix usevfork=false"
+                ]
+              }
+            },
+            "perl_exe": {
+              "type": "string",
+              "examples": [
+                "/usr/bin/perl"
+              ]
+            },
+            "perl_inc": {
+              "type": "string",
+              "examples": [
+                "/usr/share/fusioninventory/lib:/usr/local/lib64/perl5:/usr/local/share/perl5:/usr/lib64/perl5/vendor_perl:/usr/share/perl5/vendor_perl:/usr/lib64/perl5:/usr/share/perl5:."
+              ]
+            },
+            "perl_module": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "examples": [
+                  "LWP @ 6.15",
+                  "LWP::Protocol @ 6.15",
+                  "IO::Socket @ 1.38",
+                  "IO::Socket::SSL @ 2.038",
+                  "IO::Socket::INET @ 1.35",
+                  "Net::SSLeay @ 1.78",
+                  "Net::SSLeay uses OpenSSL 1.0.2k-fips  26 Jan 2017",
+                  "Net::HTTPS @ 6.15",
+                  "HTTP::Status @ 6.11",
+                  "HTTP::Response @ 6.11"
+                ]
+              }
+            },
+            "perl_version": {
+              "type": "string",
+              "examples": [
+                "v5.24.1"
+              ]
+            },
+            "program": {
+              "type": "string",
+              "examples": [
+                "/usr/bin/fusioninventory-agent"
+              ]
+            },
+            "etime": {
+              "type": "integer",
+              "title": "Time (seconds) needed to run the inventory",
+              "default": "",
+              "examples": [
+                "3"
+              ]
+            },
+            "version": {
+              "type": "string",
+              "examples": [
+                "2.3.20"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "network_device": {
+          "type": "object",
+          "title": "Network inventory device",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "System description"
+            },
+            "cpu": {
+              "type": "integer",
+              "title": "CPU load in %"
+            },
+            "firmware": {
+              "type": "string"
+            },
+            "ips": {
+              "type": "array",
+              "title": "IP addresses",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "ipv4",
+                    "examples": [
+                      "127.0.0.1",
+                      "172.28.211.1"
+                    ]
+                  }, {
+                    "type": "string",
+                    "format": "ipv6",
+                    "examples": ["::1"]
+                  }
+                ]
+              }
+            },
+            "location": {
+              "type": "string"
+            },
+            "mac": {
+              "type": "string",
+              "examples": [
+                "00:00:00:00:00:00"
+              ]
+            },
+            "memory": {
+              "type": "integer",
+              "title": "Total system memory in Mio",
+              "examples": [
+                "7908"
+              ]
+            },
+            "model": {
+              "type": "string",
+              "examples": [
+                "UCS 6248UP 48-Port"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "assettag": {
+              "type": "string"
+            },
+            "ram": {
+              "type": "integer",
+              "title": "Volatile memory memory in Mio",
+              "examples": [
+                "7908"
+              ]
+            },
+            "serial": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "pattern": "^(Unmanaged|Computer|Networking|Printer|Storage|Power|Phone|Video|KVM)$"
+            },
+            "uptime": {
+              "type": "string",
+              "title": "Uptime ('X days, HH:MM::SS' format)"
+            },
+            "manufacturer": {
+              "type": "string",
+              "examples": [
+                "Cisco"
+              ]
+            },
+            "contact": {
+              "type": "string"
+            },
+            "credentials": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "databases_services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "version"
+            ],
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "path": {
+                "type": "string"
+              },
+              "size": {
+                "type": "integer",
+                "title": "Size in MB"
+              },
+              "is_active": {
+                "type": "boolean"
+              },
+              "is_onbackup": {
+                "type": "boolean"
+              },
+              "last_boot_date": {
+                "examples": [
+                  "2021-06-03 10:16:47"
+                ],
+                "$ref": "#/definitions/datetime"
+              },
+              "last_backup_date": {
+                "examples": [
+                  "2021-06-21 11:37:46"
+                ],
+                "$ref": "#/definitions/datetime"
+              },
+              "databases": {
+                "title": "List of databases in the instance",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "size": {
+                      "type": "integer",
+                      "title": "Size in MB"
+                    },
+                    "is_active": {
+                      "type": "boolean"
+                    },
+                    "is_onbackup": {
+                      "type": "boolean"
+                    },
+                    "creation_date": {
+                      "examples": [
+                        "2021-06-03 10:16:47"
+                      ],
+                      "$ref": "#/definitions/datetime"
+                    },
+                    "update_date": {
+                      "examples": [
+                        "2021-06-03 10:16:47"
+                      ],
+                      "$ref": "#/definitions/datetime"
+                    },
+                    "last_backup_date": {
+                      "examples": [
+                        "2021-06-21 11:37:46"
+                      ],
+                      "$ref": "#/definitions/datetime"
+                    }
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "deviceid": {
+      "type": "string",
+      "title": "Agent ID"
+    },
+    "jobid": {
+      "type": "integer",
+      "title": "Job ID"
+    },
+    "itemtype": {
+      "type": "string",
+      "title": "Item type",
+      "default": "Unmanaged",
+      "pattern": "^(Unmanaged|Computer|Phone|NetworkEquipment|Printer)$"
+    },
+    "partial": {
+      "type": "boolean",
+      "title": "Is inventory partial?",
+      "default": false
+    },
+    "action": {
+      "type": "string",
+      "default": "inventory",
+      "pattern": "^(injector|inventory|netdiscovery|netinventory|.*)$"
+    },
+    "tag": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

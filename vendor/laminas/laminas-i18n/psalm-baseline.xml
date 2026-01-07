@@ -1,0 +1,1154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.21.0@d8bec4c7aaee111a532daec32fb09de5687053d1">
+  <file src="src/ConfigProvider.php">
+    <MixedArrayOffset occurrences="4"/>
+    <UndefinedClass occurrences="19">
+      <code>\Zend\I18n\Filter\Alnum</code>
+      <code>\Zend\I18n\Filter\Alpha</code>
+      <code>\Zend\I18n\Filter\NumberFormat</code>
+      <code>\Zend\I18n\Filter\NumberParse</code>
+      <code>\Zend\I18n\Translator\LoaderPluginManager</code>
+      <code>\Zend\I18n\Translator\TranslatorInterface</code>
+      <code>\Zend\I18n\Validator\Alnum</code>
+      <code>\Zend\I18n\Validator\Alpha</code>
+      <code>\Zend\I18n\Validator\DateTime</code>
+      <code>\Zend\I18n\Validator\IsFloat</code>
+      <code>\Zend\I18n\Validator\IsInt</code>
+      <code>\Zend\I18n\Validator\PhoneNumber</code>
+      <code>\Zend\I18n\Validator\PostCode</code>
+      <code>\Zend\I18n\View\Helper\CurrencyFormat</code>
+      <code>\Zend\I18n\View\Helper\DateFormat</code>
+      <code>\Zend\I18n\View\Helper\NumberFormat</code>
+      <code>\Zend\I18n\View\Helper\Plural</code>
+      <code>\Zend\I18n\View\Helper\Translate</code>
+      <code>\Zend\I18n\View\Helper\TranslatePlural</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/Filter/AbstractLocale.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;options['locale']</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Filter/Alnum.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>! is_scalar($value) &amp;&amp; ! is_array($value)</code>
+    </DocblockTypeContradiction>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$value</code>
+    </MixedArgumentTypeCoercion>
+    <MixedInferredReturnType occurrences="1">
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;options['allow_white_space']</code>
+      <code>$value</code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <PossiblyInvalidArgument occurrences="2">
+      <code>$allowWhiteSpaceOrOptions</code>
+      <code>$allowWhiteSpaceOrOptions</code>
+    </PossiblyInvalidArgument>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(bool) $flag</code>
+      <code>(string) $value</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/Filter/Alpha.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>! is_scalar($value) &amp;&amp; ! is_array($value)</code>
+    </DocblockTypeContradiction>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$value</code>
+    </MixedArgumentTypeCoercion>
+    <MixedReturnStatement occurrences="1">
+      <code>$value</code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+  </file>
+  <file src="src/Filter/NumberFormat.php">
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>NumberFormat</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Filter/NumberParse.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$this-&gt;formatter === null</code>
+    </DocblockTypeContradiction>
+    <InvalidReturnStatement occurrences="2">
+      <code>$this-&gt;options['style']</code>
+      <code>$this-&gt;options['type']</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="2">
+      <code>int</code>
+      <code>int</code>
+    </InvalidReturnType>
+    <MixedArgument occurrences="1">
+      <code>$value</code>
+    </MixedArgument>
+    <NonInvariantDocblockPropertyType occurrences="1">
+      <code>$options</code>
+    </NonInvariantDocblockPropertyType>
+    <NullableReturnStatement occurrences="2">
+      <code>$this-&gt;options['style']</code>
+      <code>$this-&gt;options['type']</code>
+    </NullableReturnStatement>
+    <PossiblyNullPropertyAssignmentValue occurrences="2">
+      <code>null</code>
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$formatter</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(int) $style</code>
+      <code>(int) $type</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/Module.php">
+    <UndefinedDocblockClass occurrences="1">
+      <code>ModuleManager</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/Translator/Loader/AbstractFileLoader.php">
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(bool) $flag</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/Translator/Loader/Gettext.php">
+    <InvalidArrayAccess occurrences="4">
+      <code>$originalStringTable[$offsetKey]</code>
+      <code>$originalStringTable[$sizeKey]</code>
+      <code>$translationStringTable[$offsetKey]</code>
+      <code>$translationStringTable[$sizeKey]</code>
+    </InvalidArrayAccess>
+    <InvalidPropertyAssignmentValue occurrences="3">
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidReturnStatement occurrences="2">
+      <code>unpack('N' . $num, fread($this-&gt;file, 4 * $num))</code>
+      <code>unpack('V' . $num, fread($this-&gt;file, 4 * $num))</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>int</code>
+    </InvalidReturnType>
+    <MissingConstructor occurrences="2">
+      <code>$file</code>
+      <code>$littleEndian</code>
+    </MissingConstructor>
+    <MixedArgument occurrences="5">
+      <code>$originalStringOffset</code>
+      <code>$originalStringSize</code>
+      <code>$textDomain['']</code>
+      <code>$translationStringOffset</code>
+      <code>$translationStringSize</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="4">
+      <code>$originalStringOffset</code>
+      <code>$originalStringSize</code>
+      <code>$translationStringOffset</code>
+      <code>$translationStringSize</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>int</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$result['int']</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Translator/Loader/Ini.php">
+    <MixedArgument occurrences="1">
+      <code>$messagesNamespaced['plural']['plural_forms']</code>
+    </MixedArgument>
+    <MixedArrayOffset occurrences="2">
+      <code>$messages[$message['message']]</code>
+      <code>$messages[array_shift($message)]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="3">
+      <code>$list</code>
+      <code>$messages[$message['message']]</code>
+      <code>$messages[array_shift($message)]</code>
+    </MixedAssignment>
+    <TypeDoesNotContainType occurrences="1">
+      <code>is_array($messages)</code>
+    </TypeDoesNotContainType>
+  </file>
+  <file src="src/Translator/Loader/PhpArray.php">
+    <MixedArgument occurrences="1">
+      <code>$textDomain['']['plural_forms']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$textDomain['']['plural_forms']</code>
+    </MixedArrayAccess>
+    <UnresolvableInclude occurrences="1">
+      <code>include $fromIncludePath</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="src/Translator/Loader/PhpMemoryArray.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>is_array($this-&gt;messages)</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="2">
+      <code>$textDomain['']['plural_forms']</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$textDomain['']['plural_forms']</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+    </MixedArrayAccess>
+  </file>
+  <file src="src/Translator/LoaderPluginManager.php">
+    <MissingReturnType occurrences="1">
+      <code>validatePlugin</code>
+    </MissingReturnType>
+    <MixedArrayOffset occurrences="1"/>
+    <MixedPropertyTypeCoercion occurrences="1"/>
+    <NonInvariantDocblockPropertyType occurrences="2">
+      <code>$aliases</code>
+      <code>$factories</code>
+    </NonInvariantDocblockPropertyType>
+    <ParamNameMismatch occurrences="1">
+      <code>$plugin</code>
+    </ParamNameMismatch>
+    <UndefinedClass occurrences="3">
+      <code>Gettext</code>
+      <code>Ini</code>
+      <code>PhpArray</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/Translator/LoaderPluginManagerFactory.php">
+    <DeprecatedInterface occurrences="1">
+      <code>LoaderPluginManagerFactory</code>
+    </DeprecatedInterface>
+    <MixedArgument occurrences="1">
+      <code>$config['translator_plugins']</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$options</code>
+    </MixedArgumentTypeCoercion>
+    <ParamNameMismatch occurrences="1">
+      <code>$container</code>
+    </ParamNameMismatch>
+  </file>
+  <file src="src/Translator/Plural/Parser.php">
+    <MixedArgument occurrences="1">
+      <code>$id</code>
+    </MixedArgument>
+    <PossiblyNullPropertyAssignmentValue occurrences="1">
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <PossiblyUndefinedVariable occurrences="1">
+      <code>$id</code>
+    </PossiblyUndefinedVariable>
+    <PropertyNotSetInConstructor occurrences="3">
+      <code>$currentPos</code>
+      <code>$currentToken</code>
+      <code>$string</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Translator/Plural/Rule.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>static::$parser === null</code>
+    </DocblockTypeContradiction>
+    <InvalidReturnStatement occurrences="1"/>
+    <MixedArgument occurrences="31">
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][2]</code>
+      <code>$ast['id']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="31">
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][0]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][1]</code>
+      <code>$ast['arguments'][2]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$ast['arguments'][]</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>int</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$ast['arguments'][0]</code>
+    </MixedReturnStatement>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(int) $number</code>
+    </RedundantCastGivenDocblockType>
+    <UnsafeInstantiation occurrences="1">
+      <code>new static($numPlurals, $ast)</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Translator/Plural/Symbol.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>$this-&gt;leftDenotationGetter === null</code>
+      <code>$this-&gt;nullDenotationGetter === null</code>
+    </DocblockTypeContradiction>
+    <MixedInferredReturnType occurrences="2">
+      <code>Symbol</code>
+      <code>Symbol</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$function($this)</code>
+      <code>$function($this, $left)</code>
+    </MixedReturnStatement>
+    <PropertyNotSetInConstructor occurrences="5">
+      <code>$first</code>
+      <code>$leftDenotationGetter</code>
+      <code>$nullDenotationGetter</code>
+      <code>$second</code>
+      <code>$third</code>
+    </PropertyNotSetInConstructor>
+    <UnnecessaryVarAnnotation occurrences="2">
+      <code>callable</code>
+      <code>callable</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Translator/TextDomain.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>$this-&gt;pluralRule === null</code>
+      <code>static::$defaultPluralRule === null</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="1">
+      <code>$pluralRule</code>
+    </MissingConstructor>
+    <PossiblyNullArgument occurrences="1">
+      <code>$textDomain-&gt;getPluralRule()</code>
+    </PossiblyNullArgument>
+    <PossiblyNullReference occurrences="2">
+      <code>getNumPlurals</code>
+      <code>getNumPlurals</code>
+    </PossiblyNullReference>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>$this-&gt;pluralRule !== null</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Translator/Translator.php">
+    <DocblockTypeContradiction occurrences="3">
+      <code>$message === null</code>
+      <code>$message === null</code>
+      <code>is_array($options)</code>
+    </DocblockTypeContradiction>
+    <FalseOperand occurrences="1">
+      <code>$messagesLoaded</code>
+    </FalseOperand>
+    <InvalidOperand occurrences="2">
+      <code>$this-&gt;loadMessagesFromFiles($textDomain, $locale)</code>
+      <code>$this-&gt;loadMessagesFromPatterns($textDomain, $locale)</code>
+    </InvalidOperand>
+    <MissingClosureParamType occurrences="2">
+      <code>$r</code>
+      <code>$r</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="2">
+      <code>static function ($r) {</code>
+      <code>static function ($r) {</code>
+    </MissingClosureReturnType>
+    <MissingConstructor occurrences="2">
+      <code>$events</code>
+      <code>$pluginManager</code>
+    </MissingConstructor>
+    <MixedArgument occurrences="20">
+      <code>$cacheId</code>
+      <code>$file['filename']</code>
+      <code>$file['filename']</code>
+      <code>$file['filename']</code>
+      <code>$file['locale'] ?? null</code>
+      <code>$file['text_domain'] ?? 'default'</code>
+      <code>$file['type']</code>
+      <code>$file['type']</code>
+      <code>$loaderType</code>
+      <code>$options['cache']</code>
+      <code>$pattern['base_dir']</code>
+      <code>$pattern['pattern']</code>
+      <code>$pattern['pattern']</code>
+      <code>$pattern['text_domain'] ?? 'default'</code>
+      <code>$pattern['type']</code>
+      <code>$pattern['type']</code>
+      <code>$remote['text_domain'] ?? 'default'</code>
+      <code>$remote['type']</code>
+      <code>array_shift($locales)</code>
+      <code>array_shift($locales)</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="20">
+      <code>$file['filename']</code>
+      <code>$file['filename']</code>
+      <code>$file['filename']</code>
+      <code>$file['locale']</code>
+      <code>$file['text_domain']</code>
+      <code>$file['type']</code>
+      <code>$file['type']</code>
+      <code>$pattern['baseDir']</code>
+      <code>$pattern['base_dir']</code>
+      <code>$pattern['pattern']</code>
+      <code>$pattern['pattern']</code>
+      <code>$pattern['text_domain']</code>
+      <code>$pattern['type']</code>
+      <code>$pattern['type']</code>
+      <code>$remote['text_domain']</code>
+      <code>$remote['type']</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="8">
+      <code>$this-&gt;files[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;messages[$textDomain][$locale]</code>
+      <code>$this-&gt;patterns[$textDomain][]</code>
+      <code>$this-&gt;remote[$textDomain][]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="8">
+      <code>$file</code>
+      <code>$file</code>
+      <code>$last</code>
+      <code>$last</code>
+      <code>$loaderType</code>
+      <code>$pattern</code>
+      <code>$pattern</code>
+      <code>$remote</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>string|null</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="3">
+      <code>merge</code>
+      <code>merge</code>
+      <code>merge</code>
+    </MixedMethodCall>
+    <MixedOperand occurrences="1">
+      <code>$pattern['baseDir']</code>
+    </MixedOperand>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;messages[$textDomain][$locale][$message]</code>
+      <code>$this-&gt;messages[$textDomain][$locale][$textDomain . "\x04" . $message]</code>
+    </MixedReturnStatement>
+    <PossiblyNullReference occurrences="1">
+      <code>evaluate</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedVariable occurrences="1">
+      <code>$cacheId</code>
+    </PossiblyUndefinedVariable>
+    <RedundantCondition occurrences="2">
+      <code>$translation[$index] !== null</code>
+      <code>isset($translation[$index]) &amp;&amp; $translation[$index] !== '' &amp;&amp; $translation[$index] !== null</code>
+    </RedundantCondition>
+    <UnsafeInstantiation occurrences="1">
+      <code>new static()</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Translator/TranslatorServiceFactory.php">
+    <DeprecatedInterface occurrences="1">
+      <code>TranslatorServiceFactory</code>
+    </DeprecatedInterface>
+    <MixedArgument occurrences="2">
+      <code>$container-&gt;get('TranslatorPluginManager')</code>
+      <code>$trConfig</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$config['translator']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$trConfig</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Validator/Alnum.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>! is_string($value) &amp;&amp; ! is_int($value) &amp;&amp; ! is_float($value)</code>
+      <code>null === static::$filter</code>
+    </DocblockTypeContradiction>
+    <InvalidScalarArgument occurrences="1">
+      <code>$value</code>
+    </InvalidScalarArgument>
+    <MixedArgument occurrences="1">
+      <code>$this-&gt;options['allowWhiteSpace']</code>
+    </MixedArgument>
+    <MixedInferredReturnType occurrences="1">
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;options['allowWhiteSpace']</code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(bool) $allowWhiteSpace</code>
+      <code>(bool) $allowWhiteSpace</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/Validator/Alpha.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>is_string($value)</code>
+      <code>null === static::$filter</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="1">
+      <code>$this-&gt;options['allowWhiteSpace']</code>
+    </MixedArgument>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <NonInvariantDocblockPropertyType occurrences="1">
+      <code>$filter</code>
+    </NonInvariantDocblockPropertyType>
+  </file>
+  <file src="src/Validator/DateTime.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>$this-&gt;formatter === null</code>
+      <code>is_string($value)</code>
+    </DocblockTypeContradiction>
+    <InvalidArgument occurrences="1">
+      <code>$this-&gt;formatter-&gt;getTimezone()</code>
+    </InvalidArgument>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$formatter</code>
+    </PropertyNotSetInConstructor>
+    <RedundantConditionGivenDocblockType occurrences="6">
+      <code>$this-&gt;formatter</code>
+      <code>$this-&gt;formatter</code>
+      <code>$this-&gt;formatter</code>
+      <code>$this-&gt;formatter</code>
+      <code>$this-&gt;formatter</code>
+      <code>$this-&gt;formatter</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Validator/IsFloat.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>! is_scalar($value)</code>
+      <code>is_bool($value)</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="1">
+      <code>$options['locale']</code>
+    </MixedArgument>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <PossiblyFalseArgument occurrences="1">
+      <code>$lastStringGroup</code>
+    </PossiblyFalseArgument>
+  </file>
+  <file src="src/Validator/IsInt.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>! is_string($value) &amp;&amp; ! is_int($value) &amp;&amp; ! is_float($value)</code>
+      <code>is_bool($strict)</code>
+    </DocblockTypeContradiction>
+    <InvalidArrayOffset occurrences="1"/>
+    <MixedArgument occurrences="2">
+      <code>$options['locale']</code>
+      <code>$options['strict']</code>
+    </MixedArgument>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <PossiblyNullArgument occurrences="1">
+      <code>$locale</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Validator/PhoneNumber.php">
+    <InvalidArgument occurrences="1">
+      <code>$countryPattern['code']</code>
+    </InvalidArgument>
+    <InvalidOperand occurrences="2">
+      <code>$countryPattern['code']</code>
+      <code>$countryPattern['code']</code>
+    </InvalidOperand>
+    <MixedArgument occurrences="10">
+      <code>$country</code>
+      <code>$options['allow_possible']</code>
+      <code>$options['allowed_types']</code>
+      <code>$options['country']</code>
+      <code>$pattern</code>
+      <code>$pattern</code>
+      <code>$pattern</code>
+      <code>$pattern</code>
+      <code>$valueNoCountry</code>
+      <code>$valueNoCountry</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="6">
+      <code>$country</code>
+      <code>$pattern</code>
+      <code>$pattern</code>
+      <code>$type</code>
+      <code>$type</code>
+      <code>static::$phone[$code]</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array[]|false</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>static::$phone[$code]</code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(bool) $possible</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/Validator/PostCode.php">
+    <DeprecatedMethod occurrences="2">
+      <code>getService</code>
+      <code>setService</code>
+    </DeprecatedMethod>
+    <DocblockTypeContradiction occurrences="1">
+      <code>! is_string($value) &amp;&amp; ! is_int($value)</code>
+    </DocblockTypeContradiction>
+    <InvalidScalarArgument occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </InvalidScalarArgument>
+    <MixedArgument occurrences="4">
+      <code>$format</code>
+      <code>$format</code>
+      <code>$options['format']</code>
+      <code>$options['locale']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$format[0]</code>
+      <code>$format[strlen($format) - 1]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$format</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="2">
+      <code>$format</code>
+      <code>$format</code>
+    </MixedOperand>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$value</code>
+    </MoreSpecificImplementedParamType>
+  </file>
+  <file src="src/View/Helper/AbstractTranslatorHelper.php">
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(bool) $enabled</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/View/Helper/CurrencyFormat.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$this-&gt;locale === null</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="3">
+      <code>$currencyCode</code>
+      <code>$currencyPattern</code>
+      <code>$locale</code>
+    </MissingConstructor>
+    <MixedArgument occurrences="2">
+      <code>$formattedNumber</code>
+      <code>$this-&gt;formatters[$formatterId]</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$defaultCurrencyCode</code>
+      <code>$formattedNumber</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="5">
+      <code>formatCurrency</code>
+      <code>getTextAttribute</code>
+      <code>setAttribute</code>
+      <code>setAttribute</code>
+      <code>setPattern</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="1">
+      <code>$formattedNumber</code>
+    </MixedReturnStatement>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(bool) $showDecimals</code>
+      <code>(string) $locale</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>$pattern !== null</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/View/Helper/DateFormat.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$this-&gt;locale === null</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="2">
+      <code>$locale</code>
+      <code>$timezone</code>
+    </MissingConstructor>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(string) $locale</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="src/View/Helper/NumberFormat.php">
+    <DocblockTypeContradiction occurrences="3">
+      <code>$this-&gt;locale === null</code>
+      <code>null === $this-&gt;formatStyle</code>
+      <code>null === $this-&gt;formatType</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="4">
+      <code>$decimals</code>
+      <code>$formatStyle</code>
+      <code>$formatType</code>
+      <code>$locale</code>
+    </MissingConstructor>
+    <MixedArgument occurrences="1">
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$textAttribute</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="2">
+      <code>$formatter</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="1">
+      <code>format</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="1">
+      <code>$formatter-&gt;format($number, $formatType)</code>
+    </MixedReturnStatement>
+    <RedundantCastGivenDocblockType occurrences="3">
+      <code>(int) $formatStyle</code>
+      <code>(int) $formatType</code>
+      <code>(string) $locale</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>$decimals !== null</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/View/Helper/Plural.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === $this-&gt;getPluralRule()</code>
+    </DocblockTypeContradiction>
+    <MissingConstructor occurrences="1">
+      <code>$rule</code>
+    </MissingConstructor>
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$strings[$pluralIndex]</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/View/HelperConfig.php">
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>array</code>
+    </LessSpecificImplementedReturnType>
+    <MixedArgument occurrences="2">
+      <code>$factory</code>
+      <code>$target</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="3">
+      <code>$alias</code>
+      <code>$name</code>
+      <code>$this-&gt;toArray()</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayOffset occurrences="1"/>
+    <MixedAssignment occurrences="2">
+      <code>$factory</code>
+      <code>$target</code>
+    </MixedAssignment>
+    <RedundantCondition occurrences="1">
+      <code>method_exists($serviceManager, 'configure')</code>
+    </RedundantCondition>
+    <UndefinedClass occurrences="6">
+      <code>\Zend\I18n\View\Helper\CurrencyFormat</code>
+      <code>\Zend\I18n\View\Helper\DateFormat</code>
+      <code>\Zend\I18n\View\Helper\NumberFormat</code>
+      <code>\Zend\I18n\View\Helper\Plural</code>
+      <code>\Zend\I18n\View\Helper\Translate</code>
+      <code>\Zend\I18n\View\Helper\TranslatePlural</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/Filter/AlnumTest.php">
+    <MixedArgument occurrences="1">
+      <code>$input</code>
+    </MixedArgument>
+  </file>
+  <file src="test/Filter/AlphaTest.php">
+    <MixedArgument occurrences="1">
+      <code>$input</code>
+    </MixedArgument>
+  </file>
+  <file src="test/ModuleTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testConfigReturnsExpectedKeys</code>
+      <code>testInitRegistersPluginManagerSpecificationWithServiceListener</code>
+    </MissingReturnType>
+    <MixedMethodCall occurrences="2">
+      <code>getConfig</code>
+      <code>init</code>
+    </MixedMethodCall>
+    <UndefinedThisPropertyAssignment occurrences="1">
+      <code>$this-&gt;module</code>
+    </UndefinedThisPropertyAssignment>
+    <UndefinedThisPropertyFetch occurrences="2">
+      <code>$this-&gt;module</code>
+      <code>$this-&gt;module</code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/TestAsset/ModuleEventInterface.php">
+    <MissingReturnType occurrences="1">
+      <code>getParam</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/ModuleManagerInterface.php">
+    <MissingReturnType occurrences="1">
+      <code>getEvent</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/ServiceListenerInterface.php">
+    <MissingReturnType occurrences="1">
+      <code>addServiceManager</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestCase.php">
+    <RedundantCondition occurrences="1">
+      <code>assertNotNull</code>
+    </RedundantCondition>
+  </file>
+  <file src="test/Translator/Loader/GettextTest.php">
+    <PossiblyNullReference occurrences="4">
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="test/Translator/Loader/IniTest.php">
+    <PossiblyNullReference occurrences="4">
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="test/Translator/Loader/PhpArrayTest.php">
+    <PossiblyNullReference occurrences="4">
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="test/Translator/Loader/PhpMemoryArrayTest.php">
+    <InvalidArgument occurrences="1">
+      <code>'foo'</code>
+    </InvalidArgument>
+    <MixedArgument occurrences="3">
+      <code>include $this-&gt;testFilesDir . '/translation_empty.php'</code>
+      <code>include $this-&gt;testFilesDir . '/translation_en.php'</code>
+      <code>include $this-&gt;testFilesDir . '/translation_en.php'</code>
+    </MixedArgument>
+    <PossiblyNullReference occurrences="4">
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+    </PossiblyNullReference>
+    <UnresolvableInclude occurrences="3">
+      <code>include $this-&gt;testFilesDir . '/translation_empty.php'</code>
+      <code>include $this-&gt;testFilesDir . '/translation_en.php'</code>
+      <code>include $this-&gt;testFilesDir . '/translation_en.php'</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="test/Translator/LoaderPluginManagerFactoryTest.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$container</code>
+      <code>$container</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="2">
+      <code>static function ($container) use ($translator) {</code>
+      <code>static function ($container) use ($translator) {</code>
+    </MissingClosureReturnType>
+    <UnusedClosureParam occurrences="2">
+      <code>$container</code>
+      <code>$container</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="1">
+      <code>$config</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Translator/TestAsset/Loader.php">
+    <MissingConstructor occurrences="1">
+      <code>$textDomain</code>
+    </MissingConstructor>
+    <ParamNameMismatch occurrences="2">
+      <code>$filename</code>
+      <code>$locale</code>
+    </ParamNameMismatch>
+  </file>
+  <file src="test/Translator/TextDomainTest.php">
+    <MissingReturnType occurrences="9">
+      <code>testArrayAccess</code>
+      <code>testInstantiation</code>
+      <code>testMerging</code>
+      <code>testMergingIncompatibleTextDomains</code>
+      <code>testMergingTextDomainWithPluralRuleIntoTextDomainWithoutPluralRule</code>
+      <code>testMergingTextDomainWithoutPluralRuleIntoTextDomainWithPluralRule</code>
+      <code>testMergingTextDomainsWithPluralRules</code>
+      <code>testPluralRuleDefault</code>
+      <code>testPluralRuleSetter</code>
+    </MissingReturnType>
+    <PossiblyNullReference occurrences="7">
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>evaluate</code>
+      <code>getNumPlurals</code>
+      <code>getNumPlurals</code>
+      <code>getNumPlurals</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="test/Translator/TranslatorAwareTraitTest.php">
+    <InvalidScalarArgument occurrences="8">
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+      <code>TranslatorAwareTrait::class</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="8">
+      <code>testGetTranslator</code>
+      <code>testGetTranslatorTextDomain</code>
+      <code>testHasTranslator</code>
+      <code>testIsTranslatorEnabled</code>
+      <code>testSetTranslator</code>
+      <code>testSetTranslatorAndTextDomain</code>
+      <code>testSetTranslatorEnabled</code>
+      <code>testSetTranslatorTextDomain</code>
+    </MissingReturnType>
+    <MixedMethodCall occurrences="28">
+      <code>getTranslator</code>
+      <code>getTranslator</code>
+      <code>getTranslator</code>
+      <code>getTranslator</code>
+      <code>getTranslator</code>
+      <code>getTranslator</code>
+      <code>getTranslatorTextDomain</code>
+      <code>getTranslatorTextDomain</code>
+      <code>getTranslatorTextDomain</code>
+      <code>getTranslatorTextDomain</code>
+      <code>getTranslatorTextDomain</code>
+      <code>getTranslatorTextDomain</code>
+      <code>hasTranslator</code>
+      <code>hasTranslator</code>
+      <code>isTranslatorEnabled</code>
+      <code>isTranslatorEnabled</code>
+      <code>isTranslatorEnabled</code>
+      <code>isTranslatorEnabled</code>
+      <code>isTranslatorEnabled</code>
+      <code>setTranslator</code>
+      <code>setTranslator</code>
+      <code>setTranslator</code>
+      <code>setTranslator</code>
+      <code>setTranslatorEnabled</code>
+      <code>setTranslatorEnabled</code>
+      <code>setTranslatorEnabled</code>
+      <code>setTranslatorTextDomain</code>
+      <code>setTranslatorTextDomain</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/Translator/TranslatorServiceFactoryTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testCreateServiceWithNoTranslatorKeyDefined</code>
+      <code>testCreateServiceWithNoTranslatorPluginManagerDefined</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Translator/TranslatorTest.php">
+    <NullArgument occurrences="4">
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+    </NullArgument>
+    <RedundantCondition occurrences="2">
+      <code>assertNull</code>
+      <code>assertNull</code>
+    </RedundantCondition>
+    <UnusedClosureParam occurrences="6">
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+      <code>$event</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="2">
+      <code>$doNotTriger</code>
+      <code>$doNotTrigger</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Validator/AlnumTest.php">
+    <InvalidArgument occurrences="1">
+      <code>[1 =&gt; 1]</code>
+    </InvalidArgument>
+  </file>
+  <file src="test/Validator/AlphaTest.php">
+    <InvalidArgument occurrences="1">
+      <code>[1 =&gt; 1]</code>
+    </InvalidArgument>
+    <InvalidCast occurrences="1">
+      <code>[1 =&gt; 1]</code>
+    </InvalidCast>
+  </file>
+  <file src="test/Validator/DateTimeTest.php">
+    <MissingReturnType occurrences="7">
+      <code>testApplicationOptionLocale</code>
+      <code>testApplicationOptionTimezone</code>
+      <code>testMultipleIsValidCalls</code>
+      <code>testOptionLocale</code>
+      <code>testOptionPattern</code>
+      <code>testOptionPatternOmitted</code>
+      <code>testOptionTimezone</code>
+    </MissingReturnType>
+    <PossiblyNullArgument occurrences="4">
+      <code>$this-&gt;validator-&gt;getDateType()</code>
+      <code>$this-&gt;validator-&gt;getLocale()</code>
+      <code>$this-&gt;validator-&gt;getPattern()</code>
+      <code>$this-&gt;validator-&gt;getTimeType()</code>
+    </PossiblyNullArgument>
+    <UndefinedMethod occurrences="1">
+      <code>testBasic</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Validator/IsFloatTest.php">
+    <InvalidArgument occurrences="1">
+      <code>[1 =&gt; 1]</code>
+    </InvalidArgument>
+    <MixedArgument occurrences="2">
+      <code>$message['notFloat']</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedOperand occurrences="1">
+      <code>$value</code>
+    </MixedOperand>
+  </file>
+  <file src="test/Validator/IsIntTest.php">
+    <InvalidArgument occurrences="1">
+      <code>[1 =&gt; 1]</code>
+    </InvalidArgument>
+    <MixedArgument occurrences="3">
+      <code>$intVal</code>
+      <code>$intVal</code>
+      <code>$strict</code>
+    </MixedArgument>
+  </file>
+  <file src="test/Validator/PostCodeTest.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="2">
+      <code>static function ($value) use ($params) {</code>
+      <code>static function ($value) use ($params) {</code>
+    </MissingClosureReturnType>
+    <MixedArgument occurrences="3">
+      <code>$message['postcodeNoMatch']</code>
+      <code>$message['postcodeService']</code>
+      <code>$postCode</code>
+    </MixedArgument>
+  </file>
+  <file src="test/View/Helper/CurrencyFormatTest.php">
+    <PossiblyNullArgument occurrences="1">
+      <code>$currencyPattern</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="test/View/Helper/DateFormatTest.php">
+    <TooManyArguments occurrences="1">
+      <code>new IntlGregorianCalendar(2013, 6, 1)</code>
+    </TooManyArguments>
+  </file>
+  <file src="test/View/Helper/NumberFormatTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testBasic</code>
+    </MissingReturnType>
+    <PossiblyNullArgument occurrences="1">
+      <code>$decimals</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="test/View/Helper/TranslatePluralTest.php">
+    <MissingReturnType occurrences="3">
+      <code>testCustomInvokeArguments</code>
+      <code>testDefaultInvokeArguments</code>
+      <code>testInvokingWithoutTranslatorWillRaiseException</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/View/Helper/TranslateTest.php">
+    <MissingReturnType occurrences="3">
+      <code>testCustomInvokeArguments</code>
+      <code>testDefaultInvokeArguments</code>
+      <code>testInvokingWithoutTranslatorWillRaiseException</code>
+    </MissingReturnType>
+  </file>
+</files>

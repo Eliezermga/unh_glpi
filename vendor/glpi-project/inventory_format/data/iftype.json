@@ -1,0 +1,1826 @@
+[
+    {
+        "decimal": "Decimal",
+        "name": "Name",
+        "description": "Description",
+        "references": "References"
+    },
+    {
+        "decimal": "1",
+        "name": "other",
+        "description": "none of the following",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "2",
+        "name": "regular1822",
+        "description": "BBN Report 1822",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "3",
+        "name": "hdh1822",
+        "description": "BBN Report 1822",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "4",
+        "name": "ddn-x25",
+        "description": "BBN Report 1822",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "5",
+        "name": "x25",
+        "description": "X.25",
+        "references": "[RFC1382]"
+    },
+    {
+        "decimal": "6",
+        "name": "ethernet-csmacd",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "7",
+        "name": "IEEE802.3",
+        "description": "DEPRECATED",
+        "references": "[RFC3635]"
+    },
+    {
+        "decimal": "8",
+        "name": "IEEE802.4",
+        "description": "Token Bus-like Objects",
+        "references": "[RFC1239]"
+    },
+    {
+        "decimal": "9",
+        "name": "IEEE802.5",
+        "description": "Token Ring-like Objects",
+        "references": "[RFC1748]"
+    },
+    {
+        "decimal": "10",
+        "name": "iso88026-man",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "11",
+        "name": "starLan",
+        "description": "DEPRECATED",
+        "references": "[RFC3635]"
+    },
+    {
+        "decimal": "12",
+        "name": "proteon-10Mbit",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "13",
+        "name": "proteon-80Mbit",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "14",
+        "name": "hyperchannel",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "15",
+        "name": "FDDI",
+        "description": "FDDI Objects",
+        "references": "[RFC1512]"
+    },
+    {
+        "decimal": "16",
+        "name": "lapb",
+        "description": "LAP B",
+        "references": "[RFC1381]"
+    },
+    {
+        "decimal": "17",
+        "name": "sdlc",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "18",
+        "name": "ds1",
+        "description": "T1\/E1 Carrier Objects",
+        "references": "[RFC4805]"
+    },
+    {
+        "decimal": "19",
+        "name": "e1",
+        "description": "obsolete",
+        "references": "[RFC4805]"
+    },
+    {
+        "decimal": "20",
+        "name": "basicISDN",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "21",
+        "name": "primaryISDN",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "22",
+        "name": "propPointToPointSerial",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "23",
+        "name": "ppp",
+        "description": "Point-to-Point Protocol",
+        "references": "[RFC1213][RFC1471]"
+    },
+    {
+        "decimal": "24",
+        "name": "softwareLoopback",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "25",
+        "name": "eon",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "26",
+        "name": "ethernet-3Mbit",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "27",
+        "name": "nsip",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "28",
+        "name": "slip",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "29",
+        "name": "ultra",
+        "description": "",
+        "references": "[RFC1213]"
+    },
+    {
+        "decimal": "30",
+        "name": "ds3",
+        "description": "DS3\/E3 Interface Objects",
+        "references": "[RFC3896]"
+    },
+    {
+        "decimal": "31",
+        "name": "sip",
+        "description": "SMDS Interface Objects",
+        "references": "[RFC1694]"
+    },
+    {
+        "decimal": "32",
+        "name": "frame-relay",
+        "description": "Frame Relay Objects for DTE",
+        "references": "[RFC2115]"
+    },
+    {
+        "decimal": "33",
+        "name": "RS-232",
+        "description": "RS-232 Objects",
+        "references": "[RFC1659]"
+    },
+    {
+        "decimal": "34",
+        "name": "Parallel",
+        "description": "Parallel Printer Objects",
+        "references": "[RFC1660]"
+    },
+    {
+        "decimal": "35",
+        "name": "arcnet",
+        "description": "ARC network",
+        "references": ""
+    },
+    {
+        "decimal": "36",
+        "name": "arcnet-plus",
+        "description": "ARC network plus",
+        "references": ""
+    },
+    {
+        "decimal": "37",
+        "name": "atm",
+        "description": "ATM",
+        "references": ""
+    },
+    {
+        "decimal": "38",
+        "name": "MIOX25",
+        "description": "MIOX25",
+        "references": "[RFC1461]"
+    },
+    {
+        "decimal": "39",
+        "name": "SONET",
+        "description": "SONET or SDH",
+        "references": ""
+    },
+    {
+        "decimal": "40",
+        "name": "x25ple",
+        "description": "X.25 packet level",
+        "references": "[RFC2127]"
+    },
+    {
+        "decimal": "41",
+        "name": "iso88022llc",
+        "description": "802.2 LLC",
+        "references": ""
+    },
+    {
+        "decimal": "42",
+        "name": "localTalk",
+        "description": "",
+        "references": ""
+    },
+    {
+        "decimal": "43",
+        "name": "smds-dxi",
+        "description": "SMDS DXI",
+        "references": ""
+    },
+    {
+        "decimal": "44",
+        "name": "frameRelayService",
+        "description": "Frame Relay DCE",
+        "references": "[RFC2954]"
+    },
+    {
+        "decimal": "45",
+        "name": "v35",
+        "description": "V.35",
+        "references": ""
+    },
+    {
+        "decimal": "46",
+        "name": "hssi",
+        "description": "HSSI",
+        "references": ""
+    },
+    {
+        "decimal": "47",
+        "name": "hippi",
+        "description": "HIPPI",
+        "references": ""
+    },
+    {
+        "decimal": "48",
+        "name": "modem",
+        "description": "generic modem",
+        "references": ""
+    },
+    {
+        "decimal": "49",
+        "name": "aal5",
+        "description": "AAL5 over ATM",
+        "references": ""
+    },
+    {
+        "decimal": "50",
+        "name": "sonetPath",
+        "description": "",
+        "references": ""
+    },
+    {
+        "decimal": "51",
+        "name": "sonetVT",
+        "description": "",
+        "references": ""
+    },
+    {
+        "decimal": "52",
+        "name": "smds-icip",
+        "description": "SMDS Inter-Carrier Interface Protocol",
+        "references": ""
+    },
+    {
+        "decimal": "53",
+        "name": "propVirtual",
+        "description": "proprietary vitural\/internal interface",
+        "references": "[RFC2863]"
+    },
+    {
+        "decimal": "54",
+        "name": "propMultiLink",
+        "description": "proprietary multi-link multiplexing",
+        "references": "[RFC2863]"
+    },
+    {
+        "decimal": "55",
+        "name": "ieee80212",
+        "description": "100BaseVG",
+        "references": ""
+    },
+    {
+        "decimal": "56",
+        "name": "fibre-channel",
+        "description": "Fibre Channel",
+        "references": ""
+    },
+    {
+        "decimal": "57",
+        "name": "hippiInterfaces",
+        "description": "HIPPI interfaces",
+        "references": "[Philip_Cameron]"
+    },
+    {
+        "decimal": "58",
+        "name": "FrameRelayInterconnect",
+        "description": "Interconnet over FR",
+        "references": "[Unknown]"
+    },
+    {
+        "decimal": "59",
+        "name": "aflane8023",
+        "description": "ATM Emulated LAN for 802.3",
+        "references": "[Keith_McCloghrie]"
+    },
+    {
+        "decimal": "60",
+        "name": "aflane8025",
+        "description": "ATM Emulated LAN for 802.5",
+        "references": "[Keith_McCloghrie]"
+    },
+    {
+        "decimal": "61",
+        "name": "cctEmul",
+        "description": "ATM Emulated circuit",
+        "references": "[Guy_Fedorkow]"
+    },
+    {
+        "decimal": "62",
+        "name": "fastEther",
+        "description": "DEPRECATED",
+        "references": "[RFC3635]"
+    },
+    {
+        "decimal": "63",
+        "name": "isdn",
+        "description": "ISDN and X.25",
+        "references": "[RFC1356]"
+    },
+    {
+        "decimal": "64",
+        "name": "v11",
+        "description": "CCITT V.11\/X.21",
+        "references": "[Satish_Popat]"
+    },
+    {
+        "decimal": "65",
+        "name": "v36",
+        "description": "CCITT V.36",
+        "references": "[Satish_Popat]"
+    },
+    {
+        "decimal": "66",
+        "name": "g703-64k",
+        "description": "CCITT G703 at 64Kbps",
+        "references": "[Satish_Popat]"
+    },
+    {
+        "decimal": "67",
+        "name": "g703-2mb",
+        "description": "CCITT G703 at 2Mbps",
+        "references": "[Satish_Popat]"
+    },
+    {
+        "decimal": "68",
+        "name": "qllc",
+        "description": "SNA QLLC",
+        "references": "[Satish_Popat]"
+    },
+    {
+        "decimal": "69",
+        "name": "fastEtherFX",
+        "description": "DEPRECATED",
+        "references": "[RFC3635]"
+    },
+    {
+        "decimal": "70",
+        "name": "channel",
+        "description": "channel",
+        "references": "[Steven_Schwell]"
+    },
+    {
+        "decimal": "71",
+        "name": "IEEE802.11",
+        "description": "radio spread spectrum",
+        "references": "[Dawkoon_Paul_Lee]"
+    },
+    {
+        "decimal": "72",
+        "name": "ibm370parChan",
+        "description": "IBM System 360\/370 OEMI Channel",
+        "references": "[Bill_Kwan]"
+    },
+    {
+        "decimal": "73",
+        "name": "ESCON",
+        "description": "IBM Enterprise Systems Connection",
+        "references": "[Bill_Kwan]"
+    },
+    {
+        "decimal": "74",
+        "name": "DLSw",
+        "description": "Data Link Switching",
+        "references": "[Bill_Kwan]"
+    },
+    {
+        "decimal": "75",
+        "name": "ISDNs",
+        "description": "ISDN S\/T interface",
+        "references": "[Ed_Alcoff]"
+    },
+    {
+        "decimal": "76",
+        "name": "ISDNu",
+        "description": "ISDN U interface",
+        "references": "[Ed_Alcoff]"
+    },
+    {
+        "decimal": "77",
+        "name": "lapd",
+        "description": "Link Access Protocol D",
+        "references": "[Ed_Alcoff]"
+    },
+    {
+        "decimal": "78",
+        "name": "ip-switch",
+        "description": "IP Switching Objects",
+        "references": "[Joe_Wei]"
+    },
+    {
+        "decimal": "79",
+        "name": "rsrb",
+        "description": "Remote Source Route Bridging",
+        "references": "[Bob_Clouston]"
+    },
+    {
+        "decimal": "80",
+        "name": "atm-logical",
+        "description": "ATM Logical Port",
+        "references": "[RFC3606]"
+    },
+    {
+        "decimal": "81",
+        "name": "ds0",
+        "description": "Digital Signal Level 0",
+        "references": "[RFC2494]"
+    },
+    {
+        "decimal": "82",
+        "name": "ds0Bundle",
+        "description": "group of ds0s on the same ds1",
+        "references": "[RFC2494]"
+    },
+    {
+        "decimal": "83",
+        "name": "bsc",
+        "description": "Bisynchronous Protocol",
+        "references": "[Bill_Kwan]"
+    },
+    {
+        "decimal": "84",
+        "name": "async",
+        "description": "Asynchronous Protocol",
+        "references": "[Bill_Kwan]"
+    },
+    {
+        "decimal": "85",
+        "name": "cnr",
+        "description": "Combat Net Radio",
+        "references": "[Herb_Jensen]"
+    },
+    {
+        "decimal": "86",
+        "name": "iso88025Dtr",
+        "description": "ISO 802.5r DTR",
+        "references": "[Trevor_Warwick]"
+    },
+    {
+        "decimal": "87",
+        "name": "eplrs",
+        "description": "Enhanced  Pos Loc Report Sys",
+        "references": "[Herb_Jensen]"
+    },
+    {
+        "decimal": "88",
+        "name": "arap",
+        "description": "Appletalk Remote Access Protocol",
+        "references": "[Jim_Halpin]"
+    },
+    {
+        "decimal": "89",
+        "name": "propCnls",
+        "description": "Proprietary Connectionless Proto.",
+        "references": "[Robert_Neill]"
+    },
+    {
+        "decimal": "90",
+        "name": "hostPad",
+        "description": "CCITT-ITU X.29 PAD Protocol",
+        "references": "[Robert_Neill]"
+    },
+    {
+        "decimal": "91",
+        "name": "termPad",
+        "description": "CCITT-ITU X.3 PAD Facility",
+        "references": "[Robert_Neill]"
+    },
+    {
+        "decimal": "92",
+        "name": "frameRelayMPI",
+        "description": "Multiproto Interconnect over FR",
+        "references": "[Robert_Neill]"
+    },
+    {
+        "decimal": "93",
+        "name": "x213",
+        "description": "CCITT-ITU X213",
+        "references": "[Robert_Neill]"
+    },
+    {
+        "decimal": "94",
+        "name": "adsl",
+        "description": "Asymmetric Digital Subscriber Loop",
+        "references": "[Gregory_Bathrick]"
+    },
+    {
+        "decimal": "95",
+        "name": "radsl",
+        "description": "Rate-Adapt. Digital Subscriber Loop",
+        "references": "[Gregory_Bathrick]"
+    },
+    {
+        "decimal": "96",
+        "name": "sdsl",
+        "description": "Symmetric Digital Subscriber Loop",
+        "references": "[Gregory_Bathrick]"
+    },
+    {
+        "decimal": "97",
+        "name": "vdsl",
+        "description": "Very H-Speed Digital Subscrib. Loop",
+        "references": "[Gregory_Bathrick]"
+    },
+    {
+        "decimal": "98",
+        "name": "iso88025CRFPInt",
+        "description": "ISO 802.5 CRFP",
+        "references": "[Trevor_Warwick]"
+    },
+    {
+        "decimal": "99",
+        "name": "myrinet",
+        "description": "Myricom Myrinet",
+        "references": "[Bob_Felderman]"
+    },
+    {
+        "decimal": "100",
+        "name": "voiceEM",
+        "description": "Voice recEive and transMit (E&M)",
+        "references": "[Bob_Stewart]"
+    },
+    {
+        "decimal": "101",
+        "name": "voiceFXO",
+        "description": "Voice Foreign Exchange Office",
+        "references": "[Bob_Stewart]"
+    },
+    {
+        "decimal": "102",
+        "name": "voiceFXS",
+        "description": "Voice Foreign Exchange Station",
+        "references": "[Bob_Stewart]"
+    },
+    {
+        "decimal": "103",
+        "name": "voiceEncap",
+        "description": "Voice encapsulation",
+        "references": "[Bob_Stewart]"
+    },
+    {
+        "decimal": "104",
+        "name": "voiceOverIp",
+        "description": "Voice over IP encapsulation",
+        "references": "[Bob_Stewart]"
+    },
+    {
+        "decimal": "105",
+        "name": "atmDxi",
+        "description": "ATM DXI",
+        "references": "[Gary_Hanson]"
+    },
+    {
+        "decimal": "106",
+        "name": "atmFuni",
+        "description": "ATM FUNI",
+        "references": "[Gary_Hanson]"
+    },
+    {
+        "decimal": "107",
+        "name": "atmIma",
+        "description": "ATM IMA",
+        "references": "[Chris_Martin]"
+    },
+    {
+        "decimal": "108",
+        "name": "pppMultilinkBundle",
+        "description": "PPP Multilink Bundle",
+        "references": "[John_Shriver]"
+    },
+    {
+        "decimal": "109",
+        "name": "ipOverCdlc",
+        "description": "IBM ipOverCdlc",
+        "references": "[Ken_White]"
+    },
+    {
+        "decimal": "110",
+        "name": "ipOverClaw",
+        "description": "IBM Common Link Access to Workstn",
+        "references": "[Ken_White]"
+    },
+    {
+        "decimal": "111",
+        "name": "stackToStack",
+        "description": "IBM stackToStack",
+        "references": "[Ken_White]"
+    },
+    {
+        "decimal": "112",
+        "name": "virtualIpAddress",
+        "description": "IBM VIPA",
+        "references": "[Ken_White]"
+    },
+    {
+        "decimal": "113",
+        "name": "mpc",
+        "description": "IBM multi-protocol channel support",
+        "references": "[Ken_White]"
+    },
+    {
+        "decimal": "114",
+        "name": "ipOverAtm",
+        "description": "IBM ipOverAtm",
+        "references": "[RFC2320]"
+    },
+    {
+        "decimal": "115",
+        "name": "iso88025Fiber",
+        "description": "ISO 802.5j Fiber Token Ring",
+        "references": "[Kevin_Lingle]"
+    },
+    {
+        "decimal": "116",
+        "name": "tdlc",
+        "description": "IBM twinaxial data link control",
+        "references": "[John_Pechacek]"
+    },
+    {
+        "decimal": "117",
+        "name": "gigabitEthernet",
+        "description": "DEPRECATED",
+        "references": "[RFC3635]"
+    },
+    {
+        "decimal": "118",
+        "name": "hdlc",
+        "description": "HDLC",
+        "references": "[Sebastien_Rosset]"
+    },
+    {
+        "decimal": "119",
+        "name": "lapf",
+        "description": "LAP F",
+        "references": "[Sebastien_Rosset]"
+    },
+    {
+        "decimal": "120",
+        "name": "v37",
+        "description": "V.37",
+        "references": "[Sebastien_Rosset]"
+    },
+    {
+        "decimal": "121",
+        "name": "x25mlp",
+        "description": "Multi-Link Protocol",
+        "references": "[Sebastien_Rosset]"
+    },
+    {
+        "decimal": "122",
+        "name": "x25huntGroup",
+        "description": "X25 Hunt Group",
+        "references": "[Sebastien_Rosset]"
+    },
+    {
+        "decimal": "123",
+        "name": "transpHdlc",
+        "description": "Transp HDLC",
+        "references": "[Sebastien_Rosset]"
+    },
+    {
+        "decimal": "124",
+        "name": "interleave",
+        "description": "Interleave channel",
+        "references": "[Karmous_Edwards]"
+    },
+    {
+        "decimal": "125",
+        "name": "fast",
+        "description": "Fast channel",
+        "references": "[Karmous_Edwards]"
+    },
+    {
+        "decimal": "126",
+        "name": "ip",
+        "description": "IP (for APPN HPR in IP networks)",
+        "references": "[Robert_Moore]"
+    },
+    {
+        "decimal": "127",
+        "name": "docsCableMaclayer",
+        "description": "CATV Mac Layer",
+        "references": "[Azlina_Palmer]"
+    },
+    {
+        "decimal": "128",
+        "name": "docsCableDownstream",
+        "description": "CATV Downstream interface",
+        "references": "[Azlina_Palmer]"
+    },
+    {
+        "decimal": "129",
+        "name": "docsCableUpstream",
+        "description": "CATV Upstream interface",
+        "references": "[Azlina_Palmer]"
+    },
+    {
+        "decimal": "130",
+        "name": "a12MppSwitch",
+        "description": "Avalon Parallel Processor",
+        "references": "[Ross_Harvey]"
+    },
+    {
+        "decimal": "131",
+        "name": "tunnel",
+        "description": "Encapsulation interface",
+        "references": "[Dave_Thaler]"
+    },
+    {
+        "decimal": "132",
+        "name": "coffee",
+        "description": "coffee pot",
+        "references": "[RFC2325]"
+    },
+    {
+        "decimal": "133",
+        "name": "ces",
+        "description": "Circiut Emulation Service",
+        "references": "[Ron_Carmona]"
+    },
+    {
+        "decimal": "134",
+        "name": "atmSubInterface",
+        "description": "(x)  ATM Sub Interface",
+        "references": "[Keith_McCloghrie]"
+    },
+    {
+        "decimal": "135",
+        "name": "l2vlan",
+        "description": "Layer 2 Virtual LAN using 802.1Q",
+        "references": "[Mike_MacFaden]"
+    },
+    {
+        "decimal": "136",
+        "name": "l3ipvlan",
+        "description": "Layer 3 Virtual LAN - IP Protocol",
+        "references": "[Mike_MacFaden]"
+    },
+    {
+        "decimal": "137",
+        "name": "l3ipxvlan",
+        "description": "Layer 3 Virtual LAN - IPX Prot.",
+        "references": "[Mike_MacFaden]"
+    },
+    {
+        "decimal": "138",
+        "name": "digitalPowerLine",
+        "description": "IP over Power Lines",
+        "references": "[Hans_Scholtes]"
+    },
+    {
+        "decimal": "139",
+        "name": "mediaMailOverIp",
+        "description": "(xxx)  Multimedia Mail over IP",
+        "references": "[Hongchi_Shih]"
+    },
+    {
+        "decimal": "140",
+        "name": "dtm",
+        "description": "Dynamic synchronous Transfer Mode",
+        "references": "[Jakob_Ellerstedt]"
+    },
+    {
+        "decimal": "141",
+        "name": "dcn",
+        "description": "Data Communications Network",
+        "references": "[James_Card]"
+    },
+    {
+        "decimal": "142",
+        "name": "ipForward",
+        "description": "IP Forwarding Interface",
+        "references": "[James_Card]"
+    },
+    {
+        "decimal": "143",
+        "name": "msdsl",
+        "description": "Multi-rate Symmetric DSL",
+        "references": "[Gopinath_Durairaj]"
+    },
+    {
+        "decimal": "144",
+        "name": "ieee1394     IEEE1394",
+        "description": "High Performance Serial Bus",
+        "references": "[Kenji_Fujisawa]"
+    },
+    {
+        "decimal": "145",
+        "name": "if-gsn",
+        "description": "HIPPI-6400",
+        "references": "[Jean_Michel_Pittet]"
+    },
+    {
+        "decimal": "146",
+        "name": "dvbRccMacLayer",
+        "description": "DVB-RCC MAC Layer",
+        "references": "[Maarten_Oelering]"
+    },
+    {
+        "decimal": "147",
+        "name": "dvbRccDownstream",
+        "description": "DVB-RCC Downstream Channel",
+        "references": "[Maarten_Oelering]"
+    },
+    {
+        "decimal": "148",
+        "name": "dvbRccUpstream",
+        "description": "DVB-RCC Upstream Channel",
+        "references": "[Maarten_Oelering]"
+    },
+    {
+        "decimal": "149",
+        "name": "atmVirtual",
+        "description": "ATM Virtual Interface",
+        "references": "[Subrahmanya_Hegde]"
+    },
+    {
+        "decimal": "150",
+        "name": "mplsTunnel",
+        "description": "MPLS Tunnel Virtual Interface",
+        "references": "[Cheenu_Srinivasan]"
+    },
+    {
+        "decimal": "151",
+        "name": "srp",
+        "description": "Spatial Reuse Protocol",
+        "references": "[Bill_Shetti]"
+    },
+    {
+        "decimal": "152",
+        "name": "voiceOverAtm",
+        "description": "Voice over ATM",
+        "references": "[Chris_White]"
+    },
+    {
+        "decimal": "153",
+        "name": "voiceOverFrameRelay",
+        "description": "Voice Over Frame Relay",
+        "references": "[Chris_White]"
+    },
+    {
+        "decimal": "154",
+        "name": "idsl",
+        "description": "Digital Subscriber Loop over ISDN",
+        "references": "[Patrick_Gili]"
+    },
+    {
+        "decimal": "155",
+        "name": "compositeLink",
+        "description": "Avici Composite Link Interface",
+        "references": "[Joseph_Dube]"
+    },
+    {
+        "decimal": "156",
+        "name": "ss7SigLink",
+        "description": "SS7 Signaling Link",
+        "references": "[Cheenu_Srinivasan]"
+    },
+    {
+        "decimal": "157",
+        "name": "propWirelessP2P",
+        "description": "Prop. P2P wireless interface",
+        "references": "[Joseph_Raja]"
+    },
+    {
+        "decimal": "158",
+        "name": "frForward",
+        "description": "Frame forward Interface",
+        "references": "[Subrahmanya_Hegde]"
+    },
+    {
+        "decimal": "159",
+        "name": "rfc1483",
+        "description": "Multiprotocol over ATM AAL5",
+        "references": "[RFC1483]"
+    },
+    {
+        "decimal": "160",
+        "name": "USB",
+        "description": "USB Interface",
+        "references": "[Bejamin_Dolnik]"
+    },
+    {
+        "decimal": "161",
+        "name": "ieee8023adLag",
+        "description": "IEEE 802.3ad Link Aggregate",
+        "references": "[Les_Bell]"
+    },
+    {
+        "decimal": "162",
+        "name": "bgpPolicyAccounting",
+        "description": "BGP Policy Accounting",
+        "references": "[Vinod_B_C]"
+    },
+    {
+        "decimal": "163",
+        "name": "frf16MfrBundle",
+        "description": "FRF.16 Multilik Frame Relay",
+        "references": "[Pate_Prayson]"
+    },
+    {
+        "decimal": "164",
+        "name": "h323Gatekeeper",
+        "description": "H323 Gatekeeper",
+        "references": "[Chris_White]"
+    },
+    {
+        "decimal": "165",
+        "name": "h323Proxy",
+        "description": "H323 Voice and Video Proxy",
+        "references": "[Chris_White]"
+    },
+    {
+        "decimal": "166",
+        "name": "mpls",
+        "description": "MPLS",
+        "references": "[Cheenu_Srinivasan]"
+    },
+    {
+        "decimal": "167",
+        "name": "mfSigLink",
+        "description": "Multi-frequency signaling link",
+        "references": "[Cheenu_Srinivasan]"
+    },
+    {
+        "decimal": "168",
+        "name": "hdsl2",
+        "description": "High Bit-Rate DSL, 2nd gen.",
+        "references": "[Bob_Ray]"
+    },
+    {
+        "decimal": "169",
+        "name": "shdsl",
+        "description": "Multirate HDSL2",
+        "references": "[Bob_Ray]"
+    },
+    {
+        "decimal": "170",
+        "name": "ds1FDL",
+        "description": "Facility Data Link (4Kbps) on a DS1",
+        "references": "[Bill_Kwan]"
+    },
+    {
+        "decimal": "171",
+        "name": "POS",
+        "description": "Packet over SONET\/SDH Interface",
+        "references": "[Ewart_Tempest]"
+    },
+    {
+        "decimal": "172",
+        "name": "dvbAsiIn",
+        "description": "DVB-ASI Input",
+        "references": "[Hezi_Oved]"
+    },
+    {
+        "decimal": "173",
+        "name": "dvbAsiOut",
+        "description": "DVB-ASI Output",
+        "references": "[Hezi_Oved]"
+    },
+    {
+        "decimal": "174",
+        "name": "plc",
+        "description": "Power Line Communications",
+        "references": "[Andrew_Lunn]"
+    },
+    {
+        "decimal": "175",
+        "name": "NFAS",
+        "description": "Non-Facility Associated Signaling",
+        "references": "[Sidney_Antommarchi]"
+    },
+    {
+        "decimal": "176",
+        "name": "TR008",
+        "description": "TROO8",
+        "references": "[Sidney_Antommarchi]"
+    },
+    {
+        "decimal": "177",
+        "name": "GR303RDT",
+        "description": "Remote Digital Terminal",
+        "references": "[Sidney_Antommarchi]"
+    },
+    {
+        "decimal": "178",
+        "name": "GR303IDT",
+        "description": "Integrated Digital Terminal",
+        "references": "[Sidney_Antommarchi]"
+    },
+    {
+        "decimal": "179",
+        "name": "ISUP",
+        "description": "ISUP",
+        "references": "[Sidney_Antommarchi]"
+    },
+    {
+        "decimal": "180",
+        "name": "propDocsWirelessMaclayer",
+        "description": "Cisco proprietary Maclayer",
+        "references": "[Joseph_Raja]"
+    },
+    {
+        "decimal": "181",
+        "name": "propDocsWirelessDownstream",
+        "description": "Cisco proprietary Downstream",
+        "references": "[Joseph_Raja]"
+    },
+    {
+        "decimal": "182",
+        "name": "propDocsWirelessUpstream",
+        "description": "Cisco proprietary Upstream",
+        "references": "[Joseph_Raja]"
+    },
+    {
+        "decimal": "183",
+        "name": "hiperlan2",
+        "description": "HIPERLAN Type 2 Radio Interface",
+        "references": "[Jamshid_Khun_Jush]"
+    },
+    {
+        "decimal": "184",
+        "name": "propBWAp2Mp",
+        "description": "PropBroadbandWirelessAccesspt2Multipt\n(use of this type for IEEE 802.16\nWMAN, interfaces as per IEEE 802.16\nis deprecated and iftype 237 should\nbe used instead)",
+        "references": "[Zvika_Zilberman]"
+    },
+    {
+        "decimal": "185",
+        "name": "sonetOverheadChannel",
+        "description": "SONET Overhead Channel",
+        "references": "[ODSI_Coalition_K_Arv]"
+    },
+    {
+        "decimal": "186",
+        "name": "digitalWrapperOverheadChannel",
+        "description": "Digital Wrapper\nOverhead",
+        "references": "[ODSI_Coalition_K_Arv]"
+    },
+    {
+        "decimal": "187",
+        "name": "aal2",
+        "description": "ATM adaptation layer 2",
+        "references": "[K_Ashoka]"
+    },
+    {
+        "decimal": "188",
+        "name": "radioMAC",
+        "description": "MAC layer over radio links",
+        "references": "[Daniele_Behar]"
+    },
+    {
+        "decimal": "189",
+        "name": "atmRadio",
+        "description": "ATM over radio links",
+        "references": "[Daniele_Behar]"
+    },
+    {
+        "decimal": "190",
+        "name": "IMT",
+        "description": "Inter-Machine Trunks",
+        "references": "[Sidney_Antommarchi]"
+    },
+    {
+        "decimal": "191",
+        "name": "mvl",
+        "description": "Multiple Virtual Lines DSL",
+        "references": "[Kevin_Baughman]"
+    },
+    {
+        "decimal": "192",
+        "name": "reachDSL",
+        "description": "Long Reach DSL",
+        "references": "[Kevin_Baughman]"
+    },
+    {
+        "decimal": "193",
+        "name": "frDlciEndPt",
+        "description": "Frame Relay DLCI End Point",
+        "references": "[Robert_Steinberger]"
+    },
+    {
+        "decimal": "194",
+        "name": "atmVciEndPt",
+        "description": "ATM VCI End Point",
+        "references": "[Robert_Steinberger]"
+    },
+    {
+        "decimal": "195",
+        "name": "opticalChannel",
+        "description": "Optical Channel",
+        "references": "[Mark_Stewart]"
+    },
+    {
+        "decimal": "196",
+        "name": "opticalTransport",
+        "description": "Optical Transport",
+        "references": "[Mark_Stewart]"
+    },
+    {
+        "decimal": "197",
+        "name": "propAtm",
+        "description": "Proprietary ATM",
+        "references": "[Subrahmanya_Hegde]"
+    },
+    {
+        "decimal": "198",
+        "name": "voiceOverCable",
+        "description": "Voice Over Cable Interface",
+        "references": "[Eugene_Nechamkin]"
+    },
+    {
+        "decimal": "199",
+        "name": "infiniband",
+        "description": "Infiniband",
+        "references": "[Bill_Strahm]"
+    },
+    {
+        "decimal": "200",
+        "name": "teLink",
+        "description": "TE Link",
+        "references": "[Martin_Dubuc]"
+    },
+    {
+        "decimal": "201",
+        "name": "q2931",
+        "description": "Q.2931",
+        "references": "[Sidney_Antommarchi_2]"
+    },
+    {
+        "decimal": "202",
+        "name": "virtualTg",
+        "description": "Virtual Trunk Group",
+        "references": "[Sidney_Antommarchi_2]"
+    },
+    {
+        "decimal": "203",
+        "name": "sipTg",
+        "description": "SIP Trunk Group",
+        "references": "[Sidney_Antommarchi_2]"
+    },
+    {
+        "decimal": "204",
+        "name": "sipSig",
+        "description": "SIP Signaling",
+        "references": "[Sidney_Antommarchi_2]"
+    },
+    {
+        "decimal": "205",
+        "name": "docsCableUpstreamChannel",
+        "description": "CATV Upstream Channel",
+        "references": "[Greg_Nakanishi]"
+    },
+    {
+        "decimal": "206",
+        "name": "econet",
+        "description": "Acorn Econet",
+        "references": "[Ben_Harris]"
+    },
+    {
+        "decimal": "207",
+        "name": "pon155",
+        "description": "FSAN 155Mb Symetrical PON interface",
+        "references": "[Graham_Higgins]"
+    },
+    {
+        "decimal": "208",
+        "name": "pon622",
+        "description": "FSAN 622Mb Symetrical PON interface",
+        "references": "[Graham_Higgins]"
+    },
+    {
+        "decimal": "209",
+        "name": "bridge",
+        "description": "Transparent bridge interface",
+        "references": "[Yuzo_Watanabe]"
+    },
+    {
+        "decimal": "210",
+        "name": "linegroup",
+        "description": "Interface common to multiple lines",
+        "references": "[Yuzo_Watanabe]"
+    },
+    {
+        "decimal": "211",
+        "name": "voiceEMFGD",
+        "description": "voice E&M Feature Group D",
+        "references": "[Taher_Shaikh]"
+    },
+    {
+        "decimal": "212",
+        "name": "voiceFGDEANA",
+        "description": "voice FGD Exchange Access North American",
+        "references": "[Taher_Shaikh]"
+    },
+    {
+        "decimal": "213",
+        "name": "voiceDID",
+        "description": "voice Direct Inward Dialing",
+        "references": "[Taher_Shaikh]"
+    },
+    {
+        "decimal": "214",
+        "name": "mpegTransport",
+        "description": "MPEG transport interface",
+        "references": "[Gaurav_Aggarwal]"
+    },
+    {
+        "decimal": "215",
+        "name": "sixToFour",
+        "description": "6to4 interface  (DEPRECATED)",
+        "references": "[RFC4087]"
+    },
+    {
+        "decimal": "216",
+        "name": "gtp",
+        "description": "GTP (GPRS Tunneling Protocol)",
+        "references": "[Rajesh_M_L]"
+    },
+    {
+        "decimal": "217",
+        "name": "pdnEtherLoop1",
+        "description": "Paradyne EtherLoop 1",
+        "references": "[Shu_Dong]"
+    },
+    {
+        "decimal": "218",
+        "name": "pdnEtherLoop2",
+        "description": "Paradyne EtherLoop 2",
+        "references": "[Shu_Dong]"
+    },
+    {
+        "decimal": "219",
+        "name": "opticalChannelGroup",
+        "description": "Optical Channel Group",
+        "references": "[Hing_Kam_Lam]"
+    },
+    {
+        "decimal": "220",
+        "name": "homepna",
+        "description": "HomePNA ITU-T G.989",
+        "references": "[Stephen_Palm]"
+    },
+    {
+        "decimal": "221",
+        "name": "gfp",
+        "description": "Generic Framing Procedure (GFP)",
+        "references": "[Italo_Busi]"
+    },
+    {
+        "decimal": "222",
+        "name": "ciscoISLvlan",
+        "description": "Layer 2 Virtual LAN using Cisco ISL",
+        "references": "[Sandeep_Raghavendra]"
+    },
+    {
+        "decimal": "223",
+        "name": "actelisMetaLOOP",
+        "description": "Acteleis proprietary MetaLOOP\nHigh Speed Link",
+        "references": "[Edward_Beili]"
+    },
+    {
+        "decimal": "224",
+        "name": "fcipLink",
+        "description": "FCIP Link",
+        "references": "[Anil_Rijhsinghani]"
+    },
+    {
+        "decimal": "225",
+        "name": "rpr",
+        "description": "Resilient Packet Ring Interface Type",
+        "references": "[IEEE 802.17]"
+    },
+    {
+        "decimal": "226",
+        "name": "qam",
+        "description": "RF Qam Interface",
+        "references": "[Jeyachitra_Alagar]"
+    },
+    {
+        "decimal": "227",
+        "name": "lmp",
+        "description": "Link Management Protocol",
+        "references": "[RFC4327]"
+    },
+    {
+        "decimal": "228",
+        "name": "cblVectaStar",
+        "description": "Cambridge Broadband Networks Limited\nVectaStar",
+        "references": "[John_Naylon]"
+    },
+    {
+        "decimal": "229",
+        "name": "docsCableMCmtsDownstream",
+        "description": "CATV Modular CMTS Downstream\nInterface",
+        "references": "[Eduardo_Cardona][\"Data-Over-Cable Service Interface Specifications:\nM-CMTS Operations Support System Interface Specification,\nCM-SP-M-OSSI-I01-050805\", DOCSIS, August 2005.][http:\/\/www.cablemodem.com\/specifications][https:\/\/www.cablelabs.com\/specifications\/archives\/docsis.html]"
+    },
+    {
+        "decimal": "230",
+        "name": "adsl2",
+        "description": "Asymmetric Digital Subscriber Loop\nVersion 2 (DEPRECATED - REPLACED\nBY 238)",
+        "references": "[RFC4706]"
+    },
+    {
+        "decimal": "231",
+        "name": "macSecControlledIF",
+        "description": "MACSecControlled",
+        "references": "[Paul_Congdon]"
+    },
+    {
+        "decimal": "232",
+        "name": "macSecUncontrolledIF",
+        "description": "MACSecUncontrolled",
+        "references": "[Paul_Congdon]"
+    },
+    {
+        "decimal": "233",
+        "name": "aviciOpticalEther",
+        "description": "Avici Optical Ethernet Aggregate",
+        "references": "[Somen_Bhattacharya]"
+    },
+    {
+        "decimal": "234",
+        "name": "atmbond",
+        "description": "atmbond",
+        "references": "[https:\/\/www.itu.int\/rec\/T-REC-G.998.1-200501-I\/en]"
+    },
+    {
+        "decimal": "235",
+        "name": "voiceFGDOS",
+        "description": "voice FGD Operator Services",
+        "references": "[Lizzie_Cheung]"
+    },
+    {
+        "decimal": "236",
+        "name": "mocaVersion1",
+        "description": "MultiMedia over Coax Alliance",
+        "references": "[Ladd_Wardani]"
+    },
+    {
+        "decimal": "237",
+        "name": "ieee80216WMAN",
+        "description": "IEEE 802.16 WMAN interface",
+        "references": "[http:\/\/standards.ieee.org\/getieee802\/802.16.html]"
+    },
+    {
+        "decimal": "238",
+        "name": "adsl2plus",
+        "description": "Asymmetric Digital Subscriber Loop\nVersion 2 -- Version 2 Plus and all\nvariants",
+        "references": "[RFC4706]"
+    },
+    {
+        "decimal": "239",
+        "name": "dvbRcsMacLayer",
+        "description": "DVB-RCS MAC Layer",
+        "references": "[RFC5728][ETSI EN 301 790][https:\/\/web.archive.org\/web\/20181229131835\/http:\/\/satlabs.org\/pdf\/SatLabs_System_Recommendations_v2.0_M&C.pdf]"
+    },
+    {
+        "decimal": "240",
+        "name": "dvbTdm",
+        "description": "DVB Satellite TDM",
+        "references": "[RFC5728][ETSI EN 300 421][ETSI EN 302 307][https:\/\/web.archive.org\/web\/20181229131835\/http:\/\/satlabs.org\/pdf\/SatLabs_System_Recommendations_v2.0_M&C.pdf]"
+    },
+    {
+        "decimal": "241",
+        "name": "dvbRcsTdma",
+        "description": "DVB-RCS TDMA",
+        "references": "[RFC5728][ETSI EN 301 790][ETSI EN 300 421][https:\/\/web.archive.org\/web\/20181229131835\/http:\/\/satlabs.org\/pdf\/SatLabs_System_Recommendations_v2.0_M&C.pdf]"
+    },
+    {
+        "decimal": "242",
+        "name": "x86Laps",
+        "description": "LAPS based on ITU-T X.86\/Y.1323",
+        "references": "[Orly_Nicklass][http:\/\/grouper.ieee.org\/groups\/802\/3\/ad_hoc\/etholaps\/public\/docs\/opening_report_0301.pdf]"
+    },
+    {
+        "decimal": "243",
+        "name": "wwanPP",
+        "description": "3GPP WWAN",
+        "references": "[Gabriel_Montenegro][https:\/\/www.3gpp.org\/ftp\/specs\/archive\/23_series\/23.060\/23060-740.zip]"
+    },
+    {
+        "decimal": "244",
+        "name": "wwanPP2",
+        "description": "3GPP2 WWAN",
+        "references": "[Gabriel_Montenegro][http:\/\/www.3gpp2.org\/Public_html\/Specs\/C.S0017-005-A_v1.0_040617.pdf]"
+    },
+    {
+        "decimal": "245",
+        "name": "voiceEBS",
+        "description": "voice P-phone EBS physical interface",
+        "references": "[Tom_Chou]"
+    },
+    {
+        "decimal": "246",
+        "name": "ifPwType",
+        "description": "Pseudowire interface type",
+        "references": "[RFC5601]"
+    },
+    {
+        "decimal": "247",
+        "name": "ILAN",
+        "description": "Internal LAN on a bridge per IEEE\n802.1ap",
+        "references": "[Glenn_Parsons][http:\/\/www.ieee802.org\/1\/files\/private\/ap-drafts\/d3\/802-1ap-D3-4.pdf]"
+    },
+    {
+        "decimal": "248",
+        "name": "PIP",
+        "description": "Provider Instance Port on a bridge\nper IEEE 802.1ah PBB",
+        "references": "[Glenn_Parsons][http:\/\/www.ieee802.org\/1\/files\/private\/ah-drafts\/d4\/802-1ah-d4-2.pdf]"
+    },
+    {
+        "decimal": "249",
+        "name": "aluELP",
+        "description": "Alcatel-Lucent Ethernet Link Protection",
+        "references": "[Xiaohua_Ma]"
+    },
+    {
+        "decimal": "250",
+        "name": "gpon",
+        "description": "Gigabit-capable passive optical networks\n(G-PON)  as per ITU-T G.984",
+        "references": "[Hyeri_Koh]"
+    },
+    {
+        "decimal": "251",
+        "name": "vdsl2",
+        "description": "Very high speed digital subscriber\nline Version 2 (as per ITU-T Recommendation\nG.993.2)",
+        "references": "[Markus_Freudenberger][RFC5650]"
+    },
+    {
+        "decimal": "252",
+        "name": "capwapDot11Profile",
+        "description": "WLAN Profile Interface",
+        "references": "[RFC5834]"
+    },
+    {
+        "decimal": "253",
+        "name": "capwapDot11Bss",
+        "description": "WLAN BSS Interface",
+        "references": "[RFC5834]"
+    },
+    {
+        "decimal": "254",
+        "name": "capwapWtpVirtualRadio",
+        "description": "WTP Virtual Radio Interface",
+        "references": "[RFC5833]"
+    },
+    {
+        "decimal": "255",
+        "name": "bits",
+        "description": "bitsport",
+        "references": "[Du_Feng]"
+    },
+    {
+        "decimal": "256",
+        "name": "docsCableUpstreamRfPort",
+        "description": "DOCSIS CATV Upstream RF\nPort",
+        "references": "[Michael_Patrick][https:\/\/www.cablelabs.com\/specifications\/CM-SP-EQAM-PMI-I01-081209.pdf]"
+    },
+    {
+        "decimal": "257",
+        "name": "cableDownstreamRfPort",
+        "description": "CATV downstream RF port",
+        "references": "[Michael_Patrick]"
+    },
+    {
+        "decimal": "258",
+        "name": "vmwareVirtualNic",
+        "description": "VMware Virtual Network Interface",
+        "references": "[Mike_MacFaden]"
+    },
+    {
+        "decimal": "259",
+        "name": "ieee802154",
+        "description": "IEEE 802.15.4 WPAN interface",
+        "references": "[Juergen_Schoenwaelde][\"IEEE Std. 802.15.4-2006\", October 2006.]"
+    },
+    {
+        "decimal": "260",
+        "name": "otnOdu",
+        "description": "OTN Optical Data Unit",
+        "references": "[Jim_Vance][https:\/\/www.itu.int\/ITU-T\/studygroups\/com15\/otn\/OTNtutorial.pdf]"
+    },
+    {
+        "decimal": "261",
+        "name": "otnOtu",
+        "description": "OTN Optical channel Transport Unit",
+        "references": "[Jim_Vance][https:\/\/www.itu.int\/ITU-T\/studygroups\/com15\/otn\/OTNtutorial.pdf]"
+    },
+    {
+        "decimal": "262",
+        "name": "ifVfiType",
+        "description": "VPLS Forwarding Instance Interface\nType",
+        "references": "[Manas_Pati]"
+    },
+    {
+        "decimal": "263",
+        "name": "g9981",
+        "description": "G.998.1 bonded interface",
+        "references": "[RFC6768][RFC Errata 3591]"
+    },
+    {
+        "decimal": "264",
+        "name": "g9982",
+        "description": "G.998.2 bonded interface",
+        "references": "[RFC6767][RFC Errata 3589]"
+    },
+    {
+        "decimal": "265",
+        "name": "g9983",
+        "description": "G.998.3 bonded interface",
+        "references": "[RFC6766][RFC Errata 3588]"
+    },
+    {
+        "decimal": "266",
+        "name": "aluEpon (E-PON)",
+        "description": "Ethernet Passive Optical Networks",
+        "references": "[Karel_Meijfroidt]"
+    },
+    {
+        "decimal": "267",
+        "name": "aluEponOnu",
+        "description": "EPON Optical Network Unit",
+        "references": "[Karel_Meijfroidt]"
+    },
+    {
+        "decimal": "268",
+        "name": "aluEponPhysicalUni",
+        "description": "EPON physical User to Network\ninterface",
+        "references": "[Karel_Meijfroidt]"
+    },
+    {
+        "decimal": "269",
+        "name": "aluEponLogicalLink",
+        "description": "The emulation of a point-to-point\nlink over the EPON layer",
+        "references": "[Karel_Meijfroidt]"
+    },
+    {
+        "decimal": "270",
+        "name": "aluGponOnu",
+        "description": "GPON Optical Network Unit",
+        "references": "[Karel_Meijfroidt][https:\/\/www.itu.int\/rec\/T-REC-G.984.2\/en]"
+    },
+    {
+        "decimal": "271",
+        "name": "aluGponPhysicalUni",
+        "description": "GPON physical User to Network\ninterface",
+        "references": "[Karel_Meijfroidt][https:\/\/www.itu.int\/rec\/T-REC-G.984.2\/en]"
+    },
+    {
+        "decimal": "272",
+        "name": "vmwareNicTeam",
+        "description": "VMware NIC Team",
+        "references": "[Michael_MacFaden][https:\/\/www.vmware.com\/pdf\/esx2_NIC_Teaming.pdf]"
+    },
+    {
+        "decimal": "273",
+        "name": "Reserved",
+        "description": "The corresponding transmission value\nis allocated according to the following\nreference.",
+        "references": "[RFC6825]"
+    },
+    {
+        "decimal": "274",
+        "name": "Reserved",
+        "description": "The corresponding transmission value\nis allocated according to the following reference.",
+        "references": "[RFC7257]"
+    },
+    {
+        "decimal": "275",
+        "name": "Reserved",
+        "description": "The corresponding transmission value\nis allocated according to the following reference.",
+        "references": "[RFC7257]"
+    },
+    {
+        "decimal": "276",
+        "name": "Reserved",
+        "description": "The corresponding transmission value\nis allocated according to the following reference.",
+        "references": "[RFC7257]"
+    },
+    {
+        "decimal": "277",
+        "name": "docsOfdmDownstream",
+        "description": "CATV Downstream OFDM interface",
+        "references": "[https:\/\/www.cablelabs.com\/specification\/cable-modem-operations-support-system-interface-specification][Miguel_O_Alvarez]"
+    },
+    {
+        "decimal": "278",
+        "name": "docsOfdmaUpstream",
+        "description": "CATV Upstream OFDMA interface",
+        "references": "[https:\/\/www.cablelabs.com\/specification\/cable-modem-operations-support-system-interface-specification][Miguel_O_Alvarez]"
+    },
+    {
+        "decimal": "279",
+        "name": "gfast",
+        "description": "G.fast port",
+        "references": "[ITU-T G.9701]"
+    },
+    {
+        "decimal": "280",
+        "name": "sdci",
+        "description": "SDCI (IO-Link)",
+        "references": "[IEC 61131-9 Edition 1.0 2013-09][Markus_Rentschler]"
+    },
+    {
+        "decimal": "281",
+        "name": "xboxWireless",
+        "description": "Xbox wireless",
+        "references": "[Brandon_Jiang]"
+    },
+    {
+        "decimal": "282",
+        "name": "fastdsl",
+        "description": "FastDSL",
+        "references": "[BBF TR-355][Broadband_Forum]"
+    },
+    {
+        "decimal": "283",
+        "name": "docsCableScte55d1FwdOob",
+        "description": "Cable SCTE 55-1 OOB Forward Channel",
+        "references": "[https:\/\/www.scte.org\/documents\/pdf\/Standards\/ANSI_SCTE-55-1-2009.pdf][Brian_Hedstrom]"
+    },
+    {
+        "decimal": "284",
+        "name": "docsCableScte55d1RetOob",
+        "description": "Cable SCTE 55-1 OOB Return Channel",
+        "references": "[https:\/\/www.scte.org\/documents\/pdf\/Standards\/ANSI_SCTE-55-1-2009.pdf][Brian_Hedstrom]"
+    },
+    {
+        "decimal": "285",
+        "name": "docsCableScte55d2DsOob",
+        "description": "Cable SCTE 55-2 OOB Downstream Channel",
+        "references": "[https:\/\/web.archive.org\/web\/20190822104256\/http:\/\/www.scte.org\/documents\/pdf\/Standards\/ANSI_SCTE%2055-2%202008.pdf][Brian_Hedstrom]"
+    },
+    {
+        "decimal": "286",
+        "name": "docsCableScte55d2UsOob",
+        "description": "Cable SCTE 55-2 OOB Upstream Channel",
+        "references": "[https:\/\/web.archive.org\/web\/20190822104256\/http:\/\/www.scte.org\/documents\/pdf\/Standards\/ANSI_SCTE%2055-2%202008.pdf][Brian_Hedstrom]"
+    },
+    {
+        "decimal": "287",
+        "name": "docsCableNdf",
+        "description": "Cable Narrowband Digital Forward",
+        "references": "[http:\/\/www.cablelabs.com\/wp-content\/uploads\/specdocs\/CM-SP-R-OOB-I04-160923.pdf][Brian_Hedstrom]"
+    },
+    {
+        "decimal": "288",
+        "name": "docsCableNdr",
+        "description": "Cable Narrowband Digital Return",
+        "references": "[http:\/\/www.cablelabs.com\/wp-content\/uploads\/specdocs\/CM-SP-R-OOB-I04-160923.pdf][Brian_Hedstrom]"
+    },
+    {
+        "decimal": "289",
+        "name": "ptm",
+        "description": "Packet Transfer Mode",
+        "references": "[ITU-T G.993.1, Annex H][ITU-T G.993.2][ITU-T G.9701][Broadband_Forum]"
+    },
+    {
+        "decimal": "290",
+        "name": "ghn",
+        "description": "G.hn port",
+        "references": "[ITU-T G.9961][Broadband_Forum]"
+    },
+    {
+        "decimal": "291",
+        "name": "otnOtsi",
+        "description": "Optical Tributary Signal",
+        "references": "[ITU-T G.959.1][Koteswara_Boyapati]"
+    },
+    {
+        "decimal": "292",
+        "name": "otnOtuc",
+        "description": "OTN OTUCn",
+        "references": "[ITU-T G.709\/Y.1331][Koteswara_Boyapati]"
+    },
+    {
+        "decimal": "293",
+        "name": "otnOduc",
+        "description": "OTN ODUC",
+        "references": "[ITU-T G.709][Koteswara_Boyapati]"
+    },
+    {
+        "decimal": "294",
+        "name": "otnOtsig",
+        "description": "OTN OTUC Signal",
+        "references": "[ITU-T G.709][Koteswara_Boyapati]"
+    },
+    {
+        "decimal": "295",
+        "name": "microwaveCarrierTermination",
+        "description": "air interface of a single microwave carrier",
+        "references": "[RFC8561]"
+    },
+    {
+        "decimal": "296",
+        "name": "microwaveRadioLinkTerminal",
+        "description": "radio link interface for one or several aggregated microwave carriers",
+        "references": "[RFC8561]"
+    },
+    {
+        "decimal": "297",
+        "name": "ieee8021axDrni",
+        "description": "IEEE 802.1AX Distributed Resilient Network Interface",
+        "references": "[IEEE 802.1AX-Rev-d2-0][John_Messenger]"
+    },
+    {
+        "decimal": "298",
+        "name": "ax25",
+        "description": "AX.25 network interfaces",
+        "references": "[AX.25 Link Access Protocol for Amateur Packet Radio version 2.2][Iain_Learmonth]"
+    },
+    {
+        "decimal": "299",
+        "name": "ieee19061nanocom",
+        "description": "Nanoscale and Molecular Communication",
+        "references": "[IEEE 1906.1-2015][Stephen_F_Bush]"
+    },
+    {
+        "decimal": "300",
+        "name": "cpri",
+        "description": "Common Public Radio Interface",
+        "references": "[CPRI v7.0][Renwang_Liu]"
+    },
+    {
+        "decimal": "301",
+        "name": "omni",
+        "description": "Overlay Multilink Network Interface (OMNI)",
+        "references": "[draft-templin-6man-omni-00][Fred_L_Templin]"
+    },
+    {
+        "decimal": "302",
+        "name": "roe",
+        "description": "Radio over Ethernet Interface",
+        "references": "[1914.3-2018 - IEEE Standard for Radio over Ethernet Encapsulations and Mappings][Renwang_Liu]"
+    },
+    {
+        "decimal": "303",
+        "name": "p2pOverLan",
+        "description": "Point to Point over LAN interface",
+        "references": "[RFC9296]"
+    }
+]

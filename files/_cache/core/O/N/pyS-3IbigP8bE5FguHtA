@@ -1,0 +1,37 @@
+1767781047
+66b49a636e0bd74cca0554f7581fdff9293aefa9
+a:1:{s:61:"bn_count_TicketRecurrent_13f79539-61f6-45f7-8dde-045706e652f2";s:1098:"      <style>
+         #bn_274114006 {
+            background-color: #fafafa;
+            color: #949494;
+         }
+
+         #bn_274114006:hover {
+            background-color: #d4d4d4;
+            border: 1px solid #aeaeae;
+         }
+
+         .theme-dark #bn_274114006 {
+            background-color: #949494;
+            color: #fafafa;
+         }
+
+         .theme-dark #bn_274114006:hover {
+            background-color: #d4d4d4;
+            color: #949494;
+            border: 1px solid #aeaeae;
+         }
+      </style>
+      <a href='/projet/glpi/front/ticketrecurrent.php?reset=reset'
+         id="bn_274114006"
+         class="card big-number  filter-dates filter-dates_mod"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Recurring tickets">Recurring tickets</div>
+         <i class="main-icon ti ti-alarm"></i>
+      </a>";}

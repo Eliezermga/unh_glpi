@@ -1,0 +1,57 @@
+0
+4568d44c62afe97f4ac752413f5344a3cdf1b3e2
+s:2674:".dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 {
+  /*!
+ * ---------------------------------------------------------------------
+ *
+ * GLPI - Gestionnaire Libre de Parc Informatique
+ *
+ * http://glpi-project.org
+ *
+ * @copyright 2015-2023 Teclib' and contributors.
+ * @copyright 2003-2014 by the INDEPNET Development Team.
+ * @licence   https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * ---------------------------------------------------------------------
+ *
+ * LICENSE
+ *
+ * This file is part of GLPI.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * ---------------------------------------------------------------------
+ */
+}
+.dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-point, .dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-line, .dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-bar, .dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-slice-donut {
+  stroke: #6db6b6;
+}
+.dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-bar + .ct-barlabel {
+  fill: setcolor(#6db6b6);
+}
+.dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-circle {
+  fill: #6db6b6;
+}
+.dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-circle + .ct-label {
+  fill: #6db6b6;
+}
+.dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-slice-pie, .dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-area, .dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-a .ct-slice-donut-solid {
+  fill: #6db6b6;
+  stroke: setcolor(#6db6b6);
+}
+.dashboard #chart-dashboard_card_central_0e7cdc2358b6a6cc70e60064d15576b8a725a013 .ct-series-0:before {
+  background-color: #6db6b6;
+  border-color: #6db6b6;
+}
+";

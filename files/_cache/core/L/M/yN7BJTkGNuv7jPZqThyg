@@ -1,0 +1,167 @@
+1767781049
+a53569bc96e86a8aef80f6bd7d4d36921991992d
+a:1:{s:53:"ticket_evolution_76fd4926-ee5e-48db-b6d6-e2947c190c5e";s:26706:"      <style>
+
+      #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 {
+         background-color: #f3f7f8;
+         color: #72a1ad
+      }
+
+      .theme-dark #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 {
+         background-color: #1f3034;
+         color: #72a1ad;
+      }
+
+      #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-label {
+         color: #72a1ad;
+      }
+
+      .theme-dark #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-label {
+         color: #72a1ad;
+      }
+
+      #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-grid {
+         stroke: #d3e2e5;
+      }
+
+      .theme-dark #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-grid {
+         stroke: #0c1314;
+      }
+
+      #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-circle {
+         stroke: #f3f7f8;
+         stroke-width: 3;
+      }
+      #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-circle + .ct-label {
+         stroke: #f3f7f8;
+      }
+      
+      </style>
+
+      <div style="height: 100%">
+          <div class="card g-chart line area multiple filter-dates filter-dates_mod filter-itilcategory filter-group_tech filter-user_tech filter-requesttype filter-location"
+               id="chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248">
+             <div class="chart ct-chart"></div>
+             <span class="main-label mt-4">Evolution of ticket in the past year</span>
+             <i class="main-icon ti ti-alert-circle"></i>
+          </div>
+      </div><script type="text/javascript">
+//<![CDATA[
+
+      $(function () {
+         if (Dashboard.getActiveDashboard()) {
+            var target = Dashboard.getActiveDashboard().element.find('#chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .chart')[0];
+         } else {
+            var target = '#chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .chart';
+         }
+         var chart = new Chartist.Line(target, {
+            labels: ["2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01"],
+            series: [{"name":"Opened","search":{"criteria":[{"link":"AND","field":15,"searchtype":"morethan","value":"2026-01-01 00:00:00"},{"link":"AND","field":15,"searchtype":"lessthan","value":"2026-02-01 00:00:00"},[]],"reset":"reset"},"data":[{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-02-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=15&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=15&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-02-01%2000%3A00%3A00&reset=reset"}]},{"name":"Solved","search":{"criteria":[{"link":"AND","field":17,"searchtype":"morethan","value":"2026-01-01 00:00:00"},{"link":"AND","field":17,"searchtype":"lessthan","value":"2026-02-01 00:00:00"},[]],"reset":"reset"},"data":[{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-02-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-02-01%2000%3A00%3A00&reset=reset"}]},{"name":"Late","search":{"criteria":[{"link":"AND","field":17,"searchtype":"morethan","value":"2026-01-01 00:00:00"},{"link":"AND","field":17,"searchtype":"lessthan","value":"2026-02-01 00:00:00"},{"link":"AND","field":82,"searchtype":"equals","value":1},[]],"reset":"reset"},"data":[{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-02-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=17&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=17&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-02-01%2000%3A00%3A00&criteria%5B2%5D%5Blink%5D=AND&criteria%5B2%5D%5Bfield%5D=82&criteria%5B2%5D%5Bsearchtype%5D=equals&criteria%5B2%5D%5Bvalue%5D=1&reset=reset"}]},{"name":"Closed","search":{"criteria":[{"link":"AND","field":16,"searchtype":"morethan","value":"2026-01-01 00:00:00"},{"link":"AND","field":16,"searchtype":"lessthan","value":"2026-02-01 00:00:00"},[]],"reset":"reset"},"data":[{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-02-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-03-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-04-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-05-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-06-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-07-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-08-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-09-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-10-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-11-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2025-12-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&reset=reset"},{"value":0,"url":"\/projet\/glpi\/front\/ticket.php?criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=16&criteria%5B0%5D%5Bsearchtype%5D=morethan&criteria%5B0%5D%5Bvalue%5D=2026-01-01%2000%3A00%3A00&criteria%5B1%5D%5Blink%5D=AND&criteria%5B1%5D%5Bfield%5D=16&criteria%5B1%5D%5Bsearchtype%5D=lessthan&criteria%5B1%5D%5Bvalue%5D=2026-02-01%2000%3A00%3A00&reset=reset"}]}],
+         }, {
+            width: '100%',
+            fullWidth: true,
+            chartPadding: {
+               right: 40
+            },
+            axisY: {
+                labelInterpolationFnc: function(value) {
+                    let display_value = 0;
+                    let unit = "";
+                    if (value < 1e3) {
+                        // less than 1K
+                        display_value = value;
+                    } else if (value < 1e6) {
+                        // More than 1k, less than 1M
+                        display_value =  value / 1e3;
+                        unit = "K";
+                    } else {
+                        // More than 1M
+                        display_value = value / 1e6;
+                        unit = "M";
+                    }
+
+                    // 1 decimal max
+                    display_value = Math.round(display_value * 10) / 10;
+
+                    return display_value + unit;
+                },
+            },
+            
+            showArea: true,
+            plugins: [
+               
+            Chartist.plugins.legend(),
+               Chartist.plugins.tooltip({
+                  appendToBody: true,
+                  class: 'dashboard-tooltip',
+                  pointClass: 'ct-circle'
+               })
+               
+            ]
+         });
+
+         chart.on('draw', function(data) {
+            // animation
+            if (data.type === 'line' || data.type === 'area') {
+               data.element.animate({
+                  d: {
+                     begin: 300 * data.index,
+                     dur: 1000,
+                     from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                     to: data.path.clone().stringify(),
+                     easing: Chartist.Svg.Easing.easeOutQuint
+                  }
+               });
+            }
+
+            if (data.type === 'point') {
+               // set url redirecting on line
+               var url = _.get(data, 'series['+data.index+'].url')
+                      || _.get(data, 'series.data['+data.index+'].url')
+                      || _.get(data, 'series.url')
+                      || '';
+               var clickable = url.length > 0;
+
+               var circle = new Chartist.Svg('circle', {
+                  cx: [data.x],
+                  cy: [data.y],
+                  r: data.value.y > 0 ? [5] : [0],
+                  "ct:value": data.value.y,
+                  "data-clickable": clickable
+               }, 'ct-circle');
+               var circle = data.element.replace(circle);
+
+               if (clickable) {
+                  circle.getNode().onclick = function() {
+                     if (!Dashboard.getActiveDashboard().edit_mode) {
+                        window.location = url;
+                     }
+                  }
+               }
+            }
+         });
+
+         // hide other lines when hovering a point
+         chart.on('created', function(bar) {
+            $('#chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-series .ct-circle, #chart_dashboard_card_assistance_4873630dc92c2a27de06a325ec1ed7999873e248 .ct-series .ct-circle + .ct-label')
+               .mouseover(function() {
+                  $(this)
+                     .attr('r', "9")
+                     .parent(".ct-series")
+                     .siblings().children()
+                     .css('stroke-opacity', "0.05")
+                     .filter(".ct-circle, .ct-label").css('fill-opacity', "0.1");
+               })
+               .mouseout(function() {
+                  $(this)
+                     .attr('r', "5")
+                     .parent(".ct-series")
+                     .siblings().children()
+                     .css('stroke-opacity', "1")
+                     .filter(".ct-circle, .ct-label").css('fill-opacity', "1");
+               });
+         });
+      });
+
+//]]>
+</script>";}

@@ -1,0 +1,37 @@
+1767781008
+2d8ac9154a30776fefe1a3e7283da0e1520509ea
+a:1:{s:52:"bn_count_Ticket_d5bf3576-5033-40fb-bbdb-292294a7698e";s:1129:"      <style>
+         #bn_694550223 {
+            background-color: #ffd957;
+            color: #8a6b00;
+         }
+
+         #bn_694550223:hover {
+            background-color: #ffc80b;
+            border: 1px solid #bd9200;
+         }
+
+         .theme-dark #bn_694550223 {
+            background-color: #8a6b00;
+            color: #ffd957;
+         }
+
+         .theme-dark #bn_694550223:hover {
+            background-color: #ffc80b;
+            color: #8a6b00;
+            border: 1px solid #bd9200;
+         }
+      </style>
+      <a href='/projet/glpi/front/ticket.php?reset=reset'
+         id="bn_694550223"
+         class="card big-number  filter-dates filter-dates_mod filter-requesttype filter-location filter-tickettype"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Tickets">Tickets</div>
+         <i class="main-icon ti ti-alert-circle"></i>
+      </a>";}

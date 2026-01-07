@@ -1,0 +1,69 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists($autoload = __DIR__ . '/../vendor/autoload.php')) {
+    // Rely on self autoload (usefull for devs)
+    require_once $autoload;
+} else {
+    // Rely on parent project autoload
+    require_once __DIR__ . '/../../../autoload.php';
+}
+
+require_once __DIR__ . '/../lib/php/Converter.php';
+
+
+if (count($argv) !== 2 && count($argv) !== 3) {
+   die("usage: ".$argv[0]." /path/to/file.xml [/path/to/file.json]\n");
+}
+
+$xml_path = $argv[1];
+if (parse_url($xml_path, PHP_URL_SCHEME) == null) {
+    if ($xml_path[0] == '/') {
+        //absolute path
+        $xml_path = 'file://' . $xml_path;
+    } else {
+        //relative path: make absolute
+        $xml_path = 'file://' . getcwd() . '/' . $xml_path;
+    }
+}
+
+$json_path = $argv[2] ?? null;
+if ($json_path !== null && parse_url($json_path, PHP_URL_SCHEME) == null) {
+    if ($json_path[0] == '/') {
+        //absolute path
+        $json_path = 'file://' . $json_path;
+    } else {
+        //relative path: make absolute
+        $json_path = 'file://' . getcwd() . '/' . $json_path;
+    }
+}
+
+if (!file_exists($xml_path)) {
+    echo sprintf(
+        "Source file '%s' does not exists!\n",
+        $xml_path
+    );
+    die(1);
+}
+
+try {
+    $converter = new Glpi\Inventory\Converter;
+
+    $xml_str = file_get_contents($xml_path);
+    $xml = simplexml_load_string($xml_str, 'SimpleXMLElement', LIBXML_NOCDATA);
+    if (!$xml) {
+         $xml_errors = libxml_get_errors();
+         throw new \RuntimeException('Invalid XML: ' . print_r($xml_errors, true));
+    }
+
+    $json = $converter->convert($xml->asXML());
+    $converter->validate(json_decode($json));
+
+    if ($json_path !== null) {
+        file_put_contents($json_path, $json);
+    }
+} catch (\Exception $e) {
+    echo "File: $xml_path\n";
+    echo $e->getMessage();
+    die(1);
+}

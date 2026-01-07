@@ -1,0 +1,37 @@
+1767781045
+966a89aa4f506011840e6b87bf5d26aac862df72
+a:1:{s:60:"bn_count_tickets_closed_e004bab5-f2b6-4060-a401-a2a8b9885245";s:1279:"      <style>
+         #bn_1116526342 {
+            background-color: #515151;
+            color: #b7b7b7;
+         }
+
+         #bn_1116526342:hover {
+            background-color: #777777;
+            border: 1px solid #9e9e9e;
+         }
+
+         .theme-dark #bn_1116526342 {
+            background-color: #b7b7b7;
+            color: #515151;
+         }
+
+         .theme-dark #bn_1116526342:hover {
+            background-color: #777777;
+            color: #b7b7b7;
+            border: 1px solid #9e9e9e;
+         }
+      </style>
+      <a href='/projet/glpi/front/ticket.php?criteria%5B0%5D%5Bfield%5D=12&criteria%5B0%5D%5Bsearchtype%5D=equals&criteria%5B0%5D%5Bvalue%5D=6&reset=reset'
+         id="bn_1116526342"
+         class="card big-number  filter-dates filter-dates_mod filter-itilcategory filter-group_tech filter-user_tech filter-requesttype filter-location"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Closed tickets">Closed tickets</div>
+         <i class="main-icon fas fa-archive"></i>
+      </a>";}

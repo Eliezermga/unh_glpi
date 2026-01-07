@@ -1,0 +1,89 @@
+1767778742
+d19451cdd0b785c536773613c98cc08105185504
+a:1:{s:65:"count_NetworkEquipment_State_81f2ae35-b366-4065-ac26-02ea4e3704a6";s:3945:"      <style>
+         #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de {
+            background-color: #f5f3ef;
+            color: #a79571
+         }
+
+         .theme-dark #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de {
+            background-color: #2f291d;
+            color: #a79571;
+         }
+
+         #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-label {
+            fill: #a79571;
+            color: #a79571;
+         }
+
+         .theme-dark #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-label {
+            fill: #a79571;
+            color: #a79571;
+         }
+
+         .dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de {
+  /*!
+ * ---------------------------------------------------------------------
+ *
+ * GLPI - Gestionnaire Libre de Parc Informatique
+ *
+ * http://glpi-project.org
+ *
+ * @copyright 2015-2023 Teclib' and contributors.
+ * @copyright 2003-2014 by the INDEPNET Development Team.
+ * @licence   https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * ---------------------------------------------------------------------
+ *
+ * LICENSE
+ *
+ * This file is part of GLPI.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * ---------------------------------------------------------------------
+ */
+}
+.dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-point, .dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-line, .dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-bar, .dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-slice-donut {
+  stroke: #a79571;
+}
+.dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-bar + .ct-barlabel {
+  fill: setcolor(#a79571);
+}
+.dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-circle {
+  fill: #a79571;
+}
+.dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-circle + .ct-label {
+  fill: #a79571;
+}
+.dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-slice-pie, .dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-area, .dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-a .ct-slice-donut-solid {
+  fill: #a79571;
+  stroke: setcolor(#a79571);
+}
+.dashboard #chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de .ct-series-0:before {
+  background-color: #a79571;
+  border-color: #a79571;
+}
+
+      </style>
+      <div style="height: 100%">
+         <div class="card g-chart pie donut filter-dates filter-dates_mod filter-location filter-manufacturer filter-group_tech filter-user_tech filter-state"
+            id="chart-dashboard_card_central_ee01df40eecb9973e811e2338224b84fee84a1de">
+            <div class="chart ct-chart"><span class='empty-card no-data'>
+               <div>No data found</div>
+            <span></div>
+            <span class="main-label">Network devices by Status</span>
+            <i class="main-icon ti ti-subtask"></i>
+         </div>
+      </div>";}

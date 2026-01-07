@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists($autoload = __DIR__ . '/../vendor/autoload.php')) {
+    // Rely on self autoload (usefull for devs)
+    require_once $autoload;
+} else {
+    // Rely on parent project autoload
+    require_once __DIR__ . '/../../../autoload.php';
+}
+
+
+$tojson = new Glpi\Inventory\FilesToJSON();
+$tojson->refreshSources();

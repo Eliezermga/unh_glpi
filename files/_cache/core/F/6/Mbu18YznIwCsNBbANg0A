@@ -1,0 +1,37 @@
+1767778738
+99445f8402f148aad8ece1fe931fd91b5b6582f3
+a:1:{s:53:"bn_count_Monitor_7059b94c-583c-4ba7-b100-d40461165318";s:1170:"      <style>
+         #bn_1469116817 {
+            background-color: #b52d30;
+            color: #efbfc0;
+         }
+
+         #bn_1469116817:hover {
+            background-color: #d6595c;
+            border: 1px solid #e59698;
+         }
+
+         .theme-dark #bn_1469116817 {
+            background-color: #efbfc0;
+            color: #b52d30;
+         }
+
+         .theme-dark #bn_1469116817:hover {
+            background-color: #d6595c;
+            color: #efbfc0;
+            border: 1px solid #e59698;
+         }
+      </style>
+      <a href='/projet/glpi/front/monitor.php?reset=reset'
+         id="bn_1469116817"
+         class="card big-number  filter-dates filter-dates_mod filter-location filter-manufacturer filter-group_tech filter-user_tech filter-state"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Monitors">Monitors</div>
+         <i class="main-icon ti ti-device-desktop"></i>
+      </a>";}
