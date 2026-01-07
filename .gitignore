@@ -1,4 +1,4 @@
-config/config.php
+config/config_db.php
 config/glpicrypt.key
 
 files/_cache/
