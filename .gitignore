@@ -1,3 +1,6 @@
+config/config.php
+config/glpicrypt.key
+
 files/_cache/
 files/_cron/
 files/_graphs/
