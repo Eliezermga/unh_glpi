@@ -3,3 +3,4 @@ files/_cache/
 files/_sessions/
 config/config_db.php
 config/glpicrypt.key
+files/
