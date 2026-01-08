@@ -3,6 +3,7 @@ config/glpicrypt.key
 
 files/_cache/
 files/_cron/
+files/_dumps/
 files/_graphs/
 files/_inventories/
 files/_locales/
@@ -13,7 +14,4 @@ files/_plugins/
 files/_rss/
 files/_sessions/
 files/_tmp/
-files/_cron/
-files/_dumps/
-fils/_locales/
 files/_uploads/
