@@ -1,0 +1,707 @@
+/**
+ * Feuille de styles - Plugin UNH Assets
+ * Charte graphique Université Nouveaux Horizons
+ * Couleurs: Bleu Clair (Cyan/Sky Blue) + Blanc
+ */
+
+:root {
+    --unh-primary: #0BA0D0;
+    --unh-primary-light: #17a2b8;
+    --unh-primary-lighter: #3AA3E3;
+    --unh-secondary: #20C997;
+    --unh-danger: #DC3545;
+    --unh-warning: #FFD700;
+    --unh-success: #28A745;
+    --unh-info: #0BA0D0;
+    --unh-white: #FFFFFF;
+    --unh-light-bg: #F8F9FA;
+    --unh-border-color: #E9ECEF;
+    --unh-text-dark: #212529;
+    --unh-text-muted: #6C757D;
+    --shadow-light: 0 1px 3px rgba(11, 160, 208, 0.1);
+    --shadow-medium: 0 2px 6px rgba(11, 160, 208, 0.15);
+}
+
+/* ============================================================================
+   Conteneur principal et mise en page
+   ============================================================================ */
+
+.unh-assets-container {
+    background-color: var(--unh-white);
+    border-radius: 4px;
+    box-shadow: var(--shadow-light);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.unh-assets-header {
+    border-bottom: 2px solid var(--unh-primary);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.unh-assets-header h1 {
+    color: var(--unh-primary);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.unh-assets-header h1 i {
+    font-size: 28px;
+}
+
+/* ============================================================================
+   Barre de filtrage et recherche
+   ============================================================================ */
+
+.unh-filter-bar {
+    background-color: var(--unh-light-bg);
+    border: 1px solid var(--unh-border-color);
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    align-items: center;
+}
+
+.unh-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.unh-filter-group label {
+    color: var(--unh-text-dark);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.unh-filter-group input,
+.unh-filter-group select {
+    border: 1px solid var(--unh-border-color);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.unh-filter-group input:focus,
+.unh-filter-group select:focus {
+    outline: none;
+    border-color: var(--unh-primary);
+    box-shadow: 0 0 0 3px rgba(11, 160, 208, 0.1);
+}
+
+.unh-search-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236C757D' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cpath d='m21 21-4.35-4.35'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 36px;
+}
+
+/* ============================================================================
+   Boutons
+   ============================================================================ */
+
+.unh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.unh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.unh-btn-primary {
+    background-color: var(--unh-primary);
+    color: var(--unh-white);
+}
+
+.unh-btn-primary:hover {
+    background-color: #0990b8;
+}
+
+.unh-btn-secondary {
+    background-color: var(--unh-light-bg);
+    color: var(--unh-text-dark);
+    border: 1px solid var(--unh-border-color);
+}
+
+.unh-btn-secondary:hover {
+    background-color: #E9ECEF;
+}
+
+.unh-btn-danger {
+    background-color: var(--unh-danger);
+    color: var(--unh-white);
+}
+
+.unh-btn-danger:hover {
+    background-color: #c82333;
+}
+
+.unh-btn-success {
+    background-color: var(--unh-success);
+    color: var(--unh-white);
+}
+
+.unh-btn-success:hover {
+    background-color: #218838;
+}
+
+.unh-btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.unh-btn-lg {
+    padding: 12px 20px;
+    font-size: 14px;
+}
+
+/* ============================================================================
+   Tableaux de données
+   ============================================================================ */
+
+.unh-equipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--unh-white);
+    border: 1px solid var(--unh-border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.unh-equipment-table thead {
+    background: linear-gradient(135deg, var(--unh-primary) 0%, var(--unh-primary-lighter) 100%);
+    color: var(--unh-white);
+}
+
+.unh-equipment-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.unh-equipment-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--unh-border-color);
+    font-size: 13px;
+}
+
+.unh-equipment-table tbody tr:hover {
+    background-color: var(--unh-light-bg);
+    transition: background-color 0.2s ease;
+}
+
+.unh-equipment-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================================================
+   Badges et étiquettes
+   ============================================================================ */
+
+.unh-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.unh-badge-operational {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--unh-success);
+    border: 1px solid var(--unh-success);
+}
+
+.unh-badge-maintenance {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #FFC107;
+    border: 1px solid #FFC107;
+}
+
+.unh-badge-out-of-service {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--unh-danger);
+    border: 1px solid var(--unh-danger);
+}
+
+.unh-badge-alert-critical {
+    background-color: var(--unh-danger);
+    color: var(--unh-white);
+    animation: pulse 2s infinite;
+}
+
+.unh-badge-alert-warning {
+    background-color: var(--unh-warning);
+    color: var(--unh-text-dark);
+}
+
+.unh-badge-alert-info {
+    background-color: var(--unh-info);
+    color: var(--unh-white);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ============================================================================
+   Icônes minimalistes
+   ============================================================================ */
+
+.unh-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--unh-light-bg);
+    color: var(--unh-primary);
+    font-size: 16px;
+}
+
+.unh-icon-small {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+}
+
+.unh-icon-lg {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+}
+
+/* ============================================================================
+   Cartes d'équipement
+   ============================================================================ */
+
+.unh-equipment-card {
+    background-color: var(--unh-white);
+    border: 1px solid var(--unh-border-color);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.unh-equipment-card:hover {
+    border-color: var(--unh-primary);
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+}
+
+.unh-equipment-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.unh-equipment-card-header h3 {
+    margin: 0;
+    color: var(--unh-text-dark);
+    font-size: 14px;
+    flex-grow: 1;
+}
+
+.unh-equipment-card-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    font-size: 12px;
+}
+
+.unh-equipment-info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.unh-equipment-info-label {
+    color: var(--unh-text-muted);
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.unh-equipment-info-value {
+    color: var(--unh-text-dark);
+}
+
+/* ============================================================================
+   Statistiques et tableaux de bord
+   ============================================================================ */
+
+.unh-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.unh-stat-card {
+    background: linear-gradient(135deg, var(--unh-primary) 0%, var(--unh-primary-lighter) 100%);
+    color: var(--unh-white);
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: var(--shadow-light);
+}
+
+.unh-stat-card.alternate {
+    background: linear-gradient(135deg, var(--unh-light-bg) 0%, var(--unh-white) 100%);
+    color: var(--unh-text-dark);
+    border: 1px solid var(--unh-border-color);
+}
+
+.unh-stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.unh-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.unh-stat-icon {
+    font-size: 24px;
+    float: right;
+    opacity: 0.3;
+}
+
+/* ============================================================================
+   Bannières d'alerte
+   ============================================================================ */
+
+.unh-alert {
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid;
+}
+
+.unh-alert-critical {
+    background-color: rgba(220, 53, 69, 0.05);
+    border-left-color: var(--unh-danger);
+    color: var(--unh-danger);
+}
+
+.unh-alert-warning {
+    background-color: rgba(255, 193, 7, 0.05);
+    border-left-color: var(--unh-warning);
+    color: #856404;
+}
+
+.unh-alert-info {
+    background-color: rgba(11, 160, 208, 0.05);
+    border-left-color: var(--unh-primary);
+    color: var(--unh-primary);
+}
+
+.unh-alert-success {
+    background-color: rgba(40, 167, 69, 0.05);
+    border-left-color: var(--unh-success);
+    color: var(--unh-success);
+}
+
+.unh-alert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.unh-alert-content {
+    flex-grow: 1;
+}
+
+.unh-alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.unh-alert-close:hover {
+    opacity: 1;
+}
+
+/* ============================================================================
+   Formulaires
+   ============================================================================ */
+
+.unh-form-group {
+    margin-bottom: 16px;
+}
+
+.unh-form-group label {
+    display: block;
+    color: var(--unh-text-dark);
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.unh-form-group input,
+.unh-form-group textarea,
+.unh-form-group select {
+    width: 100%;
+    border: 1px solid var(--unh-border-color);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.unh-form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.unh-form-group input:focus,
+.unh-form-group textarea:focus,
+.unh-form-group select:focus {
+    outline: none;
+    border-color: var(--unh-primary);
+    box-shadow: 0 0 0 3px rgba(11, 160, 208, 0.1);
+}
+
+.unh-form-error {
+    color: var(--unh-danger);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.unh-form-help {
+    color: var(--unh-text-muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ============================================================================
+   Modal et overlays
+   ============================================================================ */
+
+.unh-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.unh-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unh-modal-content {
+    background-color: var(--unh-white);
+    border-radius: 4px;
+    box-shadow: var(--shadow-medium);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.unh-modal-header {
+    border-bottom: 1px solid var(--unh-border-color);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.unh-modal-header h2 {
+    margin: 0;
+    color: var(--unh-primary);
+    font-size: 16px;
+}
+
+.unh-modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--unh-text-muted);
+    transition: color 0.2s ease;
+}
+
+.unh-modal-close:hover {
+    color: var(--unh-text-dark);
+}
+
+.unh-modal-body {
+    padding: 20px;
+}
+
+.unh-modal-footer {
+    border-top: 1px solid var(--unh-border-color);
+    padding: 16px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* ============================================================================
+   Pagination
+   ============================================================================ */
+
+.unh-pagination {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.unh-pagination-item {
+    padding: 8px 12px;
+    border: 1px solid var(--unh-border-color);
+    border-radius: 4px;
+    background-color: var(--unh-white);
+    color: var(--unh-text-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.unh-pagination-item:hover:not(.active) {
+    background-color: var(--unh-light-bg);
+    border-color: var(--unh-primary);
+}
+
+.unh-pagination-item.active {
+    background-color: var(--unh-primary);
+    color: var(--unh-white);
+    border-color: var(--unh-primary);
+}
+
+.unh-pagination-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================================================
+   Responsive design
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .unh-filter-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .unh-stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .unh-equipment-card-body {
+        grid-template-columns: 1fr;
+    }
+
+    .unh-modal-content {
+        width: 95%;
+    }
+}
+
+/* ============================================================================
+   Utilitaires et variantes
+   ============================================================================ */
+
+.unh-text-center {
+    text-align: center;
+}
+
+.unh-text-right {
+    text-align: right;
+}
+
+.unh-mt-0 { margin-top: 0; }
+.unh-mt-1 { margin-top: 4px; }
+.unh-mt-2 { margin-top: 8px; }
+.unh-mt-3 { margin-top: 12px; }
+.unh-mt-4 { margin-top: 16px; }
+.unh-mt-5 { margin-top: 20px; }
+
+.unh-mb-0 { margin-bottom: 0; }
+.unh-mb-1 { margin-bottom: 4px; }
+.unh-mb-2 { margin-bottom: 8px; }
+.unh-mb-3 { margin-bottom: 12px; }
+.unh-mb-4 { margin-bottom: 16px; }
+.unh-mb-5 { margin-bottom: 20px; }
+
+.unh-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--unh-border-color);
+    border-top-color: var(--unh-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Impression */
+@media print {
+    .unh-filter-bar,
+    .unh-btn,
+    .unh-modal {
+        display: none !important;
+    }
+
+    .unh-equipment-table {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
