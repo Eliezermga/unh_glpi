@@ -1163,11 +1163,11 @@ JAVASCRIPT;
                     'PassiveDCEquipmentModel' => null,
                 ],
 
-                _n('Virtual machine', 'Virtual machines', Session::getPluralNumber()) => [
-                    'VirtualMachineType' => null,
-                    'VirtualMachineSystem' => null,
-                    'VirtualMachineState' => null
-                ],
+                // _n('Virtual machine', 'Virtual machines', Session::getPluralNumber()) => [ // Machines virtuelles - masqué
+                //     'VirtualMachineType' => null,
+                //     'VirtualMachineSystem' => null,
+                //     'VirtualMachineState' => null
+                // ],
 
                 __('Management') => [
                     'DocumentCategory' => null,
@@ -1209,11 +1209,11 @@ JAVASCRIPT;
 
                 ],
 
-                __('Cable management') => [
-                    'CableType' => null,
-                    'CableStrand' => null,
-                    SocketModel::class => null,
-                ],
+                // __('Cable management') => [ // Gestion des câbles - masqué
+                //     'CableType' => null,
+                //     'CableStrand' => null,
+                //     SocketModel::class => null,
+                // ],
 
                 __('Internet') => [
                     'IPNetwork' => null,
@@ -1231,28 +1231,28 @@ JAVASCRIPT;
                     'UserCategory' => null
                 ],
 
-                __('Authorizations assignment rules') => [
-                    'RuleRightParameter' => null
-                ],
+                // __('Authorizations assignment rules') => [ // Règles d'affectation d'habilitations - masqué
+                //     'RuleRightParameter' => null
+                // ],
 
-                __('Fields unicity') => [
-                    'Fieldblacklist' => null
-                ],
+                // __('Fields unicity') => [ // Unicité des champs - masqué
+                //     'Fieldblacklist' => null
+                // ],
 
                 __('External authentications') => [
                     'SsoVariable' => null
                 ],
-                __('Power management') => [
-                    'Plug' => null
-                ],
-                __('Appliances') => [
-                    'ApplianceType' => null,
-                    'ApplianceEnvironment' => null,
-                ],
-                DeviceCamera::getTypeName(1) => [
-                    'Resolution'     => null,
-                    'ImageFormat'  => null
-                ],
+                // __('Power management') => [ // Gestion de l'alimentation - masqué
+                //     'Plug' => null
+                // ],
+                // __('Appliances') => [ // Applicatifs - masqué
+                //     'ApplianceType' => null,
+                //     'ApplianceEnvironment' => null,
+                // ],
+                // DeviceCamera::getTypeName(1) => [ // Caméra - masqué
+                //     'Resolution'     => null,
+                //     'ImageFormat'  => null
+                // ],
                 __('Others') => [
                     'USBVendor' => null,
                     'PCIVendor' => null
