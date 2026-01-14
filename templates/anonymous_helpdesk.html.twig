@@ -41,6 +41,96 @@
 
       <h2 class="mb-4">{{ __('Helpdesk reporting form') }}</h2>
 
+      {# Catégorie du problème avec conseils d'auto-assistance #}
+      <div class="mb-3">
+         <label class="form-label text-muted">{{ __('Select a category') }}</label>
+         <select name="itilcategories_id" id="category-select" class="form-select" onchange="showSelfHelp(this.value)">
+            <option value="0">-- {{ __('Choose a category') }} --</option>
+            <option value="wifi">{{ __('Wi-Fi / Network') }}</option>
+            <option value="account">{{ __('Account / Password') }}</option>
+            <option value="moodle">{{ __('Moodle / LMS') }}</option>
+            <option value="hardware">{{ __('Hardware / Equipment') }}</option>
+            <option value="software">{{ __('Software') }}</option>
+            <option value="other">{{ __('Other') }}</option>
+         </select>
+      </div>
+
+      {# Zone de conseils d'auto-assistance dynamique #}
+      <div id="self-help-tips" class="alert alert-info mb-3" style="display: none;">
+         <div class="d-flex align-items-start">
+            <i class="fas fa-lightbulb fa-lg me-3 mt-1" style="color: #f39c12;"></i>
+            <div>
+               <strong>{{ __('Quick tips before submitting:') }}</strong>
+               <div id="tips-content" class="mt-2"></div>
+               <hr class="my-2">
+               <small class="text-muted">
+                  <i class="fas fa-info-circle me-1"></i>
+                  {{ __('If the tips above don\'t solve your problem, please fill out the form below.') }}
+               </small>
+            </div>
+         </div>
+      </div>
+
+      <script>
+      function showSelfHelp(category) {
+         const tipsContainer = document.getElementById('self-help-tips');
+         const tipsContent = document.getElementById('tips-content');
+         
+         const tips = {
+            'wifi': `
+               <ul class="mb-0">
+                  <li><strong>Eduroam :</strong> {{ __('Use your university email as username (example: john.doe@university.edu)') }}</li>
+                  <li>{{ __('Forget the network and reconnect') }}</li>
+                  <li>{{ __('Check that Airplane mode is disabled') }}</li>
+                  <li>{{ __('Try connecting in a different location on campus') }}</li>
+               </ul>
+            `,
+            'account': `
+               <ul class="mb-0">
+                  <li><strong>{{ __('Forgot password?') }}</strong> {{ __('Use the "Forgot password" link on the login page') }}</li>
+                  <li>{{ __('Check that Caps Lock is not enabled') }}</li>
+                  <li>{{ __('Clear your browser cache and cookies') }}</li>
+                  <li>{{ __('Try with a different browser') }}</li>
+               </ul>
+            `,
+            'moodle': `
+               <ul class="mb-0">
+                  <li>{{ __('Make sure you are enrolled in the course') }}</li>
+                  <li>{{ __('Contact your teacher if the course is not visible') }}</li>
+                  <li>{{ __('Use an up-to-date browser (Chrome, Firefox, Edge)') }}</li>
+                  <li>{{ __('Check your internet connection') }}</li>
+               </ul>
+            `,
+            'hardware': `
+               <ul class="mb-0">
+                  <li>{{ __('Restart the device') }}</li>
+                  <li>{{ __('Check all cable connections') }}</li>
+                  <li>{{ __('For printers: check paper and ink levels') }}</li>
+                  <li>{{ __('Note the equipment label (e.g., SCI-A101-PC01)') }}</li>
+               </ul>
+            `,
+            'software': `
+               <ul class="mb-0">
+                  <li>{{ __('Restart the application') }}</li>
+                  <li>{{ __('Check for available updates') }}</li>
+                  <li>{{ __('Restart the computer') }}</li>
+                  <li>{{ __('Note the exact error message if any') }}</li>
+               </ul>
+            `,
+            'other': `
+               <p class="mb-0">{{ __('Please describe your problem in detail in the form below.') }}</p>
+            `
+         };
+         
+         if (category && tips[category]) {
+            tipsContent.innerHTML = tips[category];
+            tipsContainer.style.display = 'block';
+         } else {
+            tipsContainer.style.display = 'none';
+         }
+      }
+      </script>
+
       <div class="mb-3">
          <label class="form-label text-muted">{{ __('Select an urgency level') }}</label>
          <select name="urgency" class="form-select">
