@@ -143,6 +143,13 @@ class Budget extends CommonDropdown
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
+        echo "<td>" . __('Référence Annuelle UNH') . "</td>";
+        echo "<td>";
+        echo Html::input('unh_budget_code', ['value' => $this->fields['unh_budget_code'] ?? '']);
+        echo "</td>";
+        echo "<td colspan='2'>Code interne pour le budget annuel informatique de l'UNH</td></tr>";
+
+        echo "<tr class='tab_bg_1'>";
         echo "<td>" . _x('price', 'Value') . "</td>";
         echo "<td><input type='text' name='value' size='14'
                  value='" . Html::formatNumber($this->fields["value"], true) . "' class='form-control'></td>";
