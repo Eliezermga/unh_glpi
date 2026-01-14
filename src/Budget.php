@@ -187,6 +187,11 @@ class Budget extends CommonDropdown
     public function prepareInputForAdd($input)
     {
 
+ // Tâche 2 UNH : Force le budget à être partagé avec les facultés (sous-entités)
+        if (!isset($input['is_recursive'])) {
+            $input['is_recursive'] = 1; 
+        }
+
         if (isset($input["id"]) && ($input["id"] > 0)) {
             $input["_oldID"] = $input["id"];
         }
