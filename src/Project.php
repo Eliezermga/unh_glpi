@@ -82,13 +82,12 @@ class Project extends CommonDBTM implements ExtraVisibilityCriteria
      **/
     public static function getTypeName($nb = 0)
     {
-        return _n('Project', 'Projects', $nb);
+        return '';
     }
-
 
     public static function canView()
     {
-        return Session::haveRightsOr(self::$rightname, [self::READALL, self::READMY]);
+        return false;
     }
 
 

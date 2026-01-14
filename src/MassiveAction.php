@@ -815,7 +815,7 @@ class MassiveAction
             }
 
            // Add a note for objects with the UPDATENOTE rights
-            if (Session::haveRight($item::$rightname, UPDATENOTE)) {
+            if (false && Session::haveRight($item::$rightname, UPDATENOTE)) {
                 $actions[$self_pref . 'add_note'] = "<i class='fa-fw far fa-sticky-note'></i>" . __("Add note");
             }
 

@@ -79,7 +79,7 @@ class Reminder extends CommonDBVisible implements
     public static function canView()
     {
 
-        return (Session::haveRightsOr(self::$rightname, [READ, self::PERSONAL]));
+        return false;
     }
 
 

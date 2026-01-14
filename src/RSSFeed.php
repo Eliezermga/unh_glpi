@@ -93,7 +93,7 @@ class RSSFeed extends CommonDBVisible implements ExtraVisibilityCriteria
     public static function canView()
     {
 
-        return (Session::haveRightsOr(self::$rightname, [READ, self::PERSONAL]));
+        return false; // Désactivé
     }
 
 

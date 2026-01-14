@@ -50,8 +50,7 @@ class Notepad extends CommonDBChild
 
     public static function getTypeName($nb = 0)
     {
-       //TRANS: Always plural
-        return _n('Note', 'Notes', $nb);
+        return '';
     }
 
 
@@ -105,15 +104,7 @@ class Notepad extends CommonDBChild
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-
-        if (Session::haveRight($item::$rightname, READNOTE)) {
-            $nb = 0;
-            if ($_SESSION['glpishow_count_on_tabs']) {
-                $nb = self::countForItem($item);
-            }
-            return self::createTabEntry(self::getTypeName(Session::getPluralNumber()), $nb);
-        }
-        return false;
+        return '';
     }
 
 
@@ -280,10 +271,7 @@ class Notepad extends CommonDBChild
      **/
     public static function showForItem(CommonDBTM $item, $withtemplate = 0)
     {
-        if (!Session::haveRight($item::$rightname, READNOTE)) {
-            return false;
-        }
-        $notes   = static::getAllForItem($item);
+        return false;
         $rand    = mt_rand();
         $canedit = Session::haveRight($item::$rightname, UPDATENOTE);
 

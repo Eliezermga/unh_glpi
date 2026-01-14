@@ -66,7 +66,7 @@ class SavedSearch extends CommonDBTM implements ExtraVisibilityCriteria
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Saved search', 'Saved searches', $nb);
+        return '';
     }
 
 
@@ -168,14 +168,14 @@ class SavedSearch extends CommonDBTM implements ExtraVisibilityCriteria
     }
 
 
+    public static function canView()
+    {
+        return false;
+    }
+
     public function canViewItem()
     {
-
-        if ($this->fields['is_private'] == 1) {
-            return (Session::haveRight('config', READ)
-                 || $this->fields['users_id'] == Session::getLoginUserID());
-        }
-        return parent::canViewItem();
+        return false;
     }
 
 

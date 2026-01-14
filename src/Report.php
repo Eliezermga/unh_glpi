@@ -46,7 +46,12 @@ class Report extends CommonGLPI
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Report', 'Reports', $nb);
+        return '';
+    }
+
+    public static function canView()
+    {
+        return false;
     }
 
 
