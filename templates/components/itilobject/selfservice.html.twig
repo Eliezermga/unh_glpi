@@ -151,8 +151,121 @@
                   'itilcategories_id',
                   params['itilcategories_id'],
                   _n('Category', 'Categories', 1),
-                  cat_params|merge({'condition': condition}),
+                  cat_params|merge({'condition': condition, 'on_change': 'this.form.submit(); showSelfHelpTips(this);'}),
                ) }}
+
+               {# Zone de conseils d'auto-assistance dynamique #}
+               <div id="self-help-tips-container" class="col-12 mt-3 mb-3" style="display: none;">
+                  <div class="alert alert-info d-flex align-items-start">
+                     <i class="fas fa-lightbulb fa-lg me-3 mt-1" style="color: #f39c12;"></i>
+                     <div class="flex-grow-1">
+                        <strong><i class="fas fa-magic me-1"></i>{{ __('Quick tips before submitting:') }}</strong>
+                        <div id="self-help-tips-content" class="mt-2"></div>
+                        <hr class="my-2">
+                        <small class="text-muted">
+                           <i class="fas fa-info-circle me-1"></i>
+                           {{ __('If these tips don\'t solve your problem, please continue filling out the form.') }}
+                        </small>
+                     </div>
+                     <button type="button" class="btn-close ms-2" onclick="document.getElementById('self-help-tips-container').style.display='none';" aria-label="Close"></button>
+                  </div>
+               </div>
+
+               <script>
+               // Conseils d'auto-assistance par mots-clés de catégorie
+               const selfHelpTipsData = {
+                  'wifi': {
+                     keywords: ['wifi', 'wi-fi', 'réseau', 'network', 'eduroam', 'connexion', 'internet'],
+                     tips: `<ul class="mb-0 ps-3">
+                        <li><strong>Eduroam :</strong> {{ __('Use your university email as username') }}</li>
+                        <li>{{ __('Forget the network and reconnect') }}</li>
+                        <li>{{ __('Check that Airplane mode is disabled') }}</li>
+                        <li>{{ __('Try connecting in a different location on campus') }}</li>
+                     </ul>`
+                  },
+                  'account': {
+                     keywords: ['compte', 'account', 'mot de passe', 'password', 'login', 'connexion', 'accès', 'access', 'authentification'],
+                     tips: `<ul class="mb-0 ps-3">
+                        <li><strong>{{ __('Forgot password?') }}</strong> {{ __('Use the self-service password reset portal') }}</li>
+                        <li>{{ __('Check that Caps Lock is not enabled') }}</li>
+                        <li>{{ __('Clear your browser cache and cookies') }}</li>
+                        <li>{{ __('Try with a different browser or incognito mode') }}</li>
+                     </ul>`
+                  },
+                  'moodle': {
+                     keywords: ['moodle', 'lms', 'cours', 'course', 'e-learning', 'plateforme', 'ent'],
+                     tips: `<ul class="mb-0 ps-3">
+                        <li>{{ __('Make sure you are enrolled in the course') }}</li>
+                        <li>{{ __('Contact your teacher if the course is not visible') }}</li>
+                        <li>{{ __('Use an up-to-date browser (Chrome, Firefox, Edge)') }}</li>
+                        <li>{{ __('Clear browser cache if pages don\'t load correctly') }}</li>
+                     </ul>`
+                  },
+                  'hardware': {
+                     keywords: ['matériel', 'hardware', 'ordinateur', 'computer', 'imprimante', 'printer', 'écran', 'screen', 'clavier', 'keyboard', 'souris', 'mouse', 'pc', 'portable', 'laptop'],
+                     tips: `<ul class="mb-0 ps-3">
+                        <li>{{ __('Restart the device completely') }}</li>
+                        <li>{{ __('Check all cable connections') }}</li>
+                        <li>{{ __('For printers: check paper and ink/toner levels') }}</li>
+                        <li>{{ __('Note the equipment label number for faster processing') }}</li>
+                     </ul>`
+                  },
+                  'software': {
+                     keywords: ['logiciel', 'software', 'application', 'app', 'programme', 'program', 'installation', 'mise à jour', 'update', 'licence', 'license'],
+                     tips: `<ul class="mb-0 ps-3">
+                        <li>{{ __('Restart the application') }}</li>
+                        <li>{{ __('Check for available updates') }}</li>
+                        <li>{{ __('Restart the computer') }}</li>
+                        <li>{{ __('Note the exact error message if any') }}</li>
+                     </ul>`
+                  },
+                  'email': {
+                     keywords: ['email', 'mail', 'courriel', 'messagerie', 'outlook', 'webmail'],
+                     tips: `<ul class="mb-0 ps-3">
+                        <li>{{ __('Check your spam/junk folder') }}</li>
+                        <li>{{ __('Verify storage space is not full') }}</li>
+                        <li>{{ __('Try accessing via webmail') }}</li>
+                        <li>{{ __('Check internet connection') }}</li>
+                     </ul>`
+                  }
+               };
+
+               function showSelfHelpTips(selectElement) {
+                  // Récupérer le texte de l'option sélectionnée
+                  const selectedText = selectElement.options[selectElement.selectedIndex]?.text?.toLowerCase() || '';
+                  const container = document.getElementById('self-help-tips-container');
+                  const content = document.getElementById('self-help-tips-content');
+                  
+                  if (!container || !content || !selectedText) return;
+                  
+                  // Chercher une correspondance avec les mots-clés
+                  let matchedTips = null;
+                  for (const [key, data] of Object.entries(selfHelpTipsData)) {
+                     for (const keyword of data.keywords) {
+                        if (selectedText.includes(keyword)) {
+                           matchedTips = data.tips;
+                           break;
+                        }
+                     }
+                     if (matchedTips) break;
+                  }
+                  
+                  if (matchedTips) {
+                     content.innerHTML = matchedTips;
+                     container.style.display = 'block';
+                  } else {
+                     container.style.display = 'none';
+                  }
+               }
+
+               // Initialiser au chargement si une catégorie est déjà sélectionnée
+               document.addEventListener('DOMContentLoaded', function() {
+                  const catSelect = document.querySelector('[name="itilcategories_id"]');
+                  if (catSelect && catSelect.value && catSelect.value !== '0') {
+                     showSelfHelpTips(catSelect);
+                  }
+               });
+               </script>
 
                {{ fields.field(
                   'urgency',
