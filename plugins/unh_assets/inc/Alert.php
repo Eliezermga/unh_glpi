@@ -4,8 +4,6 @@
  * Université Nouveaux Horizons
  */
 
-namespace GlpiPlugin\UnhAssets\Assets;
-
 use CommonDBTM;
 
 class Alert extends CommonDBTM

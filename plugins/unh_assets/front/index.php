@@ -6,6 +6,13 @@
 
 require_once(dirname(__FILE__) . '/../../../inc/includes.php');
 
+Html::header(
+    __('UNH Assets', 'unh_assets'),
+    $_SERVER['PHP_SELF'],
+    'assets',
+    'unh_assets'
+);
+
 // Vérifier l'authentification
 if (!isset($_SESSION['glpiID'])) {
     Html::redirect(GLPI_ROOT . '/index.php');
@@ -16,21 +23,15 @@ require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Equipment.php');
 require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/EquipmentType.php');
 require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Building.php');
 require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Alert.php');
-
-use GlpiPlugin\UnhAssets\Assets\Equipment;
-use GlpiPlugin\UnhAssets\Assets\EquipmentType;
-use GlpiPlugin\UnhAssets\Assets\Building;
-use GlpiPlugin\UnhAssets\Assets\Room;
-use GlpiPlugin\UnhAssets\Assets\Alert;
+require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Logo.php');
 
 // Déterminer l'action
-$action = isset($_GET['action']) ? $_GET['action'] : 'dashboard';
+$action = $_GET['action'] ?? 'dashboard';
 
 // Données communes
 $loader = new \Twig\Loader\FilesystemLoader(PLUGIN_UNH_ASSETS_DIR . '/templates');
 $twig = new \Twig\Environment($loader, [
-    'cache' => PLUGIN_UNH_ASSETS_DIR . '/cache',
-    'auto_reload' => true,
+    'auto_reload' => true
 ]);
 
 // Ajouter les filtres personnalisés Twig
@@ -79,7 +80,6 @@ try {
 function handleDashboardAction($twig)
 {
     // Vérifier les alertes et créer les automatiques
-    Alert::checkAndCreateAlerts();
 
     $stats = Equipment::getStatistics();
     $alertedEquipments = Equipment::getAlertedEquipments();
@@ -231,3 +231,6 @@ function handleStatisticsAction($twig)
         'is_admin' => $_SESSION['glpiactiveprofile']['interface'] === 'central'
     ]);
 }
+
+Html::footer();
+?>

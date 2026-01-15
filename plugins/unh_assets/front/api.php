@@ -6,6 +6,7 @@
 
 require_once(dirname(__FILE__) . '/../../../inc/includes.php');
 
+
 // Vérifier l'authentification
 if (!isset($_SESSION['glpiID'])) {
     http_response_code(401);
@@ -18,10 +19,6 @@ require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Equipment.php');
 require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Alert.php');
 require_once(PLUGIN_UNH_ASSETS_INC_DIR . '/Building.php');
 
-use GlpiPlugin\UnhAssets\Assets\Equipment;
-use GlpiPlugin\UnhAssets\Assets\Alert;
-use GlpiPlugin\UnhAssets\Assets\Building;
-use GlpiPlugin\UnhAssets\Assets\Room;
 
 // En-têtes JSON
 header('Content-Type: application/json');

@@ -12,10 +12,6 @@
 
 define('PLUGIN_UNH_ASSETS_VERSION', '1.0.0');
 
-// Définir le chemin du plugin
-define('PLUGIN_UNH_ASSETS_DIR', GLPI_ROOT . '/plugins/unh_assets');
-define('PLUGIN_UNH_ASSETS_WEB_DIR', GLPI_ROOT . '/plugins/unh_assets/front');
-define('PLUGIN_UNH_ASSETS_INC_DIR', PLUGIN_UNH_ASSETS_DIR . '/inc');
 
 /**
  * Fonction de chargement du plugin
@@ -30,8 +26,8 @@ function plugin_unh_assets_getPluginName()
  */
 function plugin_unh_assets_checkCompat()
 {
-    if (version_compare(GLPI_VERSION, '10.0', '<')) {
-        echo __('Ce plugin nécessite GLPI 10.0 ou supérieur', 'unh_assets');
+    if (version_compare(GLPI_VERSION, '10.0.7', '<')) {
+        echo __('Ce plugin nécessite GLPI 10.0.7 ou supérieur', 'unh_assets');
         return false;
     }
     return true;
@@ -61,7 +57,6 @@ function plugin_unh_assets_install()
                 try {
                     $DB->query($statement);
                 } catch (Exception $e) {
-                    // Ignorer les erreurs si les tables existent déjà
                     error_log("SQL Error: " . $e->getMessage());
                 }
             }
@@ -78,7 +73,6 @@ function plugin_unh_assets_uninstall()
 {
     global $DB;
     
-    // Supprimer les tables
     $tables = [
         'glpi_plugin_unh_assets_types',
         'glpi_plugin_unh_assets_buildings',
