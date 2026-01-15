@@ -41,7 +41,7 @@ use Glpi\Event;
 
 include('../inc/includes.php');
 
-Session::checkRight('queuednotification', READ);
+//Session::checkRight('queuednotification', READ);
 
 if (!isset($_GET["id"])) {
     $_GET["id"] = "";

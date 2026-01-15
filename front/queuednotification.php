@@ -6,7 +6,7 @@
  * GLPI - Gestionnaire Libre de Parc Informatique
  *
  * http://glpi-project.org
- *
+ *FORM
  * @copyright 2015-2023 Teclib' and contributors.
  * @copyright 2003-2014 by the INDEPNET Development Team.
  * @licence   https://www.gnu.org/licenses/gpl-3.0.html
@@ -39,7 +39,7 @@
 
 include('../inc/includes.php');
 
-Session::checkRight("queuednotification", READ);
+//Session::checkRight("queuednotification", READ);
 
 Html::header(QueuedNotification::getTypeName(), $_SERVER['PHP_SELF'], "admin", "queuednotification");
 
