@@ -29,7 +29,7 @@ function plugin_init_incidentsalles() {
 
     $PLUGIN_HOOKS['csrf_compliant']['incidentsalles'] = true;
     
-    Plugin::registerClass('PluginIncidentsallesInstall', ['classname' => 'PluginIncidentsallesInstall']);
+    Plugin::registerClass('PluginIncidentsallesInstall');
     
     $PLUGIN_HOOKS['menu_toadd']['incidentsalles'] = ['tools' => 'PluginIncidentsallesMenu'];
 }

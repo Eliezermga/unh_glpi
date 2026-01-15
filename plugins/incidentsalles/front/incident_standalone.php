@@ -6,11 +6,7 @@ include('../../../inc/includes.php');
 
 global $DB;
 
-$table = 'glpi_incidentsalles';
-
-// Vérifier les droits d'accès
-$is_admin = Session::haveRight('config', UPDATE);
-$current_user_id = Session::getLoginUserID();
+$table = 'glpi_plugin_incidentsalles_incidents';
 
 // Vérifier si la table existe
 if (!$DB->tableExists($table)) {
@@ -36,8 +32,8 @@ if (isset($_POST['submit_incident'])) {
 
     if (!empty($salle) && !empty($type_incident) && !empty($description)) {
         $query = "INSERT INTO $table 
-                  (user_id, salle, type_incident, description, date_incident, heure_incident, equipement, statut) 
-                  VALUES ($users_id, '$salle', '$type_incident', '$description', '$date_incident', '$heure_incident', '$equipement', 'ouvert')";
+                  (users_id, salle, laboratoire, type_incident, description, date_incident, heure_incident, equipement, priorite, statut, date_creation) 
+                  VALUES ($users_id, '$salle', '$laboratoire', '$type_incident', '$description', '$date_incident', '$heure_incident', '$equipement', '$priorite', 'ouvert', NOW())";
         
         if ($DB->query($query)) {
             $message = "<div style='background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin: 20px 0;'>✅ Incident enregistré avec succès</div>";
@@ -55,7 +51,7 @@ if (isset($_POST['change_statut'])) {
     $statut = $DB->escape($_POST['statut']);
     $date_resolution = ($statut == 'resolu') ? "'" . date('Y-m-d H:i:s') . "'" : 'NULL';
     
-    $query = "UPDATE $table SET statut = '$statut', date_resolution = $date_resolution WHERE id = $id";
+    $query = "UPDATE $table SET statut = '$statut', date_resolution = $date_resolution, date_modification = NOW() WHERE id = $id";
     
     if ($DB->query($query)) {
         $message = "<div style='background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin: 20px 0;'>✅ Statut mis à jour</div>";
@@ -107,21 +103,14 @@ $tab = $_GET['tab'] ?? 'form';
         
         <ul class="tabs">
             <li><a href="?tab=form" class="<?= $tab == 'form' ? 'active' : '' ?>">📝 Déclarer un incident</a></li>
-            <?php if ($is_admin): ?>
             <li><a href="?tab=list" class="<?= $tab == 'list' ? 'active' : '' ?>">📋 Liste des incidents</a></li>
             <li><a href="?tab=stats" class="<?= $tab == 'stats' ? 'active' : '' ?>">📊 Statistiques</a></li>
-            <li><a href="?tab=alerts" class="<?= $tab == 'alerts' ? 'active' : '' ?>">🚨 Alertes</a></li>
-            <li><a href="?tab=historique" class="<?= $tab == 'historique' ? 'active' : '' ?>">📜 Historique</a></li>
-            <?php else: ?>
-            <li><a href="?tab=mes_incidents" class="<?= $tab == 'mes_incidents' ? 'active' : '' ?>">📋 Mes incidents</a></li>
-            <?php endif; ?>
         </ul>
         
         <?php if ($tab == 'form'): ?>
             <div class="card">
                 <h3>Déclarer un nouvel incident</h3>
                 <form method="post">
-                    <?php echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]); ?>
                     <div class="form-group">
                         <label>Salle *</label>
                         <input type="text" name="salle" class="form-control" placeholder="Ex: Salle A101" required />
@@ -175,54 +164,12 @@ $tab = $_GET['tab'] ?? 'form';
             </div>
         <?php endif; ?>
         
-        <?php if ($tab == 'mes_incidents' && !$is_admin): ?>
-            <div class="card">
-                <h3>Mes incidents déclarés</h3>
-                <?php
-                $query = "SELECT i.*, u.name as user_name FROM $table i 
-                          LEFT JOIN glpi_users u ON i.user_id = u.id 
-                          WHERE i.user_id = $current_user_id
-                          ORDER BY i.date_incident DESC";
-                $result = $DB->query($query);
-                
-                if ($result && $DB->numrows($result) > 0):
-                ?>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Salle</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Statut</th>
-                        </tr>
-                        <?php while ($row = $DB->fetchAssoc($result)): ?>
-                            <tr>
-                                <td><?= $row['id'] ?></td>
-                                <td><?= $row['salle'] ?></td>
-                                <td><?= $row['type_incident'] ?></td>
-                                <td><?= date('d/m/Y H:i', strtotime($row['date_incident'])) ?></td>
-                                <td><span class="badge badge-<?= $row['statut'] ?>"><?= strtoupper($row['statut']) ?></span></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </table>
-                <?php else: ?>
-                    <p style="text-align: center; padding: 40px; color: #999;">Vous n'avez déclaré aucun incident</p>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'list' && !$is_admin): ?>
-            <div class="card">
-                <p style="text-align: center; padding: 40px; color: red;">❌ Accès réservé aux administrateurs</p>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'list' && $is_admin): ?>
+        <?php if ($tab == 'list'): ?>
             <div class="card">
                 <h3>Liste des incidents</h3>
                 <?php
                 $query = "SELECT i.*, u.name as user_name FROM $table i 
-                          LEFT JOIN glpi_users u ON i.user_id = u.id 
+                          LEFT JOIN glpi_users u ON i.users_id = u.id 
                           ORDER BY i.date_incident DESC";
                 $result = $DB->query($query);
                 
@@ -231,7 +178,7 @@ $tab = $_GET['tab'] ?? 'form';
                     <table>
                         <tr>
                             <th>ID</th>
-                            <th>Salle</th>
+                            <th>Salle/Labo</th>
                             <th>Type</th>
                             <th>Date</th>
                             <th>Priorité</th>
@@ -241,15 +188,14 @@ $tab = $_GET['tab'] ?? 'form';
                         <?php while ($row = $DB->fetchAssoc($result)): ?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
-                                <td><?= $row['salle'] ?></td>
+                                <td><?= $row['salle'] . ($row['laboratoire'] ? " / " . $row['laboratoire'] : "") ?></td>
                                 <td><?= $row['type_incident'] ?></td>
                                 <td><?= date('d/m/Y H:i', strtotime($row['date_incident'])) ?></td>
-                                <td><span class="badge badge-normale">NORMALE</span></td>
+                                <td><span class="badge badge-<?= $row['priorite'] ?>"><?= strtoupper($row['priorite']) ?></span></td>
                                 <td><span class="badge badge-<?= $row['statut'] ?>"><?= strtoupper($row['statut']) ?></span></td>
                                 <td>
                                     <?php if ($row['statut'] != 'resolu'): ?>
                                         <form method="post" style="display: inline;">
-                                            <?php echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]); ?>
                                             <input type="hidden" name="incident_id" value="<?= $row['id'] ?>" />
                                             <select name="statut" class="form-control" style="width: auto; display: inline-block; padding: 5px;">
                                                 <option value="ouvert" <?= $row['statut'] == 'ouvert' ? 'selected' : '' ?>>Ouvert</option>
@@ -271,13 +217,7 @@ $tab = $_GET['tab'] ?? 'form';
             </div>
         <?php endif; ?>
         
-        <?php if ($tab == 'stats' && !$is_admin): ?>
-            <div class="card">
-                <p style="text-align: center; padding: 40px; color: red;">❌ Accès réservé aux administrateurs</p>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'stats' && $is_admin): ?>
+        <?php if ($tab == 'stats'): ?>
             <?php
             $total = $DB->query("SELECT COUNT(*) as c FROM $table")->fetch_assoc()['c'];
             $ouverts = $DB->query("SELECT COUNT(*) as c FROM $table WHERE statut='ouvert'")->fetch_assoc()['c'];
@@ -318,98 +258,6 @@ $tab = $_GET['tab'] ?? 'form';
                         </tr>
                     <?php endwhile; ?>
                 </table>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'alerts' && !$is_admin): ?>
-            <div class="card">
-                <p style="text-align: center; padding: 40px; color: red;">❌ Accès réservé aux administrateurs</p>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'alerts' && $is_admin): ?>
-            <div class="card">
-                <h3>🚨 Incidents non résolus depuis plus de 7 jours</h3>
-                <?php
-                $query = "SELECT i.*, u.name as user_name, DATEDIFF(NOW(), i.date_incident) as jours 
-                          FROM $table i 
-                          LEFT JOIN glpi_users u ON i.user_id = u.id 
-                          WHERE i.statut != 'resolu' 
-                          AND DATEDIFF(NOW(), i.date_incident) > 7
-                          ORDER BY jours DESC";
-                $result = $DB->query($query);
-                
-                if ($result && $DB->numrows($result) > 0):
-                ?>
-                    <div style="background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
-                        ⚠️ <strong><?= $DB->numrows($result) ?></strong> incident(s) nécessite(nt) une attention urgente !
-                    </div>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Salle</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Jours écoulés</th>
-                            <th>Statut</th>
-                        </tr>
-                        <?php while ($row = $DB->fetchAssoc($result)): ?>
-                            <tr style="<?= $row['jours'] > 14 ? 'background: #ffebee;' : '' ?>">
-                                <td><?= $row['id'] ?></td>
-                                <td><?= $row['salle'] ?></td>
-                                <td><?= $row['type_incident'] ?></td>
-                                <td><?= date('d/m/Y', strtotime($row['date_incident'])) ?></td>
-                                <td><strong style="color: red;"><?= $row['jours'] ?> jours</strong></td>
-                                <td><span class="badge badge-<?= $row['statut'] ?>"><?= strtoupper($row['statut']) ?></span></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </table>
-                <?php else: ?>
-                    <p style="text-align: center; padding: 40px; color: green;">✅ Aucun incident en retard</p>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'historique' && !$is_admin): ?>
-            <div class="card">
-                <p style="text-align: center; padding: 40px; color: red;">❌ Accès réservé aux administrateurs</p>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($tab == 'historique' && $is_admin): ?>
-            <div class="card">
-                <h3>📜 Historique du matériel</h3>
-                <?php
-                $query = "SELECT equipement, COUNT(*) as nb_incidents, 
-                          MAX(date_incident) as dernier_incident,
-                          GROUP_CONCAT(DISTINCT salle ORDER BY salle SEPARATOR ', ') as salles
-                          FROM $table 
-                          WHERE equipement IS NOT NULL AND equipement != ''
-                          GROUP BY equipement 
-                          ORDER BY nb_incidents DESC";
-                $result = $DB->query($query);
-                
-                if ($result && $DB->numrows($result) > 0):
-                ?>
-                    <table>
-                        <tr>
-                            <th>Équipement</th>
-                            <th>Salles</th>
-                            <th>Nb incidents</th>
-                            <th>Dernier incident</th>
-                        </tr>
-                        <?php while ($row = $DB->fetchAssoc($result)): ?>
-                            <tr>
-                                <td><strong><?= $row['equipement'] ?></strong></td>
-                                <td><?= $row['salles'] ?></td>
-                                <td><?= $row['nb_incidents'] ?></td>
-                                <td><?= date('d/m/Y', strtotime($row['dernier_incident'])) ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </table>
-                <?php else: ?>
-                    <p style="text-align: center; padding: 40px; color: #999;">Aucun historique disponible</p>
-                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
