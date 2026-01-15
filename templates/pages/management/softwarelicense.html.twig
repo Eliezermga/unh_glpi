@@ -40,7 +40,7 @@
       'Software',
       'softwares_id',
       item.fields['softwares_id'],
-      "Software"|itemtype_name,
+      "Logiciel"|itemtype_name,
       {
          'entity': item.fields['entities_id'],
          'condition': {
@@ -57,6 +57,43 @@
 {% endblock %}
 
 {% block more_fields %}
+   {# 2. Associer chaque licence à un ordinateur ou utilisateur #}
+   <div class="mb-3 row">
+      <label class="col-form-label col-sm-4">{{ __('Affectation') }}</label>
+      <div class="col-sm-8">
+         <div class="row">
+            <div class="col-md-6">
+               {{ fields.dropdownField(
+                  'Computer',
+                  'computers_id',
+                  item.fields['computers_id'],
+                  __('Ordinateur'),
+                  {
+                     'entity': item.fields['entities_id'],
+                     'condition': {'is_deleted': 0},
+                     'display_emptychoice': true
+                  }
+               ) }}
+            </div>
+            <div class="col-md-6">
+               {{ fields.dropdownField(
+                  'User',
+                  'users_id',
+                  item.fields['users_id'],
+                  __('Utilisateur'),
+                  {
+                     'entity': item.fields['entities_id'],
+                     'right': 'all',
+                     'display_emptychoice': true
+                  }
+               ) }}
+            </div>
+         </div>
+         <small class="form-text text-muted">{{ __('Associer la licence à un ordinateur ou un utilisateur spécifique') }}</small>
+      </div>
+   </div>
+
+   {# Version du logiciel #}
    {% set field %}
       {% do call('SoftwareVersion::dropdownForOneSoftware', [{
          'name': 'softwareversions_id_use',
@@ -65,7 +102,7 @@
          'width': '100%',
       }]) %}
    {% endset %}
-   {{ fields.field('softwareversions_id_use', field, __('Version in use')) }}
+   {{ fields.field('softwareversions_id_use', field, __('Version installée')) }}
 
    {% set field %}
       {% do call('SoftwareVersion::dropdownForOneSoftware', [{
@@ -75,35 +112,201 @@
       'width': '100%',
       }]) %}
    {% endset %}
-   {{ fields.field('softwareversions_id_buy', field, __('Purchase version')) }}
+   {{ fields.field('softwareversions_id_buy', field, __('Version achetée')) }}
 
+   {# 3. Vérifier le nombre de licences disponibles et utilisées #}
+   {% if item.fields['softwares_id'] > 0 %}
+   <div class="mb-3 row">
+      <label class="col-form-label col-sm-4">{{ __('Statut des licences') }}</label>
+      <div class="col-sm-8">
+         <div class="row">
+            <div class="col-md-4">
+               {{ fields.numberField('number', item.fields['number'], _x('quantity', 'Nombre total'), {
+                  'min': 1,
+                  'max': 10000,
+                  'step': 1,
+               }) }}
+            </div>
+            <div class="col-md-4">
+               {% set used_licenses = 0 %}
+               {% if item.getID() > 0 %}
+                  {# Pour une licence existante, on pourrait afficher le nombre d'installations #}
+                  {% set used_licenses = 0 %}
+               {% endif %}
+               {{ fields.numberField('used_display', used_licenses, __('Utilisées'), {
+                  'readonly': true,
+                  'class': 'bg-light',
+                  'full_width': true
+               }) }}
+            </div>
+            <div class="col-md-4">
+               {% set available_licenses = item.fields['number'] - used_licenses %}
+               {% set available_class = 'bg-light' %}
+               {% if available_licenses > 0 %}
+                  {% set available_class = 'bg-success text-white' %}
+               {% elseif available_licenses == 0 %}
+                  {% set available_class = 'bg-warning text-dark' %}
+               {% else %}
+                  {% set available_class = 'bg-danger text-white' %}
+               {% endif %}
+               
+               {{ fields.numberField('available_display', available_licenses, __('Disponibles'), {
+                  'readonly': true,
+                  'class': available_class,
+                  'full_width': true
+               }) }}
+            </div>
+         </div>
+         <small class="form-text text-muted">{{ __('Sur-quota autorisé:') }} {{ item.fields['allow_overquota'] ? __('Oui') : __('Non') }}</small>
+      </div>
+   </div>
+   {% endif %}
+
+   {# Indicateur de validité avec sur-quota #}
    {% set validity_msg = null %}
    {% if item_type == 'SoftwareLicense' %}
       {% set validity_msg %}
-         {% if item.fields['is_valid'] %}
-            <span class="green">{{ _x('adjective', 'Valid') }}</span>
-         {% elseif not item.fields['is_valid'] and item.fields['allow_overquota'] %}
-            <span class="green">{{ _x('adjective', 'Valid (Over Quota)') }}</span>
-         {% else %}
-            <span class="red">{{ _x('adjective', 'Invalid') }}</span>
-         {% endif %}
+         <div class="mt-2">
+            {% if item.fields['is_valid'] %}
+               <span class="badge bg-success">{{ _x('adjective', 'Valide') }}</span>
+            {% elseif not item.fields['is_valid'] and item.fields['allow_overquota'] %}
+               <span class="badge bg-warning text-dark">{{ _x('adjective', 'Valide (Sur-quota)') }}</span>
+            {% else %}
+               <span class="badge bg-danger">{{ _x('adjective', 'Invalide') }}</span>
+            {% endif %}
+            <small class="form-text text-muted">{{ __('Statut de conformité pour l\'UNH') }}</small>
+         </div>
       {% endset %}
    {% endif %}
-   {{ fields.dropdownNumberField('number', item.fields['number'], _x('quantity', 'Number'), {
+   
+   {{ fields.dropdownNumberField('number', item.fields['number'], _x('quantity', 'Nombre de licences'), {
       'min': 1,
       'max': 10000,
       'step': 1,
-      'toadd': {'-1': __('Unlimited')},
+      'toadd': {'-1': __('Illimité')},
       'add_field_html': validity_msg
    }) }}
 
-   {{ fields.dropdownYesNo('allow_overquota', item.fields['allow_overquota'], __('Allow Over-Quota')) }}
-
-   {{ fields.datetimeField('expire', item.fields['expire'], __('Expiration'), {
-      'helper': __('On search engine, use "Expiration contains NULL" to search licenses with no expiration date')
+   {{ fields.dropdownYesNo('allow_overquota', item.fields['allow_overquota'], __('Autoriser le sur-quota'), {
+      'helper': __('Permettre l\'utilisation au-delà du nombre de licences achetées')
    }) }}
+
+   {# 4. Suivre les dates d'expiration des licences #}
+   {{ fields.datetimeField('expire', item.fields['expire'], __('Date d\'expiration'), {
+      'helper': __('Pour rechercher les licences sans date d\'expiration, utilisez "Expiration contient NULL"'),
+      'required': false,
+      'maybeempty': true,
+      'canedit': true
+   }) }}
+
+   {# Date d'achat #}
+   {{ fields.dateField('purchase_date', item.fields['purchase_date'] ?? null, __('Date d\'achat'), {
+      'required': false,
+      'maybeempty': true
+   }) }}
+
+   {# Numéro de licence #}
+   {{ fields.textField('license_number', item.fields['license_number'] ?? null, __('Numéro de licence'), {
+      'size': 40,
+      'helper': __('Numéro unique fourni par l\'éditeur')
+   }) }}
+
+   {# Fournisseur #}
+   {{ fields.dropdownField(
+      'Supplier',
+      'suppliers_id',
+      item.fields['suppliers_id'] ?? null,
+      __('Fournisseur'),
+      {
+         'entity': item.fields['entities_id'],
+         'condition': {'is_deleted': 0},
+         'display_emptychoice': true
+      }
+   ) }}
+
+   {# Contrat associé #}
+   {{ fields.dropdownField(
+      'Contract',
+      'contracts_id',
+      item.fields['contracts_id'] ?? null,
+      __('Contrat associé'),
+      {
+         'entity': item.fields['entities_id'],
+         'condition': {'is_deleted': 0},
+         'display_emptychoice': true
+      }
+   ) }}
+
+   {# Notes spécifiques à l'UNH #}
+   {{ fields.textareaField('comment', item.fields['comment'] ?? null, __('Notes UNH'), {
+      'rows': 3,
+      'helper': __('Informations spécifiques à la gestion des licences pour l\'Université Numérique de l\'Habitat')
+   }) }}
+
+   {# Catégorie de licence - à adapter selon votre installation #}
+   {{ fields.textField('license_type', item.fields['license_type'] ?? null, __('Type de licence'), {
+      'size': 40,
+      'helper': __('Ex: Académique, Commerciale, Essai, Open Source, Gratuite')
+   }) }}
+
+   {# 5. Lien vers le rapport de conformité - version simplifiée #}
+   {% if not params['withtemplate'] and item.getID() > 0 %}
+   <div class="mb-3 row">
+      <div class="col-sm-8 offset-sm-4">
+         <div class="alert alert-info">
+            <h6 class="alert-heading">
+               <i class="fas fa-chart-bar"></i>
+               {{ __('Rapport de conformité UNH') }}
+            </h6>
+            <p class="mb-2">{{ __('Pour générer un rapport de conformité:') }}</p>
+            <ol class="mb-2 pl-3">
+               <li>{{ __('Accédez à l\'onglet "Rapports"') }}</li>
+               <li>{{ __('Sélectionnez "Licences"') }}</li>
+               <li>{{ __('Filtrez par logiciel ou entité') }}</li>
+            </ol>
+            <small class="form-text">
+               {{ __('Rapport de conformité des licences pour l\'Université Numérique de l\'Habitat (UNH)') }}
+            </small>
+         </div>
+      </div>
+   </div>
+   {% endif %}
 
    {% if params['withtemplate'] == 1 %}
       {{ fields.hiddenField('withtemplate', '1') }}
+   {% endif %}
+{% endblock %}
+
+{% block after_more_fields %}
+   {# Affichage des informations de suivi - seulement en mode édition #}
+   {% if not params['withtemplate'] and item.getID() > 0 %}
+   <div class="card mt-3">
+      <div class="card-header">
+         <h3 class="card-title">
+            <i class="fas fa-university"></i>
+            {{ __('Gestion des licences - UNH') }}
+         </h3>
+      </div>
+      <div class="card-body">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="alert alert-info">
+                  <h6 class="alert-heading">{{ __('Objectif') }}</h6>
+                  <p class="mb-0">{{ __('Assurer l\'utilisation légale et contrôlée des logiciels de l\'UNH.') }}</p>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="alert alert-light">
+                  <h6 class="alert-heading">{{ __('Tâches réalisées') }}</h6>
+                  <ul class="mb-0 pl-3">
+                     <li>{{ __('Licence enregistrée') }}</li>
+                     <li>{{ __('Affectation configurée') }}</li>
+                     <li>{{ __('Conformité vérifiée') }}</li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
    {% endif %}
 {% endblock %}
