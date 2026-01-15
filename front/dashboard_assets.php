@@ -40,7 +40,6 @@
 
 include('../inc/includes.php');
 
-
 Session::checkCentralAccess();
 $default = Glpi\Dashboard\Grid::getDefaultDashboardForMenu('assets');
 
@@ -50,7 +49,7 @@ if ($default == "") {
 }
 
 Html::header(__('Assets Dashboard'), $_SERVER['PHP_SELF'], "assets", "dashboard");
-
+  
 $dashboard = new Glpi\Dashboard\Grid($default);
 $dashboard->showDefault();
 

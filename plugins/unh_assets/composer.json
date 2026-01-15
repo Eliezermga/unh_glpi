@@ -1,0 +1,53 @@
+{
+  "name": "unh_assets",
+  "displayName": "UNH Assets - Gestion du Parc",
+  "version": "1.0.0",
+  "type": "plugin",
+  "author": "Université Nouveaux Horizons",
+  "license": "GPL v3",
+  "minGLPIVersion": "10.0.0",
+  "maxGLPIVersion": "99.9.9",
+  "requirements": {
+    "php": ">=7.4",
+    "mysql": ">=5.7",
+    "glpi": ">=10.0"
+  },
+  "permissions": {
+    "plugin_unh_assets:assets": "Consulter le parc informatique",
+    "plugin_unh_assets:manage": "Gérer les équipements",
+    "plugin_unh_assets:alerts": "Gérer les alertes"
+  },
+  "tables": [
+    "glpi_plugin_unh_assets_types",
+    "glpi_plugin_unh_assets_buildings",
+    "glpi_plugin_unh_assets_rooms",
+    "glpi_plugin_unh_assets_equipments",
+    "glpi_plugin_unh_assets_alerts",
+    "glpi_plugin_unh_assets_maintenance_logs"
+  ],
+  "features": [
+    "Inventaire centralisé des équipements",
+    "Gestion des bâtiments et salles",
+    "Système d'alertes automatiques",
+    "Journal de maintenance",
+    "Tableau de bord statistique",
+    "Recherche et filtrage avancés",
+    "Personnalisation charte UNH",
+    "Interface responsive"
+  ],
+  "translationDomains": [
+    "unh_assets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unhorizons/glpi-unh-assets"
+  },
+  "colors": {
+    "primary": "#0BA0D0",
+    "secondary": "#3AA3E3",
+    "success": "#28A745",
+    "warning": "#FFD700",
+    "danger": "#DC3545",
+    "white": "#FFFFFF"
+  }
+}

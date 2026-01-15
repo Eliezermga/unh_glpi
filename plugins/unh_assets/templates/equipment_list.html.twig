@@ -1,0 +1,196 @@
+{# Template: Liste des équipements #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ 'plugins/unh_assets/css/unh_assets.css'|glpi_asset }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .list-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="list-wrapper">
+    {# En-tête #}
+    <div class="unh-assets-header">
+        <h1>
+            <i class="fas fa-list"></i>
+            {{ page_title }}
+        </h1>
+    </div>
+
+    {# Barre de filtrage #}
+    <div class="unh-assets-container">
+        <form method="GET" style="display: contents;">
+            <input type="hidden" name="action" value="list">
+            <div class="unh-filter-bar">
+                <div class="unh-filter-group">
+                    <label for="search">Recherche</label>
+                    <input type="text" id="search" name="search" placeholder="Nom, marque, série..." 
+                           value="{{ filters.search|default('') }}">
+                </div>
+
+                <div class="unh-filter-group">
+                    <label for="status">État</label>
+                    <select id="status" name="status">
+                        <option value="">-- Tous les états --</option>
+                        <option value="operational" {% if filters.status == 'operational' %}selected{% endif %}>Opérationnel</option>
+                        <option value="maintenance" {% if filters.status == 'maintenance' %}selected{% endif %}>En maintenance</option>
+                        <option value="out_of_service" {% if filters.status == 'out_of_service' %}selected{% endif %}>Hors service</option>
+                    </select>
+                </div>
+
+                <div class="unh-filter-group">
+                    <label for="type">Type</label>
+                    <select id="type" name="type_id">
+                        <option value="">-- Tous les types --</option>
+                        {% for type in types %}
+                        <option value="{{ type.id }}" {% if filters.type_id == type.id %}selected{% endif %}>
+                            {{ type.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="unh-filter-group">
+                    <label for="building">Bâtiment</label>
+                    <select id="building" name="building_id">
+                        <option value="">-- Tous les bâtiments --</option>
+                        {% for building in buildings %}
+                        <option value="{{ building.id }}" {% if filters.building_id == building.id %}selected{% endif %}>
+                            {{ building.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 8px; align-items: flex-end;">
+                    <button type="submit" class="unh-btn unh-btn-primary">
+                        <i class="fas fa-search"></i> Filtrer
+                    </button>
+                    <a href="?action=list" class="unh-btn unh-btn-secondary">
+                        <i class="fas fa-redo"></i> Réinitialiser
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {# Tableau des équipements #}
+    <div class="unh-assets-container">
+        {% if equipments|length > 0 %}
+            <div style="overflow-x: auto;">
+                <table class="unh-equipment-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Nom</th>
+                            <th style="width: 15%;">Type</th>
+                            <th style="width: 15%;">Localisation</th>
+                            <th style="width: 12%;">État</th>
+                            <th style="width: 15%;">Marque / Modèle</th>
+                            <th style="width: 13%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for equipment in equipments %}
+                        <tr>
+                            <td>
+                                <strong>{{ equipment.name }}</strong>
+                                {% if equipment.is_alert %}
+                                    <span class="unh-badge unh-badge-alert-critical" style="margin-left: 8px;">
+                                        <i class="fas fa-exclamation-circle"></i> ALERTE
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="unh-icon-small" style="background-color: rgba(11, 160, 208, 0.1); color: #0BA0D0;">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                {{ equipment.type_name|default('N/A') }}
+                            </td>
+                            <td>
+                                <i class="fas fa-map-marker-alt" style="color: #0BA0D0;"></i>
+                                {{ equipment.building_name|default('N/A') }}
+                                {% if equipment.room_name %}<br><small>{{ equipment.room_name }}</small>{% endif %}
+                            </td>
+                            <td>
+                                {% if equipment.status == 'operational' %}
+                                    <span class="unh-badge unh-badge-operational">
+                                        <i class="fas fa-check-circle"></i> Opérationnel
+                                    </span>
+                                {% elseif equipment.status == 'maintenance' %}
+                                    <span class="unh-badge unh-badge-maintenance">
+                                        <i class="fas fa-tools"></i> Maintenance
+                                    </span>
+                                {% else %}
+                                    <span class="unh-badge unh-badge-out-of-service">
+                                        <i class="fas fa-times-circle"></i> Hors service
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ equipment.brand|default('-') }}
+                                <br>
+                                <small>{{ equipment.model|default('-') }}</small>
+                            </td>
+                            <td>
+                                <a href="?action=view&id={{ equipment.id }}" class="unh-btn unh-btn-sm unh-btn-primary">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                {% if is_admin %}
+                                    <a href="?action=edit&id={{ equipment.id }}" class="unh-btn unh-btn-sm unh-btn-secondary" style="margin-top: 4px;">
+                                        <i class="fas fa-edit"></i> Modifier
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div style="text-align: center; padding: 40px; color: #6C757D;">
+                <i class="fas fa-inbox" style="font-size: 48px; display: block; margin-bottom: 15px; color: #D9D9D9;"></i>
+                <p style="font-size: 14px; margin: 0;">Aucun équipement trouvé selon vos critères de filtrage.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    {# Pagination (si nécessaire) #}
+    <div class="unh-assets-container">
+        <div style="text-align: center; font-size: 12px; color: #6C757D;">
+            Total : <strong>{{ equipments|length }}</strong> équipement(s)
+        </div>
+    </div>
+
+    {# Actions rapides #}
+    <div class="unh-assets-container" style="text-align: center;">
+        <a href="?action=dashboard" class="unh-btn unh-btn-secondary">
+            <i class="fas fa-arrow-left"></i> Retour au tableau de bord
+        </a>
+        {% if is_admin %}
+            <a href="?action=edit&new=1" class="unh-btn unh-btn-primary" style="margin-left: 10px;">
+                <i class="fas fa-plus-circle"></i> Ajouter un équipement
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // Marquer les alertes avec animation
+    document.querySelectorAll('.unh-badge-alert-critical').forEach(el => {
+        el.style.animation = 'pulse 2s infinite';
+    });
+</script>
+</body>
+</html>

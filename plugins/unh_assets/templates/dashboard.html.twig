@@ -1,0 +1,243 @@
+{# Template: Dashboard UNH Assets #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ 'plugins/unh_assets/css/unh_assets.css'|glpi_asset }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .dashboard-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+    {# En-tête principal avec logo #}
+    <div class="unh-assets-header">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <img src="{{ logo_path }}" alt="Logo UNH" style="max-width: 120px; max-height: 100px; object-fit: contain;">
+            <div>
+                <h1 style="margin: 0;">
+                    <i class="fas fa-cube"></i>
+                    {{ page_title }}
+                </h1>
+                <p style="margin: 8px 0 0 0; color: #6C757D; font-size: 13px;">
+                    Gestion centralisée du parc informatique de l'Université Nouveaux Horizons
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {# Alertes critiques #}
+    {% if alerts_by_severity.critical > 0 %}
+    <div class="unh-alert unh-alert-critical">
+        <i class="fas fa-exclamation-circle unh-alert-icon"></i>
+        <div class="unh-alert-content">
+            <strong>{{ alerts_by_severity.critical }} équipement(s) en panne</strong>
+            <p style="margin: 4px 0 0 0; font-size: 12px;">
+                Vérifiez immédiatement l'onglet Alertes pour plus d'informations.
+            </p>
+        </div>
+        <a href="?action=alerts" class="unh-btn unh-btn-sm unh-btn-danger">Voir les alertes</a>
+    </div>
+    {% endif %}
+
+    {# Grille de statistiques #}
+    <div class="unh-stats-grid">
+        <div class="unh-stat-card">
+            <div class="unh-stat-label">Total d'équipements</div>
+            <div class="unh-stat-value">{{ stats.total }}</div>
+            <i class="fas fa-cube unh-stat-icon"></i>
+        </div>
+
+        <div class="unh-stat-card">
+            <div class="unh-stat-label">Opérationnels</div>
+            <div class="unh-stat-value" style="color: #28A745;">{{ stats.operational }}</div>
+            <i class="fas fa-check-circle unh-stat-icon" style="color: #28A745;"></i>
+        </div>
+
+        <div class="unh-stat-card">
+            <div class="unh-stat-label">En maintenance</div>
+            <div class="unh-stat-value" style="color: #FFD700;">{{ stats.maintenance }}</div>
+            <i class="fas fa-tools unh-stat-icon" style="color: #FFD700;"></i>
+        </div>
+
+        <div class="unh-stat-card">
+            <div class="unh-stat-label">Hors service</div>
+            <div class="unh-stat-value" style="color: #DC3545;">{{ stats.out_of_service }}</div>
+            <i class="fas fa-times-circle unh-stat-icon" style="color: #DC3545;"></i>
+        </div>
+
+        <div class="unh-stat-card alternate">
+            <div class="unh-stat-label">Alertes actives</div>
+            <div class="unh-stat-value">{{ stats.alerts }}</div>
+            <i class="fas fa-bell unh-stat-icon"></i>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        {# Section 1: Équipements en alerte #}
+        <div class="unh-assets-container">
+            <div class="unh-assets-header">
+                <h2 style="margin: 0; font-size: 16px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Équipements en alerte
+                </h2>
+            </div>
+
+            {% if alerted_equipments|length > 0 %}
+                <div style="max-height: 400px; overflow-y: auto;">
+                    {% for equipment in alerted_equipments %}
+                    <div class="unh-equipment-card">
+                        <div class="unh-equipment-card-header">
+                            <div class="unh-icon" style="background-color: rgba(220, 53, 69, 0.1); color: #DC3545;">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <h3>{{ equipment.name }}</h3>
+                            <span class="unh-badge unh-badge-alert-critical">ALERTE</span>
+                        </div>
+                        <div class="unh-equipment-card-body">
+                            <div class="unh-equipment-info-item">
+                                <span class="unh-equipment-info-label">Type</span>
+                                <span class="unh-equipment-info-value">{{ equipment.type_name }}</span>
+                            </div>
+                            <div class="unh-equipment-info-item">
+                                <span class="unh-equipment-info-label">État</span>
+                                <span class="unh-badge unh-badge-out-of-service">{{ equipment.status|upper }}</span>
+                            </div>
+                            <div class="unh-equipment-info-item">
+                                <span class="unh-equipment-info-label">Localisation</span>
+                                <span class="unh-equipment-info-value">
+                                    {{ equipment.building_name }}
+                                    {% if equipment.room_name %} - {{ equipment.room_name }}{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #E9ECEF;">
+                            <a href="?action=view&id={{ equipment.id }}" class="unh-btn unh-btn-sm unh-btn-primary">
+                                <i class="fas fa-eye"></i> Détails
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div style="text-align: center; padding: 20px; color: #6C757D;">
+                    <i class="fas fa-check-circle" style="font-size: 32px; color: #28A745; display: block; margin-bottom: 10px;"></i>
+                    <p>Aucune alerte en cours 🎉</p>
+                </div>
+            {% endif %}
+
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #E9ECEF;">
+                <a href="?action=alerts" class="unh-btn unh-btn-secondary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-bell"></i> Voir toutes les alertes
+                </a>
+            </div>
+        </div>
+
+        {# Section 2: Répartition par type #}
+        <div class="unh-assets-container">
+            <div class="unh-assets-header">
+                <h2 style="margin: 0; font-size: 16px;">
+                    <i class="fas fa-chart-pie"></i>
+                    Répartition par type
+                </h2>
+            </div>
+
+            {% if stats.by_type|length > 0 %}
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    {% for type_name, count in stats.by_type %}
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 13px;">{{ type_name }}</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="flex-grow: 1; background-color: #E9ECEF; border-radius: 3px; height: 8px; min-width: 50px;">
+                                <div style="background-color: #0BA0D0; height: 100%; border-radius: 3px; width: {{ (count / stats.total * 100)|round }}%;"></div>
+                            </div>
+                            <strong style="min-width: 30px; text-align: right;">{{ count }}</strong>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="text-align: center; color: #6C757D;">Aucune donnée disponible</p>
+            {% endif %}
+        </div>
+
+        {# Section 3: Répartition par bâtiment #}
+        <div class="unh-assets-container">
+            <div class="unh-assets-header">
+                <h2 style="margin: 0; font-size: 16px;">
+                    <i class="fas fa-building"></i>
+                    Répartition par bâtiment
+                </h2>
+            </div>
+
+            {% if stats.by_building|length > 0 %}
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    {% for building_name, count in stats.by_building %}
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 13px;">{{ building_name }}</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="flex-grow: 1; background-color: #E9ECEF; border-radius: 3px; height: 8px; min-width: 50px;">
+                                <div style="background-color: #3AA3E3; height: 100%; border-radius: 3px; width: {{ (count / stats.total * 100)|round }}%;"></div>
+                            </div>
+                            <strong style="min-width: 30px; text-align: right;">{{ count }}</strong>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="text-align: center; color: #6C757D;">Aucune donnée disponible</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Section 4: Actions rapides #}
+    <div class="unh-assets-container" style="margin-top: 20px;">
+        <div class="unh-assets-header">
+            <h2 style="margin: 0; font-size: 16px;">
+                <i class="fas fa-lightning-bolt"></i>
+                Actions rapides
+            </h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+            <a href="?action=list" class="unh-btn unh-btn-primary" style="justify-content: center; width: 100%;">
+                <i class="fas fa-list"></i>
+                Voir tous les équipements
+            </a>
+            <a href="?action=alerts" class="unh-btn unh-btn-danger" style="justify-content: center; width: 100%;">
+                <i class="fas fa-bell"></i>
+                Gérer les alertes
+            </a>
+            <a href="?action=statistics" class="unh-btn unh-btn-primary" style="justify-content: center; width: 100%;">
+                <i class="fas fa-chart-bar"></i>
+                Voir les statistiques
+            </a>
+            {% if is_admin %}
+            <button class="unh-btn unh-btn-secondary" style="justify-content: center; width: 100%;" onclick="alert('Fonctionnalité en développement')">
+                <i class="fas fa-plus-circle"></i>
+                Ajouter équipement
+            </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // Auto-refresh des données critiques toutes les 30 secondes
+    setInterval(function() {
+        location.reload();
+    }, 30000);
+</script>
+</body>
+</html>
