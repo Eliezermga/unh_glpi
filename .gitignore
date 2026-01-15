@@ -1,6 +1,8 @@
+config
 config/config_db.php
 config/glpicrypt.key
 
+files
 files/_cache/
 files/_cron/
 files/_dumps/
@@ -15,3 +17,11 @@ files/_rss/
 files/_sessions/
 files/_tmp/
 files/_uploads/
+
+# Scripts de migration temporaires (générés)
+execute_location_type_migration.sql
+verify_migration.php
+show_tables.php
+run_location_type_migration.php
+run_migration.bat
+check_database.php
