@@ -121,7 +121,7 @@ jobs:
     
     services:
       mysql:
-        image: mysql:${{ env.MYSQL_VERSION }}
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: glpi_test
           MYSQL_DATABASE: glpi_test
