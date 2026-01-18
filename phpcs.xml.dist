@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ruleset name="GLPI Coding Standard">
+    <description>GLPI coding standard based on PSR-12</description>
+
+    <!-- Include PSR-12 standard -->
+    <rule ref="PSR12"/>
+
+    <!-- Paths to check -->
+    <file>src</file>
+    <file>inc</file>
+    <file>front</file>
+
+    <!-- Exclude paths -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>tests/*</exclude-pattern>
+    <exclude-pattern>files/*</exclude-pattern>
+    <exclude-pattern>marketplace/*</exclude-pattern>
+    <exclude-pattern>plugins/*</exclude-pattern>
+    <exclude-pattern>lib/*</exclude-pattern>
+
+    <!-- Custom rules -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
+    </rule>
+
+    <!-- Ignore some legacy issues -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>inc/*</exclude-pattern>
+    </rule>
+</ruleset>

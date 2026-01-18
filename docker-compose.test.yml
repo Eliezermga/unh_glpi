@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql-test:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: glpi_test
+      MYSQL_DATABASE: glpi_test
+      MYSQL_USER: glpi_user
+      MYSQL_PASSWORD: glpi_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_test_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  php-test:
+    image: php:8.1-cli
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      mysql-test:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql-test
+      DB_PORT: 3306
+      DB_NAME: glpi_test
+      DB_USER: glpi_user
+      DB_PASS: glpi_pass
+    command: tail -f /dev/null
+
+volumes:
+  mysql_test_data:
