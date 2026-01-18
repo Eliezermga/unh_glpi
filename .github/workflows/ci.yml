@@ -164,7 +164,12 @@ jobs:
     - name: Run PHPUnit tests
       run: |
         if [ -f phpunit.xml ] || [ -f phpunit.xml.dist ]; then
-          ./vendor/bin/phpunit --coverage-clover=coverage.xml
+          if [ -f ./vendor/bin/phpunit ]; then
+            ./vendor/bin/phpunit --coverage-clover=coverage.xml
+          else
+            echo "PHPUnit not found in vendor/bin, using global phpunit"
+            phpunit --coverage-clover=coverage.xml
+          fi
         else
           echo "No PHPUnit configuration found, skipping tests"
         fi
