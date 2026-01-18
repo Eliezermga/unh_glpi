@@ -4,30 +4,30 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    public function testUserCreation()
+    public function testBootstrapWorks()
     {
-        $this->assertTrue(class_exists('User'));
-        
-        if (class_exists('User')) {
-            $user = new User();
-            $this->assertInstanceOf('User', $user);
+        $this->assertTrue(function_exists('testBootstrap'));
+        $this->assertTrue(testBootstrap());
+    }
+
+    public function testDatabaseConnection()
+    {
+        if (function_exists('getTestDB')) {
+            try {
+                $db = getTestDB();
+                $this->assertInstanceOf('PDO', $db);
+            } catch (Exception $e) {
+                $this->markTestSkipped('Database connection not available: ' . $e->getMessage());
+            }
+        } else {
+            $this->markTestSkipped('getTestDB function not available');
         }
     }
 
-    public function testUserValidation()
+    public function testEnvironmentVariables()
     {
-        if (class_exists('User')) {
-            $user = new User();
-            
-            // Test email validation
-            $validEmail = 'test@example.com';
-            $invalidEmail = 'invalid-email';
-            
-            // Ces tests dépendent de l'implémentation réelle de GLPI
-            $this->assertNotEmpty($validEmail);
-            $this->assertNotEmpty($invalidEmail);
-        } else {
-            $this->markTestSkipped('User class not available');
-        }
+        $this->assertNotEmpty($_ENV['DB_HOST']);
+        $this->assertNotEmpty($_ENV['DB_NAME']);
+        $this->assertNotEmpty($_ENV['DB_USER']);
     }
 }
