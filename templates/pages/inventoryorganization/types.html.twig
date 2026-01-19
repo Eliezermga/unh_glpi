@@ -1,0 +1,266 @@
+{#
+ # ---------------------------------------------------------------------
+ #
+ # GLPI - Gestionnaire Libre de Parc Informatique
+ #
+ # Organisation de l'Inventaire - Gestion des Types de Matériel
+ #
+ # ---------------------------------------------------------------------
+ #}
+
+<div class="container-fluid">
+    {# En-tête #}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">
+            <i class="ti ti-devices me-2"></i>
+            {{ title }}
+        </h1>
+        <a href="inventoryorganization.php" class="btn btn-outline-secondary">
+            <i class="ti ti-arrow-left me-1"></i>
+            Retour au Tableau de Bord
+        </a>
+    </div>
+
+    <div class="row">
+        {# Formulaire de Création de Type #}
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-plus me-2"></i>
+                        Créer un Nouveau Type
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if error_message %}
+                        <div class="alert alert-danger alert-dismissible mb-3" role="alert">
+                            {{ error_message }}
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></a>
+                        </div>
+                    {% endif %}
+                    
+                    {% if success %}
+                        <div class="alert alert-success alert-dismissible mb-3" role="alert">
+                            <i class="ti ti-check me-2"></i>
+                            Type créé avec succès !
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></a>
+                        </div>
+                    {% endif %}
+                    
+                    {% if can_create %}
+                        <form method="post" action="">
+                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="action" value="create_type">
+                            
+                            <div class="mb-3">
+                                <label class="form-label required">Catégorie</label>
+                                <select class="form-select" name="type_category" required>
+                                    {% for key, label in type_categories %}
+                                        <option value="{{ key }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label required">Nom du Type</label>
+                                <input type="text" class="form-control" name="type_name" required
+                                       placeholder="ex: PC de Bureau, Laptop, Imprimante Laser">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Commentaires</label>
+                                <textarea class="form-control" name="comment" rows="2"
+                                          placeholder="Description de ce type"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="ti ti-plus me-1"></i>
+                                Créer le Type
+                            </button>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-info mb-0">
+                            Vous n'avez pas la permission de créer des types.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {# Suggestions de Types Courants #}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-bulb me-2"></i>
+                        Types Courants
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">Cliquez pour remplir automatiquement :</p>
+                    <div class="mb-3">
+                        <strong class="text-muted small">Ordinateurs :</strong>
+                        <div class="btn-list mt-1">
+                            <button type="button" class="btn btn-outline-primary btn-sm" 
+                                    onclick="fillType('computer', 'PC de Bureau')">PC de Bureau</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" 
+                                    onclick="fillType('computer', 'Laptop')">Laptop</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" 
+                                    onclick="fillType('computer', 'Station de Travail')">Station de Travail</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" 
+                                    onclick="fillType('computer', 'Serveur')">Serveur</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <strong class="text-muted small">Moniteurs :</strong>
+                        <div class="btn-list mt-1">
+                            <button type="button" class="btn btn-outline-info btn-sm" 
+                                    onclick="fillType('monitor', 'LCD')">LCD</button>
+                            <button type="button" class="btn btn-outline-info btn-sm" 
+                                    onclick="fillType('monitor', 'LED')">LED</button>
+                            <button type="button" class="btn btn-outline-info btn-sm" 
+                                    onclick="fillType('monitor', 'Vidéoprojecteur')">Vidéoprojecteur</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <strong class="text-muted small">Imprimantes :</strong>
+                        <div class="btn-list mt-1">
+                            <button type="button" class="btn btn-outline-warning btn-sm" 
+                                    onclick="fillType('printer', 'Laser')">Laser</button>
+                            <button type="button" class="btn btn-outline-warning btn-sm" 
+                                    onclick="fillType('printer', 'Jet d\\'encre')">Jet d'encre</button>
+                            <button type="button" class="btn btn-outline-warning btn-sm" 
+                                    onclick="fillType('printer', 'Multifonction')">Multifonction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {# Affichage des Types Existants #}
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-list me-2"></i>
+                        Types Existants
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {# Types d'Ordinateurs #}
+                        <div class="col-md-6 mb-4">
+                            <h4 class="mb-3">
+                                <i class="ti ti-device-desktop text-primary me-2"></i>
+                                Types d'Ordinateurs
+                            </h4>
+                            {% if types.computer is defined and types.computer|length > 0 %}
+                                <div class="list-group list-group-flush">
+                                    {% for type in types.computer %}
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="{{ type.icon }} me-2"></i>
+                                                {{ type.name }}
+                                                <span class="badge bg-secondary ms-2">{{ type.count }}</span>
+                                            </div>
+                                            {% if can_create and type.count == 0 %}
+                                                <form method="post" action="" class="d-inline"
+                                                      onsubmit="return confirm('Supprimer ce type ?');">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="action" value="delete_type">
+                                                    <input type="hidden" name="type_category" value="computer">
+                                                    <input type="hidden" name="type_id" value="{{ type.id }}">
+                                                    <button type="submit" class="btn btn-ghost-danger btn-sm">
+                                                        <i class="ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">Aucun type d'ordinateur défini</p>
+                            {% endif %}
+                        </div>
+                        
+                        {# Types de Moniteurs #}
+                        <div class="col-md-6 mb-4">
+                            <h4 class="mb-3">
+                                <i class="ti ti-device-tv text-info me-2"></i>
+                                Types de Moniteurs
+                            </h4>
+                            {% if types.monitor is defined and types.monitor|length > 0 %}
+                                <div class="list-group list-group-flush">
+                                    {% for type in types.monitor %}
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="{{ type.icon }} me-2"></i>
+                                                {{ type.name }}
+                                                <span class="badge bg-secondary ms-2">{{ type.count }}</span>
+                                            </div>
+                                            {% if can_create and type.count == 0 %}
+                                                <form method="post" action="" class="d-inline"
+                                                      onsubmit="return confirm('Supprimer ce type ?');">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="action" value="delete_type">
+                                                    <input type="hidden" name="type_category" value="monitor">
+                                                    <input type="hidden" name="type_id" value="{{ type.id }}">
+                                                    <button type="submit" class="btn btn-ghost-danger btn-sm">
+                                                        <i class="ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">Aucun type de moniteur défini</p>
+                            {% endif %}
+                        </div>
+                        
+                        {# Types d'Imprimantes #}
+                        <div class="col-md-6 mb-4">
+                            <h4 class="mb-3">
+                                <i class="ti ti-printer text-warning me-2"></i>
+                                Types d'Imprimantes
+                            </h4>
+                            {% if types.printer is defined and types.printer|length > 0 %}
+                                <div class="list-group list-group-flush">
+                                    {% for type in types.printer %}
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="{{ type.icon }} me-2"></i>
+                                                {{ type.name }}
+                                                <span class="badge bg-secondary ms-2">{{ type.count }}</span>
+                                            </div>
+                                            {% if can_create and type.count == 0 %}
+                                                <form method="post" action="" class="d-inline"
+                                                      onsubmit="return confirm('Supprimer ce type ?');">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="action" value="delete_type">
+                                                    <input type="hidden" name="type_category" value="printer">
+                                                    <input type="hidden" name="type_id" value="{{ type.id }}">
+                                                    <button type="submit" class="btn btn-ghost-danger btn-sm">
+                                                        <i class="ti ti-trash"></i>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">Aucun type d'imprimante défini</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function fillType(category, name) {
+        document.querySelector('select[name="type_category"]').value = category;
+        document.querySelector('input[name="type_name"]').value = name;
+        document.querySelector('input[name="type_name"]').focus();
+    }
+</script>
