@@ -7,21 +7,8 @@ if (!defined('GLPI_ROOT')) {
 
 /**
  * Gestion du menu principal du plugin UNH Assets.
- *
- * Cette classe étend CommonGLPI afin de fournir à GLPI les informations
- * nécessaires pour construire le menu (nom, droits et contenu). Elle ne doit
- * contenir que la définition du contenu (sous‑menus et liens) ; les éléments
- * comme l'icône, la page par défaut ou la liste des types sont définis
- * dans setup.php via le hook `redefine_menus` et via `defineMenu()`.
  */
 class PluginUnhassetsMenu extends CommonGLPI {
-
-    /**
-     * Nom du droit utilisé pour afficher ce menu. On utilise le droit spécifique
-     * du plugin afin que seuls les profils disposant des droits "UNH Assets"
-     * puissent accéder au menu. Ceci est cohérent avec les droits déclarés
-     * lors de l'installation du plugin.
-     */
     static $rightname = 'plugin_unhassets';
 
     static function getMenuName() {
@@ -82,10 +69,6 @@ class PluginUnhassetsMenu extends CommonGLPI {
             ]
         ];
 
-        // === Éléments du parc standard (inventaire GLPI) ===
-        // Pour les objets natifs GLPI, le plus fiable est de réutiliser leur
-        // getMenuContent() : cela garantit la même structure que le menu Parc
-        // d'origine (dont l'icône/bouton "+" si l'utilisateur a le droit CREATE).
         $native_types = [
             'computer'          => 'Computer',
             'monitor'           => 'Monitor',

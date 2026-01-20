@@ -36,14 +36,6 @@ function plugin_init_unhassets() {
             }
             
             $PLUGIN_HOOKS['config_page']['unhassets'] = 'front/config.form.php';
-            
-            /*
-             * Nous souhaitons que le menu « UNH Assets » remplace entièrement
-             * le menu « Parc/Assets ». Pour cela, nous utilisons le hook
-             * « redefine_menus » afin de supprimer l’entrée « assets » du
-             * menu et d’ajouter une entrée « unhassets » contenant nos
-             * sous‑menus. Le code du hook est défini plus bas dans ce fichier.
-             */
             $PLUGIN_HOOKS['redefine_menus']['unhassets'] = 'plugin_unhassets_redefine_menus';
         }
     }
@@ -77,19 +69,9 @@ function plugin_unhassets_check_config() {
  * Fonction pour redéfinir les menus et masquer Assets
  */
 function plugin_unhassets_redefine_menus($menus) {
-    // Masquer le menu "Assets" (Parc) si présent. Le plugin offre sa propre vue du parc,
-    // il n'est donc pas nécessaire de conserver l'entrée native. On supprime
-    // l'entrée sans affecter les autres menus.
     if (isset($menus['assets'])) {
         unset($menus['assets']);
     }
-
-    // Ajouter notre menu UNH Assets.
-    // IMPORTANT (GLPI 10.0.x) : la clé 'content' attend directement la liste des
-    // entrées de sous‑menu (title/page/links). Notre méthode getMenuContent()
-    // retourne une structure plus large (avec 'options'). On injecte donc
-    // uniquement $menucontent['options'] pour que le menu latéral affiche bien
-    // les sous‑menus.
     if (class_exists('PluginUnhassetsMenu')) {
         $menucontent = PluginUnhassetsMenu::getMenuContent();
         $menus['unhassets'] = [
