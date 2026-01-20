@@ -2,7 +2,7 @@ name: GLPI CD Pipeline
 
 on:
   workflow_run:
-    workflows: ["GLPI CI Pipeline"]
+    workflows: ["GLPI_CI"]
     types: [completed]
     branches: ["main", "CI/CD_DEP"]
 

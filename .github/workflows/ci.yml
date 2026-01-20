@@ -1,4 +1,4 @@
-name: GLPI CI Pipeline
+name: GLPI_CI
 
 on:
   push:
