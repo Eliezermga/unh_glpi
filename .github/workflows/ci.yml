@@ -195,6 +195,10 @@ jobs:
     needs: [tests, code-quality]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/CI/CD_DEP')
     
+    permissions:
+      contents: read
+      packages: write
+    
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
     
@@ -216,7 +220,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/${{ github.repository }}
+        images: ghcr.io/${{ github.repository_owner }}/unh-glpi
         tags: |
           type=raw,value=ci-cd-dep-{{sha}}
 
@@ -253,7 +257,7 @@ jobs:
     steps:
     - name: Test Docker image
       run: |
-        IMAGE="ghcr.io/${{ github.repository }}"
+        IMAGE="ghcr.io/${{ github.repository_owner }}/unh-glpi"
         TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
         
         # Pull l'image buildée
