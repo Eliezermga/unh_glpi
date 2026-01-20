@@ -1,92 +1,54 @@
-# Multi-stage build pour optimiser la taille
-FROM php:8.1-apache-slim as base
+FROM php:8.1-apache
 
-# Installation des dépendances système minimales
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev \
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libzip-dev \
     libicu-dev \
     libxml2-dev \
     libcurl4-openssl-dev \
+    libldap2-dev \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Installation des extensions PHP requises
+# Configure and install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
-    mysqli \
-    pdo_mysql \
-    gd \
-    zip \
-    intl \
-    curl \
-    xml \
-    dom \
-    fileinfo \
-    session \
-    simplexml
+        gd \
+        mysqli \
+        pdo_mysql \
+        zip \
+        intl \
+        curl \
+        dom \
+        fileinfo \
+        simplexml \
+        session \
+        json
 
-# Configuration Apache
-RUN a2enmod rewrite headers \
-    && sed -i 's/80/8080/' /etc/apache2/sites-available/000-default.conf \
-    && sed -i 's/80/8080/' /etc/apache2/ports.conf
+# Enable Apache modules
+RUN a2enmod rewrite
 
-# Configuration PHP pour production
-RUN { \
-    echo 'memory_limit = 256M'; \
-    echo 'upload_max_filesize = 20M'; \
-    echo 'post_max_size = 20M'; \
-    echo 'max_execution_time = 300'; \
-    echo 'session.cookie_httponly = 1'; \
-    echo 'session.cookie_secure = 1'; \
-    echo 'expose_php = Off'; \
-} > /usr/local/etc/php/conf.d/glpi.ini
+# Set working directory
+WORKDIR /var/www/html
 
-# Stage de build
-FROM base as builder
-
-WORKDIR /tmp/glpi
+# Copy application files
 COPY . .
 
-# Nettoyage des fichiers de développement
-RUN rm -rf \
-    .git* \
-    tests/ \
-    tools/phpunit/ \
-    *.md \
-    composer.* \
-    phpunit.xml* \
-    phpstan.* \
-    .php* \
-    node_modules/
+# Install Composer dependencies
+RUN if [ -f composer.json ]; then \
+        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        && composer install --no-dev --optimize-autoloader; \
+    fi
 
-# Stage final
-FROM base as production
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
-# Création de l'utilisateur non-root
-RUN groupadd -r glpi && useradd -r -g glpi -s /bin/false glpi
+# Expose port
+EXPOSE 80
 
-# Copie de l'application
-COPY --from=builder --chown=glpi:glpi /tmp/glpi /var/www/html/
-
-# Configuration des permissions
-RUN chown -R glpi:glpi /var/www/html \
-    && chmod -R 755 /var/www/html \
-    && chmod -R 775 /var/www/html/files /var/www/html/config
-
-# Script d'entrée
-COPY --chown=glpi:glpi docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
-# Configuration Apache pour utilisateur non-root
-RUN sed -i 's/Listen 8080/Listen 8080/' /etc/apache2/ports.conf \
-    && echo "User glpi" >> /etc/apache2/apache2.conf \
-    && echo "Group glpi" >> /etc/apache2/apache2.conf
-
-EXPOSE 8080
-
-USER glpi
-
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Start Apache
 CMD ["apache2-foreground"]

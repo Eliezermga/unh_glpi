@@ -1,19 +1,17 @@
-name: GLPI CD Pipeline
+name: CD
 
 on:
-  workflow_run:
-    workflows: ["GLPI_CI"]
-    types: [completed]
+  push:
+    branches: ["main", "CI/CD_DEP"]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
+  deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
     - name: Checkout code
