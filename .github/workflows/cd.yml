@@ -3,8 +3,7 @@ name: GLPI CD Pipeline
 on:
   workflow_run:
     workflows: ["GLPI_CI"]
-    types: 
-      - completed
+    types: [completed]
     branches: ["main", "CI/CD_DEP"]
 
 env:
@@ -37,9 +36,7 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
-          type=ref,event=branch
-          type=sha,prefix={{branch}}-
-          type=raw,value=stable,enable={{is_default_branch}}
+          type=raw,value=ci-cd-dep-{{sha}}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -62,14 +59,14 @@ jobs:
         script: |
           # Variables
           IMAGE="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-          TAG="${{ fromJSON(steps.meta.outputs.json).tags[0] }}"
+          TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
           CONTAINER_NAME="glpi-app"
           
           # Login to registry
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
           
           # Pull new image
-          docker pull ${IMAGE}:${TAG##*:}
+          docker pull ${IMAGE}:${TAG}
           
           # Stop and remove old container
           docker stop ${CONTAINER_NAME} 2>/dev/null || true
@@ -86,7 +83,7 @@ jobs:
             -e DB_NAME="glpi" \
             -e DB_USER="glpi" \
             -e DB_PASS="glpi123" \
-            ${IMAGE}:${TAG##*:}
+            ${IMAGE}:${TAG}
           
           # Cleanup old images
           docker image prune -f
