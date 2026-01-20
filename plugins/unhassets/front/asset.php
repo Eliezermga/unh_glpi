@@ -13,8 +13,8 @@ if (!$canview) {
 Html::header(
     __('Parc informatique', 'unhassets'),
     $_SERVER['PHP_SELF'],
-    "assets",
-    "pluginunhassetsmenu",
+    "unhassets",
+    "unhassets",
     "asset"
 );
 

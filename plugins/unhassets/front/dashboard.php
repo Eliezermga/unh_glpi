@@ -7,8 +7,8 @@ Session::checkRight("plugin_unhassets", READ);
 Html::header(
     __('Tableau de bord', 'unhassets'),
     $_SERVER['PHP_SELF'],
-    "assets",
-    "pluginunhassetsmenu",
+    "unhassets",
+    "unhassets",
     "dashboard"
 );
 

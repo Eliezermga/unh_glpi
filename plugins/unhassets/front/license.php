@@ -7,8 +7,8 @@ Session::checkRight("plugin_unhassets", READ);
 Html::header(
     __('Licences logicielles', 'unhassets'),
     $_SERVER['PHP_SELF'],
-    "assets",
-    "pluginunhassetsmenu",
+    "unhassets",
+    "unhassets",
     "license"
 );
 

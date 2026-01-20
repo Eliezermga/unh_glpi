@@ -2,7 +2,13 @@
 
 include ('../../../inc/includes.php');
 
-Session::checkRight("plugin_unhassets", READ);
+// Sur un formulaire, GLPI utilise généralement id=-1 pour un nouvel objet.
+// On exige CREATE dans ce cas (sinon le lien "Ajouter" mène à une erreur de droits).
+if ((isset($_GET['id']) && (int)$_GET['id'] === -1) || isset($_POST['add'])) {
+    Session::checkRight("plugin_unhassets", CREATE);
+} else {
+    Session::checkRight("plugin_unhassets", READ);
+}
 
 $asset = new PluginUnhassetsAsset();
 
@@ -40,8 +46,8 @@ if (isset($_POST['add'])) {
     Html::header(
         __('Parc informatique', 'unhassets'),
         $_SERVER['PHP_SELF'],
-        "assets",
-        "pluginunhassetsmenu",
+        "unhassets",
+        "unhassets",
         "asset"
     );
     

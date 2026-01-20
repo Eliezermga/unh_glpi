@@ -2,7 +2,12 @@
 
 include ('../../../inc/includes.php');
 
-Session::checkRight("plugin_unhassets", READ);
+// CREATE requis si on ouvre un formulaire "nouveau" (id=-1)
+if ((isset($_GET['id']) && (int)$_GET['id'] === -1) || isset($_POST['add'])) {
+    Session::checkRight("plugin_unhassets", CREATE);
+} else {
+    Session::checkRight("plugin_unhassets", READ);
+}
 
 $license = new PluginUnhassetsLicense();
 
@@ -40,8 +45,8 @@ if (isset($_POST['add'])) {
     Html::header(
         __('Licences logicielles', 'unhassets'),
         $_SERVER['PHP_SELF'],
-        "assets",
-        "pluginunhassetsmenu",
+        "unhassets",
+        "unhassets",
         "license"
     );
     
