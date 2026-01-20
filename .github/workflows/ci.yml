@@ -220,7 +220,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/${{ github.repository_owner }}/unh-glpi
+        images: ghcr.io/eliezermga/unh-glpi
         tags: |
           type=raw,value=ci-cd-dep-{{sha}}
 
@@ -257,7 +257,7 @@ jobs:
     steps:
     - name: Test Docker image
       run: |
-        IMAGE="ghcr.io/${{ github.repository_owner }}/unh-glpi"
+        IMAGE="ghcr.io/eliezermga/unh-glpi"
         TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
         
         # Pull l'image buildée
