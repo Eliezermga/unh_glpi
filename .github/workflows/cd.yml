@@ -3,7 +3,8 @@ name: GLPI CD Pipeline
 on:
   workflow_run:
     workflows: ["GLPI_CI"]
-    types: [completed]
+    types: 
+      - completed
     branches: ["main", "CI/CD_DEP"]
 
 env:
