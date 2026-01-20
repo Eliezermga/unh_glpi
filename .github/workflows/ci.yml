@@ -2,7 +2,7 @@ name: GLPI CI Pipeline
 
 on:
   push:
-    branches: [ "main", "master", "CI/CD" ]
+    branches: [ "main", "CI/CD_DEP" ]
   pull_request:
     branches: [ "main", "master" ]
 
