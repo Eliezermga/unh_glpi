@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Tests
+tests/
+phpunit.xml*
+.phpunit.result.cache
+
+# Development
+.env.local
+.env.test
+composer.lock
+vendor/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Cache
+cache/
+tmp/
+
+# OS
+.DS_Store
+Thumbs.db
