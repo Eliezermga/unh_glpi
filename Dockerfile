@@ -9,40 +9,51 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libxml2-dev \
     libcurl4-openssl-dev \
-    libldap2-dev \
+    libonig-dev \
     unzip \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
-# Configure and install PHP extensions (séparément pour éviter les conflits)
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install mysqli pdo_mysql
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install intl
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
+    zip \
+    intl \
+    mysqli \
+    pdo_mysql \
+    curl \
+    mbstring \
+    xml \
+    dom \
+    fileinfo \
+    json \
+    session \
+    simplexml
 
-# Extensions déjà incluses dans PHP 8.1 (pas besoin d'installer)
-# curl, dom, fileinfo, simplexml, session, json sont built-in
-
-# Enable Apache modules
-RUN a2enmod rewrite
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy application files
-COPY . .
+# Copy composer files first for better caching
+COPY composer.json composer.lock ./
 
-# Install Composer dependencies
-RUN if [ -f composer.json ]; then \
-        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-        && composer install --no-dev --optimize-autoloader; \
-    fi
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+# Copy application code
+COPY . .
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Expose port
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Expose port 80
 EXPOSE 80
 
 # Start Apache

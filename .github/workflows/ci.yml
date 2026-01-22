@@ -327,6 +327,9 @@ jobs:
             -e DB_PASS="glpi_dev123" \
             ${IMAGE}:${TAG}
           
+          # Ensure dependencies are installed
+          docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
+          
           sleep 10
           if ! docker ps | grep -q ${CONTAINER_NAME}; then
             echo "❌ Dev deployment failed"
@@ -371,6 +374,9 @@ jobs:
             -e DB_USER="glpi_staging" \
             -e DB_PASS="glpi_staging123" \
             ${IMAGE}:${TAG}
+          
+          # Ensure dependencies are installed
+          docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           
           sleep 10
           if ! docker ps | grep -q ${CONTAINER_NAME}; then
@@ -420,6 +426,9 @@ jobs:
             -e DB_USER="glpi" \
             -e DB_PASS="glpi123" \
             ${IMAGE}:${TAG}
+          
+          # Ensure dependencies are installed
+          docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           
           sleep 15
           if ! docker ps | grep -q ${CONTAINER_NAME}; then
