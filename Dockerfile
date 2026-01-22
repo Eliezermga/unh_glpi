@@ -22,14 +22,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     intl \
     mysqli \
     pdo_mysql \
-    curl \
-    mbstring \
-    xml \
-    dom \
-    fileinfo \
-    json \
-    session \
-    simplexml
+    mbstring
 
 # Set working directory
 WORKDIR /var/www/html
