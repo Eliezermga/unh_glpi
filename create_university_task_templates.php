@@ -15,8 +15,8 @@ if (!isCommandLine()) {
 
 global $DB;
 
-echo isCommandLine() ? '' : '<html><head><meta charset="UTF-8"><title>Création des gabarits de tâches universitaires</title></head><body>';
-echo isCommandLine() ? '' : '<h1>Création des gabarits de tâches pour contexte universitaire</h1>';
+echo isCommandLine() ? '' : '<html><head><meta charset="UTF-8"><title>' . __('Creation of university task templates') . '</title></head><body>';
+echo isCommandLine() ? '' : '<h1>' . __('Creation of task templates for university context') . '</h1>';
 echo isCommandLine() ? '' : '<pre>';
 
 // Fonction pour récupérer l'ID d'une catégorie de tâche par son nom

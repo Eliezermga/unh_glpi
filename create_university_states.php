@@ -15,8 +15,8 @@ if (!isCommandLine()) {
 
 global $DB;
 
-echo isCommandLine() ? '' : '<html><head><meta charset="UTF-8"><title>Création des statuts universitaires</title></head><body>';
-echo isCommandLine() ? '' : '<h1>Création des statuts par défaut pour contexte universitaire</h1>';
+echo isCommandLine() ? '' : '<html><head><meta charset="UTF-8"><title>' . __('Creation of university states') . '</title></head><body>';
+echo isCommandLine() ? '' : '<h1>' . __('Creation of default states for university context') . '</h1>';
 echo isCommandLine() ? '' : '<pre>';
 
 // Définition des statuts adaptés à un contexte universitaire

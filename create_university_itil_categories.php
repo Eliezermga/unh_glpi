@@ -15,8 +15,8 @@ if (!isCommandLine()) {
 
 global $DB;
 
-echo isCommandLine() ? '' : '<html><head><meta charset="UTF-8"><title>Création des catégories ITIL universitaires</title></head><body>';
-echo isCommandLine() ? '' : '<h1>Création des catégories ITIL pour contexte universitaire</h1>';
+echo isCommandLine() ? '' : '<html><head><meta charset="UTF-8"><title>' . __('Creation of university ITIL categories') . '</title></head><body>';
+echo isCommandLine() ? '' : '<h1>' . __('Creation of ITIL categories for university context') . '</h1>';
 echo isCommandLine() ? '' : '<pre>';
 
 // Structure hiérarchique des catégories ITIL pour une université
