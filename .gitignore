@@ -1,7 +1,20 @@
 config/config_db.php
 config/glpicrypt.key
 
-
+files/_cache/
+files/_cron/
+files/_dumps/
+files/_graphs/
+files/_inventories/
+files/_locales/
+files/_lock/
+files/_log/
+files/_pictures/
+files/_plugins/
+files/_rss/
+files/_sessions/
+files/_tmp/
+files/_uploads/
 front/dashboard_export.php
 front/dashboard_import.php
 src/Dashboard/DashboardImporter.php

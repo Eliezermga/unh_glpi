@@ -35,9 +35,24 @@ RUN if [ -f "bin/console" ]; then \
         php bin/console dependencies install --no-interaction || true; \
     fi
 
+# Create GLPI required directories
+RUN mkdir -p /var/www/html/files/_cache \
+    && mkdir -p /var/www/html/files/_cron \
+    && mkdir -p /var/www/html/files/_dumps \
+    && mkdir -p /var/www/html/files/_graphs \
+    && mkdir -p /var/www/html/files/_lock \
+    && mkdir -p /var/www/html/files/_pictures \
+    && mkdir -p /var/www/html/files/_plugins \
+    && mkdir -p /var/www/html/files/_rss \
+    && mkdir -p /var/www/html/files/_sessions \
+    && mkdir -p /var/www/html/files/_tmp \
+    && mkdir -p /var/www/html/files/_uploads
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 755 /var/www/html \
+    && chmod -R 777 /var/www/html/files \
+    && chmod -R 777 /var/www/html/config
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
