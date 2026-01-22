@@ -31,20 +31,16 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     session \
     simplexml
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer files first for better caching
-COPY composer.json composer.lock ./
-
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-scripts
-
 # Copy application code
 COPY . .
+
+# Install GLPI dependencies using its own system
+RUN if [ -f "bin/console" ]; then \
+        php bin/console dependencies install --no-interaction || true; \
+    fi
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
