@@ -300,6 +300,8 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
         script: |
           IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
           TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
@@ -347,6 +349,8 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
         script: |
           IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
           TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
@@ -394,6 +398,8 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
         script: |
           IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
           TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
