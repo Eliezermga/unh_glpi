@@ -16,8 +16,6 @@ phpunit.xml*
 # Development
 .env.local
 .env.test
-composer.lock
-vendor/
 
 # IDE
 .vscode/
