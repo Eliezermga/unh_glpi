@@ -220,7 +220,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/eliezermga/unh-glpi
+        images: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
         tags: |
           type=raw,value=ci-cd-dep-{{sha}}
 
@@ -257,14 +257,12 @@ jobs:
     steps:
     - name: Test Docker image
       run: |
-        IMAGE="ghcr.io/eliezermga/unh-glpi"
+        IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
         TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
         
-        # Pull l'image buildée
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         docker pull ${IMAGE}:${TAG}
         
-        # Test de démarrage du container
         docker run -d --name glpi-test \
           -p 8080:80 \
           -e DB_HOST="host.docker.internal" \
@@ -273,19 +271,16 @@ jobs:
           -e DB_PASS="glpi_pass" \
           ${IMAGE}:${TAG}
         
-        # Attendre que l'app démarre
         sleep 30
         
-        # Test de santé HTTP
         if curl -f http://localhost:8080 > /dev/null 2>&1; then
-          echo "✅ Application accessible"
+          echo "Application accessible"
         else
-          echo "❌ Application non accessible"
+          echo "Application non accessible"
           docker logs glpi-test
           exit 1
         fi
         
-        # Nettoyage
         docker stop glpi-test
         docker rm glpi-test
 
@@ -301,12 +296,14 @@ jobs:
     - name: Deploy to dev server
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: 91.134.181.62
-        username: root
-        password: '@Ntumba26.'
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
         script: |
-          IMAGE="ghcr.io/eliezermga/unh-glpi"
+          IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
           TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
           CONTAINER_NAME="glpi-dev"
           
@@ -321,21 +318,20 @@ jobs:
             -p 127.0.0.1:8081:80 \
             -v glpi-dev-data:/var/www/html/files \
             -v glpi-dev-config:/var/www/html/config \
-            -e DB_HOST="localhost" \
-            -e DB_NAME="glpi_dev" \
-            -e DB_USER="glpi_dev" \
-            -e DB_PASS="glpi_dev123" \
+            -e DB_HOST="${{ secrets.DEV_DB_HOST }}" \
+            -e DB_NAME="${{ secrets.DEV_DB_NAME }}" \
+            -e DB_USER="${{ secrets.DEV_DB_USER }}" \
+            -e DB_PASS="${{ secrets.DEV_DB_PASSWORD }}" \
             ${IMAGE}:${TAG}
           
-          # Ensure dependencies are installed
           docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           
           sleep 10
           if ! docker ps | grep -q ${CONTAINER_NAME}; then
-            echo "❌ Dev deployment failed"
+            echo "Dev deployment failed"
             exit 1
           fi
-          echo "✅ Dev deployment successful"
+          echo "Dev deployment successful"
 
   # Job 8: Deploy Staging (parallèle)
   deploy-staging:
@@ -349,12 +345,14 @@ jobs:
     - name: Deploy to staging server
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: 91.134.181.62
-        username: root
-        password: '@Ntumba26.'
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
         script: |
-          IMAGE="ghcr.io/eliezermga/unh-glpi"
+          IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
           TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
           CONTAINER_NAME="glpi-staging"
           
@@ -369,21 +367,20 @@ jobs:
             -p 127.0.0.1:8082:80 \
             -v glpi-staging-data:/var/www/html/files \
             -v glpi-staging-config:/var/www/html/config \
-            -e DB_HOST="localhost" \
-            -e DB_NAME="glpi_staging" \
-            -e DB_USER="glpi_staging" \
-            -e DB_PASS="glpi_staging123" \
+            -e DB_HOST="${{ secrets.STAGING_DB_HOST }}" \
+            -e DB_NAME="${{ secrets.STAGING_DB_NAME }}" \
+            -e DB_USER="${{ secrets.STAGING_DB_USER }}" \
+            -e DB_PASS="${{ secrets.STAGING_DB_PASSWORD }}" \
             ${IMAGE}:${TAG}
           
-          # Ensure dependencies are installed
           docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           
           sleep 10
           if ! docker ps | grep -q ${CONTAINER_NAME}; then
-            echo "❌ Staging deployment failed"
+            echo "Staging deployment failed"
             exit 1
           fi
-          echo "✅ Staging deployment successful"
+          echo "Staging deployment successful"
 
   # Job 9: Deploy Production (après validation staging)
   deploy-prod:
@@ -397,20 +394,21 @@ jobs:
     - name: Deploy to production server
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: 91.134.181.62
-        username: root
-        password: '@Ntumba26.'
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
         port: 22
+        timeout: 30s
+        command_timeout: 10m
         script: |
-          IMAGE="ghcr.io/eliezermga/unh-glpi"
+          IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
           TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
           CONTAINER_NAME="glpi-prod"
           
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker pull ${IMAGE}:${TAG}
           
-          # Backup avant déploiement
-          docker exec ${CONTAINER_NAME} mysqldump -h localhost -u glpi glpi > /backup/glpi_backup_$(date +%Y%m%d_%H%M%S).sql 2>/dev/null || true
+          docker exec ${CONTAINER_NAME} mysqldump -h ${{ secrets.PROD_DB_HOST }} -u ${{ secrets.PROD_DB_USER }} ${{ secrets.PROD_DB_NAME }} > /backup/glpi_backup_$(date +%Y%m%d_%H%M%S).sql 2>/dev/null || true
           
           docker stop ${CONTAINER_NAME} 2>/dev/null || true
           docker rm ${CONTAINER_NAME} 2>/dev/null || true
@@ -421,18 +419,17 @@ jobs:
             -p 127.0.0.1:8080:80 \
             -v glpi-prod-data:/var/www/html/files \
             -v glpi-prod-config:/var/www/html/config \
-            -e DB_HOST="localhost" \
-            -e DB_NAME="glpi" \
-            -e DB_USER="glpi" \
-            -e DB_PASS="glpi123" \
+            -e DB_HOST="${{ secrets.PROD_DB_HOST }}" \
+            -e DB_NAME="${{ secrets.PROD_DB_NAME }}" \
+            -e DB_USER="${{ secrets.PROD_DB_USER }}" \
+            -e DB_PASS="${{ secrets.PROD_DB_PASSWORD }}" \
             ${IMAGE}:${TAG}
           
-          # Ensure dependencies are installed
           docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           
           sleep 15
           if ! docker ps | grep -q ${CONTAINER_NAME}; then
-            echo "❌ Production deployment failed"
+            echo "Production deployment failed"
             exit 1
           fi
-          echo "✅ Production deployment successful"
+          echo "Production deployment successful"
