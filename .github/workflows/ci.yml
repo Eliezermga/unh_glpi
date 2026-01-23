@@ -265,8 +265,7 @@ jobs:
         
         docker run -d --name glpi-test \
           -p 8080:80 \
-          --network host \
-          -e DB_HOST="127.0.0.1" \
+          -e DB_HOST="172.17.0.1" \
           -e DB_NAME="glpi_integration" \
           -e DB_USER="glpi_user" \
           -e DB_PASSWORD="glpi_pass" \
