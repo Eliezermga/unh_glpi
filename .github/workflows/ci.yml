@@ -193,7 +193,7 @@ jobs:
     name: Build Docker Image
     runs-on: ubuntu-latest
     needs: [tests, code-quality]
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/CI/CD_DEP')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/CI/cdmysql')
     
     permissions:
       contents: read
@@ -222,7 +222,7 @@ jobs:
       with:
         images: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
         tags: |
-          type=raw,value=ci-cd-dep-{{sha}}
+          type=raw,value=ci-cdmysql-{{sha}}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -240,7 +240,7 @@ jobs:
     name: Integration Tests
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/CI/CD_DEP')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/CI/cdmysql')
     
     services:
       mysql:
@@ -258,17 +258,18 @@ jobs:
     - name: Test Docker image
       run: |
         IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
-        TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
+        TAG="ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
         
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         docker pull ${IMAGE}:${TAG}
         
         docker run -d --name glpi-test \
           -p 8080:80 \
-          -e DB_HOST="host.docker.internal" \
+          --network host \
+          -e DB_HOST="127.0.0.1" \
           -e DB_NAME="glpi_integration" \
           -e DB_USER="glpi_user" \
-          -e DB_PASS="glpi_pass" \
+          -e DB_PASSWORD="glpi_pass" \
           ${IMAGE}:${TAG}
         
         sleep 30
@@ -289,7 +290,7 @@ jobs:
     name: Deploy to Development
     runs-on: ubuntu-latest
     needs: [build, integration-tests]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/CI/CD_DEP'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/CI/cdmysql'
     environment: development
     
     steps:
