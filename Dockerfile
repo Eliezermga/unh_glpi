@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-# Install system dependencies
+# Dépendances système
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
+# Extensions PHP requises par GLPI
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
+    && docker-php-ext-install \
     gd \
     zip \
     intl \
@@ -25,45 +25,27 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     pdo_mysql \
     mbstring
 
-# Set working directory
+# Activation d’Apache
+RUN a2enmod rewrite
+
+# Dossier de travail
 WORKDIR /var/www/html
 
-# Copy application code
+# Copie du code GLPI
 COPY . .
 
-# Copy and set permissions for init script
+# Script d'initialisation
 COPY init.sh /usr/local/bin/init.sh
 RUN chmod +x /usr/local/bin/init.sh
 
-# Install GLPI dependencies using its own system
-RUN if [ -f "bin/console" ]; then \
-        php bin/console dependencies install --no-interaction || true; \
-    fi
+# Création des dossiers requis par GLPI
+RUN mkdir -p /var/www/html/files/{_cache,_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads}
 
-# Create GLPI required directories
-RUN mkdir -p /var/www/html/files/_cache \
-    && mkdir -p /var/www/html/files/_cron \
-    && mkdir -p /var/www/html/files/_dumps \
-    && mkdir -p /var/www/html/files/_graphs \
-    && mkdir -p /var/www/html/files/_lock \
-    && mkdir -p /var/www/html/files/_pictures \
-    && mkdir -p /var/www/html/files/_plugins \
-    && mkdir -p /var/www/html/files/_rss \
-    && mkdir -p /var/www/html/files/_sessions \
-    && mkdir -p /var/www/html/files/_tmp \
-    && mkdir -p /var/www/html/files/_uploads
-
-# Set proper permissions
+# Permissions correctes
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
-    && chmod -R 777 /var/www/html/files \
-    && chmod -R 777 /var/www/html/config
+    && chmod -R 775 /var/www/html/files /var/www/html/config
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Expose port 80
 EXPOSE 80
 
-# Start with init script
 CMD ["/usr/local/bin/init.sh"]
