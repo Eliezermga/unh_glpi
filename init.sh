@@ -1,17 +1,18 @@
 #!/bin/bash
 
-# Attendre que MySQL soit prêt
+# Attendre que MySQL soit prêt (avec timeout)
 echo "Attente de MySQL..."
-while ! mysqladmin ping -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" --silent; do
-    sleep 1
+for i in {1..30}; do
+    if mysqladmin ping -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" --silent 2>/dev/null; then
+        echo "MySQL est prêt!"
+        break
+    fi
+    if [ $i -eq 30 ]; then
+        echo "Timeout MySQL - démarrage d'Apache sans DB"
+        break
+    fi
+    sleep 2
 done
-
-echo "MySQL est prêt!"
-
-# Attendre un peu plus pour s'assurer que MySQL est complètement prêt
-sleep 5
-
-echo "MySQL est complètement prêt!"
 
 # Démarrer Apache
 exec apache2-foreground
