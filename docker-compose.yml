@@ -19,7 +19,7 @@ services:
       - glpi-network
 
   mysql:
-    image: mysql:8.0
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: glpi
