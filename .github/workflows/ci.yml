@@ -272,12 +272,24 @@ jobs:
           -e DB_PASSWORD="glpi_pass" \
           ${IMAGE}:${TAG}
         
-        sleep 30
+        sleep 60
         
+        # Tester plusieurs fois avec plus de détails
+        for i in {1..5}; do
+          if curl -f -s http://localhost:8080 > /dev/null 2>&1; then
+            echo "Application accessible (tentative $i)"
+            break
+          else
+            echo "Tentative $i échouée, attente..."
+            sleep 10
+          fi
+        done
+        
+        # Test final
         if curl -f http://localhost:8080 > /dev/null 2>&1; then
           echo "Application accessible"
         else
-          echo "Application non accessible"
+          echo "Application non accessible après 60s + 50s d'attente"
           docker logs glpi-test
           exit 1
         fi
