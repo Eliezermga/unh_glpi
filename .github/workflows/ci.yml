@@ -413,17 +413,14 @@ jobs:
           docker stop ${CONTAINER_NAME} 2>/dev/null || true
           docker rm ${CONTAINER_NAME} 2>/dev/null || true
           
-          docker run -d \
-            --name ${CONTAINER_NAME} \
-            --restart unless-stopped \
-            -p 127.0.0.1:8080:80 \
-            -v glpi-prod-data:/var/www/html/files \
-            -v glpi-prod-config:/var/www/html/config \
-            -e DB_HOST="${{ secrets.PROD_DB_HOST }}" \
-            -e DB_NAME="${{ secrets.PROD_DB_NAME }}" \
-            -e DB_USER="${{ secrets.PROD_DB_USER }}" \
-            -e DB_PASS="${{ secrets.PROD_DB_PASSWORD }}" \
-            ${IMAGE}:${TAG}
+          # Utilisation de docker-compose pour la production
+          echo "DB_HOST=mysql" > .env
+          echo "DB_NAME=glpi" >> .env
+          echo "DB_USER=glpi_user" >> .env
+          echo "DB_PASS=${{ secrets.PROD_DB_PASSWORD }}" >> .env
+          
+          docker-compose down || true
+          docker-compose up -d
           
           docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           

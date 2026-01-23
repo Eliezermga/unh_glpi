@@ -16,6 +16,7 @@ phpunit.xml*
 # Development
 .env.local
 .env.test
+.env
 
 # IDE
 .vscode/
