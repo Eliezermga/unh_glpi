@@ -276,21 +276,27 @@ jobs:
         
         # Tester plusieurs fois avec plus de détails
         for i in {1..5}; do
-          if curl -f -s http://localhost:8080 > /dev/null 2>&1; then
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "000")
+          echo "Tentative $i: Code HTTP $HTTP_CODE"
+          if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "302" ]; then
             echo "Application accessible (tentative $i)"
             break
           else
-            echo "Tentative $i échouée, attente..."
+            echo "Tentative $i échouée (code $HTTP_CODE), attente..."
             sleep 10
           fi
         done
         
-        # Test final
-        if curl -f http://localhost:8080 > /dev/null 2>&1; then
-          echo "Application accessible"
+        # Test final avec plus de détails
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "000")
+        if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "302" ]; then
+          echo "Application accessible (code $HTTP_CODE)"
         else
-          echo "Application non accessible après 60s + 50s d'attente"
+          echo "Application non accessible après 60s + 50s d'attente (code final: $HTTP_CODE)"
+          echo "=== Logs du conteneur ==="
           docker logs glpi-test
+          echo "=== Test de connectivité ==="
+          curl -v http://localhost:8080 || true
           exit 1
         fi
         
