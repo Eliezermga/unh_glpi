@@ -31,6 +31,6 @@ docker run -d \
   -e MYSQL_PASSWORD=glpi123 \
   -p 127.0.0.1:3306:3306 \
   -v glpi-mysql:/var/lib/mysql \
-  mysql:8.0
+  mysql:5.7
 
 echo "Serveur configuré. Déploiement via GitHub Actions prêt."

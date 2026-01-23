@@ -8,7 +8,7 @@ on:
 
 env:
   PHP_VERSION: '8.1'
-  MYSQL_VERSION: '8.0'
+  MYSQL_VERSION: '5.7'
 
 jobs:
   # Job 1: Tests de syntaxe et validation
