@@ -359,7 +359,7 @@ jobs:
         command_timeout: 10m
         script: |
           IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
-          TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
+          TAG="ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
           CONTAINER_NAME="glpi-staging"
           
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -408,7 +408,7 @@ jobs:
         command_timeout: 10m
         script: |
           IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
-          TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
+          TAG="ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
           CONTAINER_NAME="glpi-prod"
           
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
