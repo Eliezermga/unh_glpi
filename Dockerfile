@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     unzip \
     git \
+    mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
@@ -29,6 +30,10 @@ WORKDIR /var/www/html
 
 # Copy application code
 COPY . .
+
+# Copy and set permissions for init script
+COPY init.sh /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/init.sh
 
 # Install GLPI dependencies using its own system
 RUN if [ -f "bin/console" ]; then \
@@ -60,5 +65,5 @@ RUN a2enmod rewrite
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start with init script
+CMD ["/usr/local/bin/init.sh"]
