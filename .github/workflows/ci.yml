@@ -123,10 +123,10 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: glpi_test
-          MYSQL_DATABASE: glpi_test
-          MYSQL_USER: glpi_user
-          MYSQL_PASSWORD: glpi_pass
+          MYSQL_ROOT_PASSWORD: glpi_password
+          MYSQL_DATABASE: glpi
+          MYSQL_USER: glpi
+          MYSQL_PASSWORD: glpi_password
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -151,15 +151,15 @@ jobs:
 
     - name: Wait for MySQL
       run: |
-        until mysqladmin ping -h 127.0.0.1 -P 3306 -u root -pglpi_test --silent; do
+        until mysqladmin ping -h 127.0.0.1 -P 3306 -u root -pglpi_password --silent; do
           echo 'Waiting for MySQL...'
           sleep 2
         done
 
     - name: Setup test database
       run: |
-        mysql -h 127.0.0.1 -P 3306 -u root -pglpi_test -e "CREATE DATABASE IF NOT EXISTS glpi_test;"
-        mysql -h 127.0.0.1 -P 3306 -u root -pglpi_test -e "GRANT ALL PRIVILEGES ON glpi_test.* TO 'glpi_user'@'%';"
+        mysql -h 127.0.0.1 -P 3306 -u root -pglpi_password -e "CREATE DATABASE IF NOT EXISTS glpi;"
+        mysql -h 127.0.0.1 -P 3306 -u root -pglpi_password -e "GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'%';"
 
     - name: Run PHPUnit tests
       run: |
@@ -176,9 +176,9 @@ jobs:
       env:
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
-        DB_NAME: glpi_test
-        DB_USER: glpi_user
-        DB_PASS: glpi_pass
+        DB_NAME: glpi
+        DB_USER: glpi
+        DB_PASS: glpi_password
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
@@ -246,10 +246,10 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: integration_test
-          MYSQL_DATABASE: glpi_integration
-          MYSQL_USER: glpi_user
-          MYSQL_PASSWORD: glpi_pass
+          MYSQL_ROOT_PASSWORD: glpi_password
+          MYSQL_DATABASE: glpi
+          MYSQL_USER: glpi
+          MYSQL_PASSWORD: glpi_password
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -268,12 +268,12 @@ jobs:
           -p 8080:80 \
           --add-host=host.docker.internal:host-gateway \
           -e DB_HOST="host.docker.internal" \
-          -e DB_NAME="glpi_integration" \
-          -e DB_USER="glpi_user" \
-          -e DB_PASSWORD="glpi_pass" \
+          -e DB_NAME="glpi" \
+          -e DB_USER="glpi" \
+          -e DB_PASSWORD="glpi_password" \
           ${IMAGE}:${TAG}
         
-        sleep 30
+        sleep 90
         
         # Test simple d'Apache
         HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "000")
