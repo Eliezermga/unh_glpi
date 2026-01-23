@@ -2,7 +2,7 @@ name: GLPI_CI
 
 on:
   push:
-    branches: [ "main", "CI/CD_DEP" ]
+    branches: [ "main", "CI/CD_DEP", "CI/cdmysql" ]
   pull_request:
     branches: [ "main", "master" ]
 
