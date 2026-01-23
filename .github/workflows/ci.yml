@@ -223,6 +223,7 @@ jobs:
         images: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
         tags: |
           type=raw,value=ci-cd-dep-{{sha}}
+          type=sha,prefix=ci-cd-dep-,format=short
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -258,7 +259,8 @@ jobs:
     - name: Test Docker image
       run: |
         IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
-        TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
+        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+        TAG="ci-cd-dep-${SHORT_SHA}"
         
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         docker pull ${IMAGE}:${TAG}
