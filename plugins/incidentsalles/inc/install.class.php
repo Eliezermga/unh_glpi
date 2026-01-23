@@ -5,7 +5,7 @@ class PluginIncidentsallesInstall {
     public static function install(Migration $migration) {
         global $DB;
 
-        $table = 'glpi_plugin_incidentsalles_incidents';
+        $table = 'glpi_incidentsalles';
 
         if (!$DB->tableExists($table)) {
             $query = "CREATE TABLE `$table` (
@@ -40,7 +40,7 @@ class PluginIncidentsallesInstall {
     public static function uninstall(Migration $migration) {
         global $DB;
 
-        $table = 'glpi_plugin_incidentsalles_incidents';
+        $table = 'glpi_incidentsalles';
 
         if ($DB->tableExists($table)) {
             $DB->queryOrDie("DROP TABLE `$table`", $DB->error());

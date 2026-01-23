@@ -4,39 +4,48 @@ include('../../../inc/includes.php');
 
 global $DB;
 
-echo "<h2>🔄 Mise à jour de la table</h2>";
-
 $table = 'glpi_incidentsalles';
 
-// Ajouter les colonnes manquantes
-$columns_to_add = [
-    "ALTER TABLE `$table` ADD COLUMN `heure_incident` TIME NULL AFTER `date_incident`",
-    "ALTER TABLE `$table` ADD COLUMN `equipement` VARCHAR(200) NULL AFTER `description`",
-    "ALTER TABLE `$table` ADD COLUMN `statut` ENUM('ouvert','en_cours','resolu') DEFAULT 'ouvert' AFTER `equipement`",
-    "ALTER TABLE `$table` ADD COLUMN `date_resolution` DATETIME NULL AFTER `statut`",
-    "ALTER TABLE `$table` CHANGE `user_id` `user_id` INT UNSIGNED NOT NULL DEFAULT 0"
-];
+echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Mise à jour table</title></head><body>";
+echo "<h2>🔧 Mise à jour de la table des incidents</h2>";
 
-echo "<p><strong>Structure actuelle de la table:</strong></p>";
-$result = $DB->query("DESCRIBE $table");
-echo "<table border='1' cellpadding='5'><tr><th>Colonne</th><th>Type</th></tr>";
-while ($row = $DB->fetchAssoc($result)) {
-    echo "<tr><td>" . $row['Field'] . "</td><td>" . $row['Type'] . "</td></tr>";
-}
-echo "</table><hr>";
-
-foreach ($columns_to_add as $i => $query) {
-    if ($DB->query($query)) {
-        echo "<p style='color: green;'>✅ Colonne " . ($i+1) . " ajoutée</p>";
-    } else {
-        $error = $DB->error();
-        if (strpos($error, 'Duplicate column') !== false) {
-            echo "<p style='color: blue;'>ℹ️ Colonne " . ($i+1) . " existe déjà</p>";
-        } else {
-            echo "<p style='color: orange;'>⚠️ Colonne " . ($i+1) . ": " . $error . "</p>";
-        }
+if ($DB->tableExists($table)) {
+    // Vérifier si les colonnes existent déjà
+    $columns = $DB->listFields($table);
+    
+    $updates = [];
+    
+    if (!isset($columns['inventaire_glpi'])) {
+        $updates[] = "ADD COLUMN `inventaire_glpi` VARCHAR(50) NULL AFTER `equipement`";
     }
+    
+    if (!isset($columns['action_maintenance'])) {
+        $updates[] = "ADD COLUMN `action_maintenance` VARCHAR(100) NULL AFTER `inventaire_glpi`";
+    }
+    
+    if (!empty($updates)) {
+        $query = "ALTER TABLE `$table` " . implode(', ', $updates);
+        
+        if ($DB->query($query)) {
+            echo "<p style='color: green;'>✅ Colonnes ajoutées avec succès !</p>";
+            echo "<ul>";
+            if (in_array("ADD COLUMN `inventaire_glpi` VARCHAR(50) NULL AFTER `equipement`", $updates)) {
+                echo "<li>inventaire_glpi (Numéro d'inventaire GLPI)</li>";
+            }
+            if (in_array("ADD COLUMN `action_maintenance` VARCHAR(100) NULL AFTER `inventaire_glpi`", $updates)) {
+                echo "<li>action_maintenance (Action de maintenance effectuée)</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<p style='color: red;'>❌ Erreur lors de la mise à jour : " . $DB->error() . "</p>";
+        }
+    } else {
+        echo "<p style='color: blue;'>ℹ️ La table est déjà à jour.</p>";
+    }
+} else {
+    echo "<p style='color: red;'>❌ La table '$table' n'existe pas. Créez-la d'abord.</p>";
 }
 
 echo "<hr>";
-echo "<p><a href='incident.php' style='padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 4px;'>➡️ Aller aux incidents</a></p>";
+echo "<p><a href='incident.php' style='padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 4px;'>➡️ Retour aux incidents</a></p>";
+echo "</body></html>";

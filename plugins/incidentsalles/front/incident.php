@@ -17,7 +17,7 @@ if (!$DB->tableExists($table)) {
     echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Erreur</title></head><body>";
     echo "<h1 style='color: red;'>❌ La table n'existe pas</h1>";
     echo "<p>La table <code>$table</code> n'existe pas dans la base de données.</p>";
-    echo "<p><a href='migrate.php' style='padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 4px;'>Créer la table maintenant</a></p>";
+    echo "<p><a href='create_table.php' style='padding: 10px 20px; background: #667eea; color: white; text-decoration: none; border-radius: 4px;'>Créer la table maintenant</a></p>";
     echo "</body></html>";
     exit;
 }
@@ -29,15 +29,18 @@ if (isset($_POST['submit_incident'])) {
     $type_incident = $DB->escape($_POST['type_incident'] ?? '');
     $description = $DB->escape($_POST['description'] ?? '');
     $heure_incident = $DB->escape($_POST['heure_incident'] ?? date('H:i'));
+    $inventaire_glpi = $DB->escape($_POST['inventaire_glpi'] ?? '');
+    $action_maintenance = $DB->escape($_POST['action_maintenance'] ?? '');
     $equipement = $DB->escape($_POST['equipement'] ?? '');
     $priorite = $DB->escape($_POST['priorite'] ?? 'normale');
     $users_id = Session::getLoginUserID();
     $date_incident = date('Y-m-d H:i:s');
 
     if (!empty($salle) && !empty($type_incident) && !empty($description)) {
+// Ajouter la colonne priorité dans l'INSERT
         $query = "INSERT INTO $table 
-                  (user_id, salle, type_incident, description, date_incident, heure_incident, equipement, statut) 
-                  VALUES ($users_id, '$salle', '$type_incident', '$description', '$date_incident', '$heure_incident', '$equipement', 'ouvert')";
+                  (users_id, salle, laboratoire, type_incident, description, date_incident, heure_incident, equipement, inventaire_glpi, action_maintenance, priorite, statut, date_creation) 
+                  VALUES ($users_id, '$salle', '$laboratoire', '$type_incident', '$description', '$date_incident', '$heure_incident', '$equipement', '$inventaire_glpi', '$action_maintenance', '$priorite', 'ouvert', NOW())";
         
         if ($DB->query($query)) {
             $message = "<div style='background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin: 20px 0;'>✅ Incident enregistré avec succès</div>";
@@ -105,12 +108,45 @@ $tab = $_GET['tab'] ?? 'form';
         
         <?php if (isset($message)) echo $message; ?>
         
+        <?php if ($is_admin): ?>
+        <!-- Widget d'alertes pour les administrateurs -->
+        <div id="alertWidget" style="margin-bottom: 20px;"></div>
+        <script>
+        function loadAlerts() {
+            fetch('alerts.php?ajax=1')
+                .then(response => response.json())
+                .then(alertes => {
+                    const widget = document.getElementById('alertWidget');
+                    if (alertes.length > 0) {
+                        let html = '<div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 8px;">';
+                        html += '<h4 style="margin: 0 0 10px 0; color: #856404;">🚨 Alertes actives</h4>';
+                        alertes.forEach(alerte => {
+                            html += `<div style="background: ${alerte.color}; color: white; padding: 8px 12px; margin: 5px 0; border-radius: 4px; font-size: 14px;">`;
+                            html += `<strong>${alerte.message}</strong>`;
+                            html += '</div>';
+                        });
+                        html += '<a href="?tab=alerts" style="color: #856404; text-decoration: none; font-weight: bold;">➡️ Gérer les alertes</a>';
+                        html += '</div>';
+                        widget.innerHTML = html;
+                    }
+                });
+        }
+        loadAlerts();
+        setInterval(loadAlerts, 30000); // Actualiser toutes les 30 secondes
+        </script>
+        <?php endif; ?>
+        
         <ul class="tabs">
             <li><a href="?tab=form" class="<?= $tab == 'form' ? 'active' : '' ?>">📝 Déclarer un incident</a></li>
             <?php if ($is_admin): ?>
             <li><a href="?tab=list" class="<?= $tab == 'list' ? 'active' : '' ?>">📋 Liste des incidents</a></li>
             <li><a href="?tab=stats" class="<?= $tab == 'stats' ? 'active' : '' ?>">📊 Statistiques</a></li>
-            <li><a href="?tab=alerts" class="<?= $tab == 'alerts' ? 'active' : '' ?>">🚨 Alertes</a></li>
+            <li><a href="?tab=alerts" class="<?= $tab == 'alerts' ? 'active' : '' ?>">🚨 Alertes 
+                <?php 
+                $alert_count = $DB->query("SELECT COUNT(*) as c FROM $table WHERE statut != 'resolu' AND (priorite = 'critique' OR DATEDIFF(NOW(), date_incident) > 7)")->fetch_assoc()['c'];
+                if ($alert_count > 0) echo "<span style='background: #dc3545; color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; margin-left: 5px;'>$alert_count</span>";
+                ?>
+            </a></li>
             <li><a href="?tab=historique" class="<?= $tab == 'historique' ? 'active' : '' ?>">📜 Historique</a></li>
             <?php else: ?>
             <li><a href="?tab=mes_incidents" class="<?= $tab == 'mes_incidents' ? 'active' : '' ?>">📋 Mes incidents</a></li>
@@ -151,6 +187,24 @@ $tab = $_GET['tab'] ?? 'form';
                     </div>
                     
                     <div class="form-group">
+                        <label>Numéro d'inventaire GLPI</label>
+                        <input type="text" name="inventaire_glpi" class="form-control" placeholder="Ex: INV001234" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Action de maintenance</label>
+                        <select name="action_maintenance" class="form-control">
+                            <option value="">-- Aucune --</option>
+                            <option value="Réparation">Réparation</option>
+                            <option value="Remplacement">Remplacement</option>
+                            <option value="Maintenance préventive">Maintenance préventive</option>
+                            <option value="Nettoyage">Nettoyage</option>
+                            <option value="Mise à jour">Mise à jour</option>
+                            <option value="Configuration">Configuration</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
                         <label>Priorité *</label>
                         <select name="priorite" class="form-control" required>
                             <option value="basse">Basse</option>
@@ -180,8 +234,8 @@ $tab = $_GET['tab'] ?? 'form';
                 <h3>Mes incidents déclarés</h3>
                 <?php
                 $query = "SELECT i.*, u.name as user_name FROM $table i 
-                          LEFT JOIN glpi_users u ON i.user_id = u.id 
-                          WHERE i.user_id = $current_user_id
+                          LEFT JOIN glpi_users u ON i.users_id = u.id 
+                          WHERE i.users_id = $current_user_id
                           ORDER BY i.date_incident DESC";
                 $result = $DB->query($query);
                 
@@ -222,7 +276,7 @@ $tab = $_GET['tab'] ?? 'form';
                 <h3>Liste des incidents</h3>
                 <?php
                 $query = "SELECT i.*, u.name as user_name FROM $table i 
-                          LEFT JOIN glpi_users u ON i.user_id = u.id 
+                          LEFT JOIN glpi_users u ON i.users_id = u.id 
                           ORDER BY i.date_incident DESC";
                 $result = $DB->query($query);
                 
@@ -244,7 +298,7 @@ $tab = $_GET['tab'] ?? 'form';
                                 <td><?= $row['salle'] ?></td>
                                 <td><?= $row['type_incident'] ?></td>
                                 <td><?= date('d/m/Y H:i', strtotime($row['date_incident'])) ?></td>
-                                <td><span class="badge badge-normale">NORMALE</span></td>
+                                <td><span class="badge badge-<?= $row['priorite'] ?>"><?= strtoupper($row['priorite']) ?></span></td>
                                 <td><span class="badge badge-<?= $row['statut'] ?>"><?= strtoupper($row['statut']) ?></span></td>
                                 <td>
                                     <?php if ($row['statut'] != 'resolu'): ?>
@@ -328,12 +382,86 @@ $tab = $_GET['tab'] ?? 'form';
         <?php endif; ?>
         
         <?php if ($tab == 'alerts' && $is_admin): ?>
+            <?php
+            // Compter les alertes
+            $alertes_7j = $DB->query("SELECT COUNT(*) as c FROM $table WHERE statut != 'resolu' AND DATEDIFF(NOW(), date_incident) > 7")->fetch_assoc()['c'];
+            $alertes_critique = $DB->query("SELECT COUNT(*) as c FROM $table WHERE statut != 'resolu' AND priorite = 'critique'")->fetch_assoc()['c'];
+            $alertes_haute = $DB->query("SELECT COUNT(*) as c FROM $table WHERE statut != 'resolu' AND priorite = 'haute'")->fetch_assoc()['c'];
+            ?>
+            
+            <!-- Résumé des alertes -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px;">
+                <div style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                    <h3 style="margin: 0; font-size: 32px;"><?= $alertes_7j ?></h3>
+                    <p style="margin: 10px 0 0 0;">Incidents > 7 jours</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #fd7e14 0%, #e55a00 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                    <h3 style="margin: 0; font-size: 32px;"><?= $alertes_critique ?></h3>
+                    <p style="margin: 10px 0 0 0;">Priorité critique</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                    <h3 style="margin: 0; font-size: 32px;"><?= $alertes_haute ?></h3>
+                    <p style="margin: 10px 0 0 0;">Priorité haute</p>
+                </div>
+            </div>
+            
+            <!-- Incidents critiques -->
+            <div class="card">
+                <h3>🔥 Incidents critiques non résolus</h3>
+                <?php
+                $query_critique = "SELECT i.*, u.name as user_name, DATEDIFF(NOW(), i.date_incident) as jours 
+                          FROM $table i 
+                          LEFT JOIN glpi_users u ON i.users_id = u.id 
+                          WHERE i.statut != 'resolu' AND i.priorite = 'critique'
+                          ORDER BY i.date_incident ASC";
+                $result_critique = $DB->query($query_critique);
+                
+                if ($result_critique && $DB->numrows($result_critique) > 0):
+                ?>
+                    <div style="background: #dc3545; color: white; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                        🚨 <strong><?= $DB->numrows($result_critique) ?></strong> incident(s) critique(s) nécessite(nt) une intervention immédiate !
+                    </div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Salle</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Jours</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php while ($row = $DB->fetchAssoc($result_critique)): ?>
+                            <tr style="background: #ffebee;">
+                                <td><?= $row['id'] ?></td>
+                                <td><?= $row['salle'] ?></td>
+                                <td><?= $row['type_incident'] ?></td>
+                                <td><?= date('d/m/Y', strtotime($row['date_incident'])) ?></td>
+                                <td><strong style="color: red;"><?= $row['jours'] ?></strong></td>
+                                <td>
+                                    <form method="post" style="display: inline;">
+                                        <?php echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]); ?>
+                                        <input type="hidden" name="incident_id" value="<?= $row['id'] ?>" />
+                                        <select name="statut" style="padding: 5px;">
+                                            <option value="en_cours">Prendre en charge</option>
+                                            <option value="resolu">Marquer résolu</option>
+                                        </select>
+                                        <button type="submit" name="change_statut" class="btn btn-primary btn-sm">OK</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </table>
+                <?php else: ?>
+                    <p style="text-align: center; padding: 20px; color: green;">✅ Aucun incident critique</p>
+                <?php endif; ?>
+            </div>
+            
             <div class="card">
                 <h3>🚨 Incidents non résolus depuis plus de 7 jours</h3>
                 <?php
                 $query = "SELECT i.*, u.name as user_name, DATEDIFF(NOW(), i.date_incident) as jours 
                           FROM $table i 
-                          LEFT JOIN glpi_users u ON i.user_id = u.id 
+                          LEFT JOIN glpi_users u ON i.users_id = u.id 
                           WHERE i.statut != 'resolu' 
                           AND DATEDIFF(NOW(), i.date_incident) > 7
                           ORDER BY jours DESC";
@@ -351,6 +479,7 @@ $tab = $_GET['tab'] ?? 'form';
                             <th>Type</th>
                             <th>Date</th>
                             <th>Jours écoulés</th>
+                            <th>Priorité</th>
                             <th>Statut</th>
                         </tr>
                         <?php while ($row = $DB->fetchAssoc($result)): ?>
@@ -360,6 +489,7 @@ $tab = $_GET['tab'] ?? 'form';
                                 <td><?= $row['type_incident'] ?></td>
                                 <td><?= date('d/m/Y', strtotime($row['date_incident'])) ?></td>
                                 <td><strong style="color: red;"><?= $row['jours'] ?> jours</strong></td>
+                                <td><span class="badge badge-<?= $row['priorite'] ?>"><?= strtoupper($row['priorite']) ?></span></td>
                                 <td><span class="badge badge-<?= $row['statut'] ?>"><?= strtoupper($row['statut']) ?></span></td>
                             </tr>
                         <?php endwhile; ?>
@@ -380,36 +510,136 @@ $tab = $_GET['tab'] ?? 'form';
             <div class="card">
                 <h3>📜 Historique du matériel</h3>
                 <?php
-                $query = "SELECT equipement, COUNT(*) as nb_incidents, 
+                $query = "SELECT equipement, inventaire_glpi, COUNT(*) as nb_incidents, 
                           MAX(date_incident) as dernier_incident,
-                          GROUP_CONCAT(DISTINCT salle ORDER BY salle SEPARATOR ', ') as salles
+                          MIN(date_incident) as premier_incident,
+                          GROUP_CONCAT(DISTINCT salle ORDER BY salle SEPARATOR ', ') as salles,
+                          GROUP_CONCAT(DISTINCT action_maintenance ORDER BY action_maintenance SEPARATOR ', ') as actions,
+                          SUM(CASE WHEN statut = 'resolu' THEN 1 ELSE 0 END) as resolus,
+                          AVG(CASE WHEN statut = 'resolu' AND date_resolution IS NOT NULL 
+                              THEN DATEDIFF(date_resolution, date_incident) ELSE NULL END) as temps_moyen_resolution
                           FROM $table 
                           WHERE equipement IS NOT NULL AND equipement != ''
-                          GROUP BY equipement 
+                          GROUP BY equipement, inventaire_glpi 
                           ORDER BY nb_incidents DESC";
                 $result = $DB->query($query);
                 
                 if ($result && $DB->numrows($result) > 0):
                 ?>
-                    <table>
+                    <div style="margin-bottom: 20px;">
+                        <h4>🔍 Filtres</h4>
+                        <input type="text" id="filterEquipement" placeholder="Rechercher un équipement..." 
+                               style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 300px;" 
+                               onkeyup="filterTable()">
+                        <select id="filterSalle" onchange="filterTable()" style="padding: 8px; margin-left: 10px;">
+                            <option value="">Toutes les salles</option>
+                            <?php
+                            $salles_query = "SELECT DISTINCT salle FROM $table WHERE salle IS NOT NULL ORDER BY salle";
+                            $salles_result = $DB->query($salles_query);
+                            while ($salle_row = $DB->fetchAssoc($salles_result)) {
+                                echo "<option value='{$salle_row['salle']}'>{$salle_row['salle']}</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    
+                    <table id="historiqueTable">
                         <tr>
                             <th>Équipement</th>
+                            <th>N° Inventaire</th>
                             <th>Salles</th>
+                            <th>Actions maintenance</th>
                             <th>Nb incidents</th>
+                            <th>Résolus</th>
+                            <th>Taux résolution</th>
+                            <th>Temps moyen</th>
+                            <th>Premier incident</th>
                             <th>Dernier incident</th>
+                            <th>Actions</th>
                         </tr>
-                        <?php while ($row = $DB->fetchAssoc($result)): ?>
-                            <tr>
-                                <td><strong><?= $row['equipement'] ?></strong></td>
-                                <td><?= $row['salles'] ?></td>
-                                <td><?= $row['nb_incidents'] ?></td>
+                        <?php while ($row = $DB->fetchAssoc($result)): 
+                            $taux_resolution = $row['nb_incidents'] > 0 ? round(($row['resolus'] / $row['nb_incidents']) * 100) : 0;
+                            $temps_moyen = $row['temps_moyen_resolution'] ? round($row['temps_moyen_resolution'], 1) : 0;
+                        ?>
+                            <tr data-equipement="<?= strtolower($row['equipement']) ?>" data-salles="<?= strtolower($row['salles']) ?>">
+                                <td><strong><?= htmlspecialchars($row['equipement']) ?></strong></td>
+                                <td><?= htmlspecialchars($row['inventaire_glpi'] ?: 'N/A') ?></td>
+                                <td><?= htmlspecialchars($row['salles']) ?></td>
+                                <td><?= htmlspecialchars($row['actions'] ?: 'Aucune') ?></td>
+                                <td><span class="badge badge-<?= $row['nb_incidents'] > 5 ? 'haute' : ($row['nb_incidents'] > 2 ? 'normale' : 'basse') ?>"><?= $row['nb_incidents'] ?></span></td>
+                                <td><?= $row['resolus'] ?></td>
+                                <td>
+                                    <span class="badge badge-<?= $taux_resolution >= 80 ? 'resolu' : ($taux_resolution >= 50 ? 'normale' : 'ouvert') ?>">
+                                        <?= $taux_resolution ?>%
+                                    </span>
+                                </td>
+                                <td><?= $temps_moyen ?> j</td>
+                                <td><?= date('d/m/Y', strtotime($row['premier_incident'])) ?></td>
                                 <td><?= date('d/m/Y', strtotime($row['dernier_incident'])) ?></td>
+                                <td>
+                                    <button onclick="showDetails('<?= addslashes($row['equipement']) ?>')" class="btn btn-primary btn-sm">Détails</button>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </table>
+                    
+                    <script>
+                    function filterTable() {
+                        const equipementFilter = document.getElementById('filterEquipement').value.toLowerCase();
+                        const salleFilter = document.getElementById('filterSalle').value.toLowerCase();
+                        const rows = document.querySelectorAll('#historiqueTable tr:not(:first-child)');
+                        
+                        rows.forEach(row => {
+                            const equipement = row.dataset.equipement;
+                            const salles = row.dataset.salles;
+                            const showEquipement = equipement.includes(equipementFilter);
+                            const showSalle = !salleFilter || salles.includes(salleFilter);
+                            
+                            row.style.display = (showEquipement && showSalle) ? '' : 'none';
+                        });
+                    }
+                    
+                    function showDetails(equipement) {
+                        window.open('historique_details.php?equipement=' + encodeURIComponent(equipement), '_blank', 'width=800,height=600');
+                    }
+                    </script>
                 <?php else: ?>
                     <p style="text-align: center; padding: 40px; color: #999;">Aucun historique disponible</p>
                 <?php endif; ?>
+            </div>
+            
+            <!-- Statistiques générales -->
+            <div class="card">
+                <h3>📊 Statistiques générales</h3>
+                <?php
+                $stats_query = "SELECT 
+                    COUNT(DISTINCT equipement) as nb_equipements,
+                    COUNT(*) as total_incidents,
+                    AVG(CASE WHEN statut = 'resolu' AND date_resolution IS NOT NULL 
+                        THEN DATEDIFF(date_resolution, date_incident) ELSE NULL END) as temps_moyen_global,
+                    COUNT(CASE WHEN statut = 'resolu' THEN 1 END) as total_resolus
+                    FROM $table WHERE equipement IS NOT NULL AND equipement != ''";
+                $stats = $DB->query($stats_query)->fetch_assoc();
+                $taux_global = $stats['total_incidents'] > 0 ? round(($stats['total_resolus'] / $stats['total_incidents']) * 100) : 0;
+                ?>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                    <div style="background: #17a2b8; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="margin: 0; font-size: 24px;"><?= $stats['nb_equipements'] ?></h4>
+                        <p style="margin: 5px 0 0 0;">Équipements suivis</p>
+                    </div>
+                    <div style="background: #6c757d; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="margin: 0; font-size: 24px;"><?= $stats['total_incidents'] ?></h4>
+                        <p style="margin: 5px 0 0 0;">Total incidents</p>
+                    </div>
+                    <div style="background: #28a745; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="margin: 0; font-size: 24px;"><?= $taux_global ?>%</h4>
+                        <p style="margin: 5px 0 0 0;">Taux résolution</p>
+                    </div>
+                    <div style="background: #fd7e14; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="margin: 0; font-size: 24px;"><?= $stats['temps_moyen_global'] ? round($stats['temps_moyen_global'], 1) : 0 ?> j</h4>
+                        <p style="margin: 5px 0 0 0;">Temps moyen</p>
+                    </div>
+                </div>
             </div>
         <?php endif; ?>
     </div>
