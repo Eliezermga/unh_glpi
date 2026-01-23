@@ -12,6 +12,30 @@ class PluginUnhassetsAsset extends CommonDBTM {
         return __('Parc informatique', 'unhassets');
     }
 
+    static function canView() {
+        return Session::haveRight(self::$rightname, READ)
+            || Session::haveRight('config', READ);
+    }
+
+    static function canCreate() {
+        // Dans GLPI, certains profils/plugins mappent "Écriture" sur UPDATE.
+        // On accepte donc UPDATE comme droit de création pour éviter de masquer
+        // le bouton "+" quand l'utilisateur a bien un droit d'écriture.
+        return Session::haveRight(self::$rightname, CREATE)
+            || Session::haveRight(self::$rightname, UPDATE)
+            || Session::haveRight('config', UPDATE);
+    }
+
+    static function canUpdate() {
+        return Session::haveRight(self::$rightname, UPDATE)
+            || Session::haveRight('config', UPDATE);
+    }
+
+    static function canDelete() {
+        return Session::haveRight(self::$rightname, DELETE)
+            || Session::haveRight('config', UPDATE);
+    }
+
     function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
         if (!$withtemplate) {
             if ($item->getType() == 'Computer' || $item->getType() == 'Printer' 
@@ -160,88 +184,7 @@ class PluginUnhassetsAsset extends CommonDBTM {
         return $input;
     }
 
-    function rawSearchOptions() {
-        $tab = [];
-
-        $tab[] = [
-            'id'                 => 'common',
-            'name'               => __('Caractéristiques')
-        ];
-
-        $tab[] = [
-            'id'                 => '1',
-            'table'              => $this->getTable(),
-            'field'              => 'name',
-            'name'               => __('Nom'),
-            'datatype'           => 'itemlink',
-            'massiveaction'      => false,
-        ];
-
-        $tab[] = [
-            'id'                 => '2',
-            'table'              => $this->getTable(),
-            'field'              => 'building',
-            'name'               => __('Bâtiment', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        $tab[] = [
-            'id'                 => '3',
-            'table'              => $this->getTable(),
-            'field'              => 'room',
-            'name'               => __('Salle', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        $tab[] = [
-            'id'                 => '4',
-            'table'              => $this->getTable(),
-            'field'              => 'department',
-            'name'               => __('Département', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        $tab[] = [
-            'id'                 => '5',
-            'table'              => $this->getTable(),
-            'field'              => 'brand',
-            'name'               => __('Marque', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        $tab[] = [
-            'id'                 => '6',
-            'table'              => $this->getTable(),
-            'field'              => 'model',
-            'name'               => __('Modèle', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        $tab[] = [
-            'id'                 => '7',
-            'table'              => $this->getTable(),
-            'field'              => 'status',
-            'name'               => __('Statut', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        $tab[] = [
-            'id'                 => '8',
-            'table'              => $this->getTable(),
-            'field'              => 'asset_category',
-            'name'               => __('Catégorie', 'unhassets'),
-            'datatype'           => 'text',
-        ];
-
-        return $tab;
-    }
-
-    static function getMenuContent() {
-        $menu = [];
-        $menu['title'] = self::getTypeName(2);
-        $menu['page']  = '/plugins/unhassets/front/asset.php';
-        $menu['icon']  = 'fas fa-desktop';
-
-        return $menu;
+    public function rawSearchOptions() {
+    return parent::rawSearchOptions();
     }
 }

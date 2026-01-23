@@ -12,6 +12,27 @@ class PluginUnhassetsReservation extends CommonDBTM {
         return _n('Réservation', 'Réservations', $nb, 'unhassets');
     }
 
+    static function canView() {
+        return Session::haveRight(self::$rightname, READ)
+            || Session::haveRight('config', READ);
+    }
+
+    static function canCreate() {
+        return Session::haveRight(self::$rightname, CREATE)
+            || Session::haveRight(self::$rightname, UPDATE)
+            || Session::haveRight('config', UPDATE);
+    }
+
+    static function canUpdate() {
+        return Session::haveRight(self::$rightname, UPDATE)
+            || Session::haveRight('config', UPDATE);
+    }
+
+    static function canDelete() {
+        return Session::haveRight(self::$rightname, DELETE)
+            || Session::haveRight('config', UPDATE);
+    }
+
     function defineTabs($options = []) {
         $ong = [];
         $this->addDefaultFormTab($ong);
@@ -229,71 +250,7 @@ class PluginUnhassetsReservation extends CommonDBTM {
         ]);
     }
 
-    function rawSearchOptions() {
-        $tab = [];
-
-        $tab[] = [
-            'id'   => 'common',
-            'name' => __('Caractéristiques')
-        ];
-
-        $tab[] = [
-            'id'            => '1',
-            'table'         => $this->getTable(),
-            'field'         => 'id',
-            'name'          => __('ID'),
-            'massiveaction' => false,
-            'datatype'      => 'number'
-        ];
-
-        $tab[] = [
-            'id'       => '2',
-            'table'    => 'glpi_plugin_unhassets_assets',
-            'field'    => 'name',
-            'name'     => __('Équipement', 'unhassets'),
-            'datatype' => 'dropdown'
-        ];
-
-        $tab[] = [
-            'id'       => '3',
-            'table'    => 'glpi_users',
-            'field'    => 'name',
-            'name'     => __('Utilisateur'),
-            'datatype' => 'dropdown'
-        ];
-
-        $tab[] = [
-            'id'       => '4',
-            'table'    => $this->getTable(),
-            'field'    => 'reservation_date',
-            'name'     => __('Date', 'unhassets'),
-            'datatype' => 'date'
-        ];
-
-        $tab[] = [
-            'id'       => '5',
-            'table'    => $this->getTable(),
-            'field'    => 'start_time',
-            'name'     => __('Début', 'unhassets'),
-            'datatype' => 'datetime'
-        ];
-
-        $tab[] = [
-            'id'       => '6',
-            'table'    => $this->getTable(),
-            'field'    => 'end_time',
-            'name'     => __('Fin', 'unhassets'),
-            'datatype' => 'datetime'
-        ];
-
-        $tab[] = [
-            'id'       => '7',
-            'table'    => $this->getTable(),
-            'field'    => 'status',
-            'name'     => __('Statut', 'unhassets'),
-            'datatype' => 'text'
-        ];
-
-        return $tab;
+    public function rawSearchOptions() {
+    return parent::rawSearchOptions();
     }
 }

@@ -2,17 +2,12 @@
 
 include ('../../../inc/includes.php');
 
-// CREATE requis si on ouvre un formulaire "nouveau" (id=-1)
-if ((isset($_GET['id']) && (int)$_GET['id'] === -1) || isset($_POST['add'])) {
-    Session::checkRight("plugin_unhassets", CREATE);
-} else {
-    Session::checkRight("plugin_unhassets", READ);
-}
+Session::checkRight("plugin_unhassets", READ);
 
 $license = new PluginUnhassetsLicense();
 
 if (isset($_POST['add'])) {
-    $license->check(-1, CREATE, $_POST);
+    $license->check(-1, UPDATE, $_POST);
     if ($newID = $license->add($_POST)) {
         Session::addMessageAfterRedirect(__('Licence ajoutée avec succès', 'unhassets'));
     }

@@ -12,6 +12,27 @@ class PluginUnhassetsLicense extends CommonDBTM {
         return _n('Licence', 'Licences', $nb, 'unhassets');
     }
 
+    static function canView() {
+        return Session::haveRight(self::$rightname, READ)
+            || Session::haveRight('config', READ);
+    }
+
+    static function canCreate() {
+        return Session::haveRight(self::$rightname, CREATE)
+            || Session::haveRight(self::$rightname, UPDATE)
+            || Session::haveRight('config', UPDATE);
+    }
+
+    static function canUpdate() {
+        return Session::haveRight(self::$rightname, UPDATE)
+            || Session::haveRight('config', UPDATE);
+    }
+
+    static function canDelete() {
+        return Session::haveRight(self::$rightname, DELETE)
+            || Session::haveRight('config', UPDATE);
+    }
+
     function defineTabs($options = []) {
         $ong = [];
         $this->addDefaultFormTab($ong);
@@ -233,87 +254,7 @@ class PluginUnhassetsLicense extends CommonDBTM {
         return 1;
     }
 
-    function rawSearchOptions() {
-        $tab = [];
-
-        $tab[] = [
-            'id'   => 'common',
-            'name' => __('Caractéristiques')
-        ];
-
-        $tab[] = [
-            'id'            => '1',
-            'table'         => $this->getTable(),
-            'field'         => 'name',
-            'name'          => __('Nom'),
-            'datatype'      => 'itemlink',
-            'massiveaction' => false
-        ];
-
-        $tab[] = [
-            'id'       => '2',
-            'table'    => $this->getTable(),
-            'field'    => 'software_name',
-            'name'     => __('Logiciel', 'unhassets'),
-            'datatype' => 'text'
-        ];
-
-        $tab[] = [
-            'id'       => '3',
-            'table'    => $this->getTable(),
-            'field'    => 'version',
-            'name'     => __('Version', 'unhassets'),
-            'datatype' => 'text'
-        ];
-
-        $tab[] = [
-            'id'       => '4',
-            'table'    => $this->getTable(),
-            'field'    => 'license_type',
-            'name'     => __('Type', 'unhassets'),
-            'datatype' => 'text'
-        ];
-
-        $tab[] = [
-            'id'       => '5',
-            'table'    => $this->getTable(),
-            'field'    => 'expiration_date',
-            'name'     => __('Date d\'expiration', 'unhassets'),
-            'datatype' => 'date'
-        ];
-
-        $tab[] = [
-            'id'       => '6',
-            'table'    => $this->getTable(),
-            'field'    => 'number_licenses',
-            'name'     => __('Nombre de licences', 'unhassets'),
-            'datatype' => 'number'
-        ];
-
-        $tab[] = [
-            'id'       => '7',
-            'table'    => $this->getTable(),
-            'field'    => 'used_licenses',
-            'name'     => __('Licences utilisées', 'unhassets'),
-            'datatype' => 'number'
-        ];
-
-        $tab[] = [
-            'id'       => '8',
-            'table'    => $this->getTable(),
-            'field'    => 'status',
-            'name'     => __('Statut', 'unhassets'),
-            'datatype' => 'text'
-        ];
-
-        $tab[] = [
-            'id'       => '9',
-            'table'    => $this->getTable(),
-            'field'    => 'department',
-            'name'     => __('Département', 'unhassets'),
-            'datatype' => 'text'
-        ];
-
-        return $tab;
+    public function rawSearchOptions() {
+    return parent::rawSearchOptions();
     }
 }

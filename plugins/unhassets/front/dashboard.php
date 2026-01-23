@@ -126,9 +126,11 @@ $licenses_expiring = $DB->request([
     'COUNT' => 'cpt',
     'FROM'  => 'glpi_plugin_unhassets_licenses',
     'WHERE' => [
-        'is_deleted'      => 0,
-        'expiration_date' => ['<=', date('Y-m-d', strtotime('+30 days'))],
-        'expiration_date' => ['>', $today]
+        'is_deleted' => 0,
+        'AND' => [
+            ['expiration_date' => ['<=', date('Y-m-d', strtotime('+30 days'))]],
+            ['expiration_date' => ['>', $today]]
+        ]
     ]
 ])->current()['cpt'];
 
