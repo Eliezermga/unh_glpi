@@ -15,6 +15,8 @@ services:
     volumes:
       - ./files:/var/www/html/files
       - ./config:/var/www/html/config
+    networks:
+      - glpi-network
 
   mysql:
     image: mysql:8.0
@@ -27,6 +29,12 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - glpi-network
 
 volumes:
   mysql_data:
+
+networks:
+  glpi-network:
+    driver: bridge
