@@ -223,7 +223,6 @@ jobs:
         images: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}
         tags: |
           type=raw,value=ci-cd-dep-{{sha}}
-          type=sha,prefix=ci-cd-dep-,format=short
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -259,8 +258,7 @@ jobs:
     - name: Test Docker image
       run: |
         IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
-        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
-        TAG="ci-cd-dep-${SHORT_SHA}"
+        TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
         
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         docker pull ${IMAGE}:${TAG}
@@ -403,77 +401,35 @@ jobs:
         timeout: 30s
         command_timeout: 10m
         script: |
-          # Installation de docker-compose si nécessaire
-          if ! command -v docker-compose &> /dev/null; then
-            sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-          fi
+          IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
+          TAG="ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)"
+          CONTAINER_NAME="glpi-prod"
           
-          # Création du répertoire de travail
-          mkdir -p ~/glpi-prod
-          cd ~/glpi-prod
-          
-          # Création du fichier .env
-          cat > .env << EOF
-          DB_NAME=glpi
-          DB_USER=glpi_user
-          DB_PASS=${{ secrets.PROD_DB_PASSWORD }}
-          MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
-          EOF
-          
-          # Téléchargement des fichiers de configuration
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker pull ${IMAGE}:${TAG}
           
-          # Arrêt des anciens conteneurs
-          docker-compose down 2>/dev/null || true
+          docker exec ${CONTAINER_NAME} mysqldump -h ${{ secrets.PROD_DB_HOST }} -u ${{ secrets.PROD_DB_USER }} ${{ secrets.PROD_DB_NAME }} > /backup/glpi_backup_$(date +%Y%m%d_%H%M%S).sql 2>/dev/null || true
           
-          # Création du docker-compose.yml
-          cat > docker-compose.yml << 'EOF'
-          version: '3.8'
+          docker stop ${CONTAINER_NAME} 2>/dev/null || true
+          docker rm ${CONTAINER_NAME} 2>/dev/null || true
           
-          services:
-            glpi:
-              image: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:ci-cd-dep-$(echo ${{ github.sha }} | cut -c1-7)
-              ports:
-                - "127.0.0.1:8080:80"
-              environment:
-                - DB_HOST=mysql
-                - DB_USER=${DB_USER}
-                - DB_PASS=${DB_PASS}
-                - DB_NAME=${DB_NAME}
-              depends_on:
-                - mysql
-              volumes:
-                - glpi_files:/var/www/html/files
-                - glpi_config:/var/www/html/config
-              restart: unless-stopped
+          docker run -d \
+            --name ${CONTAINER_NAME} \
+            --restart unless-stopped \
+            -p 127.0.0.1:8080:80 \
+            -v glpi-prod-data:/var/www/html/files \
+            -v glpi-prod-config:/var/www/html/config \
+            -e DB_HOST="${{ secrets.PROD_DB_HOST }}" \
+            -e DB_NAME="${{ secrets.PROD_DB_NAME }}" \
+            -e DB_USER="${{ secrets.PROD_DB_USER }}" \
+            -e DB_PASS="${{ secrets.PROD_DB_PASSWORD }}" \
+            ${IMAGE}:${TAG}
           
-            mysql:
-              image: mysql:8.0
-              environment:
-                - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-                - MYSQL_DATABASE=${DB_NAME}
-                - MYSQL_USER=${DB_USER}
-                - MYSQL_PASSWORD=${DB_PASS}
-              volumes:
-                - mysql_data:/var/lib/mysql
-              command: --default-authentication-plugin=mysql_native_password
-              restart: unless-stopped
+          docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
           
-          volumes:
-            mysql_data:
-            glpi_files:
-            glpi_config:
-          EOF
-          
-          # Démarrage des services
-          docker-compose up -d
-          
-          # Attente et vérification
-          sleep 30
-          if ! docker-compose ps | grep -q "Up"; then
+          sleep 15
+          if ! docker ps | grep -q ${CONTAINER_NAME}; then
             echo "Production deployment failed"
-            docker-compose logs
             exit 1
           fi
           echo "Production deployment successful"
