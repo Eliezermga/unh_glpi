@@ -1433,8 +1433,11 @@ HTML;
                 'title' => __('Setup'),
                 'types' => [
                     'CommonDropdown', 'CommonDevice', 'Notification',
-                    'SLM', 'Config', 'FieldUnicity', 'CronTask', 'Auth',
-                    'MailCollector', 'Link', 'Plugin'
+                    // 'SLM', // Niveaux de services - masqué
+                    'Config', 'FieldUnicity', 'CronTask', 'Auth',
+                    // 'MailCollector', // Collecteurs - masqué
+                    // 'Link', // Liens externes - masqué
+                    'Plugin'
                 ],
                 'icon'  => 'ti ti-settings'
             ],
