@@ -1,32 +1,64 @@
 version: '3.8'
 
 services:
-  web:
+  glpi:
     build: .
+    container_name: glpi_app
+    restart: unless-stopped
     ports:
       - "8080:80"
-    depends_on:
-      - mysql
     environment:
-      - DB_HOST=mysql
-      - DB_NAME=glpi
-      - DB_USER=glpi
-      - DB_PASSWORD=glpi_password
+      DB_HOST: mysql
+      DB_NAME: glpi
+      DB_USER: glpi
+      DB_PASSWORD: glpi_password
+      GLPI_INSTALL_MODE: 0
     volumes:
-      - ./files:/var/www/html/files
-      - ./config:/var/www/html/config
+      - glpi_files:/var/www/html/files
+      - glpi_config:/var/www/html/config
+      - ./plugins:/var/www/html/plugins
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - glpi_network
 
   mysql:
     image: mysql:5.7
+    container_name: glpi_mysql
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: glpi_password
       MYSQL_DATABASE: glpi
       MYSQL_USER: glpi
       MYSQL_PASSWORD: glpi_password
-    ports:
-      - "3306:3306"
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/glpi.cnf:ro
+    ports:
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+    networks:
+      - glpi_network
 
 volumes:
   mysql_data:
+    driver: local
+  glpi_files:
+    driver: local
+  glpi_config:
+    driver: local
+
+networks:
+  glpi_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
