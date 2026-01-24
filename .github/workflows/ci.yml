@@ -263,10 +263,26 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker pull ${IMAGE}:${TAG}
           
+          # Créer un réseau Docker pour la communication
+          docker network create glpi-test-network || true
+          
+          # Démarrer MySQL dans le réseau
+          docker run -d --name mysql-test \
+            --network glpi-test-network \
+            -e MYSQL_ROOT_PASSWORD=glpi_password \
+            -e MYSQL_DATABASE=glpi \
+            -e MYSQL_USER=glpi \
+            -e MYSQL_PASSWORD=glpi_password \
+            mysql:5.7
+          
+          # Attendre que MySQL soit prêt
+          sleep 30
+          
+          # Démarrer GLPI dans le même réseau
           docker run -d --name glpi-test \
+            --network glpi-test-network \
             -p 8080:80 \
-            --add-host=host.docker.internal:host-gateway \
-            -e DB_HOST="host.docker.internal" \
+            -e DB_HOST="mysql-test" \
             -e DB_NAME="glpi" \
             -e DB_USER="glpi" \
             -e DB_PASSWORD="glpi_password" \
@@ -282,11 +298,13 @@ jobs:
           else
             echo "Application non accessible (code: $HTTP_CODE)"
             docker logs glpi-test
+            docker logs mysql-test
             exit 1
           fi
           
-          docker stop glpi-test
-          docker rm glpi-test
+          docker stop glpi-test mysql-test
+          docker rm glpi-test mysql-test
+          docker network rm glpi-test-network
 
   # Job 7: Deploy Dev
   deploy-dev:
