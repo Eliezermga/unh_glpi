@@ -1,32 +1,76 @@
 version: '3.8'
 
 services:
-  web:
+  # Service GLPI avec PHP-FPM et Nginx
+  glpi:
     build: .
+    container_name: glpi_app
+    restart: unless-stopped
     ports:
+      # Exposition sur toutes les interfaces (accessible via IP serveur)
       - "8080:80"
-    depends_on:
-      - mysql
     environment:
-      - DB_HOST=mysql
+      # Variables d'environnement pour la connexion DB
+      - DB_HOST=database
       - DB_NAME=glpi
-      - DB_USER=glpi
-      - DB_PASSWORD=glpi_password
+      - DB_USER=glpi_user
+      - DB_PASSWORD=glpi_secure_password
+      - GLPI_INSTALL_MODE=0
     volumes:
-      - ./files:/var/www/html/files
-      - ./config:/var/www/html/config
+      # Volumes persistants pour les données GLPI
+      - glpi_files:/var/www/html/files
+      - glpi_config:/var/www/html/config
+      - ./plugins:/var/www/html/plugins
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - glpi_network
 
-  mysql:
+  # Service MySQL 5.7
+  database:
     image: mysql:5.7
+    container_name: glpi_mysql
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
+      # Configuration MySQL sécurisée
+      MYSQL_ROOT_PASSWORD: root_secure_password
       MYSQL_DATABASE: glpi
-      MYSQL_USER: glpi
-      MYSQL_PASSWORD: glpi_password
-    ports:
-      - "3306:3306"
+      MYSQL_USER: glpi_user
+      MYSQL_PASSWORD: glpi_secure_password
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
     volumes:
+      # Volume persistant pour les données MySQL
       - mysql_data:/var/lib/mysql
+      # Configuration MySQL optimisée pour GLPI
+      - ./mysql/my.cnf:/etc/mysql/conf.d/glpi.cnf:ro
+    ports:
+      # Port MySQL exposé uniquement en local pour debug
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      # Vérification de santé MySQL
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_secure_password"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+      start_period: 40s
+    networks:
+      - glpi_network
 
+# Volumes nommés pour persistance des données
 volumes:
   mysql_data:
+    driver: local
+  glpi_files:
+    driver: local
+  glpi_config:
+    driver: local
+
+# Réseau isolé pour la communication inter-services
+networks:
+  glpi_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

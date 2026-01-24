@@ -2,7 +2,7 @@ name: GLPI_CI
 
 on:
   push:
-    branches: [ "main", "CI/CD_DEP", "CI/cdmysql" ]
+    branches: [ "main", "CI/CD_DEP", "configmysqlcicd_k" ]
   pull_request:
     branches: [ "main", "master" ]
 
@@ -295,6 +295,14 @@ jobs:
     name: Deploy to Development
     runs-on: ubuntu-latest
     needs: [build, integration-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/CI/cdmysql'
+    
+    steps:
+    - name: Deploy to dev environment
+      run: |
+        echo "Déploiement en développement"
+        echo "Image: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
+        # Ici vous ajouteriez vos commandes de déploiemention-tests]
     if: github.event_name == 'push' && github.ref == 'refs/heads/CI/cdmysql'
     environment: development
     
