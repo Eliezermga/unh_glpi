@@ -331,30 +331,50 @@ jobs:
           script: |
             IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
             TAG="ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
-            CONTAINER_NAME="glpi-dev"
             
+            # Créer le réseau Docker s'il n'existe pas
+            docker network create glpi-dev-network 2>/dev/null || true
+            
+            # Démarrer MySQL pour dev
+            if ! docker ps -a | grep -q mysql-dev; then
+              docker run -d \
+                --name mysql-dev \
+                --network glpi-dev-network \
+                --restart unless-stopped \
+                -e MYSQL_ROOT_PASSWORD=glpi_password \
+                -e MYSQL_DATABASE=glpi \
+                -e MYSQL_USER=glpi \
+                -e MYSQL_PASSWORD=glpi_password \
+                -v mysql-dev-data:/var/lib/mysql \
+                mysql:5.7
+              
+              echo "Attente de MySQL..."
+              sleep 30
+            fi
+            
+            # Déployer GLPI
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ${IMAGE}:${TAG}
-            docker stop ${CONTAINER_NAME} 2>/dev/null || true
-            docker rm ${CONTAINER_NAME} 2>/dev/null || true
+            docker stop glpi-dev 2>/dev/null || true
+            docker rm glpi-dev 2>/dev/null || true
             
             docker run -d \
-              --name ${CONTAINER_NAME} \
+              --name glpi-dev \
+              --network glpi-dev-network \
               --restart unless-stopped \
               -p 127.0.0.1:8081:80 \
               -v glpi-dev-data:/var/www/html/files \
               -v glpi-dev-config:/var/www/html/config \
-              -e DB_HOST="${{ secrets.DEV_DB_HOST }}" \
-              -e DB_NAME="${{ secrets.DEV_DB_NAME }}" \
-              -e DB_USER="${{ secrets.DEV_DB_USER }}" \
-              -e DB_PASS="${{ secrets.DEV_DB_PASSWORD }}" \
+              -e DB_HOST="mysql-dev" \
+              -e DB_NAME="glpi" \
+              -e DB_USER="glpi" \
+              -e DB_PASSWORD="glpi_password" \
               ${IMAGE}:${TAG}
             
-            docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
-            
             sleep 10
-            if ! docker ps | grep -q ${CONTAINER_NAME}; then
+            if ! docker ps | grep -q glpi-dev; then
               echo "Dev deployment failed"
+              docker logs glpi-dev
               exit 1
             fi
             echo "Dev deployment successful"
@@ -380,30 +400,50 @@ jobs:
           script: |
             IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
             TAG="ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
-            CONTAINER_NAME="glpi-staging"
             
+            # Créer le réseau Docker s'il n'existe pas
+            docker network create glpi-staging-network 2>/dev/null || true
+            
+            # Démarrer MySQL pour staging
+            if ! docker ps -a | grep -q mysql-staging; then
+              docker run -d \
+                --name mysql-staging \
+                --network glpi-staging-network \
+                --restart unless-stopped \
+                -e MYSQL_ROOT_PASSWORD=glpi_password \
+                -e MYSQL_DATABASE=glpi \
+                -e MYSQL_USER=glpi \
+                -e MYSQL_PASSWORD=glpi_password \
+                -v mysql-staging-data:/var/lib/mysql \
+                mysql:5.7
+              
+              echo "Attente de MySQL..."
+              sleep 30
+            fi
+            
+            # Déployer GLPI
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ${IMAGE}:${TAG}
-            docker stop ${CONTAINER_NAME} 2>/dev/null || true
-            docker rm ${CONTAINER_NAME} 2>/dev/null || true
+            docker stop glpi-staging 2>/dev/null || true
+            docker rm glpi-staging 2>/dev/null || true
             
             docker run -d \
-              --name ${CONTAINER_NAME} \
+              --name glpi-staging \
+              --network glpi-staging-network \
               --restart unless-stopped \
               -p 127.0.0.1:8082:80 \
               -v glpi-staging-data:/var/www/html/files \
               -v glpi-staging-config:/var/www/html/config \
-              -e DB_HOST="${{ secrets.STAGING_DB_HOST }}" \
-              -e DB_NAME="${{ secrets.STAGING_DB_NAME }}" \
-              -e DB_USER="${{ secrets.STAGING_DB_USER }}" \
-              -e DB_PASS="${{ secrets.STAGING_DB_PASSWORD }}" \
+              -e DB_HOST="mysql-staging" \
+              -e DB_NAME="glpi" \
+              -e DB_USER="glpi" \
+              -e DB_PASSWORD="glpi_password" \
               ${IMAGE}:${TAG}
             
-            docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
-            
             sleep 10
-            if ! docker ps | grep -q ${CONTAINER_NAME}; then
+            if ! docker ps | grep -q glpi-staging; then
               echo "Staging deployment failed"
+              docker logs glpi-staging
               exit 1
             fi
             echo "Staging deployment successful"
@@ -429,33 +469,50 @@ jobs:
           script: |
             IMAGE="ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}"
             TAG="ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"
-            CONTAINER_NAME="glpi-prod"
             
+            # Créer le réseau Docker s'il n'existe pas
+            docker network create glpi-prod-network 2>/dev/null || true
+            
+            # Démarrer MySQL pour production
+            if ! docker ps -a | grep -q mysql-prod; then
+              docker run -d \
+                --name mysql-prod \
+                --network glpi-prod-network \
+                --restart unless-stopped \
+                -e MYSQL_ROOT_PASSWORD=glpi_password \
+                -e MYSQL_DATABASE=glpi \
+                -e MYSQL_USER=glpi \
+                -e MYSQL_PASSWORD=glpi_password \
+                -v mysql-prod-data:/var/lib/mysql \
+                mysql:5.7
+              
+              echo "Attente de MySQL..."
+              sleep 30
+            fi
+            
+            # Déployer GLPI
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ${IMAGE}:${TAG}
-            
-            docker exec ${CONTAINER_NAME} mysqldump -h ${{ secrets.PROD_DB_HOST }} -u ${{ secrets.PROD_DB_USER }} ${{ secrets.PROD_DB_NAME }} > /backup/glpi_backup_$(date +%Y%m%d_%H%M%S).sql 2>/dev/null || true
-            
-            docker stop ${CONTAINER_NAME} 2>/dev/null || true
-            docker rm ${CONTAINER_NAME} 2>/dev/null || true
+            docker stop glpi-prod 2>/dev/null || true
+            docker rm glpi-prod 2>/dev/null || true
             
             docker run -d \
-              --name ${CONTAINER_NAME} \
+              --name glpi-prod \
+              --network glpi-prod-network \
               --restart unless-stopped \
               -p 127.0.0.1:8080:80 \
               -v glpi-prod-data:/var/www/html/files \
               -v glpi-prod-config:/var/www/html/config \
-              -e DB_HOST="${{ secrets.PROD_DB_HOST }}" \
-              -e DB_NAME="${{ secrets.PROD_DB_NAME }}" \
-              -e DB_USER="${{ secrets.PROD_DB_USER }}" \
-              -e DB_PASS="${{ secrets.PROD_DB_PASSWORD }}" \
+              -e DB_HOST="mysql-prod" \
+              -e DB_NAME="glpi" \
+              -e DB_USER="glpi" \
+              -e DB_PASSWORD="glpi_password" \
               ${IMAGE}:${TAG}
             
-            docker exec ${CONTAINER_NAME} php bin/console dependencies install || true
-            
             sleep 15
-            if ! docker ps | grep -q ${CONTAINER_NAME}; then
+            if ! docker ps | grep -q glpi-prod; then
               echo "Production deployment failed"
+              docker logs glpi-prod
               exit 1
             fi
             echo "Production deployment successful"
