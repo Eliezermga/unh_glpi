@@ -275,8 +275,12 @@ jobs:
             -e MYSQL_PASSWORD=glpi_password \
             mysql:5.7
           
-          # Attendre que MySQL soit prêt
-          sleep 30
+          # Attendre que MySQL soit complètement prêt
+          echo "Attente de MySQL..."
+          sleep 60
+          
+          # Vérifier que MySQL accepte les connexions
+          docker exec mysql-test mysqladmin ping -h localhost -u root -pglpi_password --silent
           
           # Démarrer GLPI dans le même réseau
           docker run -d --name glpi-test \
@@ -288,7 +292,7 @@ jobs:
             -e DB_PASSWORD="glpi_password" \
             ${IMAGE}:${TAG}
           
-          sleep 90
+          sleep 120
           
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "000")
           echo "Code HTTP: $HTTP_CODE"
