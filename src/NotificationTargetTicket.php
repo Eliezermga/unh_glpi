@@ -55,19 +55,9 @@ class NotificationTargetTicket extends NotificationTargetCommonITILObject
 
     public function getSubjectPrefix($event = '')
     {
-
+        // UNH : Préfixe personnalisé pour l'Université
         if ($event != 'alertnotclosed') {
-            $perso_tag = trim(Entity::getUsedConfig(
-                'notification_subject_tag',
-                $this->getEntity(),
-                '',
-                ''
-            ));
-
-            if (empty($perso_tag)) {
-                 $perso_tag = 'GLPI';
-            }
-            return sprintf("[$perso_tag #%07d] ", $this->obj->getField('id'));
+            return sprintf("[UNH #%07d] ", $this->obj->getField('id'));
         }
         return parent::getSubjectPrefix();
     }
@@ -83,7 +73,7 @@ class NotificationTargetTicket extends NotificationTargetCommonITILObject
             && MailCollector::countActiveCollectors()
             && $this->allowResponse()
         ) {
-            return self::HEADERTAG . ' ' . __('To answer by email, write above this line') . ' ' .
+            return self::HEADERTAG . ' ' . __('Pour répondre par email, veuillez écrire au-dessus de cette ligne') . ' ' .
                 self::HEADERTAG;
         }
 
@@ -102,7 +92,7 @@ class NotificationTargetTicket extends NotificationTargetCommonITILObject
             && MailCollector::countActiveCollectors()
             && $this->allowResponse()
         ) {
-            return self::FOOTERTAG . ' ' . __('To answer by email, write under this line') . ' ' .
+            return self::FOOTERTAG . ' ' . __('Pour répondre par email, veuillez écrire en-dessous de cette ligne') . ' ' .
                 self::FOOTERTAG;
         }
 

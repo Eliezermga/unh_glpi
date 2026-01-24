@@ -114,7 +114,8 @@ class NotificationMailing implements NotificationInterface
         }
 
         $mmail->AddAddress($recipient, $CFG_GLPI["admin_email_name"]);
-        $mmail->Subject = "[GLPI] " . __('Mail test');
+        // UNH : Préfixe personnalisé pour le test d'email
+        $mmail->Subject = "[UNH] " . __('Mail test');
         $mmail->Body    = $text;
 
         if (!$mmail->Send()) {
