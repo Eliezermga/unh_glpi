@@ -33,15 +33,11 @@
  * ---------------------------------------------------------------------
  */
 
-/**
- * @since 0.85
- */
+include('../../../inc/includes.php');
 
-include('../inc/includes.php');
+Session::checkRightsOr('plugin_academic_projects', [READ, UPDATE, CREATE, DELETE]);
 
-Session::checkRightsOr('project', [Project::READALL, Project::READMY]);
-
-$project = new Project();
+$project = new PluginAcademicProject();
 
 // Handle actions
 if (isset($_POST['add'])) {
@@ -59,13 +55,13 @@ if (isset($_POST['add'])) {
 } elseif (isset($_GET['id'])) {
     // Show form for editing or viewing
     $project->getFromDB($_GET['id']);
-    Html::header(Project::getTypeName(1), $_SERVER['PHP_SELF'], "tools", "project");
+    Html::header(PluginAcademicProject::getTypeName(1), $_SERVER['PHP_SELF'], "tools", "PluginAcademicProject");
     $project->showForm($_GET['id']);
-    $project->showTeam($project);
+    $project->showTabsContent();
     Html::footer();
 } else {
     // Default: Show search list
-    Html::header(Project::getTypeName(Session::getPluralNumber()), $_SERVER['PHP_SELF'], "tools", "project");
+    Html::header(PluginAcademicProject::getTypeName(Session::getPluralNumber()), $_SERVER['PHP_SELF'], "tools", "PluginAcademicProject");
 
     // Optional filter for student and research projects
     echo "<div class='center'>";
@@ -75,7 +71,23 @@ if (isset($_POST['add'])) {
     echo "<tr class='tab_bg_1'>";
     echo "<td>" . _n('Type', 'Types', 1) . "</td>";
     echo "<td>";
-    ProjectType::dropdown(['name' => 'projecttypes_id', 'value' => $_GET['projecttypes_id'] ?? '']);
+    $types = [
+        'student' => __('Student Project'),
+        'research' => __('Research Project')
+    ];
+    Dropdown::showFromArray('projecttype', $types, ['value' => $_GET['projecttype'] ?? '']);
+    echo "</td>";
+    echo "</tr>";
+    echo "<tr class='tab_bg_1'>";
+    echo "<td>" . __('Status') . "</td>";
+    echo "<td>";
+    $statuses = [
+        'draft' => __('Draft'),
+        'active' => __('Active'),
+        'completed' => __('Completed'),
+        'cancelled' => __('Cancelled')
+    ];
+    Dropdown::showFromArray('status', $statuses, ['value' => $_GET['status'] ?? '']);
     echo "</td>";
     echo "</tr>";
     echo "<tr class='tab_bg_2'>";
@@ -88,14 +100,21 @@ if (isset($_POST['add'])) {
     echo "</div>";
 
     $criteria = [];
-    if (isset($_GET['projecttypes_id']) && !empty($_GET['projecttypes_id'])) {
+    if (isset($_GET['projecttype']) && !empty($_GET['projecttype'])) {
         $criteria['criteria'][] = [
-            'field' => 14, // projecttypes_id
+            'field' => 3, // projecttype
             'searchtype' => 'equals',
-            'value' => $_GET['projecttypes_id']
+            'value' => $_GET['projecttype']
+        ];
+    }
+    if (isset($_GET['status']) && !empty($_GET['status'])) {
+        $criteria['criteria'][] = [
+            'field' => 4, // status
+            'searchtype' => 'equals',
+            'value' => $_GET['status']
         ];
     }
 
-    Search::show('Project', $criteria);
+    Search::show('PluginAcademicProject', $criteria);
     Html::footer();
 }
