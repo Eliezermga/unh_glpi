@@ -18749,9 +18749,9 @@ msgstr "RAID"
 #: src/Central.php:72 src/RSSFeed.php:80
 msgid "RSS feed"
 msgid_plural "RSS feeds"
-msgstr[0] "Flux RSS"
-msgstr[1] "Flux RSS"
-msgstr[2] "Flux RSS"
+msgstr[0] "Sécurité des outils"
+msgstr[1] "Sécurité des outils"
+msgstr[2] "Sécurité des outils"
 
 #: src/System/Status/StatusChecker.php:511
 #, php-format

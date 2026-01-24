@@ -1,0 +1,4 @@
+- [x] Modifier le titre de la page en "Accès au module Outils"
+- [x] Remplacer la liste simulée par une requête DB pour les utilisateurs ayant accès aux outils
+- [x] Afficher la liste des utilisateurs
+- [x] Tester la page
