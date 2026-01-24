@@ -87,7 +87,7 @@
   background: #ffffff;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(9, 8, 8, 0.08);
 }
 
 .chart-card h3 {
