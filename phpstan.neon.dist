@@ -1,0 +1,19 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - inc
+    excludePaths:
+        - vendor
+        - tests
+        - files
+        - marketplace
+        - plugins
+    ignoreErrors:
+        - '#Call to an undefined method#'
+        - '#Access to an undefined property#'
+        - '#Variable \$[a-zA-Z_]+ might not be defined#'
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false
+    tmpDir: .phpstan.cache

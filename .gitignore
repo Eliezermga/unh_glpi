@@ -20,4 +20,4 @@ files/_uploads/
 files/_téléchargements/
 front/dashboard_export.php
 front/dashboard_import.php
-src/Tableau de bord/ImportateurTableau de bord.php
+src/Dashboard/DashboardImporter.php

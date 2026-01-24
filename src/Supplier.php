@@ -68,6 +68,9 @@ class Supplier extends CommonDBTM
     public function prepareInputForAdd($input)
     {
         $input = parent::prepareInputForAdd($input);
+ // UNH : Le fournisseur doit être visible par toutes les facultés
+        $input['is_recursive'] = 1; 
+
         return $this->managePictures($input);
     }
 
@@ -140,6 +143,67 @@ class Supplier extends CommonDBTM
                = _x('button', 'Add a contract');
         }
         return $actions;
+    }
+public function showForm($ID, $options = []) {
+        $this->initForm($ID, $options);
+        $this->showFormHeader($options);
+
+        // --- SECTION 1 : COORDONNÉES DE BASE ---
+        echo "<tr class='tab_bg_1'>";
+        echo "<td>" . __('Nom') . "</td>";
+        echo "<td>" . Html::input('name', ['value' => $this->fields['name'] ?? '', 'size' => 40]) . "</td>";
+        echo "<td>" . __('Type de tiers') . "</td>";
+        echo "<td>";
+        SupplierType::dropdown(['value' => $this->fields["suppliertypes_id"]]);
+        echo "</td>";
+        echo "</tr>";
+
+        echo "<tr class='tab_bg_1'>";
+        echo "<td>" . __('Téléphone') . "</td>";
+        echo "<td>" . Html::input('phonenumber', ['value' => $this->fields['phonenumber'] ?? '']) . "</td>";
+        echo "<td>" . __('Site Web') . "</td>";
+        echo "<td>" . Html::input('website', ['value' => $this->fields['website'] ?? '']) . "</td>";
+        echo "</tr>";
+
+        echo "<tr class='tab_bg_1'>";
+        echo "<td>" . __('Adresse') . "</td>";
+        echo "<td colspan='3'>";
+        echo "<textarea name='address' cols='45' rows='2'>" . ($this->fields['address'] ?? '') . "</textarea>";
+        echo "</td>";
+        echo "</tr>";
+
+        // --- SECTION 2 : VOS CHAMPS SPÉCIFIQUES UNH ---
+        echo "<tr class='tab_bg_1'>";
+        echo "<th colspan='4' class='center' style='background-color:#003366; color:white;'>" . __('INFORMATIONS SPÉCIFIQUES UNH') . "</th>";
+        echo "</tr>";
+
+        echo "<tr class='tab_bg_1'>";
+        echo "<td>" . __('Catégorie de Partenaire UNH') . "</td>";
+        echo "<td>";
+        echo Html::select('unh_supplier_type', [
+            'local'    => 'Fournisseur Local (Lubumbashi)',
+            'national' => 'Fournisseur National (RDC)',
+            'inter'    => 'Partenaire International'
+        ], ['value' => $this->fields['unh_supplier_type'] ?? '']);
+        echo "</td>";
+
+        echo "<td>" . __('Évaluation Qualité (1-5)') . "</td>";
+        echo "<td>";
+        echo Html::select('unh_rating', [
+            0 => '---',
+            1 => '⭐',
+            2 => '⭐⭐',
+            3 => '⭐⭐⭐',
+            4 => '⭐⭐⭐⭐',
+            5 => '⭐⭐⭐⭐⭐'
+        ], ['value' => $this->fields['unh_rating'] ?? 0]);
+        echo "</td>";
+        echo "</tr>";
+
+        // Affiche le bouton Sauvegarder unique
+        $this->showFormButtons($options);
+        
+        return true;
     }
 
     public function rawSearchOptions()
@@ -362,6 +426,24 @@ class Supplier extends CommonDBTM
 
         $tab = array_merge($tab, Notepad::rawSearchOptionsToAdd());
 
+        // --- TEST UNH : Utilisation d'IDs hors plage standard ---
+        $tab[] = [
+            'id'                 => '950', 
+            'table'              => $this->getTable(),
+            'field'              => 'unh_supplier_type',
+            'name'               => __('Catégorie UNH'),
+            'datatype'           => 'string',
+            'autocomplete'       => true
+        ];
+
+        $tab[] = [
+            'id'                 => '951',
+            'table'              => $this->getTable(),
+            'field'              => 'unh_rating',
+            'name'               => __('Évaluation Qualité (1-5)'),
+            'datatype'           => 'number',
+        ];
+       
         return $tab;
     }
 
