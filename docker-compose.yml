@@ -10,11 +10,11 @@ services:
       # Exposition sur toutes les interfaces (accessible via IP serveur)
       - "8080:80"
     environment:
-      # Variables d'environnement pour la connexion DB
-      - DB_HOST=database
+      # Variables d'environnement pour la connexion DB (alignées avec CI)
+      - DB_HOST=mysql
       - DB_NAME=glpi
-      - DB_USER=glpi_user
-      - DB_PASSWORD=glpi_secure_password
+      - DB_USER=glpi
+      - DB_PASSWORD=glpi_password
       - GLPI_INSTALL_MODE=0
     volumes:
       # Volumes persistants pour les données GLPI
@@ -22,22 +22,22 @@ services:
       - glpi_config:/var/www/html/config
       - ./plugins:/var/www/html/plugins
     depends_on:
-      database:
+      mysql:
         condition: service_healthy
     networks:
       - glpi_network
 
-  # Service MySQL 5.7
-  database:
+  # Service MySQL 5.7 (aligné avec CI)
+  mysql:
     image: mysql:5.7
     container_name: glpi_mysql
     restart: unless-stopped
     environment:
-      # Configuration MySQL sécurisée
-      MYSQL_ROOT_PASSWORD: root_secure_password
+      # Configuration MySQL identique au CI
+      MYSQL_ROOT_PASSWORD: glpi_password
       MYSQL_DATABASE: glpi
-      MYSQL_USER: glpi_user
-      MYSQL_PASSWORD: glpi_secure_password
+      MYSQL_USER: glpi
+      MYSQL_PASSWORD: glpi_password
       MYSQL_CHARSET: utf8mb4
       MYSQL_COLLATION: utf8mb4_unicode_ci
     volumes:
@@ -50,7 +50,7 @@ services:
       - "127.0.0.1:3306:3306"
     healthcheck:
       # Vérification de santé MySQL
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_secure_password"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pglpi_password"]
       timeout: 20s
       retries: 10
       interval: 10s

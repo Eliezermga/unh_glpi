@@ -301,6 +301,20 @@ jobs:
     - name: Deploy to dev environment
       run: |
         echo "Déploiement en développement"
+        echo "Image: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)" integration-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/configmysqlcicd_k'
+    
+    steps:
+    - name: Deploy to dev environment
+      run: |
+        echo "Déploiement en développement"
+        echo "Image: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)" integration-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/configmysqlcicd_k'
+    
+    steps:
+    - name: Deploy to dev environment
+      run: |
+        echo "Déploiement en développement"
         echo "Image: ghcr.io/${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:ci-cdmysql-$(echo ${{ github.sha }} | cut -c1-7)"eds: [build, integration-tests]
     if: github.event_name == 'push' && github.ref == 'refs/heads/CI/cdmysql'
     environment: development
