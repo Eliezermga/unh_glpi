@@ -1,0 +1,97 @@
+.unh-dashboard {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-title {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.kpi-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.kpi-title {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.kpi-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.kpi-card.warning {
+  background: #fff3cd;
+}
+
+.kpi-card.danger {
+  background: #f8d7da;
+}
+
+.kpi-card.info {
+  background: #d1ecf1;
+}
+
+.dashboard-actions {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.dashboard-actions a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 20px;
+  background: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.dashboard-actions a:hover {
+  background: #2980b9;
+}
+
+
+
+
+
+
+
+
+
+
+
+.charts-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 20px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.chart-card h3 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  text-align: center;
+}
