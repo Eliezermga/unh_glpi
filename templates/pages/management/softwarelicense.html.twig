@@ -1,138 +1,165 @@
 {#
- # ---------------------------------------------------------------------
- #
- # GLPI - Gestionnaire Libre de Parc Informatique
- #
- # http://glpi-project.org
- #
- # @copyright 2015-2023 Teclib' and contributors.
- # @copyright 2003-2014 by the INDEPNET Development Team.
- # @licence   https://www.gnu.org/licenses/gpl-3.0.html
- #
- # ---------------------------------------------------------------------
- #
- # LICENSE
- #
- # This file is part of GLPI.
- #
- # This program is free software: you can redistribute it and/or modify
- # it under the terms of the GNU General Public License as published by
- # the Free Software Foundation, either version 3 of the License, or
- # (at your option) any later version.
- #
- # This program is distributed in the hope that it will be useful,
- # but WITHOUT ANY WARRANTY; without even the implied warranty of
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- # See the GNU General Public License for more details.
- #
- # You should have received a copy of the GNU General Public License
- # along with this program. If not, see <https://www.gnu.org/licenses/>.
- #
- # ---------------------------------------------------------------------
- #}
-
-{# === Software License form template (custom formatting update) === #}
+ # GLPI - Formulaire Licence Logiciel
+ # Université Nouveaux Horizons (UNH)
+#}
 
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
-
 {% set params = params ?? [] %}
 
+{# ID entité UNH #}
+{% set UNH_ENTITY_ID = 3 %}
+
 {% block form_fields %}
+
+<input type="hidden" name="entities_id" value="{{ UNH_ENTITY_ID }}"/>
+
+<div class="alert alert-info mb-3">
+   <strong>Université Nouveaux Horizons</strong><br>
+   Gestion institutionnelle des licences logicielles
+</div>
+
+{# ================= LOGICIEL ================= #}
+{% if item.fields['id'] > 0 %}
+
+   <input type="hidden" name="softwares_id" value="{{ item.fields['softwares_id'] }}" />
+
+   {% set software_link %}
+      <a href="{{ call('Software::getFormURLWithID', [item.fields['softwares_id']]) }}">
+         {{ call('Dropdown::getDropdownName', ['glpi_softwares', item.fields['softwares_id']]) }}
+      </a>
+   {% endset %}
+
+   {{ fields.field('software', software_link, __('Logiciel')) }}
+
+{% else %}
+
    {{ fields.dropdownField(
       'Software',
       'softwares_id',
       item.fields['softwares_id'],
-      "Software"|itemtype_name,
+      __('Logiciel'),
       {
-         'entity': item.fields['entities_id'],
-         'condition': {
-            'is_template': 0,
-            'is_deleted': 0
-         },
+         'entity': UNH_ENTITY_ID,
+         'condition': {'is_deleted': 0},
          'on_change': 'this.form.submit()'
       }
    ) }}
 
-   {{ fields.nullField() }}
+{% endif %}
 
-   {{ parent() }}
+{{ fields.nullField() }}
+
+{# ================= TYPE DE LICENCE ================= #}
+{{ fields.dropdownField(
+   'SoftwareLicenseType',
+   'softwarelicensetypes_id',
+   item.fields['softwarelicensetypes_id'],
+   __('Type de licence'),
+   {'entity': UNH_ENTITY_ID}
+) }}
+
+{# ================= FOURNISSEUR ================= #}
+{{ fields.dropdownField(
+   'Supplier',
+   'suppliers_id',
+   item.fields['suppliers_id'],
+   __('Fournisseur'),
+   {'entity': UNH_ENTITY_ID}
+) }}
+
+{# ================= LOCALISATION ================= #}
+{{ fields.dropdownField(
+   'Location',
+   'locations_id',
+   item.fields['locations_id'],
+   __('Faculté / Service'),
+   {'entity': UNH_ENTITY_ID}
+) }}
+
+{{ parent() }}
 {% endblock %}
 
 {% block more_fields %}
 
-   {# Version currently used #}
-   {% set field %}
-      {% do call(
-         'SoftwareVersion::dropdownForOneSoftware',
-         [{
-            'name': 'softwareversions_id_use',
-            'softwares_id': item.fields['softwares_id'],
-            'value': item.fields['softwareversions_id_use'],
-            'width': '100%'
-         }]
-      ) %}
-   {% endset %}
-   {{ fields.field('softwareversions_id_use', field, __('Version in use')) }}
+{# ================= VERSION UTILISÉE ================= #}
+{% set field %}
+   {% do call('SoftwareVersion::dropdownForOneSoftware', [{
+      'name': 'softwareversions_id_use',
+      'softwares_id': item.fields['softwares_id'],
+      'value': item.fields['softwareversions_id_use'],
+      'width': '100%'
+   }]) %}
+{% endset %}
+{{ fields.field('softwareversions_id_use', field, __('Version utilisée à l’UNH')) }}
 
-   {# Purchased version #}
-   {% set field %}
-      {% do call(
-         'SoftwareVersion::dropdownForOneSoftware',
-         [{
-            'name': 'softwareversions_id_buy',
-            'softwares_id': item.fields['softwares_id'],
-            'value': item.fields['softwareversions_id_buy'],
-            'width': '100%'
-         }]
-      ) %}
-   {% endset %}
-   {{ fields.field('softwareversions_id_buy', field, __('Purchase version')) }}
+{# ================= VERSION ACHETÉE ================= #}
+{% set field %}
+   {% do call('SoftwareVersion::dropdownForOneSoftware', [{
+      'name': 'softwareversions_id_buy',
+      'softwares_id': item.fields['softwares_id'],
+      'value': item.fields['softwareversions_id_buy'],
+      'width': '100%'
+   }]) %}
+{% endset %}
+{{ fields.field('softwareversions_id_buy', field, __('Version achetée')) }}
 
-   {# License validity indicator #}
-   {% set validity_msg = null %}
-   {% if item_type == 'SoftwareLicense' %}
-      {% set validity_msg %}
-         {% if item.fields['is_valid'] %}
-            <span class="green">{{ _x('adjective', 'Valid') }}</span>
-         {% elseif not item.fields['is_valid'] and item.fields['allow_overquota'] %}
-            <span class="green">{{ _x('adjective', 'Valid (Over Quota)') }}</span>
-         {% else %}
-            <span class="red">{{ _x('adjective', 'Invalid') }}</span>
-         {% endif %}
-      {% endset %}
-   {% endif %}
+{# ================= QUANTITÉ ================= #}
+{{ fields.dropdownNumberField(
+   'number',
+   item.fields['number'],
+   __('Nombre de licences'),
+   {
+      'min': 1,
+      'max': 10000,
+      'step': 1,
+      'toadd': {'-1': __('Illimité')}
+   }
+) }}
 
-   {{ fields.dropdownNumberField(
-      'number',
-      item.fields['number'],
-      _x('quantity', 'Number'),
-      {
-         'min': 1,
-         'max': 10000,
-         'step': 1,
-         'toadd': { '-1': __('Unlimited') },
-         'add_field_html': validity_msg
-      }
-   ) }}
+{# ================= DÉPASSEMENT ================= #}
+{{ fields.dropdownYesNo(
+   'allow_overquota',
+   item.fields['allow_overquota'],
+   __('Autoriser le dépassement')
+) }}
 
-   {{ fields.dropdownYesNo(
-      'allow_overquota',
-      item.fields['allow_overquota'],
-      __('Allow Over-Quota')
-   ) }}
+{# ================= RESPONSABLE ================= #}
+{{ fields.dropdownField(
+   'User',
+   'users_id_tech',
+   item.fields['users_id_tech'],
+   __('Responsable IT'),
+   {'entity': UNH_ENTITY_ID}
+) }}
 
-   {{ fields.datetimeField(
-      'expire',
-      item.fields['expire'],
-      __('Expiration'),
-      {
-         'helper': __('On search engine, use "Expiration contains NULL" to search licenses with no expiration date')
-      }
-   ) }}
+{# ================= GROUPE IT ================= #}
+{{ fields.dropdownField(
+   'Group',
+   'groups_id',
+   item.fields['groups_id'],
+   __('Service informatique'),
+   {'entity': UNH_ENTITY_ID}
+) }}
 
-   {% if params['withtemplate'] == 1 %}
-      {{ fields.hiddenField('withtemplate', '1') }}
-   {% endif %}
+{# ================= EXPIRATION ================= #}
+{{ fields.datetimeField(
+   'expire',
+   item.fields['expire'],
+   __('Date d’expiration'),
+   {'helper': __('Vide = licence permanente')}
+) }}
+
+{# ================= COMMENTAIRE ================= #}
+{{ fields.textareaField(
+   'comment',
+   item.fields['comment'],
+   __('Observations institutionnelles'),
+   {'rows': 3}
+) }}
+
+{% if params['withtemplate'] == 1 %}
+   {{ fields.hiddenField('withtemplate', '1') }}
+{% endif %}
 
 {% endblock %}
