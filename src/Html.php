@@ -1398,15 +1398,21 @@ HTML;
         }
 
         $menu += [
-            'management' => [
-                'title' => __('Management'),
-                'types' => [
-                    'SoftwareLicense', 'Budget', 'Supplier', 'Contact', 'Contract',
-                    'Document', 'Line', 'Certificate', 'Datacenter', 'Cluster', 'Domain',
-                    'Appliance', 'Database'
-                ],
-                'icon'  => 'ti ti-wallet'
-            ],
+    'management' => [
+        'title' => __('Management'),
+        'types' => [
+            'SoftwareLicense', 'Budget', 'Supplier', 'Contact', 'Contract',
+            'Document', 'Line', 'Certificate',
+            // 'Datacenter',
+            // 'Cluster',
+            // 'Domain',
+            // 'Appliance',
+            'Database'
+        ],
+        'icon'  => 'ti ti-wallet'
+    ],
+];
+
             'tools' => [
                 'title' => __('Tools'),
                 'types' => [
