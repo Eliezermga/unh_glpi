@@ -3,14 +3,17 @@ set -e
 
 echo "🚀 Démarrage de GLPI..."
 
-# Attendre que MySQL soit prêt
+# Attendre que MySQL soit prêt (test TCP simple)
 echo "⏳ Attente de la base de données..."
-while ! mysqladmin ping -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" --silent; do
+until nc -z -v -w30 "$DB_HOST" 3306; do
     echo "   Base de données non disponible, nouvelle tentative dans 5s..."
     sleep 5
 done
 
 echo "✅ Base de données disponible"
+
+# Attendre 5 secondes supplémentaires pour que MySQL soit complètement prêt
+sleep 5
 
 # Vérifier si GLPI est déjà installé
 if [ ! -f "/var/www/html/config/config_db.php" ]; then

@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     unzip \
     git \
+    netcat-openbsd \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
