@@ -805,7 +805,7 @@ class Entity extends CommonTreeDropdown
             'name'               => __('Comments'),
             'datatype'           => 'text'
         ];
-
+      
         $tab[] = [
             'id'                 => '122',
             'table'              => $this->getTable(),
@@ -1950,7 +1950,7 @@ class Entity extends CommonTreeDropdown
             return false;
         }
 
-       // Notification right applied
+    // Notification correcte appliquée
         $canedit = (Notification::canUpdate()
                   && Session::haveAccessToEntity($ID));
 
