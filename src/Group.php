@@ -232,11 +232,11 @@ class Group extends CommonTreeDropdown
         echo "<td>" . __('Name') . "</td>";
         echo "<td>";
         echo Html::input('name', ['value' => $this->fields['name']]);
-        /*echo "</td>";
+        echo "</td>";
         echo "<td rowspan='12' class='middle'>" . __('Comments') . "</td>";
         echo "<td class='middle' rowspan='12'>";
         echo "<textarea class='form-control' name='comment' >" . $this->fields["comment"] . "</textarea>";
-        echo "</td></tr>";*/
+        echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('As child of') . "</td><td>";
