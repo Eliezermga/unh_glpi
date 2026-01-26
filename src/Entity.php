@@ -798,13 +798,13 @@ class Entity extends CommonTreeDropdown
             'datatype'           => 'string',
         ];
 
-        $tab[] = [
+      /*  $tab[] = [
             'id'                 => '16',
             'table'              => $this->getTable(),
             'field'              => 'comment',
             'name'               => __('Comments'),
             'datatype'           => 'text'
-        ];
+        ];*/
 
         $tab[] = [
             'id'                 => '122',
