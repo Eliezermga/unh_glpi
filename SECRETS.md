@@ -44,4 +44,3 @@ sudo usermod -aG docker deploy
 - Considérer l'authentification par clé SSH
 - Restreindre l'accès SSH par IP si possible
 - Utiliser un utilisateur dédié avec permissions minimales
-

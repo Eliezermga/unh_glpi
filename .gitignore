@@ -21,3 +21,5 @@ files/_uploads/
 front/dashboard_export.php
 front/dashboard_import.php
 src/Dashboard/DashboardImporter.php
+
+.vscode/
