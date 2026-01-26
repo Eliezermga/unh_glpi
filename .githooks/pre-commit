@@ -1,0 +1,35 @@
+#!/bin/sh
+# Pre-commit hook for GLPI
+
+echo "🔍 Running pre-commit checks..."
+
+# Check PHP syntax
+echo "Checking PHP syntax..."
+if ! make syntax; then
+    echo "❌ PHP syntax errors found. Commit aborted."
+    exit 1
+fi
+
+# Check coding standards
+echo "Checking coding standards..."
+if ! make lint; then
+    echo "❌ Coding standard violations found. Run 'make lint-fix' to fix them."
+    exit 1
+fi
+
+# Run static analysis
+echo "Running static analysis..."
+if ! make analyze; then
+    echo "⚠️ Static analysis issues found. Please review."
+    # Don't block commit for static analysis warnings
+fi
+
+# Run security audit
+echo "Running security audit..."
+if ! make security; then
+    echo "⚠️ Security vulnerabilities found. Please review."
+    # Don't block commit for security warnings in development
+fi
+
+echo "✅ Pre-commit checks passed!"
+exit 0
