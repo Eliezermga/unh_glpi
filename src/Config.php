@@ -189,6 +189,74 @@ class Config extends CommonDBTM
             }
         }
 
+        // Validate university name
+        if (isset($input["university_name"]) && !empty($input["university_name"])) {
+            $input["university_name"] = trim($input["university_name"]);
+            if (strlen($input["university_name"]) > 255) {
+                Session::addMessageAfterRedirect(__('University name is too long (maximum 255 characters)!'), false, ERROR);
+                return false;
+            }
+        }
+
+        // Validate academic year format (e.g., "2024-2025")
+        if (isset($input["academic_year"]) && !empty($input["academic_year"])) {
+            $input["academic_year"] = trim($input["academic_year"]);
+            if (!preg_match('/^\d{4}-\d{4}$/', $input["academic_year"])) {
+                Session::addMessageAfterRedirect(__('Invalid academic year format! Expected format: YYYY-YYYY (e.g., 2024-2025)'), false, ERROR);
+                return false;
+            }
+        }
+
+        // Validate current semester
+        if (isset($input["current_semester"]) && !empty($input["current_semester"])) {
+            $valid_semesters = ['autumn', 'spring', 'summer'];
+            if (!in_array($input["current_semester"], $valid_semesters)) {
+                Session::addMessageAfterRedirect(__('Invalid semester value!'), false, ERROR);
+                return false;
+            }
+        }
+
+        // Validate academic year dates
+        if (isset($input["academic_year_start_date"]) && !empty($input["academic_year_start_date"])) {
+            $start_date = strtotime($input["academic_year_start_date"]);
+            if ($start_date === false) {
+                Session::addMessageAfterRedirect(__('Invalid academic year start date!'), false, ERROR);
+                return false;
+            }
+        }
+
+        if (isset($input["academic_year_end_date"]) && !empty($input["academic_year_end_date"])) {
+            $end_date = strtotime($input["academic_year_end_date"]);
+            if ($end_date === false) {
+                Session::addMessageAfterRedirect(__('Invalid academic year end date!'), false, ERROR);
+                return false;
+            }
+
+            // Check that end date is after start date if both are set
+            if (isset($input["academic_year_start_date"]) && !empty($input["academic_year_start_date"])) {
+                $start_date = strtotime($input["academic_year_start_date"]);
+                if ($end_date <= $start_date) {
+                    Session::addMessageAfterRedirect(__('Academic year end date must be after start date!'), false, ERROR);
+                    return false;
+                }
+            }
+        }
+
+        // Validate helpdesk and central doc URLs
+        if (isset($input["helpdesk_doc_url"]) && !empty($input["helpdesk_doc_url"])) {
+            if (!Toolbox::isValidWebUrl($input["helpdesk_doc_url"])) {
+                Session::addMessageAfterRedirect(__('Invalid student documentation link!'), false, ERROR);
+                return false;
+            }
+        }
+
+        if (isset($input["central_doc_url"]) && !empty($input["central_doc_url"])) {
+            if (!Toolbox::isValidWebUrl($input["central_doc_url"])) {
+                Session::addMessageAfterRedirect(__('Invalid administrative documentation link!'), false, ERROR);
+                return false;
+            }
+        }
+
         $input = $this->handleSmtpInput($input);
 
         if (isset($input["proxy_passwd"]) && empty($input["proxy_passwd"])) {
