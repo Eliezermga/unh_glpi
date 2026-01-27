@@ -53,6 +53,80 @@
 
 {% block config_fields %}
 
+<div class="hr-text">
+    <i class="ti ti-school"></i>
+    <span>{{ __('University identity') }}</span>
+</div>
+
+<div class="row ps-4">
+
+    {{ fields.textField(
+        'university_name',
+        config['university_name'] ?? '',
+        __('University name'),
+        field_options|merge({
+            'helper': __('This name will be displayed in the application header')
+        })
+    ) }}
+
+</div>
+
+<div class="hr-text">
+    <i class="ti ti-calendar"></i>
+    <span>{{ __('Academic configuration') }}</span>
+</div>
+
+<div class="row ps-4">
+
+    {{ fields.textField(
+        'academic_year',
+        config['academic_year'] ?? '',
+        __('Current academic year'),
+        field_options|merge({
+            'helper': __('Example: 2024-2025'),
+            'placeholder': '2024-2025'
+        })
+    ) }}
+
+    {{ fields.dropdownArrayField(
+        'current_semester',
+        config['current_semester'] ?? '',
+        {
+            'autumn': __('Autumn'),
+            'spring': __('Spring'),
+            'summer': __('Summer')
+        },
+        __('Current semester'),
+        field_options|merge({
+            'width': 'auto',
+        })
+    ) }}
+
+    {{ fields.dateField(
+        'academic_year_start_date',
+        config['academic_year_start_date'] ?? '',
+        __('Academic year start date'),
+        field_options|merge({
+            'maybeempty': true,
+        })
+    ) }}
+
+    {{ fields.dateField(
+        'academic_year_end_date',
+        config['academic_year_end_date'] ?? '',
+        __('Academic year end date'),
+        field_options|merge({
+            'maybeempty': true,
+        })
+    ) }}
+
+</div>
+
+<div class="hr-text">
+    <i class="ti ti-settings"></i>
+    <span>{{ __('General configuration') }}</span>
+</div>
+
 <div class="row ps-4">
 
     {{ fields.textField(
@@ -69,21 +143,26 @@
         field_options|merge({
             'enable_richtext': true,
             'enable_images': false,
+            'helper': __('Welcome message for university users. You can use HTML formatting.')
         })
     ) }}
 
     {{ fields.textField(
         'helpdesk_doc_url',
         config['helpdesk_doc_url'],
-        __('Simplified interface help link'),
-        field_options
+        __('Student documentation link'),
+        field_options|merge({
+            'helper': __('Link to student documentation (simplified interface)')
+        })
     ) }}
 
     {{ fields.textField(
         'central_doc_url',
         config['central_doc_url'],
-        __('Standard interface help link'),
-        field_options
+        __('Administrative documentation link'),
+        field_options|merge({
+            'helper': __('Link to administrative documentation (standard interface)')
+        })
     ) }}
 
     {{ fields.numberField(
