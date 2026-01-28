@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <name>Base de Connaissances Universitaire</name>
+  <key>universite</key>
+  <state>stable</state>
+  <type>plugin</type>
+  <homepage>https://votre-universite.fr</homepage>
+  <version>1.0.0</version>
+  <author>Équipe de développement</author>
+  <license>GPLv2+</license>
+  <description>
+    <short>Gestion centralisée de la base de connaissances universitaire</short>
+    <long>
+      Solution complète de gestion des connaissances universitaires.
+      Permet de gérer les cours, ressources (documents, vidéos, liens) et catégories.
+      Interface intuitive et facile d'utilisation pour étudiants et personnel.
+    </long>
+  </description>
+  <requirements>
+    <requirement type="glpi_version" value="10.0" />
+    <requirement type="php_version" value="7.4" />
+  </requirements>
+</plugin>

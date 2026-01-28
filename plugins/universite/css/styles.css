@@ -1,0 +1,195 @@
+/* Style général du plugin */
+.plugin_universite {
+    margin: 20px;
+}
+
+/* En-tête des sections */
+.plugin_universite h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+/* Cartes de cours */
+.course-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.course-card:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.course-card h3 {
+    margin-top: 0;
+    color: #2980b9;
+}
+
+/* Boutons d'action */
+.plugin_universite .btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #2980b9;
+    outline: 2px solid #1a5a7a;
+    outline-offset: 2px;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #27ae60;
+    outline: 2px solid #1a6a3f;
+    outline-offset: 2px;
+}
+
+/* Formulaire */
+.plugin_universite form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.plugin_universite .form-group {
+    margin-bottom: 15px;
+}
+
+.plugin_universite label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.plugin_universite input[type="text"],
+.plugin_universite input[type="email"],
+.plugin_universite input[type="password"],
+.plugin_universite input[type="number"],
+.plugin_universite textarea,
+.plugin_universite select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.plugin_universite input[type="text"]:focus,
+.plugin_universite input[type="email"]:focus,
+.plugin_universite input[type="password"]:focus,
+.plugin_universite input[type="number"]:focus,
+.plugin_universite textarea:focus,
+.plugin_universite select:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+    border-color: #3498db;
+}
+
+.plugin_universite textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Tableaux */
+.plugin_universite table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.plugin_universite th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.plugin_universite td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.plugin_universite tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Messages d'alerte */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    role: alert;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+/* Support Safari */
+@supports (-webkit-backdrop-filter: blur(10px)) {
+    .plugin_universite .blur-effect {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* Scrollbar pour support moderne */
+@supports (scrollbar-gutter: stable) {
+    html {
+        scrollbar-gutter: stable;
+    }
+} 
