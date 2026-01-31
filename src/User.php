@@ -3757,7 +3757,7 @@ echo "</td></tr>\n";
         ];
 
         $tab[] = [
-            'id'                 => '23',
+            'id'                 => '231',
             'table'              => $this->getTable(),
             'field'              => 'date_sync',
             'datatype'           => 'datetime',
