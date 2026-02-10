@@ -3,73 +3,126 @@
 /**
  * ---------------------------------------------------------------------
  *
- * GLPI - Gestionnaire Libre de Parc Informatique
+ * Base de connaissances pédagogique (Cours, Tutoriels et Guides)
+ * Adaptation GLPI
  *
- * http://glpi-project.org
+ * Basé sur GLPI - Gestionnaire Libre de Parc Informatique
+ * https://glpi-project.org
  *
- * @copyright 2015-2023 Teclib' and contributors.
- * @copyright 2003-2014 by the INDEPNET Development Team.
+ * @copyright 2015-2023 Teclib'
  * @licence   https://www.gnu.org/licenses/gpl-3.0.html
  *
  * ---------------------------------------------------------------------
  *
- * LICENSE
+ * DESCRIPTION
  *
- * This file is part of GLPI.
+ * Base centralisée regroupant :
+ *  - Cours universitaires
+ *  - Tutoriels pédagogiques
+ *  - Guides pratiques
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Accès :
+ *  - Lecture : étudiants et personnel
+ *  - Création / modification / suppression : personnel autorisé
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * ---------------------------------------------------------------------
+ * Fonctionnalités :
+ *  - Recherche par mots-clés
+ *  - Classement par catégories
+ *  - FAQ pédagogique
+ *  - Articles toujours à jour
  */
 
 use Glpi\Toolbox\Sanitizer;
 
 include('../inc/includes.php');
 
-if (!Session::haveRightsOr('knowbase', [READ, KnowbaseItem::READFAQ])) {
+global $CFG_GLPI;
+
+/**
+ * ---------------------------------------------------------------------
+ * Gestion des droits
+ * Lecture obligatoire pour accéder à la base
+ * Les droits d'édition sont gérés automatiquement par GLPI
+ * ---------------------------------------------------------------------
+ */
+if (
+    !Session::haveRight('knowbase', READ)
+    && !Session::haveRight('knowbase', KnowbaseItem::READFAQ)
+) {
     Session::redirectIfNotLoggedIn();
     Html::displayRightError();
 }
-if (isset($_GET["id"])) {
-    Html::redirect(KnowbaseItem::getFormURLWithID($_GET["id"]));
+
+/**
+ * ---------------------------------------------------------------------
+ * Redirection vers la fiche si un ID est fourni
+ * ---------------------------------------------------------------------
+ */
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    Html::redirect(
+        KnowbaseItem::getFormURLWithID((int) $_GET['id'])
+    );
 }
 
-Html::header(KnowbaseItem::getTypeName(1), $_SERVER['PHP_SELF'], "tools", "knowbaseitem");
+/**
+ * ---------------------------------------------------------------------
+ * En-tête GLPI personnalisé
+ * ---------------------------------------------------------------------
+ */
+Html::header(
+    __('Base de connaissances pédagogique'),
+    $_SERVER['PHP_SELF'],
+    'tools',
+    'knowbaseitem'
+);
 
-// Clean for search
+/**
+ * ---------------------------------------------------------------------
+ * Nettoyage sécurisé des paramètres GET
+ * ---------------------------------------------------------------------
+ */
 $_GET = Sanitizer::dbUnescapeRecursive($_GET);
 
-// Search a solution
+/**
+ * ---------------------------------------------------------------------
+ * Pré-remplissage de la recherche si lien avec un objet GLPI
+ * ---------------------------------------------------------------------
+ */
 if (
-    !isset($_GET["contains"])
-    && isset($_GET["item_itemtype"])
-    && isset($_GET["item_items_id"])
+    !isset($_GET['contains'])
+    && isset($_GET['item_itemtype'], $_GET['item_items_id'])
 ) {
-    if (in_array($_GET["item_itemtype"], $CFG_GLPI['kb_types']) && $item = getItemForItemtype($_GET["item_itemtype"])) {
-        if ($item->can($_GET["item_items_id"], READ)) {
-            $_GET["contains"] = $item->getField('name');
+    if (
+        in_array($_GET['item_itemtype'], $CFG_GLPI['kb_types'])
+        && ($item = getItemForItemtype($_GET['item_itemtype']))
+    ) {
+        if ($item->can((int) $_GET['item_items_id'], READ)) {
+            $_GET['contains'] = $item->getField('name');
         }
     }
 }
 
-// Manage forcetab : non standard system (file name <> class name)
+/**
+ * ---------------------------------------------------------------------
+ * Gestion du forçage d'onglet
+ * ---------------------------------------------------------------------
+ */
 if (isset($_GET['forcetab'])) {
     Session::setActiveTab('Knowbase', $_GET['forcetab']);
     unset($_GET['forcetab']);
 }
 
-$kb = new Knowbase();
-$kb->display($_GET);
+/**
+ * ---------------------------------------------------------------------
+ * Affichage de la base de connaissances
+ * ---------------------------------------------------------------------
+ */
+$knowbase = new Knowbase();
+$knowbase->display($_GET);
 
+/**
+ * ---------------------------------------------------------------------
+ * Pied de page GLPI
+ * ---------------------------------------------------------------------
+ */
 Html::footer();
