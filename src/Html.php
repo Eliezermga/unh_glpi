@@ -1,4 +1,4 @@
-<?php
+0 <?php
 
 /**
  * ---------------------------------------------------------------------
@@ -1386,7 +1386,7 @@ HTML;
             'helpdesk' => [
                 'title' => __('Assistance'),
                 'types' => [
-                    'Ticket', 'Problem', 'Change',
+                    'Ticket', 'Change',
                     'Planning', 'Stat', 'TicketRecurrent', 'RecurrentChange'
                 ],
                 'icon'    => 'ti ti-headset'
@@ -1557,6 +1557,16 @@ HTML;
                 }
             }
 
+            // Add Support Technique entry to Assistance menu
+            if (isset($menu['helpdesk']['content'])) {
+                $menu['helpdesk']['content']['support_technique'] = [
+                    'title'    => __('Technical Support'),
+                    'shortcut' => '',
+                    'page'     => '/front/helpdesk.php',
+                    'icon'     => 'ti ti-lifebuoy',
+                ];
+            }
+
             $_SESSION['glpimenu'] = $menu;
            // echo 'menu load';
         } else {
@@ -1631,6 +1641,13 @@ HTML;
                 'icon'    => KnowbaseItem::getIcon(),
             ];
         }
+
+        // Technical Support menu entry
+        $menu['technical_support'] = [
+            'default' => '/front/helpdesk.php',
+            'title'   => __('Technical Support'),
+            'icon'    => 'ti ti-headset',
+        ];
 
         if (
             isset($PLUGIN_HOOKS["helpdesk_menu_entry"])
