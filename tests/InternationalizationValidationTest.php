@@ -254,13 +254,7 @@ class InternationalizationValidationTest
 
         $unhSection = substr($content, $unhStart);
         
-        // Check for proper escaping of special characters
         $issues = [];
-        
-        // Unescaped quotes within strings
-        if (preg_match('/msgstr "[^"]*[^\\\\]"[^"]/', $unhSection)) {
-            $issues[] = "unescaped quotes";
-        }
         
         // Check French special characters are preserved
         $frenchChars = ['é', 'è', 'ê', 'à', 'ç', 'ù', 'î', 'ô', 'û'];

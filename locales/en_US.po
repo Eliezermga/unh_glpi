@@ -26273,3 +26273,94 @@ msgstr "Full location list"
 msgid "Manage entities"
 msgstr "Manage entities"
 
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Critical issues requiring immediate attention, such as duplicate serial numbers or data inconsistencies."
+msgstr "Critical issues requiring immediate attention, such as duplicate serial numbers or data inconsistencies."
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Issues that should be resolved, such as assets without assigned location."
+msgstr "Issues that should be resolved, such as assets without assigned location."
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Informational notifications, such as assets in the root entity."
+msgstr "Informational notifications, such as assets in the root entity."
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Configure the format of asset labels. Example: UNH-PC-001"
+msgstr "Configure the format of asset labels. Example: UNH-PC-001"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "2-5 letters"
+msgstr "2-5 letters"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "digits"
+msgstr "digits"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Define short codes for each asset type."
+msgstr "Define short codes for each asset type."
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Next available labels for each asset type:"
+msgstr "Next available labels for each asset type:"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Labels follow this format:"
+msgstr "Labels follow this format:"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Prefix: Identifier of your organization"
+msgstr "Prefix: Identifier of your organization"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Type Code: Identifies the asset category"
+msgstr "Type Code: Identifies the asset category"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Number: Auto-incremented sequential number"
+msgstr "Number: Auto-incremented sequential number"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Computers"
+msgstr "Computers"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Monitors"
+msgstr "Monitors"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Printers"
+msgstr "Printers"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "e.g., Desktop PC, Laptop, Laser Printer"
+msgstr "e.g., Desktop PC, Laptop, Laser Printer"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Description of this type"
+msgstr "Description of this type"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Delete this type?"
+msgstr "Delete this type?"
+
+#: common
+msgid "Close"
+msgstr "Close"
+
+#: common
+msgid "Error"
+msgstr "Error"
+
+#: common
+msgid "Warning"
+msgstr "Warning"
+
+#: common
+msgid "Info"
+msgstr "Info"
+
+#: common
+msgid "Type"
+msgstr "Type"
