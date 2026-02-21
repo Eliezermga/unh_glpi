@@ -11,6 +11,7 @@
 require_once __DIR__ . '/HtmlMenuUnitTest.php';
 require_once __DIR__ . '/TechnicalSupportIntegrationTest.php';
 require_once __DIR__ . '/TechnicalSupportValidationTest.php';
+require_once __DIR__ . '/InventoryOrganizationTest.php';
 
 use Tests\Unit\HtmlMenuTest;
 use Tests\Integration\TechnicalSupportIntegrationTest;

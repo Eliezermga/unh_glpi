@@ -1387,11 +1387,13 @@ HTML;
                 'title' => __('Assistance'),
                 'types' => [
                     'Ticket', 'Change',
-                    'Planning', 'Stat', 'TicketRecurrent', 'RecurrentChange'
+                    'Planning', 'Stat', 'TicketRecurrent', 'RecurrentChange',
+                    'InventoryOrganization'
                 ],
                 'icon'    => 'ti ti-headset'
             ]
         ];
+
 
         if ($can_read_dashboard && strlen($default_asset_helpdesk) > 0) {
             $menu['helpdesk']['default_dashboard'] = '/front/dashboard_helpdesk.php';
@@ -1648,6 +1650,15 @@ HTML;
             'title'   => __('Technical Support'),
             'icon'    => 'ti ti-headset',
         ];
+
+        // Inventory Organization menu entry (for admins and technicians only)
+        if (InventoryOrganization::canView()) {
+            $menu['inventory_organization'] = [
+                'default' => '/front/inventoryorganization.php',
+                'title'   => __('Inventory Organization'),
+                'icon'    => 'ti ti-building-warehouse',
+            ];
+        }
 
         if (
             isset($PLUGIN_HOOKS["helpdesk_menu_entry"])

@@ -1,0 +1,162 @@
+{#
+ # ---------------------------------------------------------------------
+ #
+ # GLPI - Gestionnaire Libre de Parc Informatique
+ #
+ # Organisation de l'Inventaire - Création d'Entités
+ #
+ # ---------------------------------------------------------------------
+ #}
+
+<div class="container-fluid">
+    {# En-tête #}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">
+            <i class="ti ti-building me-2"></i>
+            {{ title }}
+        </h1>
+        <a href="inventoryorganization.php" class="btn btn-outline-secondary">
+            <i class="ti ti-arrow-left me-1"></i>
+            Retour au Tableau de Bord
+        </a>
+    </div>
+
+    {# Message d'Erreur #}
+    {% if error_message %}
+        <div class="alert alert-danger alert-dismissible mb-4" role="alert">
+            <div class="d-flex">
+                <div>
+                    <i class="ti ti-alert-circle me-2"></i>
+                </div>
+                <div>{{ error_message }}</div>
+            </div>
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></a>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-8">
+            {# Option 1: Formulaire GLPI Natif (Recommandé) #}
+            <div class="card mb-4">
+                <div class="card-header bg-primary-lt">
+                    <h3 class="card-title mb-0">
+                        <i class="ti ti-plus me-2"></i>
+                        Créer une Nouvelle Entité
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-3">
+                        Utilisez le formulaire GLPI standard pour créer une entité avec tous les champs disponibles.
+                    </p>
+                    <a href="entity.form.php" class="btn btn-primary btn-lg">
+                        <i class="ti ti-building-community me-2"></i>
+                        Ouvrir le Formulaire de Création
+                    </a>
+                </div>
+            </div>
+
+            {# Raccourcis de Navigation #}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="ti ti-external-link me-2"></i>
+                        Accès Rapides
+                    </h3>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="entity.php" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <span class="avatar bg-info-lt me-3">
+                            <i class="ti ti-list text-info"></i>
+                        </span>
+                        <div class="flex-fill">
+                            <strong>Liste des Entités</strong>
+                            <p class="text-muted mb-0 small">Voir toutes les entités existantes de GLPI</p>
+                        </div>
+                        <i class="ti ti-chevron-right"></i>
+                    </a>
+                    
+                    <a href="inventoryorganization.location.php" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <span class="avatar bg-success-lt me-3">
+                            <i class="ti ti-map-pin text-success"></i>
+                        </span>
+                        <div class="flex-fill">
+                            <strong>Gérer les Lieux</strong>
+                            <p class="text-muted mb-0 small">Créer et organiser des lieux dans les entités</p>
+                        </div>
+                        <i class="ti ti-chevron-right"></i>
+                    </a>
+                    
+                    <a href="inventoryorganization.type.php" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <span class="avatar bg-warning-lt me-3">
+                            <i class="ti ti-devices text-warning"></i>
+                        </span>
+                        <div class="flex-fill">
+                            <strong>Types de Matériel</strong>
+                            <p class="text-muted mb-0 small">Gérer les catégories d'équipements</p>
+                        </div>
+                        <i class="ti ti-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            {# Guide Rapide #}
+            <div class="card bg-azure-lt">
+                <div class="card-body">
+                    <h4 class="mb-3">
+                        <i class="ti ti-bulb me-2"></i>
+                        Guide Rapide
+                    </h4>
+                    <p class="mb-2"><strong>Qu'est-ce qu'une entité ?</strong></p>
+                    <p class="text-muted mb-3">
+                        Les entités sont des unités organisationnelles qui permettent de segmenter votre parc informatique (par département, site, filiale, etc.).
+                    </p>
+                    
+                    <p class="mb-2"><strong>Hiérarchie des Entités</strong></p>
+                    <ul class="text-muted mb-3">
+                        <li>Créez d'abord l'entité racine (ex: UNH)</li>
+                        <li>Puis ajoutez des sous-entités (ex: Campus, Départements)</li>
+                        <li>Les permissions sont héritées dans l'arborescence</li>
+                    </ul>
+                    
+                    <p class="mb-2"><strong>Bonnes Pratiques</strong></p>
+                    <ul class="text-muted mb-0">
+                        <li>Utilisez des noms explicites</li>
+                        <li>Limitez le nombre de niveaux (3-4 max)</li>
+                        <li>Alignez la structure sur votre organisation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            {# Entités existantes #}
+            <div class="card mt-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Entités Existantes</h3>
+                    <span class="badge bg-primary">{{ entities|length }}</span>
+                </div>
+                <div class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
+                    {% if entities|length > 0 %}
+                        {% for entity in entities|slice(0, 15) %}
+                            <div class="list-group-item py-2">
+                                <i class="ti ti-building me-2 text-muted"></i>
+                                {{ entity.name|raw }}
+                            </div>
+                        {% endfor %}
+                        {% if entities|length > 15 %}
+                            <div class="list-group-item text-muted py-2">
+                                <i class="ti ti-dots me-2"></i>
+                                ... et {{ entities|length - 15 }} autres
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="list-group-item text-muted">
+                            <i class="ti ti-info-circle me-2"></i>
+                            Aucune entité pour le moment
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
