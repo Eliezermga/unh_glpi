@@ -1412,7 +1412,7 @@ HTML;
             'tools' => [
                 'title' => __('Tools'),
                 'types' => [
-                    'Project', 'Reminder', 'RSSFeed', 'KnowbaseItem',
+                    'Project', 'Reminder', 'RSSFeed',
                     'ReservationItem', 'Report', 'MigrationCleaner',
                     'SavedSearch', 'Impact'
                 ],
@@ -1566,6 +1566,14 @@ HTML;
                     'shortcut' => '',
                     'page'     => '/front/helpdesk.php',
                     'icon'     => 'ti ti-lifebuoy',
+                ];
+                
+                // Add FAQ / Knowledge Base entry to Assistance menu (Issue #50)
+                $menu['helpdesk']['content']['faq'] = [
+                    'title'    => __('FAQ'),
+                    'shortcut' => 'b',
+                    'page'     => '/front/knowbaseitem.php',
+                    'icon'     => 'ti ti-book',
                 ];
             }
 
