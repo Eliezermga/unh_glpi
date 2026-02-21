@@ -3,13 +3,13 @@
  #
  # GLPI - Gestionnaire Libre de Parc Informatique
  #
- # Organisation de l'Inventaire - Gestion des Lieux
+ # Inventory Organization - Location Management
  #
  # ---------------------------------------------------------------------
  #}
 
 <div class="container-fluid">
-    {# En-tête #}
+    {# Header #}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="mb-0">
             <i class="ti ti-map-pin me-2"></i>
@@ -17,24 +17,24 @@
         </h1>
         <a href="inventoryorganization.php" class="btn btn-outline-secondary">
             <i class="ti ti-arrow-left me-1"></i>
-            Retour au Tableau de Bord
+            {{ __('Back to Dashboard') }}
         </a>
     </div>
 
-    {# Message de Succès #}
+    {# Success Message #}
     {% if success %}
         <div class="alert alert-success alert-dismissible mb-4" role="alert">
             <div class="d-flex">
                 <div>
                     <i class="ti ti-check me-2"></i>
                 </div>
-                <div>Lieu créé avec succès !</div>
+                <div>{{ __('Location created successfully!') }}</div>
             </div>
-            <a class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></a>
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
         </div>
     {% endif %}
 
-    {# Message d'Erreur #}
+    {# Error Message #}
     {% if error_message %}
         <div class="alert alert-danger alert-dismissible mb-4" role="alert">
             <div class="d-flex">
@@ -43,48 +43,48 @@
                 </div>
                 <div>{{ error_message }}</div>
             </div>
-            <a class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></a>
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
         </div>
     {% endif %}
 
     <div class="row">
         <div class="col-lg-8">
-            {# Option: Formulaire GLPI Natif #}
+            {# Option: Native GLPI Form #}
             <div class="card mb-4">
                 <div class="card-header bg-success-lt">
                     <h3 class="card-title mb-0">
                         <i class="ti ti-plus me-2"></i>
-                        Créer un Nouveau Lieu
+                        {{ __('Create a New Location') }}
                     </h3>
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-3">
-                        Utilisez le formulaire GLPI standard pour créer un lieu avec bâtiment, salle, coordonnées GPS et autres champs.
+                        {{ __('Use the standard GLPI form to create a location with building, room, GPS coordinates and other fields.') }}
                     </p>
                     <a href="location.form.php" class="btn btn-success btn-lg">
                         <i class="ti ti-map-pin me-2"></i>
-                        Ouvrir le Formulaire de Création
+                        {{ __('Open Creation Form') }}
                     </a>
                 </div>
             </div>
 
-            {# Modèles Rapides #}
+            {# Quick Templates #}
             <div class="card mb-4">
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="ti ti-template me-2"></i>
-                        Suggestions de Structure
+                        {{ __('Structure Suggestions') }}
                     </h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-3">Voici une structure de lieux typique pour une université :</p>
+                    <p class="text-muted mb-3">{{ __('Here is a typical location structure for a university:') }}</p>
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <div class="card bg-light">
                                 <div class="card-body text-center py-3">
                                     <i class="ti ti-building-castle text-primary" style="font-size: 24px;"></i>
-                                    <h5 class="mb-1">Campus</h5>
-                                    <small class="text-muted">Site géographique principal</small>
+                                    <h5 class="mb-1">{{ __('Campus') }}</h5>
+                                    <small class="text-muted">{{ __('Main geographical site') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -92,8 +92,8 @@
                             <div class="card bg-light">
                                 <div class="card-body text-center py-3">
                                     <i class="ti ti-building text-info" style="font-size: 24px;"></i>
-                                    <h5 class="mb-1">Bâtiments</h5>
-                                    <small class="text-muted">Bât. A, B, C, Bibliothèque</small>
+                                    <h5 class="mb-1">{{ __('Buildings') }}</h5>
+                                    <small class="text-muted">{{ __('Building A, B, C, Library') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -101,8 +101,8 @@
                             <div class="card bg-light">
                                 <div class="card-body text-center py-3">
                                     <i class="ti ti-door text-success" style="font-size: 24px;"></i>
-                                    <h5 class="mb-1">Salles</h5>
-                                    <small class="text-muted">Bureau 101, Salle Serveur</small>
+                                    <h5 class="mb-1">{{ __('Rooms') }}</h5>
+                                    <small class="text-muted">{{ __('Office 101, Server Room') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -110,15 +110,15 @@
                 </div>
             </div>
 
-            {# Liste des Lieux Existants #}
+            {# Existing Locations List #}
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">
                         <i class="ti ti-list me-2"></i>
-                        Lieux Existants
+                        {{ __('Existing Locations') }}
                     </h3>
                     <a href="location.php" class="btn btn-sm btn-outline-primary">
-                        Voir Tout
+                        {{ __('View All') }}
                         <i class="ti ti-external-link ms-1"></i>
                     </a>
                 </div>
@@ -126,8 +126,8 @@
                     <table class="table table-vcenter card-table">
                         <thead>
                             <tr>
-                                <th>Nom</th>
-                                <th class="text-end">Actifs</th>
+                                <th>{{ __('Name') }}</th>
+                                <th class="text-end">{{ __('Assets') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,7 +146,7 @@
                                 {% if flat_locations|length > 15 %}
                                     <tr>
                                         <td colspan="2" class="text-muted text-center">
-                                            ... et {{ flat_locations|length - 15 }} autres lieux
+                                            ... {{ __('and %d more locations')|format(flat_locations|length - 15) }}
                                         </td>
                                     </tr>
                                 {% endif %}
@@ -154,7 +154,7 @@
                                 <tr>
                                     <td colspan="2" class="text-muted text-center py-4">
                                         <i class="ti ti-map-pin-off me-2"></i>
-                                        Aucun lieu défini pour le moment
+                                        {{ __('No locations defined yet') }}
                                     </td>
                                 </tr>
                             {% endif %}
@@ -165,49 +165,49 @@
         </div>
         
         <div class="col-lg-4">
-            {# Guide Rapide #}
+            {# Quick Guide #}
             <div class="card bg-azure-lt">
                 <div class="card-body">
                     <h4 class="mb-3">
                         <i class="ti ti-bulb me-2"></i>
-                        Guide Rapide
+                        {{ __('Quick Guide') }}
                     </h4>
-                    <p class="mb-2"><strong>Qu'est-ce qu'un lieu ?</strong></p>
+                    <p class="mb-2"><strong>{{ __('What is a location?') }}</strong></p>
                     <p class="text-muted mb-3">
-                        Les lieux permettent de localiser géographiquement vos équipements : campus, bâtiments, bureaux, salles serveur, etc.
+                        {{ __('Locations allow you to geographically locate your equipment: campuses, buildings, offices, server rooms, etc.') }}
                     </p>
                     
-                    <p class="mb-2"><strong>Bonnes Pratiques</strong></p>
+                    <p class="mb-2"><strong>{{ __('Best Practices') }}</strong></p>
                     <ul class="text-muted mb-0">
-                        <li>Structure hiérarchique : Campus → Bâtiment → Étage → Salle</li>
-                        <li>Utilisez des codes cohérents (ex: BAT-A, B101)</li>
-                        <li>Renseignez les coordonnées GPS si disponibles</li>
-                        <li>Associez chaque équipement à un lieu précis</li>
+                        <li>{{ __('Hierarchical structure: Campus → Building → Floor → Room') }}</li>
+                        <li>{{ __('Use consistent codes (e.g., BLDG-A, B101)') }}</li>
+                        <li>{{ __('Fill in GPS coordinates if available') }}</li>
+                        <li>{{ __('Associate each equipment to a specific location') }}</li>
                     </ul>
                 </div>
             </div>
             
-            {# Statistiques #}
+            {# Statistics #}
             <div class="card mt-3">
                 <div class="card-body text-center">
                     <div class="h1 mb-0">{{ flat_locations|length }}</div>
-                    <div class="text-muted">Lieux définis</div>
+                    <div class="text-muted">{{ __('Defined locations') }}</div>
                 </div>
             </div>
             
-            {# Liens Rapides #}
+            {# Quick Links #}
             <div class="card mt-3">
                 <div class="card-header">
-                    <h3 class="card-title">Accès Rapides</h3>
+                    <h3 class="card-title">{{ __('Quick Access') }}</h3>
                 </div>
                 <div class="list-group list-group-flush">
                     <a href="location.php" class="list-group-item list-group-item-action">
                         <i class="ti ti-list me-2"></i>
-                        Liste complète des lieux
+                        {{ __('Full location list') }}
                     </a>
                     <a href="inventoryorganization.entity.php" class="list-group-item list-group-item-action">
                         <i class="ti ti-building me-2"></i>
-                        Gérer les entités
+                        {{ __('Manage entities') }}
                     </a>
                 </div>
             </div>

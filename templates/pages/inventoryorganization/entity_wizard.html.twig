@@ -3,13 +3,13 @@
  #
  # GLPI - Gestionnaire Libre de Parc Informatique
  #
- # Organisation de l'Inventaire - Création d'Entités
+ # Inventory Organization - Entity Creation
  #
  # ---------------------------------------------------------------------
  #}
 
 <div class="container-fluid">
-    {# En-tête #}
+    {# Header #}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="mb-0">
             <i class="ti ti-building me-2"></i>
@@ -17,11 +17,11 @@
         </h1>
         <a href="inventoryorganization.php" class="btn btn-outline-secondary">
             <i class="ti ti-arrow-left me-1"></i>
-            Retour au Tableau de Bord
+            {{ __('Back to Dashboard') }}
         </a>
     </div>
 
-    {# Message d'Erreur #}
+    {# Error Message #}
     {% if error_message %}
         <div class="alert alert-danger alert-dismissible mb-4" role="alert">
             <div class="d-flex">
@@ -30,37 +30,37 @@
                 </div>
                 <div>{{ error_message }}</div>
             </div>
-            <a class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></a>
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
         </div>
     {% endif %}
 
     <div class="row">
         <div class="col-lg-8">
-            {# Option 1: Formulaire GLPI Natif (Recommandé) #}
+            {# Option 1: Native GLPI Form (Recommended) #}
             <div class="card mb-4">
                 <div class="card-header bg-primary-lt">
                     <h3 class="card-title mb-0">
                         <i class="ti ti-plus me-2"></i>
-                        Créer une Nouvelle Entité
+                        {{ __('Create a New Entity') }}
                     </h3>
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-3">
-                        Utilisez le formulaire GLPI standard pour créer une entité avec tous les champs disponibles.
+                        {{ __('Use the standard GLPI form to create an entity with all available fields.') }}
                     </p>
                     <a href="entity.form.php" class="btn btn-primary btn-lg">
                         <i class="ti ti-building-community me-2"></i>
-                        Ouvrir le Formulaire de Création
+                        {{ __('Open Creation Form') }}
                     </a>
                 </div>
             </div>
 
-            {# Raccourcis de Navigation #}
+            {# Navigation Shortcuts #}
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="ti ti-external-link me-2"></i>
-                        Accès Rapides
+                        {{ __('Quick Access') }}
                     </h3>
                 </div>
                 <div class="list-group list-group-flush">
@@ -69,8 +69,8 @@
                             <i class="ti ti-list text-info"></i>
                         </span>
                         <div class="flex-fill">
-                            <strong>Liste des Entités</strong>
-                            <p class="text-muted mb-0 small">Voir toutes les entités existantes de GLPI</p>
+                            <strong>{{ __('Entity List') }}</strong>
+                            <p class="text-muted mb-0 small">{{ __('View all existing GLPI entities') }}</p>
                         </div>
                         <i class="ti ti-chevron-right"></i>
                     </a>
@@ -80,8 +80,8 @@
                             <i class="ti ti-map-pin text-success"></i>
                         </span>
                         <div class="flex-fill">
-                            <strong>Gérer les Lieux</strong>
-                            <p class="text-muted mb-0 small">Créer et organiser des lieux dans les entités</p>
+                            <strong>{{ __('Manage Locations') }}</strong>
+                            <p class="text-muted mb-0 small">{{ __('Create and organize locations within entities') }}</p>
                         </div>
                         <i class="ti ti-chevron-right"></i>
                     </a>
@@ -91,8 +91,8 @@
                             <i class="ti ti-devices text-warning"></i>
                         </span>
                         <div class="flex-fill">
-                            <strong>Types de Matériel</strong>
-                            <p class="text-muted mb-0 small">Gérer les catégories d'équipements</p>
+                            <strong>{{ __('Equipment Types') }}</strong>
+                            <p class="text-muted mb-0 small">{{ __('Manage equipment categories') }}</p>
                         </div>
                         <i class="ti ti-chevron-right"></i>
                     </a>
@@ -101,38 +101,38 @@
         </div>
         
         <div class="col-lg-4">
-            {# Guide Rapide #}
+            {# Quick Guide #}
             <div class="card bg-azure-lt">
                 <div class="card-body">
                     <h4 class="mb-3">
                         <i class="ti ti-bulb me-2"></i>
-                        Guide Rapide
+                        {{ __('Quick Guide') }}
                     </h4>
-                    <p class="mb-2"><strong>Qu'est-ce qu'une entité ?</strong></p>
+                    <p class="mb-2"><strong>{{ __('What is an entity?') }}</strong></p>
                     <p class="text-muted mb-3">
-                        Les entités sont des unités organisationnelles qui permettent de segmenter votre parc informatique (par département, site, filiale, etc.).
+                        {{ __('Entities are organizational units that allow you to segment your IT assets (by department, site, subsidiary, etc.).') }}
                     </p>
                     
-                    <p class="mb-2"><strong>Hiérarchie des Entités</strong></p>
+                    <p class="mb-2"><strong>{{ __('Entity Hierarchy') }}</strong></p>
                     <ul class="text-muted mb-3">
-                        <li>Créez d'abord l'entité racine (ex: UNH)</li>
-                        <li>Puis ajoutez des sous-entités (ex: Campus, Départements)</li>
-                        <li>Les permissions sont héritées dans l'arborescence</li>
+                        <li>{{ __('First create the root entity (e.g., UNH)') }}</li>
+                        <li>{{ __('Then add sub-entities (e.g., Campus, Departments)') }}</li>
+                        <li>{{ __('Permissions are inherited in the tree structure') }}</li>
                     </ul>
                     
-                    <p class="mb-2"><strong>Bonnes Pratiques</strong></p>
+                    <p class="mb-2"><strong>{{ __('Best Practices') }}</strong></p>
                     <ul class="text-muted mb-0">
-                        <li>Utilisez des noms explicites</li>
-                        <li>Limitez le nombre de niveaux (3-4 max)</li>
-                        <li>Alignez la structure sur votre organisation</li>
+                        <li>{{ __('Use explicit names') }}</li>
+                        <li>{{ __('Limit the number of levels (3-4 max)') }}</li>
+                        <li>{{ __('Align the structure with your organization') }}</li>
                     </ul>
                 </div>
             </div>
             
-            {# Entités existantes #}
+            {# Existing Entities #}
             <div class="card mt-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">Entités Existantes</h3>
+                    <h3 class="card-title mb-0">{{ __('Existing Entities') }}</h3>
                     <span class="badge bg-primary">{{ entities|length }}</span>
                 </div>
                 <div class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
@@ -146,13 +146,13 @@
                         {% if entities|length > 15 %}
                             <div class="list-group-item text-muted py-2">
                                 <i class="ti ti-dots me-2"></i>
-                                ... et {{ entities|length - 15 }} autres
+                                ... {{ __('and %d more')|format(entities|length - 15) }}
                             </div>
                         {% endif %}
                     {% else %}
                         <div class="list-group-item text-muted">
                             <i class="ti ti-info-circle me-2"></i>
-                            Aucune entité pour le moment
+                            {{ __('No entities yet') }}
                         </div>
                     {% endif %}
                 </div>

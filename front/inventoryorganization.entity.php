@@ -43,7 +43,7 @@ $flat_entities = flattenEntities($entities);
 
 // Display header
 Html::header(
-    'Gestion des Entités',
+    __('Entity Management'),
     $_SERVER['PHP_SELF'],
     'helpdesk',
     'inventoryorganization'
@@ -51,7 +51,7 @@ Html::header(
 
 // Render the entity page template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/entity_wizard.html.twig', [
-    'title'       => 'Gestion des Entités',
+    'title'       => __('Entity Management'),
     'entities'    => $flat_entities,
     'can_create'  => Entity::canCreate(),
 ]);

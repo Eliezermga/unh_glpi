@@ -3,13 +3,13 @@
  #
  # GLPI - Gestionnaire Libre de Parc Informatique
  #
- # Organisation de l'Inventaire - Vérification de Cohérence
+ # Inventory Organization - Coherence Check
  #
  # ---------------------------------------------------------------------
  #}
 
 <div class="container-fluid">
-    {# En-tête #}
+    {# Header #}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="mb-0">
             <i class="ti ti-checkbox me-2"></i>
@@ -18,16 +18,16 @@
         <div class="btn-list">
             <a href="?export=csv" class="btn btn-outline-success">
                 <i class="ti ti-download me-1"></i>
-                Exporter CSV
+                {{ __('Export CSV') }}
             </a>
             <a href="inventoryorganization.php" class="btn btn-outline-secondary">
                 <i class="ti ti-arrow-left me-1"></i>
-                Retour au Tableau de Bord
+                {{ __('Back to Dashboard') }}
             </a>
         </div>
     </div>
 
-    {# Cartes de Résumé #}
+    {# Summary Cards #}
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="card card-sm {% if summary.total == 0 %}bg-success-lt{% else %}bg-secondary-lt{% endif %}">
@@ -38,7 +38,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.total }}</div>
-                            <div class="text-muted">Total des Problèmes</div>
+                            <div class="text-muted">{{ __('Total Issues') }}</div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.errors }}</div>
-                            <div class="text-muted">Erreurs</div>
+                            <div class="text-muted">{{ __('Errors') }}</div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.warnings }}</div>
-                            <div class="text-muted">Avertissements</div>
+                            <div class="text-muted">{{ __('Warnings') }}</div>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.info }}</div>
-                            <div class="text-muted">Informations</div>
+                            <div class="text-muted">{{ __('Information') }}</div>
                         </div>
                     </div>
                 </div>
@@ -91,52 +91,52 @@
         </div>
     </div>
 
-    {# Filtres #}
+    {# Filters #}
     <div class="card mb-4">
         <div class="card-body">
             <form method="get" action="" class="row g-3 align-items-end">
                 <div class="col-md-4">
-                    <label class="form-label">Type de Problème</label>
+                    <label class="form-label">{{ __('Issue Type') }}</label>
                     <select class="form-select" name="filter_type">
-                        <option value="all" {% if filter_type == 'all' %}selected{% endif %}>Tous les Types</option>
+                        <option value="all" {% if filter_type == 'all' %}selected{% endif %}>{{ __('All Types') }}</option>
                         {% for key, label in issue_types %}
                             <option value="{{ key }}" {% if filter_type == key %}selected{% endif %}>{{ label }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Sévérité</label>
+                    <label class="form-label">{{ __('Severity') }}</label>
                     <select class="form-select" name="filter_severity">
-                        <option value="all" {% if filter_severity == 'all' %}selected{% endif %}>Toutes les Sévérités</option>
-                        <option value="error" {% if filter_severity == 'error' %}selected{% endif %}>Erreurs</option>
-                        <option value="warning" {% if filter_severity == 'warning' %}selected{% endif %}>Avertissements</option>
-                        <option value="info" {% if filter_severity == 'info' %}selected{% endif %}>Informations</option>
+                        <option value="all" {% if filter_severity == 'all' %}selected{% endif %}>{{ __('All Severities') }}</option>
+                        <option value="error" {% if filter_severity == 'error' %}selected{% endif %}>{{ __('Errors') }}</option>
+                        <option value="warning" {% if filter_severity == 'warning' %}selected{% endif %}>{{ __('Warnings') }}</option>
+                        <option value="info" {% if filter_severity == 'info' %}selected{% endif %}>{{ __('Information') }}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary">
                         <i class="ti ti-filter me-1"></i>
-                        Appliquer les Filtres
+                        {{ __('Apply Filters') }}
                     </button>
                     <a href="?" class="btn btn-outline-secondary">
                         <i class="ti ti-x me-1"></i>
-                        Effacer
+                        {{ __('Clear') }}
                     </a>
                 </div>
             </form>
         </div>
     </div>
 
-    {# Tableau des Problèmes ou Message de Succès #}
+    {# Issues Table or Success Message #}
     {% if status_ok %}
         <div class="card bg-success-lt">
             <div class="card-body text-center py-5">
                 <span class="avatar avatar-xl mb-3 bg-success">
                     <i class="ti ti-check"></i>
                 </span>
-                <h2 class="text-success">L'Inventaire est Cohérent !</h2>
+                <h2 class="text-success">{{ __('Inventory is Coherent!') }}</h2>
                 <p class="text-muted mb-0">
-                    Aucun problème détecté. Votre inventaire est correctement structuré.
+                    {{ __('No issues detected. Your inventory is correctly structured.') }}
                 </p>
             </div>
         </div>
@@ -145,7 +145,7 @@
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="ti ti-list me-2"></i>
-                    Problèmes Détectés
+                    {{ __('Detected Issues') }}
                     <span class="badge bg-secondary ms-2">{{ issues|length }}</span>
                 </h3>
             </div>
@@ -153,11 +153,11 @@
                 <table class="table table-vcenter card-table table-striped">
                     <thead>
                         <tr>
-                            <th style="width: 100px;">Sévérité</th>
-                            <th style="width: 150px;">Type</th>
-                            <th>Message</th>
-                            <th style="width: 150px;">Type d'Actif</th>
-                            <th style="width: 150px;">Nom de l'Actif</th>
+                            <th style="width: 100px;">{{ __('Severity') }}</th>
+                            <th style="width: 150px;">{{ __('Type') }}</th>
+                            <th>{{ __('Message') }}</th>
+                            <th style="width: 150px;">{{ __('Asset Type') }}</th>
+                            <th style="width: 150px;">{{ __('Asset Name') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,17 +167,17 @@
                                     {% if issue.severity == 'error' %}
                                         <span class="badge bg-danger">
                                             <i class="ti ti-alert-octagon me-1"></i>
-                                            Erreur
+                                            {{ __('Error') }}
                                         </span>
                                     {% elseif issue.severity == 'warning' %}
                                         <span class="badge bg-warning">
                                             <i class="ti ti-alert-triangle me-1"></i>
-                                            Avert.
+                                            {{ __('Warning') }}
                                         </span>
                                     {% else %}
                                         <span class="badge bg-info">
                                             <i class="ti ti-info-circle me-1"></i>
-                                            Info
+                                            {{ __('Info') }}
                                         </span>
                                     {% endif %}
                                 </td>
@@ -197,7 +197,7 @@
                         {% else %}
                             <tr>
                                 <td colspan="5" class="text-center text-muted py-4">
-                                    Aucun problème ne correspond à vos filtres.
+                                    {{ __('No issues match your filters.') }}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -207,12 +207,12 @@
         </div>
     {% endif %}
 
-    {# Carte d'Aide #}
+    {# Help Card #}
     <div class="card mt-4">
         <div class="card-header">
             <h3 class="card-title">
                 <i class="ti ti-help me-2"></i>
-                Comprendre les Problèmes
+                {{ __('Understanding Issues') }}
             </h3>
         </div>
         <div class="card-body">
@@ -220,28 +220,28 @@
                 <div class="col-md-4">
                     <h5 class="text-danger">
                         <i class="ti ti-alert-octagon me-1"></i>
-                        Erreurs
+                        {{ __('Errors') }}
                     </h5>
                     <p class="text-muted small">
-                        Problèmes critiques nécessitant une attention immédiate, comme les numéros de série en double ou les incohérences de données.
+                        {{ __('Critical issues requiring immediate attention, such as duplicate serial numbers or data inconsistencies.') }}
                     </p>
                 </div>
                 <div class="col-md-4">
                     <h5 class="text-warning">
                         <i class="ti ti-alert-triangle me-1"></i>
-                        Avertissements
+                        {{ __('Warnings') }}
                     </h5>
                     <p class="text-muted small">
-                        Problèmes qui devraient être résolus, comme les actifs sans lieu assigné.
+                        {{ __('Issues that should be resolved, such as assets without assigned location.') }}
                     </p>
                 </div>
                 <div class="col-md-4">
                     <h5 class="text-info">
                         <i class="ti ti-info-circle me-1"></i>
-                        Informations
+                        {{ __('Information') }}
                     </h5>
                     <p class="text-muted small">
-                        Notifications informatives, comme les actifs dans l'entité racine.
+                        {{ __('Informational notifications, such as assets in the root entity.') }}
                     </p>
                 </div>
             </div>
