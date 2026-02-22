@@ -603,8 +603,9 @@ class Config extends CommonDBTM
         echo "<tr><th colspan='4'>" . __('Authentication') . "</th></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td width='30%'>" . __('Automatically add users from an external authentication source') .
-           "</td><td width='20%'>";
+        echo "<td width='30%'>" . __('Automatically add users from an external authentication source');
+        Html::showToolTip(__('Synchronisation automatique avec l\'annuaire universitaire (LDAP/Active Directory)'));
+        echo "</td><td width='20%'>";
         Dropdown::showYesNo("is_users_auto_add", $CFG_GLPI["is_users_auto_add"]);
         echo "</td><td width='30%'>" . __('Add a user without accreditation from a LDAP directory') .
            "</td><td width='20%'>";
@@ -612,7 +613,9 @@ class Config extends CommonDBTM
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td> " . __('Action when a user is deleted from the LDAP directory') . "</td><td>";
+        echo "<td> " . __('Action when a user is deleted from the LDAP directory');
+        Html::showToolTip(__('Action lors de la suppression d\'un étudiant/personnel de l\'annuaire universitaire'));
+        echo "</td><td>";
         AuthLDAP::dropdownUserDeletedActions($CFG_GLPI["user_deleted_ldap"]);
         echo "</td><td> " . __('Action when a user is restored in the LDAP directory') . "</td><td>";
         AuthLDAP::dropdownUserRestoredActions($CFG_GLPI["user_restored_ldap"]);
