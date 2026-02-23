@@ -71,16 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Validate prefix
         if (empty($new_config['prefix'])) {
-            $error_message = 'Le préfixe est requis';
+            $error_message = __('Prefix is required');
         } elseif (!preg_match('/^[A-Z]{2,5}$/', $new_config['prefix'])) {
-            $error_message = 'Le préfixe doit être de 2 à 5 lettres majuscules';
+            $error_message = __('Prefix must be between 2 and 5 uppercase letters');
         } else {
             if (InventoryOrganization::saveLabelingConfig($new_config)) {
                 $success = true;
                 $config = $new_config;
-                Session::addMessageAfterRedirect('Configuration de l\'étiquetage enregistrée', false, INFO);
+                Session::addMessageAfterRedirect(__('Labeling configuration saved'), false, INFO);
             } else {
-                $error_message = 'Échec de l\'enregistrement de la configuration';
+                $error_message = __('Failed to save configuration');
             }
         }
     }
@@ -99,7 +99,7 @@ foreach ($asset_types as $type) {
 
 // Display header
 Html::header(
-    'Configuration de l\'Étiquetage',
+    __('Labeling Configuration'),
     $_SERVER['PHP_SELF'],
     'helpdesk',
     'inventoryorganization'
@@ -107,20 +107,20 @@ Html::header(
 
 // Render the labeling configuration template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/labeling.html.twig', [
-    'title'          => 'Configuration de l\'Étiquetage',
+    'title'          => __('Labeling Configuration'),
     'config'         => $config,
     'preview_labels' => $preview_labels,
     'success'        => $success,
     'error_message'  => $error_message,
     'can_create'     => InventoryOrganization::canCreate(),
     'asset_types'    => [
-        'computer'   => 'Ordinateur',
-        'laptop'     => 'Laptop',
-        'monitor'    => 'Moniteur',
-        'printer'    => 'Imprimante',
-        'phone'      => 'Téléphone',
-        'projector'  => 'Vidéoprojecteur',
-        'peripheral' => 'Périphérique',
+        'computer'   => __('Computer'),
+        'laptop'     => __('Laptop'),
+        'monitor'    => __('Monitor'),
+        'printer'    => __('Printer'),
+        'phone'      => __('Phone'),
+        'projector'  => __('Projector'),
+        'peripheral' => __('Peripheral'),
     ],
 ]);
 

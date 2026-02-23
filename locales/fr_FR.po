@@ -27356,6 +27356,88 @@ msgstr "Info"
 msgid "Type"
 msgstr "Type"
 
+#. UNH GLPI Custom Translations - Inventory Organization (PHP front files)
+#: front/inventoryorganization.type.php
+msgid "Type name is required"
+msgstr "Le nom du type est requis"
+
+#: front/inventoryorganization.type.php
+#, php-format
+msgid "Type \"%s\" created successfully"
+msgstr "Type \"%s\" créé avec succès"
+
+#: front/inventoryorganization.type.php
+msgid "Failed to create type"
+msgstr "Échec de la création du type"
+
+#: front/inventoryorganization.type.php
+msgid "Type deleted successfully"
+msgstr "Type supprimé avec succès"
+
+#: front/inventoryorganization.type.php
+msgid "Failed to delete type"
+msgstr "Échec de la suppression du type"
+
+#: front/inventoryorganization.type.php
+msgid "Material Type Management"
+msgstr "Gestion des types de matériel"
+
+#: front/inventoryorganization.location.php
+msgid "Location Management"
+msgstr "Gestion des lieux"
+
+#: front/inventoryorganization.labeling.php
+msgid "Prefix is required"
+msgstr "Le préfixe est requis"
+
+#: front/inventoryorganization.labeling.php
+msgid "Prefix must be between 2 and 5 uppercase letters"
+msgstr "Le préfixe doit être de 2 à 5 lettres majuscules"
+
+#: front/inventoryorganization.labeling.php
+msgid "Labeling configuration saved"
+msgstr "Configuration de l'étiquetage enregistrée"
+
+#: front/inventoryorganization.labeling.php
+msgid "Failed to save configuration"
+msgstr "Échec de l'enregistrement de la configuration"
+
+#: front/inventoryorganization.coherence.php
+msgid "No location assigned"
+msgstr "Aucun lieu assigné"
+
+#: front/inventoryorganization.coherence.php
+msgid "In root entity"
+msgstr "Dans l'entité racine"
+
+#: front/inventoryorganization.coherence.php
+msgid "Duplicate serial number"
+msgstr "Numéro de série dupliqué"
+
+#: front/inventoryorganization.coherence.php
+msgid "Inventory Coherence Check"
+msgstr "Vérification de la cohérence de l'inventaire"
+
+#: front/inventoryorganization.labeling.php
+msgid "Laptop"
+msgstr "Ordinateur portable"
+
+#: front/inventoryorganization.labeling.php
+msgid "Peripheral"
+msgstr "Périphérique"
+
+#: front/inventoryorganization.labeling.php
+msgid "Projector"
+msgstr "Vidéoprojecteur"
+
+#: front/inventoryorganization.type.php
+msgid "Phones"
+msgstr "Téléphones"
+
+#: front/inventoryorganization.type.php
+msgid "Peripherals"
+msgstr "Périphériques"
+
 #: templates/pages/inventoryorganization/locations.html.twig
 msgid "Location created successfully!"
 msgstr "Lieu créé avec succès !"
