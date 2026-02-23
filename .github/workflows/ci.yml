@@ -2,7 +2,7 @@ name: GLPI_CI
 
 on:
   push:
-    branches: [ "main", "CI/CD_DEP", "configmysqlcicd_k" ]
+    branches: [ "main", "pre-product" ]
   pull_request:
     branches: [ "main", "master" ]
 
@@ -193,7 +193,7 @@ jobs:
     name: Build Docker Image
     runs-on: ubuntu-latest
     needs: [tests, code-quality]
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/configmysqlcicd_k')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/pre-product')
     
     permissions:
       contents: read
@@ -240,7 +240,7 @@ jobs:
     name: Integration Tests
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/configmysqlcicd_k')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/pre-product')
     
     services:
       mysql:
@@ -315,7 +315,7 @@ jobs:
     name: Deploy to Development
     runs-on: ubuntu-latest
     needs: [build, integration-tests]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/configmysqlcicd_k'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/pre-product'
     environment: development
     
     steps:
