@@ -315,7 +315,7 @@ jobs:
     name: Deploy to Development
     runs-on: ubuntu-latest
     needs: [build, integration-tests]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/configmysqlcicd_k'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/pre-product'
     environment: development
     
     steps:
