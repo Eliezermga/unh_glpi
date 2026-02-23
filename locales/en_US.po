@@ -26364,3 +26364,85 @@ msgstr "Info"
 #: common
 msgid "Type"
 msgstr "Type"
+
+#. UNH GLPI Custom Translations - Inventory Organization (PHP front files)
+#: front/inventoryorganization.type.php
+msgid "Type name is required"
+msgstr "Type name is required"
+
+#: front/inventoryorganization.type.php
+#, php-format
+msgid "Type \"%s\" created successfully"
+msgstr "Type \"%s\" created successfully"
+
+#: front/inventoryorganization.type.php
+msgid "Failed to create type"
+msgstr "Failed to create type"
+
+#: front/inventoryorganization.type.php
+msgid "Type deleted successfully"
+msgstr "Type deleted successfully"
+
+#: front/inventoryorganization.type.php
+msgid "Failed to delete type"
+msgstr "Failed to delete type"
+
+#: front/inventoryorganization.type.php
+msgid "Material Type Management"
+msgstr "Material Type Management"
+
+#: front/inventoryorganization.location.php
+msgid "Location Management"
+msgstr "Location Management"
+
+#: front/inventoryorganization.labeling.php
+msgid "Prefix is required"
+msgstr "Prefix is required"
+
+#: front/inventoryorganization.labeling.php
+msgid "Prefix must be between 2 and 5 uppercase letters"
+msgstr "Prefix must be between 2 and 5 uppercase letters"
+
+#: front/inventoryorganization.labeling.php
+msgid "Labeling configuration saved"
+msgstr "Labeling configuration saved"
+
+#: front/inventoryorganization.labeling.php
+msgid "Failed to save configuration"
+msgstr "Failed to save configuration"
+
+#: front/inventoryorganization.coherence.php
+msgid "No location assigned"
+msgstr "No location assigned"
+
+#: front/inventoryorganization.coherence.php
+msgid "In root entity"
+msgstr "In root entity"
+
+#: front/inventoryorganization.coherence.php
+msgid "Duplicate serial number"
+msgstr "Duplicate serial number"
+
+#: front/inventoryorganization.coherence.php
+msgid "Inventory Coherence Check"
+msgstr "Inventory Coherence Check"
+
+#: front/inventoryorganization.labeling.php
+msgid "Laptop"
+msgstr "Laptop"
+
+#: front/inventoryorganization.labeling.php
+msgid "Peripheral"
+msgstr "Peripheral"
+
+#: front/inventoryorganization.labeling.php
+msgid "Projector"
+msgstr "Projector"
+
+#: front/inventoryorganization.type.php
+msgid "Phones"
+msgstr "Phones"
+
+#: front/inventoryorganization.type.php
+msgid "Peripherals"
+msgstr "Peripherals"

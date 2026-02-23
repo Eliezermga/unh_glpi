@@ -63,7 +63,7 @@ $flat_locations = flattenLocations($locations);
 
 // Display header
 Html::header(
-    'Gestion des Lieux',
+    __('Location Management'),
     $_SERVER['PHP_SELF'],
     'helpdesk',
     'inventoryorganization'
@@ -71,7 +71,7 @@ Html::header(
 
 // Render the location management template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/locations.html.twig', [
-    'title'          => 'Gestion des Lieux',
+    'title'          => __('Location Management'),
     'locations'      => $locations,
     'flat_locations' => $flat_locations,
     'entities'       => $flat_entities,
