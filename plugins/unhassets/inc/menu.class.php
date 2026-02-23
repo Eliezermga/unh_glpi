@@ -4,12 +4,9 @@ if (!defined('GLPI_ROOT')) {
     die("Sorry. You can't access this file directly");
 }
 
-
-/**
- * Gestion du menu principal du plugin UNH Assets.
- */
 class PluginUnhassetsMenu extends CommonGLPI {
-    static $rightname = 'plugin_unhassets';
+
+    static $rightname = 'config';
 
     static function getMenuName() {
         return __('UNH Assets', 'unhassets');
@@ -17,22 +14,27 @@ class PluginUnhassetsMenu extends CommonGLPI {
 
     static function getMenuContent() {
         global $CFG_GLPI;
+        
         $menu = [];
-        // Titre du menu principal (affiché dans la barre latérale du plugin)
+        
+        // Configuration du menu principal
         $menu['title'] = self::getMenuName();
-        // Page principale accessible en cliquant sur le lien racine du plugin
         $menu['page']  = '/plugins/unhassets/front/dashboard.php';
-        // Lien de recherche par défaut pour le menu racine
-        $menu['links']['search'] = '/plugins/unhassets/front/dashboard.php';
+        $menu['icon']  = 'ti ti-building';
+        $menu['default'] = '/plugins/unhassets/front/dashboard.php';
 
-        // Sous‑menus du plugin — utiliser la clé 'options'
+        // Sous-menus - IMPORTANT : utiliser la clé 'options'
         $menu['options'] = [];
-
-        // === Modules personnalisés du plugin ===
+        
+        // Toujours visible
+        $menu['types'] = [__CLASS__];
+        
+        // === VOS MODULES PERSONNALISÉS ===
+        
         $menu['options']['dashboard'] = [
             'title' => __('Tableau de bord', 'unhassets'),
             'page'  => '/plugins/unhassets/front/dashboard.php',
-            'shortcut' => '',
+            'icon'  => 'ti ti-chart-line',
             'links' => [
                 'search' => '/plugins/unhassets/front/dashboard.php',
             ]
@@ -41,10 +43,9 @@ class PluginUnhassetsMenu extends CommonGLPI {
         $menu['options']['asset'] = [
             'title' => __('Gestion du parc', 'unhassets'),
             'page'  => '/plugins/unhassets/front/asset.php',
-            'shortcut' => '',
+            'icon'  => 'ti ti-device-desktop',
             'links' => [
                 'search' => '/plugins/unhassets/front/asset.php',
-                // GLPI attend généralement id=-1 pour ouvrir un formulaire "nouveau"
                 'add'    => '/plugins/unhassets/front/asset.form.php?id=-1',
             ]
         ];
@@ -52,7 +53,7 @@ class PluginUnhassetsMenu extends CommonGLPI {
         $menu['options']['reservation'] = [
             'title' => __('Réservations', 'unhassets'),
             'page'  => '/plugins/unhassets/front/reservation.php',
-            'shortcut' => '',
+            'icon'  => 'ti ti-calendar-check',
             'links' => [
                 'search' => '/plugins/unhassets/front/reservation.php',
                 'add'    => '/plugins/unhassets/front/reservation.form.php?id=-1',
@@ -62,50 +63,128 @@ class PluginUnhassetsMenu extends CommonGLPI {
         $menu['options']['license'] = [
             'title' => __('Licences logicielles', 'unhassets'),
             'page'  => '/plugins/unhassets/front/license.php',
-            'shortcut' => '',
+            'icon'  => 'ti ti-key',
             'links' => [
                 'search' => '/plugins/unhassets/front/license.php',
                 'add'    => '/plugins/unhassets/front/license.form.php?id=-1',
             ]
         ];
 
-        $native_types = [
-            'computer'          => 'Computer',
-            'monitor'           => 'Monitor',
-            'software'          => 'Software',
-            'networkequipment'  => 'NetworkEquipment',
-            'printer'           => 'Printer',
-            'peripheral'        => 'Peripheral',
-            'phone'             => 'Phone',
-        ];
+        // === ÉLÉMENTS DU PARC (pages natives GLPI réintégrées) ===
+        //
+        // IMPORTANT : pour que le bouton "+" apparaisse sur les pages natives
+        // (computer.php, printer.php, etc.), GLPI doit pouvoir retrouver le
+        // contexte de menu via Html::header(). Ces pages appellent en interne
+        // Html::header(..., "assets", "computer") ce qui fait référence à
+        // $_SESSION['glpimenu']['assets']['content']['computer'].
+        //
+        // On injecte donc ces sous-menus AUSSI dans notre menu 'unhassets',
+        // mais les droits (canCreate, canView) sont gérés nativement par GLPI
+        // car les classes (Computer, Printer, etc.) ont leur propre $rightname.
+        // On n'a donc rien à forcer ici : si l'utilisateur a le droit "computer"
+        // dans son profil, le bouton "+" s'affichera automatiquement.
 
-        foreach ($native_types as $key => $type) {
-            if (class_exists($type) && $type::canView()) {
-                $menu['options'][$key] = $type::getMenuContent();
-            }
+        // Ordinateurs
+        if (Computer::canView()) {
+            $menu['options']['computer'] = [
+                'title'    => Computer::getTypeName(Session::getPluralNumber()),
+                'page'     => Computer::getSearchURL(false),
+                'icon'     => Computer::getIcon(),
+                'itemtype' => 'Computer',   // ← clé critique pour les droits
+                'links'    => [
+                    'search' => Computer::getSearchURL(false),
+                    'add'    => Computer::canCreate() ? Computer::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
+        }
+
+        // Moniteurs
+        if (Monitor::canView()) {
+            $menu['options']['monitor'] = [
+                'title'    => Monitor::getTypeName(Session::getPluralNumber()),
+                'page'     => Monitor::getSearchURL(false),
+                'icon'     => Monitor::getIcon(),
+                'itemtype' => 'Monitor',
+                'links'    => [
+                    'search' => Monitor::getSearchURL(false),
+                    'add'    => Monitor::canCreate() ? Monitor::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
+        }
+
+        // Logiciels
+        if (Software::canView()) {
+            $menu['options']['software'] = [
+                'title'    => Software::getTypeName(Session::getPluralNumber()),
+                'page'     => Software::getSearchURL(false),
+                'icon'     => Software::getIcon(),
+                'itemtype' => 'Software',
+                'links'    => [
+                    'search' => Software::getSearchURL(false),
+                    'add'    => Software::canCreate() ? Software::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
+        }
+
+        // Équipements réseau
+        if (NetworkEquipment::canView()) {
+            $menu['options']['networkequipment'] = [
+                'title'    => NetworkEquipment::getTypeName(Session::getPluralNumber()),
+                'page'     => NetworkEquipment::getSearchURL(false),
+                'icon'     => NetworkEquipment::getIcon(),
+                'itemtype' => 'NetworkEquipment',
+                'links'    => [
+                    'search' => NetworkEquipment::getSearchURL(false),
+                    'add'    => NetworkEquipment::canCreate() ? NetworkEquipment::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
+        }
+
+        // Imprimantes
+        if (Printer::canView()) {
+            $menu['options']['printer'] = [
+                'title'    => Printer::getTypeName(Session::getPluralNumber()),
+                'page'     => Printer::getSearchURL(false),
+                'icon'     => Printer::getIcon(),
+                'itemtype' => 'Printer',
+                'links'    => [
+                    'search' => Printer::getSearchURL(false),
+                    'add'    => Printer::canCreate() ? Printer::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
+        }
+
+        // Périphériques
+        if (Peripheral::canView()) {
+            $menu['options']['peripheral'] = [
+                'title'    => Peripheral::getTypeName(Session::getPluralNumber()),
+                'page'     => Peripheral::getSearchURL(false),
+                'icon'     => Peripheral::getIcon(),
+                'itemtype' => 'Peripheral',
+                'links'    => [
+                    'search' => Peripheral::getSearchURL(false),
+                    'add'    => Peripheral::canCreate() ? Peripheral::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
+        }
+
+        // Téléphones
+        if (Phone::canView()) {
+            $menu['options']['phone'] = [
+                'title'    => Phone::getTypeName(Session::getPluralNumber()),
+                'page'     => Phone::getSearchURL(false),
+                'icon'     => Phone::getIcon(),
+                'itemtype' => 'Phone',
+                'links'    => [
+                    'search' => Phone::getSearchURL(false),
+                    'add'    => Phone::canCreate() ? Phone::getFormURL(false).'?id=-1' : '',
+                ]
+            ];
         }
 
         return $menu;
     }
 
-    static function removeRightsFromSession() {
-        if (isset($_SESSION['glpimenu']['unhassets'])) {
-            unset($_SESSION['glpimenu']['unhassets']);
-        }
-    }
-    
-    /**
-     * Définir le menu dans la session GLPI
-     */
-    static function defineMenu() {
-        global $CFG_GLPI;
-        
-        $_SESSION['glpimenu']['unhassets'] = [
-            'title'   => self::getMenuName(),
-            'types'   => [__CLASS__],
-            'default' => '/plugins/unhassets/front/dashboard.php',
-            'icon'    => 'ti ti-building',
-            'content' => self::getMenuContent()
-        ];
-    }
+    // NOTE : on ne modifie jamais $_SESSION['glpimenu'] dans un plugin.
+    // Le menu est géré via le hook redefine_menus dans setup.php.
 }

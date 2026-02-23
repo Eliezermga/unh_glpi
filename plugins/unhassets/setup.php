@@ -21,20 +21,32 @@ function plugin_init_unhassets() {
     $plugin = new Plugin();
     if ($plugin->isActivated('unhassets')) {
         
-        // Enregistrement basique
-        Plugin::registerClass('PluginUnhassetsAsset');
-        Plugin::registerClass('PluginUnhassetsReservation');
-        Plugin::registerClass('PluginUnhassetsLicense');
-        Plugin::registerClass('PluginUnhassetsProfile');
-        Plugin::registerClass('PluginUnhassetsMenu');
+        // Plugin::registerClass() sert UNIQUEMENT pour :
+        // - addtabon    : ajouter un onglet sur un type natif
+        // - ticket_types, contract_types, etc. : intégration dans des listes GLPI
+        //
+        // Pour une classe de données pure (CRUD sur sa propre table),
+        // PAS besoin de registerClass(). L'autoloader suffit.
+        //
+        // PROBLÈME RACINE du "Duplicate key 23" :
+        // Plugin::registerClass('PluginUnhassetsAsset') sans paramètre
+        // fait que GLPI appelle getSearchOptionsToAdd() de cette classe
+        // sur TOUS les itemtypes natifs (Computer, Monitor, etc.).
+        // CommonDBTM fournit une implémentation par défaut de
+        // getSearchOptionsToAdd() qui retourne rawSearchOptions() de la classe,
+        // laquelle hérite des clés de CommonDBTM dont la clé 23.
+        // → collision avec la clé 23 de Monitor/Computer/etc.
+        //
+        // Solution : seul AssetTab (qui étend CommonGLPI, sans clé héritée)
+        // est enregistré avec addtabon. Les classes de données ne sont pas
+        // enregistrées du tout — elles sont chargées via l'autoloader.
+
+        Plugin::registerClass('PluginUnhassetsAssetTab', [
+            'addtabon' => ['Computer', 'Monitor', 'Printer', 'NetworkEquipment', 'Peripheral', 'Phone']
+        ]);
 
         if (Session::getLoginUserID()) {
-            
-            // Définir le droit par défaut
-            if (!isset($_SESSION['glpiactiveprofile']['plugin_unhassets'])) {
-                $_SESSION['glpiactiveprofile']['plugin_unhassets'] = READ;
-            }
-            
+
             $PLUGIN_HOOKS['config_page']['unhassets'] = 'front/config.form.php';
             $PLUGIN_HOOKS['redefine_menus']['unhassets'] = 'plugin_unhassets_redefine_menus';
         }
@@ -69,17 +81,56 @@ function plugin_unhassets_check_config() {
  * Fonction pour redéfinir les menus et masquer Assets
  */
 function plugin_unhassets_redefine_menus($menus) {
-    if (isset($menus['assets'])) {
-        unset($menus['assets']);
+
+    if (!class_exists('PluginUnhassetsMenu')) {
+        return $menus;
     }
-    if (class_exists('PluginUnhassetsMenu')) {
-        $menucontent = PluginUnhassetsMenu::getMenuContent();
-        $menus['unhassets'] = [
-            'title'   => PluginUnhassetsMenu::getMenuName(),
-            'default' => '/plugins/unhassets/front/dashboard.php',
-            'icon'    => 'ti ti-building',
-            'content' => $menucontent['options'] ?? [],
-        ];
+
+    $menucontent = PluginUnhassetsMenu::getMenuContent();
+
+    // ---------------------------------------------------------------
+    // ETAPE 1 : Masquer le menu 'assets' de la navbar
+    // On le supprime du tableau $menus (rendu Twig courant).
+    // $_SESSION['glpimenu']['assets'] reste intact → les boutons "+"
+    // sur les pages natives continuent de fonctionner.
+    // ---------------------------------------------------------------
+    unset($menus['assets']);
+
+    // ---------------------------------------------------------------
+    // ETAPE 2 : Construire notre menu 'unhassets'
+    // ---------------------------------------------------------------
+    $menus['unhassets'] = [
+        'title'   => PluginUnhassetsMenu::getMenuName(),
+        'default' => '/plugins/unhassets/front/dashboard.php',
+        'icon'    => 'ti ti-building',
+        'content' => $menucontent['options'] ?? [],
+    ];
+
+    // ---------------------------------------------------------------
+    // ETAPE 3 : Fil d'Ariane pour les pages natives réutilisées
+    //
+    // Les pages natives (computer.php, monitor.php...) appellent :
+    //   Html::header(..., 'assets', 'computer')
+    // GLPI cherche le titre du menu parent dans $_SESSION['glpimenu']
+    // à la clé 'assets'. Comme le menu assets existe toujours en session
+    // (on a fait unset() sur $menus mais pas sur $_SESSION), le breadcrumb
+    // affiche encore "Assets" ou rien selon la version.
+    //
+    // Pour forcer "UNH Assets" dans le breadcrumb des pages natives,
+    // on écrase la clé 'assets' de la SESSION avec le titre de notre menu.
+    // Les boutons "+" restent fonctionnels car $_SESSION['glpimenu']['assets']['content']
+    // est préservé.
+    // ---------------------------------------------------------------
+    if (isset($_SESSION['glpimenu']['assets'])) {
+        // Renommer le menu assets en session pour le breadcrumb
+        $_SESSION['glpimenu']['assets']['title'] = PluginUnhassetsMenu::getMenuName();
+        $_SESSION['glpimenu']['assets']['icon']  = 'ti ti-building';
+    }
+
+    // Injecter aussi notre menu dans la session pour le breadcrumb
+    // des pages propres au plugin (asset.php, reservation.php, license.php)
+    if (!isset($_SESSION['glpimenu']['unhassets'])) {
+        $_SESSION['glpimenu']['unhassets'] = $menus['unhassets'];
     }
 
     return $menus;
