@@ -68,9 +68,9 @@ $summary = [
 
 // Get issue types for filter
 $issue_types = [
-    'no_location'     => 'Aucun lieu assigné',
-    'root_entity'     => 'Dans l\'entité racine',
-    'duplicate_serial' => 'Numéro de série dupliqué',
+    'no_location'      => __('No location assigned'),
+    'root_entity'      => __('In root entity'),
+    'duplicate_serial' => __('Duplicate serial number'),
 ];
 
 // Export functionality
@@ -82,11 +82,11 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     
     // CSV header
     fputcsv($output, [
-        'Sévérité',
-        'Type',
-        'Message',
-        'Type d\'Actif',
-        'Nom de l\'Actif',
+        __('Severity'),
+        __('Type'),
+        __('Message'),
+        __('Asset Type'),
+        __('Asset Name'),
     ]);
     
     // CSV data
@@ -106,7 +106,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
 
 // Display header
 Html::header(
-    'Vérification de la Cohérence de l\'Inventaire',
+    __('Inventory Coherence Check'),
     $_SERVER['PHP_SELF'],
     'helpdesk',
     'inventoryorganization'
@@ -114,7 +114,7 @@ Html::header(
 
 // Render the coherence check template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/coherence.html.twig', [
-    'title'           => 'Vérification de la Cohérence de l\'Inventaire',
+    'title'           => __('Inventory Coherence Check'),
     'issues'          => array_values($issues),
     'summary'         => $summary,
     'issue_types'     => $issue_types,

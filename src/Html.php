@@ -1572,7 +1572,7 @@ HTML;
                 $menu['helpdesk']['content']['faq'] = [
                     'title'    => __('FAQ'),
                     'shortcut' => 'b',
-                    'page'     => '/front/knowbaseitem.php',
+                    'page'     => '/front/helpdesk.faq.php',
                     'icon'     => 'ti ti-book',
                 ];
             }

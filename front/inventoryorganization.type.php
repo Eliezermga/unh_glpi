@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $type_name = trim($_POST['type_name'] ?? '');
         
         if (empty($type_name)) {
-            $error_message = 'Le nom du type est requis';
+            $error_message = __('Type name is required');
         } else {
             // Create the type based on category
             $type_classes = [
@@ -76,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($type_obj->add($input)) {
                 $success = true;
                 Session::addMessageAfterRedirect(
-                    sprintf('Type "%s" créé avec succès', $type_name),
+                    sprintf(__('Type "%s" created successfully'), $type_name),
                     false,
                     INFO
                 );
             } else {
-                $error_message = 'Échec de la création du type';
+                $error_message = __('Failed to create type');
             }
         }
     }
@@ -103,9 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $type_obj = new $class_name();
             
             if ($type_obj->delete(['id' => $type_id])) {
-                Session::addMessageAfterRedirect('Type supprimé avec succès', false, INFO);
+                Session::addMessageAfterRedirect(__('Type deleted successfully'), false, INFO);
             } else {
-                Session::addMessageAfterRedirect('Échec de la suppression du type', false, ERROR);
+                Session::addMessageAfterRedirect(__('Failed to delete type'), false, ERROR);
             }
         }
         Html::redirect($_SERVER['PHP_SELF']);
@@ -117,16 +117,16 @@ $types = InventoryOrganization::getMaterialTypes();
 
 // Prepare type categories for the form
 $type_categories = [
-    'computer'   => 'Ordinateurs',
-    'monitor'    => 'Moniteurs',
-    'printer'    => 'Imprimantes',
-    'phone'      => 'Téléphones',
-    'peripheral' => 'Périphériques',
+    'computer'   => __('Computers'),
+    'monitor'    => __('Monitors'),
+    'printer'    => __('Printers'),
+    'phone'      => __('Phones'),
+    'peripheral' => __('Peripherals'),
 ];
 
 // Display header
 Html::header(
-    'Gestion des Types de Matériel',
+    __('Material Type Management'),
     $_SERVER['PHP_SELF'],
     'helpdesk',
     'inventoryorganization'
@@ -134,7 +134,7 @@ Html::header(
 
 // Render the type management template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/types.html.twig', [
-    'title'           => 'Gestion des Types de Matériel',
+    'title'           => __('Material Type Management'),
     'types'           => $types,
     'type_categories' => $type_categories,
     'success'         => $success,
