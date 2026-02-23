@@ -20,6 +20,41 @@ if (!InventoryOrganization::canView()) {
     Html::displayRightError();
 }
 
+$success = false;
+$error_message = '';
+
+// Handle entity creation directly on this page
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
+
+    if ($action === 'create_entity') {
+        if (!Entity::canCreate()) {
+            $error_message = __('The action you have requested is not allowed.');
+        } else {
+            $entity_data = [
+                'name'      => trim($_POST['name'] ?? ''),
+                'parent_id' => (int) ($_POST['parent_id'] ?? 0),
+                'comment'   => trim($_POST['comment'] ?? ''),
+                'address'   => trim($_POST['address'] ?? ''),
+                'postcode'  => trim($_POST['postcode'] ?? ''),
+                'town'      => trim($_POST['town'] ?? ''),
+                'country'   => trim($_POST['country'] ?? ''),
+            ];
+
+            if ($entity_data['name'] === '') {
+                $error_message = __('Le nom de l entite est requis');
+            } else {
+                $entity_id = InventoryOrganization::createEntity($entity_data);
+                if ($entity_id) {
+                    $success = true;
+                } else {
+                    $error_message = __('Echec de la creation de l entite');
+                }
+            }
+        }
+    }
+}
+
 // Get existing entities for display
 $entities = InventoryOrganization::getEntityTree(0);
 
@@ -27,6 +62,9 @@ $entities = InventoryOrganization::getEntityTree(0);
 function flattenEntities($entities, $level = 0) {
     $result = [];
     foreach ($entities as $entity) {
+        if (!Session::haveAccessToEntity((int) ($entity['id'] ?? 0), true)) {
+            continue;
+        }
         $result[] = [
             'id' => $entity['id'],
             'name' => str_repeat('&nbsp;&nbsp;&nbsp;', $level) . $entity['name'],
@@ -40,10 +78,11 @@ function flattenEntities($entities, $level = 0) {
 }
 
 $flat_entities = flattenEntities($entities);
+$active_entity = (int) Session::getActiveEntity();
 
 // Display header
 Html::header(
-    __('Entity Management'),
+    __("Gestion des entites"),
     $_SERVER['PHP_SELF'],
     'helpdesk',
     'inventoryorganization'
@@ -51,9 +90,12 @@ Html::header(
 
 // Render the entity page template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/entity_wizard.html.twig', [
-    'title'       => __('Entity Management'),
+    'title'       => __("Gestion des entites"),
     'entities'    => $flat_entities,
     'can_create'  => Entity::canCreate(),
+    'success'     => $success,
+    'error_message' => $error_message,
+    'active_entity' => $active_entity,
 ]);
 
 Html::footer();

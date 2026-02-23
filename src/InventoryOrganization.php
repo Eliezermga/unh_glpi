@@ -762,11 +762,24 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function createEntity($data)
     {
+        if (!Entity::canCreate()) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
         $entity = new Entity();
-        
+        $parent_id = (int) ($data['parent_id'] ?? 0);
+        if ($parent_id <= 0 && method_exists('Session', 'getActiveEntity')) {
+            $parent_id = (int) Session::getActiveEntity();
+        }
+        if ($parent_id < 0 || !Session::haveAccessToEntity($parent_id, true)) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
         $input = [
             'name'        => $data['name'] ?? '',
-            'entities_id' => $data['parent_id'] ?? 0,
+            'entities_id' => $parent_id,
             'comment'     => $data['comment'] ?? '',
             'address'     => $data['address'] ?? '',
             'postcode'    => $data['postcode'] ?? '',
@@ -776,7 +789,7 @@ class InventoryOrganization extends CommonGLPI
 
         // Validate
         if (empty($input['name'])) {
-            Session::addMessageAfterRedirect(__('Entity name is required'), false, ERROR);
+            Session::addMessageAfterRedirect(__('Le nom de l entite est requis'), false, ERROR);
             return false;
         }
 
@@ -784,7 +797,7 @@ class InventoryOrganization extends CommonGLPI
 
         if ($entity_id) {
             Session::addMessageAfterRedirect(
-                sprintf(__('Entity "%s" created successfully'), $input['name']),
+                sprintf(__('Entite "%s" creee avec succes'), $input['name']),
                 false,
                 INFO
             );
@@ -801,12 +814,40 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function createLocation($data)
     {
+        if (!Location::canCreate()) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
         $location = new Location();
-        
+        $entity_id = (int) ($data['entity_id'] ?? 0);
+        if ($entity_id <= 0 && method_exists('Session', 'getActiveEntity')) {
+            $entity_id = (int) Session::getActiveEntity();
+        }
+        if ($entity_id < 0 || !Session::haveAccessToEntity($entity_id, true)) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
+        $parent_location = (int) ($data['parent_id'] ?? 0);
+        if ($parent_location > 0) {
+            global $DB;
+            $parent = $DB->request([
+                'SELECT' => ['id', 'entities_id'],
+                'FROM'   => 'glpi_locations',
+                'WHERE'  => ['id' => $parent_location],
+                'LIMIT'  => 1
+            ])->current();
+
+            if (!$parent || !Session::haveAccessToEntity((int) ($parent['entities_id'] ?? -1), true)) {
+                $parent_location = 0;
+            }
+        }
+
         $input = [
             'name'         => $data['name'] ?? '',
-            'locations_id' => $data['parent_id'] ?? 0,
-            'entities_id'  => $data['entity_id'] ?? 0,
+            'locations_id' => $parent_location,
+            'entities_id'  => $entity_id,
             'comment'      => $data['comment'] ?? '',
             'building'     => $data['building'] ?? '',
             'room'         => $data['room'] ?? '',
@@ -814,7 +855,7 @@ class InventoryOrganization extends CommonGLPI
 
         // Validate
         if (empty($input['name'])) {
-            Session::addMessageAfterRedirect(__('Location name is required'), false, ERROR);
+            Session::addMessageAfterRedirect(__('Le nom du lieu est requis'), false, ERROR);
             return false;
         }
 
@@ -822,7 +863,7 @@ class InventoryOrganization extends CommonGLPI
 
         if ($location_id) {
             Session::addMessageAfterRedirect(
-                sprintf(__('Location "%s" created successfully'), $input['name']),
+                sprintf(__('Lieu "%s" cree avec succes'), $input['name']),
                 false,
                 INFO
             );
