@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $class_name = $type_classes[$type_category] ?? 'ComputerType';
             $type_obj = new $class_name();
+            if (!$type_obj->canCreate()) {
+                $error_message = __('You do not have permission to create types.');
+                goto render_page;
+            }
             
             $input = [
                 'name' => $type_name,
@@ -111,6 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         Html::redirect($_SERVER['PHP_SELF']);
     }
 }
+
+render_page:
 
 // Get material types
 $types = InventoryOrganization::getMaterialTypes();

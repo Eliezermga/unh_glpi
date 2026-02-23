@@ -62,7 +62,7 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function getTypeName($nb = 0)
     {
-        return __('Inventory Organization');
+        return __("Organisation de l'inventaire");
     }
 
     /**
@@ -153,10 +153,10 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function canCreate()
     {
-        // Allow if user can create entities OR has config rights OR has ticket update rights
+        // Keep creation rights aligned with real writable resources used by this module.
         return Session::haveRight(Entity::$rightname, CREATE)
-            || Session::haveRight('config', UPDATE) 
-            || Session::haveRight('ticket', UPDATE)
+            || Session::haveRight('config', UPDATE)
+            || Session::haveRight('dropdown', UPDATE)
             || Session::haveRight('location', CREATE);
     }
 

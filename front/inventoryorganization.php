@@ -61,7 +61,7 @@ Html::header(
 
 // Render the main dashboard template
 Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/main.html.twig', [
-    'title'      => __('Inventory Organization'),
+    'title'      => InventoryOrganization::getTypeName(),
     'stats'      => $summary['stats'],
     'issues'     => $summary['issues'],
     'issue_summary' => $summary['issue_summary'],
