@@ -26923,3 +26923,537 @@ msgstr "Vous devrez ajouter un réseau"
 #: templates/layout/parts/profile_selector.html.twig
 msgid "⌥ (option) + ⌘ (command) + E"
 msgstr "⌥ (option) + ⌘ (command) + E"
+
+#. =====================================================
+#. UNH GLPI Custom Translations - Inventory Organization
+#. =====================================================
+
+#: src/Html.php front/inventoryorganization.php
+msgid "Technical Support"
+msgstr "Support Technique"
+
+#: src/Html.php front/inventoryorganization.php
+msgid "Inventory Organization"
+msgstr "Organisation de l'inventaire"
+
+#: front/inventoryorganization.entity.php
+msgid "Entity Management"
+msgstr "Gestion des Entités"
+
+#: front/inventoryorganization.php
+msgid "Entities"
+msgstr "Entités"
+
+#: front/inventoryorganization.php
+msgid "Create and manage GLPI entities"
+msgstr "Créer et gérer les entités GLPI"
+
+#: front/inventoryorganization.php
+msgid "Locations"
+msgstr "Lieux"
+
+#: front/inventoryorganization.php
+msgid "Define locations (offices, amphitheaters, rooms)"
+msgstr "Définir les lieux (bureaux, amphithéâtres, salles)"
+
+#: front/inventoryorganization.php
+msgid "Equipment Types"
+msgstr "Types de Matériel"
+
+#: front/inventoryorganization.php
+msgid "Create equipment types (PCs, laptops, projectors)"
+msgstr "Créer les types de matériel (PC, laptops, projecteurs)"
+
+#: front/inventoryorganization.php
+msgid "Labeling"
+msgstr "Étiquetage"
+
+#: front/inventoryorganization.php
+msgid "Configure standardized labeling"
+msgstr "Configurer l'étiquetage normalisé"
+
+#: front/inventoryorganization.php
+msgid "Coherence Check"
+msgstr "Vérification Cohérence"
+
+#: front/inventoryorganization.php
+msgid "Check inventory coherence"
+msgstr "Vérifier la cohérence de l'inventaire"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Back to Dashboard"
+msgstr "Retour au Tableau de Bord"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Create a New Type"
+msgstr "Créer un Nouveau Type"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Category"
+msgstr "Catégorie"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Type Name"
+msgstr "Nom du Type"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Comments"
+msgstr "Commentaires"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Create the Type"
+msgstr "Créer le Type"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "You do not have permission to create types."
+msgstr "Vous n'avez pas la permission de créer des types."
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Common Types"
+msgstr "Types Courants"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Click to auto-fill:"
+msgstr "Cliquez pour remplir automatiquement :"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Existing Types"
+msgstr "Types Existants"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Computer Types"
+msgstr "Types d'Ordinateurs"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Monitor Types"
+msgstr "Types de Moniteurs"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Printer Types"
+msgstr "Types d'Imprimantes"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "No computer type defined"
+msgstr "Aucun type d'ordinateur défini"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "No monitor type defined"
+msgstr "Aucun type de moniteur défini"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "No printer type defined"
+msgstr "Aucun type d'imprimante défini"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Type created successfully!"
+msgstr "Type créé avec succès !"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Export CSV"
+msgstr "Exporter CSV"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Total Issues"
+msgstr "Total des Problèmes"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Errors"
+msgstr "Erreurs"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Warnings"
+msgstr "Avertissements"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Information"
+msgstr "Informations"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Issue Type"
+msgstr "Type de Problème"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Severity"
+msgstr "Sévérité"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "All Types"
+msgstr "Tous les Types"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "All Severities"
+msgstr "Toutes les Sévérités"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Apply Filters"
+msgstr "Appliquer les Filtres"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Clear"
+msgstr "Effacer"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Inventory is Coherent!"
+msgstr "L'Inventaire est Cohérent !"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "No issues detected. Your inventory is correctly structured."
+msgstr "Aucun problème détecté. Votre inventaire est correctement structuré."
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Detected Issues"
+msgstr "Problèmes Détectés"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Message"
+msgstr "Message"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Asset Type"
+msgstr "Type d'Actif"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Asset Name"
+msgstr "Nom de l'Actif"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "No issues match your filters."
+msgstr "Aucun problème ne correspond à vos filtres."
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Understanding Issues"
+msgstr "Comprendre les Problèmes"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Labeling Configuration"
+msgstr "Configuration de l'Étiquetage"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Configuration saved successfully!"
+msgstr "Configuration enregistrée avec succès !"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Label Format"
+msgstr "Format de l'Étiquette"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Prefix"
+msgstr "Préfixe"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Numeric Padding"
+msgstr "Remplissage Numérique"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Type Codes"
+msgstr "Codes de Types"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Save Configuration"
+msgstr "Enregistrer la Configuration"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "You do not have permission to modify the configuration."
+msgstr "Vous n'avez pas la permission de modifier la configuration."
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Label Preview"
+msgstr "Prévisualisation des Étiquettes"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Next Label"
+msgstr "Prochaine Étiquette"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "How Labels Work"
+msgstr "Comment Fonctionnent les Étiquettes"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Type Code"
+msgstr "Code Type"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Number"
+msgstr "Numéro"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Create a New Entity"
+msgstr "Créer une Nouvelle Entité"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Use the standard GLPI form to create an entity with all available fields."
+msgstr "Utilisez le formulaire GLPI standard pour créer une entité avec tous les champs disponibles."
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Open Creation Form"
+msgstr "Ouvrir le Formulaire de Création"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Quick Access"
+msgstr "Accès Rapides"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Entity List"
+msgstr "Liste des Entités"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "View all existing GLPI entities"
+msgstr "Voir toutes les entités existantes de GLPI"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Manage Locations"
+msgstr "Gérer les Lieux"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Create and organize locations within entities"
+msgstr "Créer et organiser des lieux dans les entités"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Manage equipment categories"
+msgstr "Gérer les catégories d'équipements"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Quick Guide"
+msgstr "Guide Rapide"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "What is an entity?"
+msgstr "Qu'est-ce qu'une entité ?"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Entities are organizational units that allow you to segment your IT assets (by department, site, subsidiary, etc.)."
+msgstr "Les entités sont des unités organisationnelles qui permettent de segmenter votre parc informatique (par département, site, filiale, etc.)."
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Entity Hierarchy"
+msgstr "Hiérarchie des Entités"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "First create the root entity (e.g., UNH)"
+msgstr "Créez d'abord l'entité racine (ex: UNH)"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Then add sub-entities (e.g., Campus, Departments)"
+msgstr "Puis ajoutez des sous-entités (ex: Campus, Départements)"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Permissions are inherited in the tree structure"
+msgstr "Les permissions sont héritées dans l'arborescence"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Best Practices"
+msgstr "Bonnes Pratiques"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Use explicit names"
+msgstr "Utilisez des noms explicites"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Limit the number of levels (3-4 max)"
+msgstr "Limitez le nombre de niveaux (3-4 max)"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Align the structure with your organization"
+msgstr "Alignez la structure sur votre organisation"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "Existing Entities"
+msgstr "Entités Existantes"
+
+#: templates/pages/inventoryorganization/entity_wizard.html.twig
+msgid "No entities yet"
+msgstr "Aucune entité pour le moment"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Critical issues requiring immediate attention, such as duplicate serial numbers or data inconsistencies."
+msgstr "Problèmes critiques nécessitant une attention immédiate, comme les numéros de série en double ou les incohérences de données."
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Issues that should be resolved, such as assets without assigned location."
+msgstr "Problèmes qui devraient être résolus, comme les actifs sans lieu assigné."
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Informational notifications, such as assets in the root entity."
+msgstr "Notifications informatives, comme les actifs dans l'entité racine."
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Configure the format of asset labels. Example: UNH-PC-001"
+msgstr "Configurez le format des étiquettes d'actifs. Exemple : UNH-PC-001"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "2-5 letters"
+msgstr "2-5 lettres"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "digits"
+msgstr "chiffres"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Define short codes for each asset type."
+msgstr "Définissez les codes courts pour chaque type d'actif."
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Next available labels for each asset type:"
+msgstr "Prochaines étiquettes disponibles pour chaque type d'actif :"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Labels follow this format:"
+msgstr "Les étiquettes suivent ce format :"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Prefix: Identifier of your organization"
+msgstr "Préfixe : Identifiant de votre organisation"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Type Code: Identifies the asset category"
+msgstr "Code Type : Identifie la catégorie d'actif"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Number: Auto-incremented sequential number"
+msgstr "Numéro : Numéro séquentiel auto-incrémenté"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Computers"
+msgstr "Ordinateurs"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Monitors"
+msgstr "Moniteurs"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Printers"
+msgstr "Imprimantes"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "e.g., Desktop PC, Laptop, Laser Printer"
+msgstr "ex: PC de Bureau, Laptop, Imprimante Laser"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Description of this type"
+msgstr "Description de ce type"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Delete this type?"
+msgstr "Supprimer ce type ?"
+
+#: common
+msgid "Close"
+msgstr "Fermer"
+
+#: common
+msgid "Error"
+msgstr "Erreur"
+
+#: common
+msgid "Warning"
+msgstr "Avertissement"
+
+#: common
+msgid "Info"
+msgstr "Info"
+
+#: common
+msgid "Type"
+msgstr "Type"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Location created successfully!"
+msgstr "Lieu créé avec succès !"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Create a New Location"
+msgstr "Créer un Nouveau Lieu"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Use the standard GLPI form to create a location with building, room, GPS coordinates and other fields."
+msgstr "Utilisez le formulaire GLPI standard pour créer un lieu avec bâtiment, salle, coordonnées GPS et autres champs."
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Structure Suggestions"
+msgstr "Suggestions de Structure"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Here is a typical location structure for a university:"
+msgstr "Voici une structure de lieux typique pour une université :"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Campus"
+msgstr "Campus"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Main geographical site"
+msgstr "Site géographique principal"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Buildings"
+msgstr "Bâtiments"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Building A, B, C, Library"
+msgstr "Bât. A, B, C, Bibliothèque"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Rooms"
+msgstr "Salles"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Office 101, Server Room"
+msgstr "Bureau 101, Salle Serveur"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Existing Locations"
+msgstr "Lieux Existants"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "View All"
+msgstr "Voir Tout"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Name"
+msgstr "Nom"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Assets"
+msgstr "Actifs"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "No locations defined yet"
+msgstr "Aucun lieu défini pour le moment"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "What is a location?"
+msgstr "Qu'est-ce qu'un lieu ?"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Locations allow you to geographically locate your equipment: campuses, buildings, offices, server rooms, etc."
+msgstr "Les lieux permettent de localiser géographiquement vos équipements : campus, bâtiments, bureaux, salles serveur, etc."
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Hierarchical structure: Campus → Building → Floor → Room"
+msgstr "Structure hiérarchique : Campus → Bâtiment → Étage → Salle"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Use consistent codes (e.g., BLDG-A, B101)"
+msgstr "Utilisez des codes cohérents (ex: BAT-A, B101)"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Fill in GPS coordinates if available"
+msgstr "Renseignez les coordonnées GPS si disponibles"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Associate each equipment to a specific location"
+msgstr "Associez chaque équipement à un lieu précis"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Defined locations"
+msgstr "Lieux définis"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Full location list"
+msgstr "Liste complète des lieux"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Manage entities"
+msgstr "Gérer les entités"
+
+

@@ -1,4 +1,4 @@
-<?php
+0 <?php
 
 /**
  * ---------------------------------------------------------------------
@@ -1386,12 +1386,14 @@ HTML;
             'helpdesk' => [
                 'title' => __('Assistance'),
                 'types' => [
-                    'Ticket', 'Problem', 'Change',
-                    'Planning', 'Stat', 'TicketRecurrent', 'RecurrentChange'
+                    'Ticket', 'Change',
+                    'Planning', 'Stat', 'TicketRecurrent', 'RecurrentChange',
+                    'InventoryOrganization'
                 ],
                 'icon'    => 'ti ti-headset'
             ]
         ];
+
 
         if ($can_read_dashboard && strlen($default_asset_helpdesk) > 0) {
             $menu['helpdesk']['default_dashboard'] = '/front/dashboard_helpdesk.php';
@@ -1410,7 +1412,7 @@ HTML;
             'tools' => [
                 'title' => __('Tools'),
                 'types' => [
-                    'Project', 'Reminder', 'RSSFeed', 'KnowbaseItem',
+                    'Project', 'Reminder', 'RSSFeed',
                     'ReservationItem', 'Report', 'MigrationCleaner',
                     'SavedSearch', 'Impact'
                 ],
@@ -1557,6 +1559,24 @@ HTML;
                 }
             }
 
+            // Add Support Technique entry to Assistance menu
+            if (isset($menu['helpdesk']['content'])) {
+                $menu['helpdesk']['content']['support_technique'] = [
+                    'title'    => __('Technical Support'),
+                    'shortcut' => '',
+                    'page'     => '/front/helpdesk.php',
+                    'icon'     => 'ti ti-lifebuoy',
+                ];
+                
+                // Add FAQ / Knowledge Base entry to Assistance menu (Issue #50)
+                $menu['helpdesk']['content']['faq'] = [
+                    'title'    => __('FAQ'),
+                    'shortcut' => 'b',
+                    'page'     => '/front/knowbaseitem.php',
+                    'icon'     => 'ti ti-book',
+                ];
+            }
+
             $_SESSION['glpimenu'] = $menu;
            // echo 'menu load';
         } else {
@@ -1629,6 +1649,22 @@ HTML;
                 'default' => '/front/helpdesk.faq.php',
                 'title'   => __('FAQ'),
                 'icon'    => KnowbaseItem::getIcon(),
+            ];
+        }
+
+        // Technical Support menu entry
+        $menu['technical_support'] = [
+            'default' => '/front/helpdesk.php',
+            'title'   => __('Technical Support'),
+            'icon'    => 'ti ti-headset',
+        ];
+
+        // Inventory Organization menu entry (for admins and technicians only)
+        if (InventoryOrganization::canView()) {
+            $menu['inventory_organization'] = [
+                'default' => '/front/inventoryorganization.php',
+                'title'   => __('Inventory Organization'),
+                'icon'    => 'ti ti-building-warehouse',
             ];
         }
 
