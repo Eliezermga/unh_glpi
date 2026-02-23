@@ -35,7 +35,7 @@
                     {% if error_message %}
                         <div class="alert alert-danger alert-dismissible mb-3" role="alert">
                             {{ error_message }}
-                            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button>
                         </div>
                     {% endif %}
                     
@@ -43,7 +43,7 @@
                         <div class="alert alert-success alert-dismissible mb-3" role="alert">
                             <i class="ti ti-check me-2"></i>
                             {{ __('Configuration saved successfully!') }}
-                            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button>
                         </div>
                     {% endif %}
                     
@@ -55,7 +55,7 @@
                             <div class="mb-4">
                                 <h4>{{ __('Label Format') }}</h4>
                                 <p class="text-muted small">
-                                    {{ __('Configure the format of asset labels. Example: UNH-PC-001') }}
+                                    {{ __('Configure the format of asset labels. Example: UNH-FAC-BAT-PC-001') }}
                                 </p>
                                 
                                 <div class="row">
@@ -170,6 +170,16 @@
                         </div>
                         <div class="h1 text-muted mx-1">-</div>
                         <div class="text-center mx-2">
+                            <div class="h1 text-primary mb-1">FAC</div>
+                            <small class="text-muted">{{ __('Faculty') }}</small>
+                        </div>
+                        <div class="h1 text-muted mx-1">-</div>
+                        <div class="text-center mx-2">
+                            <div class="h1 text-cyan mb-1">BAT</div>
+                            <small class="text-muted">{{ __('Building') }}</small>
+                        </div>
+                        <div class="h1 text-muted mx-1">-</div>
+                        <div class="text-center mx-2">
                             <div class="h1 text-success mb-1">TYPE</div>
                             <small class="text-muted">{{ __('Type Code') }}</small>
                         </div>
@@ -182,6 +192,8 @@
                     
                     <ul class="mb-0">
                         <li>{{ __('Prefix: Identifier of your organization') }}</li>
+                        <li>{{ __('FAC: Faculty code derived from entity hierarchy') }}</li>
+                        <li>{{ __('BAT: Building code derived from location hierarchy') }}</li>
                         <li>{{ __('Type Code: Identifies the asset category') }}</li>
                         <li>{{ __('Number: Auto-incremented sequential number') }}</li>
                     </ul>

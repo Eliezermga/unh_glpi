@@ -52,7 +52,7 @@ class InventoryOrganization extends CommonGLPI
     /**
      * Default labeling format
      */
-    const DEFAULT_LABEL_FORMAT = 'UNH-{TYPE}-{NUM}';
+    const DEFAULT_LABEL_FORMAT = 'UNH-{FAC}-{BAT}-{TYPE}-{NUM}';
 
     /**
      * Get type name
@@ -105,27 +105,27 @@ class InventoryOrganization extends CommonGLPI
             ],
             'options'  => [
                 'entity' => [
-                    'title' => __('Entities'),
+                    'title' => __('Entités'),
                     'page'  => '/front/inventoryorganization.entity.php',
                     'icon'  => 'ti ti-building',
                 ],
                 'location' => [
-                    'title' => __('Locations'),
+                    'title' => __('Lieux'),
                     'page'  => '/front/inventoryorganization.location.php',
                     'icon'  => 'ti ti-map-pin',
                 ],
                 'type' => [
-                    'title' => __('Material Types'),
+                    'title' => __('Types de matériel'),
                     'page'  => '/front/inventoryorganization.type.php',
                     'icon'  => 'ti ti-devices',
                 ],
                 'labeling' => [
-                    'title' => __('Labeling'),
+                    'title' => __('Étiquetage'),
                     'page'  => '/front/inventoryorganization.labeling.php',
                     'icon'  => 'ti ti-tag',
                 ],
                 'coherence' => [
-                    'title' => __('Coherence Check'),
+                    'title' => __('Vérification de cohérence'),
                     'page'  => '/front/inventoryorganization.coherence.php',
                     'icon'  => 'ti ti-checkbox',
                 ],
@@ -558,6 +558,103 @@ class InventoryOrganization extends CommonGLPI
     }
 
     /**
+     * Build an uppercase token from a label-like source.
+     *
+     * @param string $value
+     * @param string $fallback
+     * @param int $max_len
+     * @return string
+     */
+    private static function buildToken($value, $fallback, $max_len = 4)
+    {
+        $clean = strtoupper((string) $value);
+        $clean = preg_replace('/[^A-Z0-9]/', '', $clean ?? '');
+        if ($clean === '') {
+            return $fallback;
+        }
+
+        return substr($clean, 0, $max_len);
+    }
+
+    /**
+     * Resolve faculty token from entity context.
+     *
+     * @param int $entities_id
+     * @return string
+     */
+    private static function resolveFacultyToken($entities_id = 0)
+    {
+        global $DB;
+
+        $entity_id = (int) $entities_id;
+        if ($entity_id <= 0 && method_exists('Session', 'getActiveEntity')) {
+            $entity_id = (int) Session::getActiveEntity();
+        }
+
+        if ($entity_id <= 0) {
+            return 'FAC';
+        }
+
+        $result = $DB->request([
+            'SELECT' => ['name', 'completename'],
+            'FROM'   => 'glpi_entities',
+            'WHERE'  => ['id' => $entity_id],
+            'LIMIT'  => 1
+        ]);
+
+        if (!($row = $result->current())) {
+            return 'FAC';
+        }
+
+        // Expected hierarchy: UNH > Faculty > Department.
+        $parts = preg_split('/\s*>\s*/', (string) ($row['completename'] ?? ''), -1, PREG_SPLIT_NO_EMPTY);
+        if (count($parts) >= 2) {
+            return self::buildToken($parts[1], 'FAC');
+        }
+
+        return self::buildToken($row['name'] ?? '', 'FAC');
+    }
+
+    /**
+     * Resolve building token from location context.
+     *
+     * @param int $locations_id
+     * @return string
+     */
+    private static function resolveBuildingToken($locations_id = 0)
+    {
+        global $DB;
+
+        $location_id = (int) $locations_id;
+        if ($location_id <= 0) {
+            return 'BAT';
+        }
+
+        $result = $DB->request([
+            'SELECT' => ['name', 'completename', 'building'],
+            'FROM'   => 'glpi_locations',
+            'WHERE'  => ['id' => $location_id],
+            'LIMIT'  => 1
+        ]);
+
+        if (!($row = $result->current())) {
+            return 'BAT';
+        }
+
+        if (!empty($row['building'])) {
+            return self::buildToken($row['building'], 'BAT');
+        }
+
+        // Expected hierarchy: Campus > Building > Floor > Room.
+        $parts = preg_split('/\s*>\s*/', (string) ($row['completename'] ?? ''), -1, PREG_SPLIT_NO_EMPTY);
+        if (count($parts) >= 2) {
+            return self::buildToken($parts[1], 'BAT');
+        }
+
+        return self::buildToken($row['name'] ?? '', 'BAT');
+    }
+
+    /**
      * Save labeling configuration
      *
      * @param array $config Configuration array
@@ -576,7 +673,7 @@ class InventoryOrganization extends CommonGLPI
      * @param string $asset_type Asset type (computer, monitor, etc.)
      * @return string
      */
-    public static function generateNextLabel($asset_type)
+    public static function generateNextLabel($asset_type, $entities_id = 0, $locations_id = 0)
     {
         global $DB;
 
@@ -584,9 +681,18 @@ class InventoryOrganization extends CommonGLPI
         $prefix = $config['prefix'] ?? 'UNH';
         $type_code = $config['types'][$asset_type] ?? strtoupper(substr($asset_type, 0, 3));
         $padding = $config['padding'] ?? 3;
+        $faculty = self::resolveFacultyToken($entities_id);
+        $building = self::resolveBuildingToken($locations_id);
+        $format = $config['format'] ?? self::DEFAULT_LABEL_FORMAT;
+
+        $is_extended = strpos($format, '{FAC}') !== false || strpos($format, '{BAT}') !== false;
 
         // Find the highest number for this type
-        $pattern = $prefix . '-' . $type_code . '-%';
+        if ($is_extended) {
+            $pattern = sprintf('%s-%s-%s-%s-%%', $prefix, $faculty, $building, $type_code);
+        } else {
+            $pattern = $prefix . '-' . $type_code . '-%';
+        }
         
         $tables = [
             'computer'   => 'glpi_computers',
@@ -615,6 +721,10 @@ class InventoryOrganization extends CommonGLPI
         }
 
         $next_num = $max_num + 1;
+        if ($is_extended) {
+            return sprintf('%s-%s-%s-%s-%0' . $padding . 'd', $prefix, $faculty, $building, $type_code, $next_num);
+        }
+
         return sprintf('%s-%s-%0' . $padding . 'd', $prefix, $type_code, $next_num);
     }
 
@@ -629,11 +739,19 @@ class InventoryOrganization extends CommonGLPI
         $config = self::getLabelingConfig();
         $prefix = preg_quote($config['prefix'] ?? 'UNH', '/');
         $type_codes = array_values($config['types'] ?? []);
+        if (empty($type_codes)) {
+            return false;
+        }
         $types_pattern = implode('|', array_map('preg_quote', $type_codes));
-        
-        $pattern = '/^' . $prefix . '-(' . $types_pattern . ')-\d{' . ($config['padding'] ?? 3) . ',}$/';
-        
-        return (bool) preg_match($pattern, $label);
+        $number_pattern = '\d{' . ($config['padding'] ?? 3) . ',}';
+
+        // Backward compatibility:
+        // - Legacy: PREFIX-TYPE-NNN
+        // - Extended: PREFIX-FAC-BAT-TYPE-NNN
+        $legacy_pattern = '/^' . $prefix . '-(' . $types_pattern . ')-' . $number_pattern . '$/';
+        $extended_pattern = '/^' . $prefix . '-[A-Z0-9]{1,4}-[A-Z0-9]{1,4}-(' . $types_pattern . ')-' . $number_pattern . '$/';
+
+        return (bool) preg_match($legacy_pattern, $label) || (bool) preg_match($extended_pattern, $label);
     }
 
     /**
