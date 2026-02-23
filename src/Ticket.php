@@ -3208,6 +3208,9 @@ JAVASCRIPT;
         foreach ($location_so as &$so) {
            //duplicated search options :(
             switch ($so['id']) {
+                case 23:
+                    $so['id'] = 87;
+                    break;
                 case 3:
                     $so['id'] = 83;
                     break;
