@@ -1663,7 +1663,7 @@ HTML;
         if (InventoryOrganization::canView()) {
             $menu['inventory_organization'] = [
                 'default' => '/front/inventoryorganization.php',
-                'title'   => InventoryOrganization::getTypeName(),
+                'title'   => __('Inventory Organization'),
                 'icon'    => 'ti ti-building-warehouse',
             ];
         }

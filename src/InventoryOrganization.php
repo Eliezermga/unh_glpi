@@ -62,7 +62,7 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function getTypeName($nb = 0)
     {
-        return __("Organisation de l'inventaire");
+        return __('Inventory Organization');
     }
 
     /**
