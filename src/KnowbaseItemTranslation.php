@@ -400,6 +400,14 @@ class KnowbaseItemTranslation extends CommonDBChild
             }
         }
 
+        if (is_string($item->fields[$field]) && $item->fields[$field] !== '') {
+            $gettext_fallback = __($item->fields[$field]);
+            if ($gettext_fallback !== $item->fields[$field]) {
+                self::$translation_cache[$cache_key] = $gettext_fallback;
+                return $gettext_fallback;
+            }
+        }
+
         self::$translation_cache[$cache_key] = $item->fields[$field];
         return $item->fields[$field];
     }

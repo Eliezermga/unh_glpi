@@ -84,6 +84,21 @@ class FaqTranslationFallbackTest
         return false;
     }
 
+    public function testGettextFallbackIsPresent(): bool
+    {
+        $testName = 'testGettextFallbackIsPresent';
+        $filePath = dirname(__DIR__) . '/src/KnowbaseItemTranslation.php';
+        $content = file_get_contents($filePath);
+
+        return $this->assertContains(
+            $testName,
+            $content,
+            '$gettext_fallback = __($item->fields[$field]);',
+            'Gettext fallback found for FAQ translation values',
+            'Gettext fallback missing for FAQ translation values'
+        );
+    }
+
     public function runAllTests(): array
     {
         echo "===========================================\n";
@@ -93,6 +108,7 @@ class FaqTranslationFallbackTest
         $this->testPreferredLanguageFallbackExists();
         $this->testEnglishFallbackLocalesIncluded();
         $this->testFaqListFallbackCallsTranslationGetter();
+        $this->testGettextFallbackIsPresent();
 
         foreach ($this->testResults as $name => $result) {
             $status = $result['status'] === 'PASSED' ? "\033[32mPASSED\033[0m" : "\033[31mFAILED\033[0m";
