@@ -340,7 +340,8 @@ class InventoryOrganization extends CommonGLPI
         foreach (['glpi_computers', 'glpi_monitors', 'glpi_printers'] as $table) {
             $type_name = $asset_tables[$table];
             $result = $DB->request([
-                'SELECT' => ['serial', 'COUNT' => 'cnt'],
+                'SELECT' => ['serial'],
+                'COUNT'  => 'cnt',
                 'FROM'   => $table,
                 'WHERE'  => [
                     'is_deleted' => 0,
@@ -437,7 +438,11 @@ class InventoryOrganization extends CommonGLPI
 
         // Computer types
         $result = $DB->request([
-            'SELECT' => ['glpi_computertypes.id', 'glpi_computertypes.name', 'COUNT' => 'cnt'],
+            'SELECT' => [
+                'glpi_computertypes.id',
+                'glpi_computertypes.name',
+                'COUNT' => 'glpi_computers.id AS cnt'
+            ],
             'FROM'   => 'glpi_computertypes',
             'LEFT JOIN' => [
                 'glpi_computers' => [
@@ -467,7 +472,11 @@ class InventoryOrganization extends CommonGLPI
 
         // Monitor types
         $result = $DB->request([
-            'SELECT' => ['glpi_monitortypes.id', 'glpi_monitortypes.name', 'COUNT' => 'cnt'],
+            'SELECT' => [
+                'glpi_monitortypes.id',
+                'glpi_monitortypes.name',
+                'COUNT' => 'glpi_monitors.id AS cnt'
+            ],
             'FROM'   => 'glpi_monitortypes',
             'LEFT JOIN' => [
                 'glpi_monitors' => [
@@ -497,7 +506,11 @@ class InventoryOrganization extends CommonGLPI
 
         // Printer types
         $result = $DB->request([
-            'SELECT' => ['glpi_printertypes.id', 'glpi_printertypes.name', 'COUNT' => 'cnt'],
+            'SELECT' => [
+                'glpi_printertypes.id',
+                'glpi_printertypes.name',
+                'COUNT' => 'glpi_printers.id AS cnt'
+            ],
             'FROM'   => 'glpi_printertypes',
             'LEFT JOIN' => [
                 'glpi_printers' => [
