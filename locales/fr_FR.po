@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Cyril Damas, 2021
 # Steve Hubert <hubertsteve.ga@gmail.com>, 2021
@@ -23,7 +23,7 @@
 # alexandre delaunay <delaunay.alexandre@gmail.com>, 2023
 # Tiago Graça, 2023
 # Cédric Anne, 2023
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -32,12 +32,14 @@ msgstr ""
 "POT-Creation-Date: 2023-04-05 06:38+0000\n"
 "PO-Revision-Date: 2021-05-26 09:06+0000\n"
 "Last-Translator: Cédric Anne, 2023\n"
-"Language-Team: French (France) (https://app.transifex.com/glpi/teams/1637/fr_FR/)\n"
+"Language-Team: French (France) (https://app.transifex.com/glpi/teams/1637/"
+"fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #: src/Config.php:1808 src/Config.php:1830
 #, php-format
@@ -65,8 +67,10 @@ msgid "\"innodb_large_prefix\" must be enabled."
 msgstr "La variable \"innodb_large_prefix\" doit-être activée."
 
 #: src/System/Requirement/SessionsConfiguration.php:64
-msgid "\"session.auto_start\" and \"session.use_trans_sid\" must be set to off."
-msgstr "\"session.auto_start\" et \"session.use_trans_sid\" doivent être désactivés."
+msgid ""
+"\"session.auto_start\" and \"session.use_trans_sid\" must be set to off."
+msgstr ""
+"\"session.auto_start\" et \"session.use_trans_sid\" doivent être désactivés."
 
 #: src/System/Requirement/SessionsConfiguration.php:66
 msgid "\"session.auto_start\" must be set to off."
@@ -2060,8 +2064,8 @@ msgid ""
 "many tables). Please use 'Items seen' criterion instead"
 msgstr ""
 "Le critère \"tous\" ne peut être utilisé avec cette liste d'objets, la "
-"requête SQL échoue (trop de tables). Veuillez utiliser le critère \"Éléments"
-" visualisés\" à la place."
+"requête SQL échoue (trop de tables). Veuillez utiliser le critère \"Éléments "
+"visualisés\" à la place."
 
 #: front/massiveaction.php:84
 #, php-format
@@ -2471,8 +2475,8 @@ msgid ""
 "Access token does not provide a refresh token, please verify application "
 "configuration."
 msgstr ""
-"Le jeton d'accès ne fourni pas de jeton de renouvellement. Veuillez vérifier"
-" la configuration de votre application."
+"Le jeton d'accès ne fourni pas de jeton de renouvellement. Veuillez vérifier "
+"la configuration de votre application."
 
 #: front/smtp_oauth2_callback.php:94
 msgctxt "oauth"
@@ -3193,8 +3197,7 @@ msgstr "Entêtes additionnelles"
 
 #: src/Console/Plugin/InstallCommand.php:68
 msgid "Additionnal parameters to pass to the plugin install hook function"
-msgstr ""
-"Valeurs additionnelles à passer à la fonction d'installation du plugin"
+msgstr "Valeurs additionnelles à passer à la fonction d'installation du plugin"
 
 #: templates/generic_show_form.html.twig src/Contact.php:296
 #: src/Supplier.php:178
@@ -3543,8 +3546,8 @@ msgstr "Permettre de répondre"
 #: src/Config.php:757
 msgid "Allow to login to API and get a session token with user credentials"
 msgstr ""
-"Permettre la connexion à l'API et l'obtention d'un jeton de session avec les"
-" identifiants utilisateur"
+"Permettre la connexion à l'API et l'obtention d'un jeton de session avec les "
+"identifiants utilisateur"
 
 #: src/Config.php:764
 msgid ""
@@ -3558,8 +3561,7 @@ msgstr ""
 #: src/AuthLDAP.php:488
 msgid "Allow to use RootDN and Password for non-anonymous binds."
 msgstr ""
-"Utiliser le DN du compte et le mot de passe pour les connexions non "
-"anonymes."
+"Utiliser le DN du compte et le mot de passe pour les connexions non anonymes."
 
 #: src/Console/Database/UpdateCommand.php:99
 msgid "Allow update to an unstable version"
@@ -3569,8 +3571,7 @@ msgstr "Autoriser les mises à jour depuis une version instable"
 #, php-format
 msgid "Allow usage statistics sending to Telemetry service (%s)"
 msgstr ""
-"Autoriser l'envoi de statistiques d'utilisation au service de télémétrie "
-"(%s)"
+"Autoriser l'envoi de statistiques d'utilisation au service de télémétrie (%s)"
 
 #: src/Marketplace/View.php:381
 msgid "Alpha ASC"
@@ -3607,8 +3608,8 @@ msgstr "Usager numéro"
 
 #: src/Computer_Item.php:148 src/Computer.php:266
 msgid ""
-"Alternate username updated. The connected items have been updated using this"
-" alternate username."
+"Alternate username updated. The connected items have been updated using this "
+"alternate username."
 msgstr ""
 "Usager mis à jour. Les éléments connectés ont également été mis à jour."
 
@@ -4604,8 +4605,8 @@ msgstr "Généré automatiquement par GLPI %s"
 #: src/Config.php:1332
 msgid "Automatically refresh data (tickets list, project kanban) in minutes."
 msgstr ""
-"Rafraichissement automatique des données (liste des tickets, kanban dans les"
-" projets) en minutes"
+"Rafraichissement automatique des données (liste des tickets, kanban dans les "
+"projets) en minutes"
 
 #: src/Config.php:519
 msgid "Automatically update of the elements related to the computers"
@@ -5162,8 +5163,8 @@ msgid ""
 "Cache namespace can be use to ensure either separation or sharing of "
 "multiple GLPI instances data on same cache system."
 msgstr ""
-"L'espace de noms du cache peut être utilisé pour assurer la séparation ou le"
-" partage des données de plusieurs instances de GLPI sur le même système de "
+"L'espace de noms du cache peut être utilisé pour assurer la séparation ou le "
+"partage des données de plusieurs instances de GLPI sur le même système de "
 "cache."
 
 #: src/Console/Cache/ConfigureCommand.php:89
@@ -5741,7 +5742,8 @@ msgstr "Vérification du réplicat SQL"
 
 #: src/Console/Database/CheckSchemaIntegrityCommand.php:129
 msgid "Check tokens related to \"DYNAMIC\" row format migration."
-msgstr "Vérifier les jetons liés à la migration de format de ligne \"DYNAMIC\"."
+msgstr ""
+"Vérifier les jetons liés à la migration de format de ligne \"DYNAMIC\"."
 
 #: src/Console/Database/CheckSchemaIntegrityCommand.php:101
 msgid "Check tokens related to all databases migrations."
@@ -5753,7 +5755,8 @@ msgstr "Vérifier les jetons liés à la migration de \"MyISAM\" à \"InnoDB\"."
 
 #: src/Console/Database/CheckSchemaIntegrityCommand.php:115
 msgid "Check tokens related to migration from \"datetime\" to \"timestamp\"."
-msgstr "Vérifier les jetons liés à la migration de \"datetime\" à \"timestamp\"."
+msgstr ""
+"Vérifier les jetons liés à la migration de \"datetime\" à \"timestamp\"."
 
 #: src/Console/Database/CheckSchemaIntegrityCommand.php:122
 msgid "Check tokens related to migration from \"utf8\" to \"utf8mb4\"."
@@ -6011,8 +6014,8 @@ msgstr "Cliquez sur un élément pour le supprimer du réseau"
 #: templates/layout/parts/profile_selector.html.twig
 #, php-format
 msgid ""
-"Click on the %s icon to load the elements of the selected entity, as well as"
-" its sub-entities."
+"Click on the %s icon to load the elements of the selected entity, as well as "
+"its sub-entities."
 msgstr ""
 "Cliquez sur l'icone %s pour charger les éléments de l'entité sélectionnée "
 "ainsi que de ses sous-entités."
@@ -6213,8 +6216,8 @@ msgstr "Couleurs"
 #, php-format
 msgid "Column \"%s.%s\" contains negative values. Updating them to \"%s\"..."
 msgstr ""
-"La colonne \"%s.%s\" contient des valeurs négatives. Mise à jour à la valeur"
-" \"%s\"..."
+"La colonne \"%s.%s\" contient des valeurs négatives. Mise à jour à la valeur "
+"\"%s\"..."
 
 #: src/Console/AbstractCommand.php:270
 msgid "Command execution may take a long time and should not be interrupted."
@@ -6744,8 +6747,8 @@ msgid ""
 "Convert database tables to \"Dynamic\" row format (required for \"utf8mb4\" "
 "character support)."
 msgstr ""
-"Convertir les tables de la base de données au format de ligne \"Dynamic\" "
-"(nécessaire pour le support des caractères \"utf8mb4\")."
+"Convertir les tables de la base de données au format de ligne \"Dynamic"
+"\" (nécessaire pour le support des caractères \"utf8mb4\")."
 
 #: src/PrinterLog.php:236
 msgid "Copies"
@@ -7310,8 +7313,8 @@ msgid ""
 "Database already contains \"glpi_*\" tables. Use --force option to override "
 "existing database."
 msgstr ""
-"La base de données contient déjà des tables \"glpi_*\". Utilisez l'option "
-"--force pour écraser la base de données existante."
+"La base de données contient déjà des tables \"glpi_*\". Utilisez l'option --"
+"force pour écraser la base de données existante."
 
 #: src/Console/Database/AbstractConfigureCommand.php:208
 #: src/Console/Database/InstallCommand.php:169
@@ -7319,8 +7322,8 @@ msgid ""
 "Database configuration already exists. Use --reconfigure option to override "
 "existing configuration."
 msgstr ""
-"La configuration de la base de données existe déjà. Utilisez l'option "
-"--reconfigure pour écraser la configuration existante."
+"La configuration de la base de données existe déjà. Utilisez l'option --"
+"reconfigure pour écraser la configuration existante."
 
 #: src/System/Requirement/DbConfiguration.php:91
 msgid "Database configuration is OK."
@@ -7341,7 +7344,8 @@ msgstr "La configuration de la base de données n'est pas prise en charge."
 #: src/Console/Database/InstallCommand.php:238
 #, php-format
 msgid "Database connection failed with message \"(%s) %s\"."
-msgstr "La connexion à la base de données a échoué avec le message \"(%s) %s\"."
+msgstr ""
+"La connexion à la base de données a échoué avec le message \"(%s) %s\"."
 
 #: templates/install/step2.html.twig
 msgid "Database connection setup"
@@ -7358,7 +7362,8 @@ msgstr "Base de données créée"
 #: src/Console/Database/InstallCommand.php:274
 #, php-format
 msgid "Database creation failed with message \"(%s) %s\"."
-msgstr "La création de la base de données a échoué avec le message \"(%s) %s\"."
+msgstr ""
+"La création de la base de données a échoué avec le message \"(%s) %s\"."
 
 #: templates/install/step3.html.twig
 msgid "Database engine is not supported."
@@ -7424,8 +7429,7 @@ msgstr "Nom de la base de données :"
 
 #: src/Console/Database/AbstractConfigureCommand.php:119
 msgid ""
-"Database password (will be prompted for value if option passed without "
-"value)"
+"Database password (will be prompted for value if option passed without value)"
 msgstr ""
 "Mot de passe de la base de données (une valeur vous sera demandée si "
 "l'option est fournie sans valeur)"
@@ -8416,8 +8420,7 @@ msgstr "Plugin désactivé"
 #, php-format
 msgid "Disallow usage statistics sending to Telemetry service (%s)"
 msgstr ""
-"Interdire l'envoi de statistiques d'utilisation au service de télémétrie "
-"(%s)"
+"Interdire l'envoi de statistiques d'utilisation au service de télémétrie (%s)"
 
 #: src/Computer_Item.php:252 src/Computer_Item.php:273
 #: src/Computer_Item.php:384 src/Computer_Item.php:552
@@ -9452,8 +9455,8 @@ msgid ""
 "End date to apply in \"modifyTimestamp\" filter (see %s for supported "
 "formats)"
 msgstr ""
-"Date de fin à appliquer dans le filtre \"modifyTimestamp\" (voir %s pour les"
-" formats supportés)"
+"Date de fin à appliquer dans le filtre \"modifyTimestamp\" (voir %s pour les "
+"formats supportés)"
 
 #: src/CronTask.php:1704
 msgid "End hour of run period"
@@ -9643,8 +9646,8 @@ msgstr "Erreur lors de la création de la base !"
 msgid ""
 "Error in entering dates. The starting date is later than the ending date"
 msgstr ""
-"Erreur lors de la saisie des dates. La date de début est plus récente que la"
-" date de fin"
+"Erreur lors de la saisie des dates. La date de début est plus récente que la "
+"date de fin"
 
 #: src/NotificationEventMailing.php:393
 msgid "Error in sending the email"
@@ -9690,8 +9693,8 @@ msgid ""
 "Error when parsing HTTP_REFERER. Reload previous page before doing action "
 "again."
 msgstr ""
-"Erreur lors de l'analyse de HTTP_REFERER. Recharger la page précédente avant"
-" de faire à nouveau une action."
+"Erreur lors de l'analyse de HTTP_REFERER. Recharger la page précédente avant "
+"de faire à nouveau une action."
 
 #: src/Console/Ldap/SynchronizeUsersCommand.php:310
 #, php-format
@@ -9733,8 +9736,8 @@ msgstr ""
 #: src/SLA.php:65
 msgid "Escalations defined in the SLA will be triggered under this new date."
 msgstr ""
-"Les escalades définies dans le SLA seront également déclenchées conformément"
-" à cette nouvelle date."
+"Les escalades définies dans le SLA seront également déclenchées conformément "
+"à cette nouvelle date."
 
 #: templates/components/form/flags.html.twig src/Printer.php:500
 msgid "Ethernet"
@@ -9882,8 +9885,8 @@ msgstr "Erreur d'exécution"
 
 #: src/Console/Task/UnlockCommand.php:67
 msgid ""
-"Execution time (in cycles) from which the task is considered as stuck (delay"
-" = task frequency * cycle)"
+"Execution time (in cycles) from which the task is considered as stuck (delay "
+"= task frequency * cycle)"
 msgstr ""
 "Temps d'exécution (en cycles) à partir duquel la tâche est considérée comme "
 "bloqué (délai = fréquence de la tâche * cycle)"
@@ -10138,8 +10141,8 @@ msgstr "Erreur d'écriture du fichier sur le disque"
 #, php-format
 msgid "Failed to write rollback SQL queries in \"%s\" file."
 msgstr ""
-"Échec de l'écriture des requêtes SQL de retour-arrière dans le fichier "
-"\"%s\"."
+"Échec de l'écriture des requêtes SQL de retour-arrière dans le fichier \"%s"
+"\"."
 
 #: src/NotificationEventMailing.php:417
 #, php-format
@@ -10593,8 +10596,8 @@ msgstr "Pour des raisons de sécurité, veuillez supprimer le fichier : %s"
 
 #: src/Infocom.php:1127
 msgid ""
-"For this type of item, the financial and administrative information are only"
-" a model for the items which you should add."
+"For this type of item, the financial and administrative information are only "
+"a model for the items which you should add."
 msgstr ""
 "Pour ce type d'élément, les informations financières et administratives ne "
 "sont qu'un modèle pour les éléments que vous ajouterez."
@@ -10641,14 +10644,16 @@ msgstr ""
 
 #: src/Console/Ldap/SynchronizeUsersCommand.php:126
 #, php-format
-msgid "Force strategy used for deleted users (current configured action: \"%s\")"
+msgid ""
+"Force strategy used for deleted users (current configured action: \"%s\")"
 msgstr ""
 "Forcer la stratégie utilisée pour les utilisateurs supprimés (action "
 "actuellement configurée : \"%s\")"
 
 #: src/Console/Ldap/SynchronizeUsersCommand.php:149
 #, php-format
-msgid "Force strategy used for restored users (current configured action: \"%s\")"
+msgid ""
+"Force strategy used for restored users (current configured action: \"%s\")"
 msgstr ""
 "Forcer la stratégie utilisée pour les utilisateurs restaurés (action "
 "configurée actuellement : \"%s\")"
@@ -10690,8 +10695,7 @@ msgstr "Ancien technicien chargé du ticket"
 
 #: src/Console/Security/ChangekeyCommand.php:73
 #, php-format
-msgid ""
-"Found %1$s field(s) and %2$s configuration entries requiring migration."
+msgid "Found %1$s field(s) and %2$s configuration entries requiring migration."
 msgstr ""
 "Trouvé %1$s champ(s) et %2$s entrées de configuration demandant une "
 "migration."
@@ -10804,8 +10808,8 @@ msgstr "Plein écran"
 
 #: src/FQDN.php:60
 msgid ""
-"Fully Qualified Domain Name. Use the classical notation (labels separated by"
-" dots). For example: indepnet.net"
+"Fully Qualified Domain Name. Use the classical notation (labels separated by "
+"dots). For example: indepnet.net"
 msgstr ""
 "Nom de domaine complètement qualifié. Utilisez la notation classique (noms "
 "séparés par des points). Par exemple : services.glpi-network.com"
@@ -10833,14 +10837,14 @@ msgstr ""
 
 #: src/System/Requirement/DataDirectoriesProtectedPath.php:75
 msgid ""
-"GLPI data directories should be placed outside web root directory. It can be"
-" achieved by redefining corresponding constants. See installation "
+"GLPI data directories should be placed outside web root directory. It can be "
+"achieved by redefining corresponding constants. See installation "
 "documentation for more details."
 msgstr ""
 "Les dossiers de données de GLPI devraient être placés en dehors du dossier "
 "racine web. Ceci peut être effectué en redéfinissant les constantes "
-"correspondantes. Référez-vous à la documentation d'installation pour plus de"
-" détails."
+"correspondantes. Référez-vous à la documentation d'installation pour plus de "
+"détails."
 
 #: src/Console/Database/UpdateCommand.php:167
 msgid "GLPI database version"
@@ -11215,7 +11219,8 @@ msgid ""
 "We can help you solve them. Sign up for support on %s."
 msgstr ""
 "Vous avez une difficulté pour mettre en place un module avancé GLPI ?\n"
-"Nous pouvons vous aider à la résoudre. Inscrivez-vous pour obtenir du support sur %s."
+"Nous pouvons vous aider à la résoudre. Inscrivez-vous pour obtenir du "
+"support sur %s."
 
 #: templates/components/itilobject/timeline/form_document_item.html.twig
 #: src/NotificationTargetProjectTask.php:616 src/KnowbaseItem.php:1225
@@ -11631,12 +11636,12 @@ msgstr "Si les types de cartouches ne sont plus utilisés"
 
 #: src/User.php:5500 src/Api/API.php:2175
 msgid ""
-"If the given email address match an exisiting GLPI user, you will receive an"
-" email containing the informations required to reset your password. Please "
+"If the given email address match an exisiting GLPI user, you will receive an "
+"email containing the informations required to reset your password. Please "
 "contact your administrator if you do not receive any email."
 msgstr ""
-"Si l'adresse email donnée correspond à un utilisateur GLPI, vous recevrez un"
-" email contenant les informations requises pour ré-initialiser votre mot de "
+"Si l'adresse email donnée correspond à un utilisateur GLPI, vous recevrez un "
+"email contenant les informations requises pour ré-initialiser votre mot de "
 "passe. Merci de contacter votre administrateur si vous ne recevez pas "
 "d'emails."
 
@@ -11651,8 +11656,7 @@ msgid "If the item represents a milestone or not"
 msgstr "Si l'élément représente une étape importante ou non"
 
 #: src/CommonDropdown.php:621
-msgid ""
-"If you confirm the deletion, all uses of this dropdown will be blanked."
+msgid "If you confirm the deletion, all uses of this dropdown will be blanked."
 msgstr ""
 "Si vous confirmez la suppression, toutes les utilisations de cet intitulé "
 "seront effacées."
@@ -12269,10 +12273,11 @@ msgstr "Installation d'une cartouche"
 
 #: src/Config.php:1796
 #, php-format
-msgid "Installing and enabling the \"%s\" extension may improve GLPI performance"
+msgid ""
+"Installing and enabling the \"%s\" extension may improve GLPI performance"
 msgstr ""
-"Installer et activer l'extension  \"%s\" pourrait améliorer les performances"
-" de GLPI"
+"Installer et activer l'extension  \"%s\" pourrait améliorer les performances "
+"de GLPI"
 
 #: js/planning.js:371 js/planning.js:493 js/planning.js:536
 msgid "Instance"
@@ -12673,21 +12678,21 @@ msgid ""
 "It is also possible to upload a compressed archive directly with a "
 "collection of inventory files."
 msgstr ""
-"Il est possible d'importer directement une archive compressée avec plusieurs"
-" fichiers d'inventaire."
+"Il est possible d'importer directement une archive compressée avec plusieurs "
+"fichiers d'inventaire."
 
 #: src/Console/Migration/RacksPluginToCoreCommand.php:217
 #: src/Console/Migration/AppliancesPluginToCoreCommand.php:162
 #: src/Console/Migration/AbstractPluginToCoreCommand.php:106
 msgid "It is better to make a backup of your existing data before continuing."
 msgstr ""
-"Il est préférable de faire une sauvegarde de vos données existantes avant de"
-" continuer."
+"Il est préférable de faire une sauvegarde de vos données existantes avant de "
+"continuer."
 
 #: src/Rule.php:1078
 msgid ""
-"It is possible to affect the result of a regular expression using the string"
-" #0"
+"It is possible to affect the result of a regular expression using the string "
+"#0"
 msgstr ""
 "Il est possible d'affecter le résultat d'une expression régulière en "
 "utilisant la chaîne #0"
@@ -13039,8 +13044,8 @@ msgstr ""
 #, php-format
 msgid "Knowledge base item translation has not been reverted to revision %s"
 msgstr ""
-"La traduction de l'élément de la base de connaissances n'a été rétablie à la"
-" révision %s"
+"La traduction de l'élément de la base de connaissances n'a été rétablie à la "
+"révision %s"
 
 #: templates/pages/setup/general/general_setup.html.twig
 msgid "Knowledge base translation"
@@ -14577,8 +14582,7 @@ msgstr "Migrer les données du plugin baies dans les tables du cœur de GLPI"
 
 #: src/Console/Migration/UnsignedKeysCommand.php:65
 msgid "Migrate primary/foreign keys to unsigned integers"
-msgstr ""
-"Migration des clefs principales/étrangères vers des entiers non signés"
+msgstr "Migration des clefs principales/étrangères vers des entiers non signés"
 
 #: src/Console/Migration/UnsignedKeysCommand.php:91
 #, php-format
@@ -14650,7 +14654,8 @@ msgstr ""
 #: src/Console/Migration/UnsignedKeysCommand.php:218
 #, php-format
 msgid "Migration of column \"%s.%s\" failed with message \"(%s) %s\"."
-msgstr "La migration de la colonne \"%s.%s\" a échouée avec le message  \"(%s) %s\"."
+msgstr ""
+"La migration de la colonne \"%s.%s\" a échouée avec le message  \"(%s) %s\"."
 
 #: src/Console/Migration/DynamicRowFormatCommand.php:141
 #: src/Console/Migration/AppliancesPluginToCoreCommand.php:345
@@ -14658,7 +14663,8 @@ msgstr "La migration de la colonne \"%s.%s\" a échouée avec le message  \"(%s)
 #: src/Console/Migration/MyIsamToInnoDbCommand.php:102
 #, php-format
 msgid "Migration of table \"%s\" failed with message \"(%s) %s\"."
-msgstr "La migration de la table \"%s\" a échouée avec le message  \"(%s) %s\"."
+msgstr ""
+"La migration de la table \"%s\" a échouée avec le message  \"(%s) %s\"."
 
 #: templates/pages/tools/project_task.html.twig
 #: templates/components/kanban/item_panels/default_panel.html.twig
@@ -14716,8 +14722,7 @@ msgstr "Champ requis manquant en entrée"
 
 #: src/IPNetwork.php:332
 msgid "Missing network property (In CIDR notation. Ex: 192.168.1.1/24)"
-msgstr ""
-"Propriété réseau manquante (dans la notation CIDR. Ex: 192.168.1.1/24)"
+msgstr "Propriété réseau manquante (dans la notation CIDR. Ex: 192.168.1.1/24)"
 
 #: install/update.php:162
 msgid "Missing security key file"
@@ -15867,8 +15872,7 @@ msgstr "Aucune option disponible pour ce type de port."
 
 #: src/DisplayPreference.php:349
 msgid "No personal criteria. Create personal parameters?"
-msgstr ""
-"Aucun critère personnel. Voulez-vous créer vos paramètres personnels ?"
+msgstr "Aucun critère personnel. Voulez-vous créer vos paramètres personnels ?"
 
 #: src/Pdu_Plug.php:148
 msgid "No plug found"
@@ -16617,8 +16621,8 @@ msgstr "Le système d'exploitation et PHP utilisent des entiers 64 bits."
 
 #: src/System/Requirement/IntegerSize.php:51
 msgid ""
-"OS or PHP is not relying on 64 bits integers, operations on IP addresses may"
-" produce unexpected results."
+"OS or PHP is not relying on 64 bits integers, operations on IP addresses may "
+"produce unexpected results."
 msgstr ""
 "Le système d'exploitation ou PHP n'utilisent des entiers 64 bits. Les "
 "opération relatives aux adresses IP peuvent produire des résultats "
@@ -16835,8 +16839,7 @@ msgstr ""
 "directory."
 
 #: src/Console/Ldap/SynchronizeUsersCommand.php:493
-msgid ""
-"Option --begin-date value has to be lower than option --end-date value."
+msgid "Option --begin-date value has to be lower than option --end-date value."
 msgstr ""
 "La valeur de l'option --begin-date doit être plus petite que la valeur de "
 "l'option --end-date"
@@ -16993,8 +16996,8 @@ msgid ""
 "Other models and items cannot be migrated when --no-interaction option is "
 "used."
 msgstr ""
-"Les modèles et éléments autres ne peuvent pas être migré quand l'option "
-"--no-interaction est utilisée."
+"Les modèles et éléments autres ne peuvent pas être migré quand l'option --no-"
+"interaction est utilisée."
 
 #: templates/dropdown_form.html.twig
 msgid "Other pictures"
@@ -17020,8 +17023,7 @@ msgstr "Autres méthodes d'authentification"
 
 #: src/Marketplace/View.php:362
 msgid ""
-"Otherwise, you will need to download and unzip the plugins archives "
-"manually."
+"Otherwise, you will need to download and unzip the plugins archives manually."
 msgstr ""
 "Autrement, vous devrez télécharger et décompresser les archives des plugins "
 "manuellement."
@@ -17039,8 +17041,8 @@ msgid ""
 "Output language (default value is existing GLPI \"language\" configuration "
 "or \"en_GB\")"
 msgstr ""
-"Langue de sortie (la valeur par défaut est celle de la configuration de GLPI"
-" ou \"en_GB\")"
+"Langue de sortie (la valeur par défaut est celle de la configuration de GLPI "
+"ou \"en_GB\")"
 
 #: src/NetworkPortMetrics.php:206
 msgid "Output megabytes"
@@ -17106,8 +17108,8 @@ msgid ""
 "PHP %s official support has ended. An upgrade to a more recent PHP version "
 "is recommended."
 msgstr ""
-"Le support officiel de PHP %s est terminé. La mise à niveau vers une version"
-" plus récente de PHP est recommandée."
+"Le support officiel de PHP %s est terminé. La mise à niveau vers une version "
+"plus récente de PHP est recommandée."
 
 #: front/config.form.php:71
 msgid "PHP OPcache reset successful"
@@ -17123,20 +17125,20 @@ msgstr "Extensions du noyau de PHP"
 
 #: src/System/Requirement/SessionsSecurityConfiguration.php:64
 msgid ""
-"PHP directive \"session.cookie_httponly\" should be set to \"on\" to prevent"
-" client-side script to access cookie values."
+"PHP directive \"session.cookie_httponly\" should be set to \"on\" to prevent "
+"client-side script to access cookie values."
 msgstr ""
 "La directive PHP \"session.cookie_httponly\" devrait être définie à \"on\" "
 "pour prévenir l'accès aux cookies depuis les scripts côté client."
 
 #: src/System/Requirement/SessionsSecurityConfiguration.php:79
 msgid ""
-"PHP directive \"session.cookie_samesite\" should be set, at least, to "
-"\"Lax\", to prevent cookie to be sent on cross-origin POST requests."
+"PHP directive \"session.cookie_samesite\" should be set, at least, to \"Lax"
+"\", to prevent cookie to be sent on cross-origin POST requests."
 msgstr ""
-"La directive PHP \"session.cookie_samesite\" devrait être définie, au moins,"
-" à \"Lax\" pour prévenir l'envoi des cookies lors des requêtes multi-origine"
-" de type POST."
+"La directive PHP \"session.cookie_samesite\" devrait être définie, au moins, "
+"à \"Lax\" pour prévenir l'envoi des cookies lors des requêtes multi-origine "
+"de type POST."
 
 #: src/System/Requirement/SessionsSecurityConfiguration.php:60
 msgid ""
@@ -17895,8 +17897,8 @@ msgid ""
 "Plugin \"%s\" is already installed. Use --force option to force "
 "reinstallation."
 msgstr ""
-"Le plugin « %s » est déjà installé. Utilisez l'option --force pour forcer la"
-" réinstallation."
+"Le plugin « %s » est déjà installé. Utilisez l'option --force pour forcer la "
+"réinstallation."
 
 #: src/Console/Plugin/UninstallCommand.php:175
 #, php-format
@@ -18808,8 +18810,8 @@ msgstr ""
 
 #: src/Console/Migration/RacksPluginToCoreCommand.php:263
 msgid ""
-"Racks plugin is not part of GLPI plugin list. It has never been installed or"
-" has been cleaned."
+"Racks plugin is not part of GLPI plugin list. It has never been installed or "
+"has been cleaned."
 msgstr ""
 "Le plugin baies n'est pas dans la liste des plugins GLPI. Il n'a jamais été "
 "installé ou a été nettoyé."
@@ -19313,7 +19315,8 @@ msgstr "Supprimer l'objet du groupe"
 #: src/Migration.php:1572
 #, php-format
 msgid "Renaming \"%s\" foreign keys to \"%s\" in all tables..."
-msgstr "Renommage des clés étrangères \"%s\" par \"%s\" dans toutes les tables..."
+msgstr ""
+"Renommage des clés étrangères \"%s\" par \"%s\" dans toutes les tables..."
 
 #: src/Migration.php:1595
 #, php-format
@@ -19364,8 +19367,7 @@ msgstr "Remplacer"
 
 #: src/Entity.php:3508
 msgid "Replace the agent and group name with a customisable nickname"
-msgstr ""
-"Remplacer le nom de l'agent et du groupe par un surnom personnalisable"
+msgstr "Remplacer le nom de l'agent et du groupe par un surnom personnalisable"
 
 #: src/Entity.php:3507
 msgid "Replace the agent and group name with a generic name"
@@ -20379,8 +20381,7 @@ msgstr "Enregistrement du fichier de configuration ..."
 
 #: src/Console/Diagnostic/CheckHtmlEncodingCommand.php:387
 msgid "Scanning database for items to fix..."
-msgstr ""
-"Analyse de la base de données pour détecter les éléments à corriger..."
+msgstr "Analyse de la base de données pour détecter les éléments à corriger..."
 
 #: src/PrinterLog.php:226
 msgid "Scans"
@@ -20599,11 +20600,10 @@ msgid "See what would be sent..."
 msgstr "Voir ce qui serait envoyé..."
 
 #: templates/install/step0.html.twig
-msgid ""
-"Select 'Upgrade' to update your version of GLPI from an earlier version"
+msgid "Select 'Upgrade' to update your version of GLPI from an earlier version"
 msgstr ""
-"Choisissez 'Mise à jour' pour lancer la mise à jour de votre version de GLPI"
-" à partir d'une version antérieure."
+"Choisissez 'Mise à jour' pour lancer la mise à jour de votre version de GLPI "
+"à partir d'une version antérieure."
 
 #: src/CommonDBConnexity.php:639
 #, php-format
@@ -20763,8 +20763,7 @@ msgstr "Date d'envoi"
 #: src/Entity.php:1081 src/Entity.php:2267
 msgid "Send financial and administrative information alarms before"
 msgstr ""
-"Envoyer les alertes sur les informations financières et administratives "
-"avant"
+"Envoyer les alertes sur les informations financières et administratives avant"
 
 #: src/Entity.php:1041 src/Entity.php:2301
 msgid "Send license alarms before"
@@ -20932,8 +20931,8 @@ msgstr "Définir le lieu ici"
 #: src/Console/Migration/BuildMissingTimestampsCommand.php:51
 msgid "Set missing `date_creation` and `date_mod` values using log entries."
 msgstr ""
-"Définir les valeurs manquantes de `date_creation` et `date_mod` en utilisant"
-" les entrées d'historique."
+"Définir les valeurs manquantes de `date_creation` et `date_mod` en utilisant "
+"les entrées d'historique."
 
 #: js/impact.js:1340
 msgid "Set name and/or color for this group"
@@ -20983,11 +20982,10 @@ msgstr "Configuration"
 
 #: src/NetworkName.php:419
 msgid ""
-"Several network names available! Go to the tab 'Network Name' to manage "
-"them."
+"Several network names available! Go to the tab 'Network Name' to manage them."
 msgstr ""
-"Il existe plusieurs noms de réseau ! Utilisez l'onglet 'Nom réseau' pour les"
-" gérer."
+"Il existe plusieurs noms de réseau ! Utilisez l'onglet 'Nom réseau' pour les "
+"gérer."
 
 #: templates/components/photoswipe.html.twig src/RichText/RichText.php:438
 msgid "Share"
@@ -22312,8 +22310,8 @@ msgid ""
 "The CAS lib isn't available, GLPI doesn't package it anymore for license "
 "compatibility issue."
 msgstr ""
-"La bibliothèque CAS n'est pas disponible, GLPI ne la fournit plus par défaut"
-" en raison d'incompatibilités de licence."
+"La bibliothèque CAS n'est pas disponible, GLPI ne la fournit plus par défaut "
+"en raison d'incompatibilités de licence."
 
 #: src/Auth.php:1610
 msgid "The CURL extension for your PHP parser isn't installed"
@@ -22339,8 +22337,7 @@ msgstr "L'extension LDAP de votre parseur PHP n'est pas installée"
 
 #: src/NotificationMailingSetting.php:178
 msgid "The PHP mail function is unknown or is not activated on your system."
-msgstr ""
-"La fonction mail PHP n'existe pas ou est désactivée sur votre système."
+msgstr "La fonction mail PHP n'existe pas ou est désactivée sur votre système."
 
 #: src/Session.php:1534 src/Session.php:1537
 msgid "The action you have requested is not allowed."
@@ -22513,8 +22510,8 @@ msgstr ""
 #, php-format
 msgid ""
 "The key file \"%s\" used to encrypt/decrypt sensitive data is missing. You "
-"should retrieve it from your previous installation or encrypted data will be"
-" unreadable."
+"should retrieve it from your previous installation or encrypted data will be "
+"unreadable."
 msgstr ""
 "Le fichier de clé \"%s\" utilisé pour crypter / décrypter les données "
 "sensibles est manquant. Vous devez le récupérer à partir de votre "
@@ -22587,8 +22584,7 @@ msgstr "La clé de souscription fait référence à une souscription résiliée.
 
 #: js/modules/Kanban/Kanban.js:2242
 msgid ""
-"The regular expression you entered is invalid. Please check it and try "
-"again."
+"The regular expression you entered is invalid. Please check it and try again."
 msgstr ""
 "L'expression régulière que vous avez saisi est invalide. Merci de vérifier "
 "sa syntaxe avant de recommencer."
@@ -22777,8 +22773,7 @@ msgstr "Cet élément fait partie de la FAQ"
 
 #: src/CommonITILValidation.php:1610
 msgid ""
-"This item is waiting for approval, do you really want to resolve or close "
-"it?"
+"This item is waiting for approval, do you really want to resolve or close it?"
 msgstr ""
 "Cet élément est en attente d'approbation, voulez-vous vraiment le résoudre "
 "ou le clôturer ?"
@@ -22820,8 +22815,8 @@ msgstr "Ce plugin requiert le paramètre GLPI %1$s."
 #, php-format
 msgid "This plugin requires PHP compiled along with \"%1$s\""
 msgstr ""
-"Ce plugin requiert que votre environnement PHP ait été compilé avec l'option"
-" \"%1$s\""
+"Ce plugin requiert que votre environnement PHP ait été compilé avec l'option "
+"\"%1$s\""
 
 #: src/Plugin.php:2034
 #, php-format
@@ -22869,11 +22864,11 @@ msgstr ""
 #: src/ConsumableItem.php:360
 #, php-format
 msgid ""
-"Threshold of alarm reached for the type of consumable: %1$s - Reference %2$s"
-" - Remaining %3$d"
+"Threshold of alarm reached for the type of consumable: %1$s - Reference %2$s "
+"- Remaining %3$d"
 msgstr ""
-"Seuil d'alerte atteint pour le type de consommable : %1$s - Référence : %2$s"
-" - Restant : %3$d"
+"Seuil d'alerte atteint pour le type de consommable : %1$s - Référence : %2$s "
+"- Restant : %3$d"
 
 #: src/Toolbox.php:2216 src/Config.php:892 src/Features/PlanningEvent.php:798
 msgid "Thursday"
@@ -23156,11 +23151,11 @@ msgstr "Les fuseaux horaires semblent chargés dans la base de données."
 
 #: src/System/Requirement/DbTimezones.php:88
 msgid ""
-"Timezones seems not loaded, see https://glpi-"
-"install.readthedocs.io/en/latest/timezones.html."
+"Timezones seems not loaded, see https://glpi-install.readthedocs.io/en/"
+"latest/timezones.html."
 msgstr ""
-"Les fuseaux horaires ne semblent pas être chargés, voir https://glpi-"
-"install.readthedocs.io/en/latest/timezones.html."
+"Les fuseaux horaires ne semblent pas être chargés, voir https://glpi-install."
+"readthedocs.io/en/latest/timezones.html."
 
 #: src/Console/Migration/TimestampsCommand.php:211
 #: src/Console/Database/EnableTimezonesCommand.php:81
@@ -23264,11 +23259,11 @@ msgstr "Vider la liste des éléments à transférer"
 
 #: src/Html.php:2696
 msgid ""
-"To increase the limit: change max_input_vars or suhosin.post.max_vars in php"
-" configuration."
+"To increase the limit: change max_input_vars or suhosin.post.max_vars in php "
+"configuration."
 msgstr ""
-"Pour augmenter la limite, modifier la valeur de max_input_vars ou de "
-"suhosin.post.max_vars dans la configuration PHP."
+"Pour augmenter la limite, modifier la valeur de max_input_vars ou de suhosin."
+"post.max_vars dans la configuration PHP."
 
 #: src/NotificationTargetConsumableItem.php:100
 #: src/NotificationTargetCartridgeItem.php:100
@@ -23696,7 +23691,8 @@ msgstr "L'URL \"%s\" n'est pas autorisée par votre administrateur."
 
 #: src/Toolbox.php:1433 src/System/Status/StatusChecker.php:407
 #, php-format
-msgid "URL \"%s\" is not considered safe and cannot be fetched from GLPI server."
+msgid ""
+"URL \"%s\" is not considered safe and cannot be fetched from GLPI server."
 msgstr ""
 "L'URL \"%s\" n'est pas considérée comme sûre et ne peut pas être récupérée "
 "depuis le serveur de GLPI."
@@ -23777,8 +23773,8 @@ msgid ""
 "Unable to configure notifications: please configure at least one followup "
 "type using the above configuration."
 msgstr ""
-"Configuration des notifications impossible : veuillez configurer au moins un"
-" type de suivi dans la configuration ci-dessus."
+"Configuration des notifications impossible : veuillez configurer au moins un "
+"type de suivi dans la configuration ci-dessus."
 
 #: src/Console/AbstractCommand.php:108
 msgid "Unable to connect to database."
@@ -24291,8 +24287,8 @@ msgstr "Retirer le défaut"
 msgid ""
 "Unset cache configuration to use default filesystem cache for given context"
 msgstr ""
-"Annulation de la configuration du cache pour utiliser le cache par défaut du"
-" système de fichiers pour un contexte donné"
+"Annulation de la configuration du cache pour utiliser le cache par défaut du "
+"système de fichiers pour un contexte donné"
 
 #: ajax/ticketsatisfaction.php:95
 msgid "Unspecified"
@@ -24404,8 +24400,7 @@ msgstr "Mettre à jour un composant"
 
 #: src/Console/Database/UpdateCommand.php:93
 msgid "Update database schema to new version"
-msgstr ""
-"Mettre à jour le schéma de la base de données vers la nouvelle version"
+msgstr "Mettre à jour le schéma de la base de données vers la nouvelle version"
 
 #: src/KnowbaseItem_Item.php:229
 msgid "Update date"
@@ -24579,8 +24574,8 @@ msgstr "Mise à jour des itemtypes GLPI..."
 #, php-format
 msgid "Updating column \"%s.%s\" values failed with message \"(%s) %s\"."
 msgstr ""
-"La mise à jour de la colonne \"%s.%s\" a échouée avec le message  \"(%s) "
-"%s\"."
+"La mise à jour de la colonne \"%s.%s\" a échouée avec le message  \"(%s) %s"
+"\"."
 
 #: src/Console/Migration/DomainsPluginToCoreCommand.php:136
 #: src/Console/Migration/DomainsPluginToCoreCommand.php:199
@@ -24941,8 +24936,8 @@ msgid ""
 "optional), is_fqdn (boolean, optional)."
 msgstr ""
 "Les propriétés de descripteur de champ valides sont : key (chaîne, "
-"obligatoire), label (chaîne, obligatoire), placeholder (chaîne, facultatif),"
-" quote_value (booléen, facultatif), is_fqdn (booléen, facultatif)."
+"obligatoire), label (chaîne, obligatoire), placeholder (chaîne, facultatif), "
+"quote_value (booléen, facultatif), is_fqdn (booléen, facultatif)."
 
 #: src/Item_SoftwareVersion.php:1132
 msgid "Valid license"
@@ -25342,13 +25337,12 @@ msgstr ""
 #, php-format
 msgid "Warning: an email was undeliverable to %s with %d retries remaining"
 msgstr ""
-"Attention : un courriel n'a pas pu être délivré à %s. %d tentatives "
-"restantes"
+"Attention : un courriel n'a pas pu être délivré à %s. %d tentatives restantes"
 
 #: templates/components/itilobject/timeline/form_solution.html.twig
 msgid ""
-"Warning: non closed children tickets depends on current ticket. Are you sure"
-" you want to close it?"
+"Warning: non closed children tickets depends on current ticket. Are you sure "
+"you want to close it?"
 msgstr ""
 "Attention : des tickets enfants non clos dépendent du ticket courant. Êtes-"
 "vous sûr de vouloir le fermer ?"
@@ -25430,8 +25424,8 @@ msgstr "Des fichiers d'un précédente version de GLPI ont été détectés."
 #: src/Console/Migration/RacksPluginToCoreCommand.php:518
 #, php-format
 msgid ""
-"We found %d models for other items. For each, we will ask you where you want"
-" to import it."
+"We found %d models for other items. For each, we will ask you where you want "
+"to import it."
 msgstr ""
 "Nous avons trouvé %d modèles pour les éléments autres. Pour chacun, nous "
 "allons vous demander où vous souhaitez les importer."
@@ -25559,16 +25553,16 @@ msgid ""
 "When automatic computation is active, percentage is computed based on the "
 "average of all child project and task percent done."
 msgstr ""
-"Quand le calcul automatique est activé, le pourcentage est calculé depuis la"
-" moyenne des pourcentages de toutes les projets et tâches enfants"
+"Quand le calcul automatique est activé, le pourcentage est calculé depuis la "
+"moyenne des pourcentages de toutes les projets et tâches enfants"
 
 #: templates/pages/tools/project_task.html.twig
 msgid ""
 "When automatic computation is active, percentage is computed based on the "
 "average of all child task percent done."
 msgstr ""
-"Quand le calcul automatique est activé, le pourcentage est calculé depuis la"
-" moyenne des pourcentages de toutes les tâches enfants"
+"Quand le calcul automatique est activé, le pourcentage est calculé depuis la "
+"moyenne des pourcentages de toutes les tâches enfants"
 
 #: src/Config.php:532
 msgid "When connecting or updating"
@@ -25599,8 +25593,8 @@ msgstr ""
 #: src/Console/Plugin/DeactivateCommand.php:159
 msgid "Which plugin(s) do you want to deactivate (comma separated values)?"
 msgstr ""
-"Quel(s) plugin(s) voulez-vous désactiver (valeurs séparées par des virgules)"
-" ?"
+"Quel(s) plugin(s) voulez-vous désactiver (valeurs séparées par des "
+"virgules) ?"
 
 #: src/Console/Marketplace/DownloadCommand.php:103
 msgid "Which plugin(s) do you want to download (comma separated values)?"
@@ -25611,8 +25605,7 @@ msgstr ""
 #: src/Console/Plugin/InstallCommand.php:178
 msgid "Which plugin(s) do you want to install (comma separated values)?"
 msgstr ""
-"Quel(s) plugin(s) voulez-vous installer (valeurs séparées par des virgules) "
-"?"
+"Quel(s) plugin(s) voulez-vous installer (valeurs séparées par des virgules) ?"
 
 #: src/Console/Plugin/UninstallCommand.php:118
 msgid "Which plugin(s) do you want to uninstall (comma separated values)?"
@@ -25659,11 +25652,11 @@ msgstr "Version du protocole wifi"
 
 #: src/Inventory/Conf.php:665
 msgid ""
-"Will attempt to create components from VM information sent from host, do not"
-" use if you plan to inventory any VM directly!"
+"Will attempt to create components from VM information sent from host, do not "
+"use if you plan to inventory any VM directly!"
 msgstr ""
-"Essaiera de créer les composants à partir des informations de la VM envoyées"
-" par l'hôte, ne pas utiliser si vous planifiez d'inventorier les VM "
+"Essaiera de créer les composants à partir des informations de la VM envoyées "
+"par l'hôte, ne pas utiliser si vous planifiez d'inventorier les VM "
 "directement !"
 
 #: templates/pages/assets/socket.html.twig src/Socket.php:453
@@ -25844,11 +25837,10 @@ msgstr ""
 
 #: src/Console/Migration/RacksPluginToCoreCommand.php:216
 msgid ""
-"You are about to launch migration of Racks plugin data into GLPI core "
-"tables."
+"You are about to launch migration of Racks plugin data into GLPI core tables."
 msgstr ""
-"Vous êtes prêt à lancer la migration du plugin baies dans les tables du cœur"
-" de GLPI."
+"Vous êtes prêt à lancer la migration du plugin baies dans les tables du cœur "
+"de GLPI."
 
 #: templates/layout/parts/page_header_empty.html.twig
 #: templates/layout/parts/page_header.html.twig
@@ -25978,8 +25970,7 @@ msgid "You can't add an entity without name"
 msgstr "Vous ne pouvez pas ajouter une entité sans nom"
 
 #: src/MassiveAction.php:1480
-msgid ""
-"You can't delete that item by massive actions, because it has sub-items"
+msgid "You can't delete that item by massive actions, because it has sub-items"
 msgstr ""
 "Vous ne pouvez pas supprimer cet élément car il possède des sous-éléments"
 
@@ -26008,8 +25999,7 @@ msgstr "Vous ne pouvez pas créer de ticket pour cet utilisateur"
 
 #: src/Entity.php:173
 msgid "You cannot delete an entity which contains sub-entities."
-msgstr ""
-"Vous ne pouvez pas supprimer une entité qui contient des sous-entités."
+msgstr "Vous ne pouvez pas supprimer une entité qui contient des sous-entités."
 
 #: front/itilsolution.form.php:53
 msgid "You cannot solve this item!"
@@ -26065,8 +26055,7 @@ msgstr "Vous avez demandé la réinitialisation de votre mot de passe."
 #: front/ticket_user.form.php:74 front/group_ticket.form.php:67
 #: front/group_problem.form.php:67 front/problem_user.form.php:79
 #: front/change_user.form.php:76 front/change_group.form.php:67
-msgid ""
-"You have been redirected because you no longer have access to this item"
+msgid "You have been redirected because you no longer have access to this item"
 msgstr "Vous avez été redirigé car vous n'avez plus accès à cet élément"
 
 #: front/itilfollowup.form.php:139 front/itilsolution.form.php:110
@@ -26080,8 +26069,8 @@ msgid ""
 "You have more automatic actions which need to run each minute than the "
 "number allow each run. Increase this config."
 msgstr ""
-"Vous avez plus d'actions automatiques devant s'exécuter chaque minute que le"
-" nombre maximum autorisé. Augmentez cette configuration."
+"Vous avez plus d'actions automatiques devant s'exécuter chaque minute que le "
+"nombre maximum autorisé. Augmentez cette configuration."
 
 #: templates/layout/parts/saved_searches_list.html.twig
 msgid "You have not recorded any saved searches yet"
@@ -26168,19 +26157,27 @@ msgstr ""
 #: src/GLPINetwork.php:283
 #, php-format
 msgid ""
-"You need help to integrate GLPI in your IT, have a bug fixed or benefit from pre-configured rules or dictionaries?\n"
+"You need help to integrate GLPI in your IT, have a bug fixed or benefit from "
+"pre-configured rules or dictionaries?\n"
 "\n"
 "We provide the %s space for you.\n"
-"GLPI-Network is a commercial service that includes a subscription for tier 3 support, ensuring the correction of bugs encountered with a commitment time.\n"
+"GLPI-Network is a commercial service that includes a subscription for tier 3 "
+"support, ensuring the correction of bugs encountered with a commitment "
+"time.\n"
 "\n"
-"In this same space, you will be able to <b>contact an official partner</b> to help you with your GLPI integration."
+"In this same space, you will be able to <b>contact an official partner</b> "
+"to help you with your GLPI integration."
 msgstr ""
-"Vous souhaitez obtenir de l’aide pour intégrer GLPI dans votre SI, faire corriger un bug ou bénéficier de règles ou dictionnaires préconfigurés ?\n"
+"Vous souhaitez obtenir de l’aide pour intégrer GLPI dans votre SI, faire "
+"corriger un bug ou bénéficier de règles ou dictionnaires préconfigurés ?\n"
 "\n"
 "Nous mettons à votre disposition l’espace %s.\n"
-"GLPI-Network est un service commercial qui comprend une souscription au support niveau 3, garantissant la correction des bugs rencontrés avec un engagement de délai.\n"
+"GLPI-Network est un service commercial qui comprend une souscription au "
+"support niveau 3, garantissant la correction des bugs rencontrés avec un "
+"engagement de délai.\n"
 "\n"
-"Sur ce même espace, vous pourrez <b>contacter un partenaire officiel</b> pour vous aider dans votre intégration de GLPI."
+"Sur ce même espace, vous pourrez <b>contacter un partenaire officiel</"
+"b> pour vous aider dans votre intégration de GLPI."
 
 #: js/impact.js:2481
 msgid "You need to select at least 2 assets to make a group"
@@ -26191,8 +26188,8 @@ msgid ""
 "You should try to update these plugins to their latest version and run the "
 "command again."
 msgstr ""
-"Vous devriez essayer de mettre à jour ces plugins dans leur dernière version"
-" et exécuter la commande à nouveau."
+"Vous devriez essayer de mettre à jour ces plugins dans leur dernière version "
+"et exécuter la commande à nouveau."
 
 #: templates/layout/parts/user_header.html.twig
 msgid "You will find it on the GLPI-PROJECT.org site."
@@ -26249,8 +26246,7 @@ msgstr ""
 "connecter."
 
 #: templates/password_form.html.twig src/User.php:5404
-msgid ""
-"Your password reset request has expired or is invalid. Please renew it."
+msgid "Your password reset request has expired or is invalid. Please renew it."
 msgstr ""
 "La demande de renouvellement de mot de passe a expirée ou est invalide. "
 "Merci de la renouveller."
@@ -26927,7 +26923,6 @@ msgstr "⌥ (option) + ⌘ (command) + E"
 #. =====================================================
 #. UNH GLPI Custom Translations - Inventory Organization
 #. =====================================================
-
 #: src/Html.php front/inventoryorganization.php
 msgid "Technical Support"
 msgstr "Support Technique"
@@ -26989,16 +26984,8 @@ msgid "Create a New Type"
 msgstr "Créer un Nouveau Type"
 
 #: templates/pages/inventoryorganization/types.html.twig
-msgid "Category"
-msgstr "Catégorie"
-
-#: templates/pages/inventoryorganization/types.html.twig
 msgid "Type Name"
 msgstr "Nom du Type"
-
-#: templates/pages/inventoryorganization/types.html.twig
-msgid "Comments"
-msgstr "Commentaires"
 
 #: templates/pages/inventoryorganization/types.html.twig
 msgid "Create the Type"
@@ -27065,10 +27052,6 @@ msgid "Warnings"
 msgstr "Avertissements"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
-msgid "Information"
-msgstr "Informations"
-
-#: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Issue Type"
 msgstr "Type de Problème"
 
@@ -27089,10 +27072,6 @@ msgid "Apply Filters"
 msgstr "Appliquer les Filtres"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
-msgid "Clear"
-msgstr "Effacer"
-
-#: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Inventory is Coherent!"
 msgstr "L'Inventaire est Cohérent !"
 
@@ -27103,10 +27082,6 @@ msgstr "Aucun problème détecté. Votre inventaire est correctement structuré.
 #: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Detected Issues"
 msgstr "Problèmes Détectés"
-
-#: templates/pages/inventoryorganization/coherence.html.twig
-msgid "Message"
-msgstr "Message"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Asset Type"
@@ -27172,17 +27147,16 @@ msgstr "Comment Fonctionnent les Étiquettes"
 msgid "Type Code"
 msgstr "Code Type"
 
-#: templates/pages/inventoryorganization/labeling.html.twig
-msgid "Number"
-msgstr "Numéro"
-
 #: templates/pages/inventoryorganization/entity_wizard.html.twig
 msgid "Create a New Entity"
 msgstr "Créer une Nouvelle Entité"
 
 #: templates/pages/inventoryorganization/entity_wizard.html.twig
-msgid "Use the standard GLPI form to create an entity with all available fields."
-msgstr "Utilisez le formulaire GLPI standard pour créer une entité avec tous les champs disponibles."
+msgid ""
+"Use the standard GLPI form to create an entity with all available fields."
+msgstr ""
+"Utilisez le formulaire GLPI standard pour créer une entité avec tous les "
+"champs disponibles."
 
 #: templates/pages/inventoryorganization/entity_wizard.html.twig
 msgid "Open Creation Form"
@@ -27221,8 +27195,12 @@ msgid "What is an entity?"
 msgstr "Qu'est-ce qu'une entité ?"
 
 #: templates/pages/inventoryorganization/entity_wizard.html.twig
-msgid "Entities are organizational units that allow you to segment your IT assets (by department, site, subsidiary, etc.)."
-msgstr "Les entités sont des unités organisationnelles qui permettent de segmenter votre parc informatique (par département, site, filiale, etc.)."
+msgid ""
+"Entities are organizational units that allow you to segment your IT assets "
+"(by department, site, subsidiary, etc.)."
+msgstr ""
+"Les entités sont des unités organisationnelles qui permettent de segmenter "
+"votre parc informatique (par département, site, filiale, etc.)."
 
 #: templates/pages/inventoryorganization/entity_wizard.html.twig
 msgid "Entity Hierarchy"
@@ -27265,12 +27243,18 @@ msgid "No entities yet"
 msgstr "Aucune entité pour le moment"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
-msgid "Critical issues requiring immediate attention, such as duplicate serial numbers or data inconsistencies."
-msgstr "Problèmes critiques nécessitant une attention immédiate, comme les numéros de série en double ou les incohérences de données."
+msgid ""
+"Critical issues requiring immediate attention, such as duplicate serial "
+"numbers or data inconsistencies."
+msgstr ""
+"Problèmes critiques nécessitant une attention immédiate, comme les numéros "
+"de série en double ou les incohérences de données."
 
 #: templates/pages/inventoryorganization/coherence.html.twig
-msgid "Issues that should be resolved, such as assets without assigned location."
-msgstr "Problèmes qui devraient être résolus, comme les actifs sans lieu assigné."
+msgid ""
+"Issues that should be resolved, such as assets without assigned location."
+msgstr ""
+"Problèmes qui devraient être résolus, comme les actifs sans lieu assigné."
 
 #: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Informational notifications, such as assets in the root entity."
@@ -27337,24 +27321,8 @@ msgid "Delete this type?"
 msgstr "Supprimer ce type ?"
 
 #: common
-msgid "Close"
-msgstr "Fermer"
-
-#: common
-msgid "Error"
-msgstr "Erreur"
-
-#: common
-msgid "Warning"
-msgstr "Avertissement"
-
-#: common
 msgid "Info"
 msgstr "Info"
-
-#: common
-msgid "Type"
-msgstr "Type"
 
 #. UNH GLPI Custom Translations - Inventory Organization (PHP front files)
 #: front/inventoryorganization.type.php
@@ -27447,8 +27415,12 @@ msgid "Create a New Location"
 msgstr "Créer un Nouveau Lieu"
 
 #: templates/pages/inventoryorganization/locations.html.twig
-msgid "Use the standard GLPI form to create a location with building, room, GPS coordinates and other fields."
-msgstr "Utilisez le formulaire GLPI standard pour créer un lieu avec bâtiment, salle, coordonnées GPS et autres champs."
+msgid ""
+"Use the standard GLPI form to create a location with building, room, GPS "
+"coordinates and other fields."
+msgstr ""
+"Utilisez le formulaire GLPI standard pour créer un lieu avec bâtiment, "
+"salle, coordonnées GPS et autres champs."
 
 #: templates/pages/inventoryorganization/locations.html.twig
 msgid "Structure Suggestions"
@@ -27491,14 +27463,6 @@ msgid "View All"
 msgstr "Voir Tout"
 
 #: templates/pages/inventoryorganization/locations.html.twig
-msgid "Name"
-msgstr "Nom"
-
-#: templates/pages/inventoryorganization/locations.html.twig
-msgid "Assets"
-msgstr "Actifs"
-
-#: templates/pages/inventoryorganization/locations.html.twig
 msgid "No locations defined yet"
 msgstr "Aucun lieu défini pour le moment"
 
@@ -27507,8 +27471,12 @@ msgid "What is a location?"
 msgstr "Qu'est-ce qu'un lieu ?"
 
 #: templates/pages/inventoryorganization/locations.html.twig
-msgid "Locations allow you to geographically locate your equipment: campuses, buildings, offices, server rooms, etc."
-msgstr "Les lieux permettent de localiser géographiquement vos équipements : campus, bâtiments, bureaux, salles serveur, etc."
+msgid ""
+"Locations allow you to geographically locate your equipment: campuses, "
+"buildings, offices, server rooms, etc."
+msgstr ""
+"Les lieux permettent de localiser géographiquement vos équipements : campus, "
+"bâtiments, bureaux, salles serveur, etc."
 
 #: templates/pages/inventoryorganization/locations.html.twig
 msgid "Hierarchical structure: Campus → Building → Floor → Room"
@@ -27538,12 +27506,9 @@ msgstr "Liste complète des lieux"
 msgid "Manage entities"
 msgstr "Gérer les entités"
 
-
-
 #. =====================================================
 #. UNH GLPI Custom Translations - Inventory Organization (2026 refresh)
 #. =====================================================
-
 msgid "Retour au tableau de bord"
 msgstr "Retour au tableau de bord"
 
@@ -27699,6 +27664,7 @@ msgstr "Total des problemes"
 
 msgid "Comprendre les niveaux"
 msgstr "Comprendre les niveaux"
+
 msgid "PC Bureau"
 msgstr "PC Bureau"
 
@@ -27749,12 +27715,18 @@ msgid "Quick tips before submitting:"
 msgstr "Conseils rapides avant soumission :"
 
 #: templates/anonymous_helpdesk.html.twig
-msgid "If the tips above don't solve your problem, please fill out the form below."
-msgstr "Si les conseils ci-dessus ne resolvent pas votre probleme, merci de remplir le formulaire ci-dessous."
+msgid ""
+"If the tips above don't solve your problem, please fill out the form below."
+msgstr ""
+"Si les conseils ci-dessus ne resolvent pas votre probleme, merci de remplir "
+"le formulaire ci-dessous."
 
 #: templates/anonymous_helpdesk.html.twig
-msgid "Use your university email as username (example: john.doe@university.edu)"
-msgstr "Utilisez votre adresse email universitaire comme identifiant (exemple : john.doe@university.edu)"
+msgid ""
+"Use your university email as username (example: john.doe@university.edu)"
+msgstr ""
+"Utilisez votre adresse email universitaire comme identifiant (exemple : john."
+"doe@university.edu)"
 
 #: templates/anonymous_helpdesk.html.twig
 msgid "Forget the network and reconnect"
@@ -27839,3 +27811,24 @@ msgstr "Notez le message d'erreur exact s'il y en a un"
 #: templates/anonymous_helpdesk.html.twig
 msgid "Please describe your problem in detail in the form below."
 msgstr "Decrivez votre probleme en detail dans le formulaire ci-dessous."
+
+#. UNH GLPI Custom Translations - Inventory Organization menu
+#: front/inventoryorganization.php
+msgid "Create and manage the GLPI entity hierarchy"
+msgstr "Creer et gerer la hierarchie des entites GLPI"
+
+#: front/inventoryorganization.php
+msgid "Define locations (campus, buildings, floors, rooms)"
+msgstr "Definir les lieux (campus, batiments, etages, salles)"
+
+#: front/inventoryorganization.php
+msgid "Asset types"
+msgstr "Types de materiel"
+
+#: front/inventoryorganization.php
+msgid "Create asset types (PC, laptop, projector)"
+msgstr "Creer les types de materiel (PC, laptop, projecteur)"
+
+#: front/inventoryorganization.php
+msgid "Configure the format UNH-FAC-BAT-TYPE-NNN"
+msgstr "Configurer le format UNH-FAC-BAT-TYPE-NNN"
