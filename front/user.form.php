@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
       let row = document.createElement("tr");
 
-      row.innerHTML = `
+      row.innerHTML = 
          <td>Type d'utilisateur</td>
          <td>
             <select name="user_type" class="form-control">
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function(){
                <option value="IT">IT</option>
             </select>
          </td>
-      `;
+      ;
 
       table.appendChild(row);
    }
