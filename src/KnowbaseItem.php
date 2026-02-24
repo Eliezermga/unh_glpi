@@ -1970,9 +1970,13 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                // Manage translations
                 if (isset($data['transname']) && !empty($data['transname'])) {
                     $name   = $data["transname"];
+                } elseif (KnowbaseItemTranslation::canBeTranslated($item)) {
+                    $name = KnowbaseItemTranslation::getTranslatedValue($item, 'name');
                 }
                 if (isset($data['transanswer']) && !empty($data['transanswer'])) {
                     $answer = $data["transanswer"];
+                } elseif (KnowbaseItemTranslation::canBeTranslated($item)) {
+                    $answer = KnowbaseItemTranslation::getTranslatedValue($item, 'answer');
                 }
 
                 if ($output_type == Search::HTML_OUTPUT) {
@@ -2229,6 +2233,11 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
 
                 if (isset($data['transname']) && !empty($data['transname'])) {
                     $name = $data['transname'];
+                } elseif (KnowbaseItemTranslation::isKbTranslationActive()) {
+                    $item = new self();
+                    if ($item->getFromDB($data['id']) && KnowbaseItemTranslation::canBeTranslated($item)) {
+                        $name = KnowbaseItemTranslation::getTranslatedValue($item, 'name');
+                    }
                 }
                 $output .= "<tr class='tab_bg_2'><td class='left'><div class='kb'>";
                 if ($data['is_faq']) {

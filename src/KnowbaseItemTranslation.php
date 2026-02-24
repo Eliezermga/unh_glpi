@@ -49,6 +49,7 @@ class KnowbaseItemTranslation extends CommonDBChild
     public static $logs_for_parent = false;
 
     public static $rightname       = 'knowbase';
+    private static $translation_cache = [];
 
 
 
@@ -344,20 +345,93 @@ class KnowbaseItemTranslation extends CommonDBChild
      **/
     public static function getTranslatedValue(KnowbaseItem $item, $field = "name")
     {
+        global $DB;
+
+        if (!in_array($field, ['name', 'answer'])) {
+            return $item->fields[$field] ?? "";
+        }
+
+        $language = $_SESSION['glpilanguage'] ?? '';
+        $cache_key = $item->getID() . '|' . $field . '|' . $language;
+        if (array_key_exists($cache_key, self::$translation_cache)) {
+            return self::$translation_cache[$cache_key];
+        }
+
+        $languages = self::getPreferredLanguages($language);
+
         $obj   = new self();
-        $found = $obj->find([
-            'knowbaseitems_id'   => $item->getID(),
-            'language'           => $_SESSION['glpilanguage']
-        ]);
+        foreach ($languages as $current_language) {
+            $found = $obj->find([
+                'knowbaseitems_id'   => $item->getID(),
+                'language'           => $current_language
+            ]);
+
+            if (count($found) > 0) {
+                $first = array_shift($found);
+                if (!empty($first[$field])) {
+                    self::$translation_cache[$cache_key] = $first[$field];
+                    return $first[$field];
+                }
+            }
+        }
 
         if (
-            (count($found) > 0)
-            && in_array($field, ['name', 'answer'])
+            !empty($language)
+            && preg_match('/^([a-z]{2})[_-]/i', $language, $matches)
         ) {
-            $first = array_shift($found);
-            return $first[$field];
+            $base_language = strtolower($matches[1]);
+            $iterator = $DB->request([
+                'SELECT' => [$field],
+                'FROM'   => self::getTable(),
+                'WHERE'  => [
+                    'knowbaseitems_id' => $item->getID(),
+                    'language'         => ['LIKE', $base_language . '\_%']
+                ],
+                'ORDER'  => ['language ASC'],
+                'LIMIT'  => 1
+            ]);
+
+            if (count($iterator)) {
+                $current = $iterator->current();
+                if (!empty($current[$field])) {
+                    self::$translation_cache[$cache_key] = $current[$field];
+                    return $current[$field];
+                }
+            }
         }
+
+        self::$translation_cache[$cache_key] = $item->fields[$field];
         return $item->fields[$field];
+    }
+
+    /**
+     * Build ordered fallback languages for KB translations.
+     *
+     * @param string $language
+     *
+     * @return array
+     **/
+    private static function getPreferredLanguages(string $language): array
+    {
+        $preferred = [];
+
+        if (!empty($language)) {
+            $preferred[] = $language;
+        }
+
+        if (preg_match('/^([a-z]{2})[_-]([a-z]{2})$/i', $language, $matches)) {
+            $base = strtolower($matches[1]);
+            if ($base === 'en') {
+                $preferred[] = 'en_US';
+                $preferred[] = 'en_GB';
+            } elseif ($base === 'fr') {
+                $preferred[] = 'fr_FR';
+                $preferred[] = 'fr_CA';
+                $preferred[] = 'fr_BE';
+            }
+        }
+
+        return array_values(array_unique(array_filter($preferred)));
     }
 
 
