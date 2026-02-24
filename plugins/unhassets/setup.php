@@ -21,29 +21,16 @@ function plugin_init_unhassets() {
     $plugin = new Plugin();
     if ($plugin->isActivated('unhassets')) {
         
-        // Plugin::registerClass() sert UNIQUEMENT pour :
-        // - addtabon    : ajouter un onglet sur un type natif
-        // - ticket_types, contract_types, etc. : intégration dans des listes GLPI
-        //
-        // Pour une classe de données pure (CRUD sur sa propre table),
-        // PAS besoin de registerClass(). L'autoloader suffit.
-        //
-        // PROBLÈME RACINE du "Duplicate key 23" :
-        // Plugin::registerClass('PluginUnhassetsAsset') sans paramètre
-        // fait que GLPI appelle getSearchOptionsToAdd() de cette classe
-        // sur TOUS les itemtypes natifs (Computer, Monitor, etc.).
-        // CommonDBTM fournit une implémentation par défaut de
-        // getSearchOptionsToAdd() qui retourne rawSearchOptions() de la classe,
-        // laquelle hérite des clés de CommonDBTM dont la clé 23.
-        // → collision avec la clé 23 de Monitor/Computer/etc.
-        //
-        // Solution : seul AssetTab (qui étend CommonGLPI, sans clé héritée)
-        // est enregistré avec addtabon. Les classes de données ne sont pas
-        // enregistrées du tout — elles sont chargées via l'autoloader.
+        // Le plugin ne réutilise plus les pages natives du module "Parc".
+        // Par conséquent, on ne déclare plus de classe d'onglet sur les
+        // types natifs. Les classes de données (Asset, Reservation, License)
+        // sont toujours chargées par l'autoloader, mais aucun onglet
+        // supplémentaire n'est ajouté sur les pages natives.
 
-        Plugin::registerClass('PluginUnhassetsAssetTab', [
-            'addtabon' => ['Computer', 'Monitor', 'Printer', 'NetworkEquipment', 'Peripheral', 'Phone']
-        ]);
+        // NOTE : ne pas appeler Plugin::registerClass() ici.  Les types
+        // natifs resteront inchangés et afficheront uniquement leurs onglets
+        // d'origine.  Toutes les fonctionnalités du plugin sont accessibles
+        // via les écrans dédiés dans le menu UNH Assets.
 
         if (Session::getLoginUserID()) {
 
