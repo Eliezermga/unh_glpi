@@ -26390,3 +26390,84 @@ msgstr "Verification de coherence"
 #: front/inventoryorganization.php
 msgid "Check inventory coherence"
 msgstr "Controler la coherence de l inventaire"
+
+#. UNH GLPI Static FAQ (DB independent)
+#: src/KnowbaseItem.php
+msgid "faq.static.question.create_support_ticket"
+msgstr "Comment creer un ticket de support ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.reset_password"
+msgstr "Comment reinitialiser mon mot de passe ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.connect_campus_wifi"
+msgstr "Comment se connecter au WiFi du campus ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.computer_not_booting"
+msgstr "Mon ordinateur ne demarre plus, que faire ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.install_software"
+msgstr "Comment installer un logiciel ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.printer_not_working"
+msgstr "L'imprimante ne fonctionne pas"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.remote_file_access"
+msgstr "Comment acceder a mes fichiers a distance ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.black_or_frozen_screen"
+msgstr "Mon ecran reste noir ou fige"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.track_ticket_status"
+msgstr "Comment suivre l'etat de mon ticket ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.useful_keyboard_shortcuts"
+msgstr "Les raccourcis clavier utiles"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.create_support_ticket"
+msgstr "Allez dans Assistance > Creer ticket, choisissez une categorie, decrivez le probleme, puis envoyez."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.reset_password"
+msgstr "Utilisez Mot de passe oublie sur la page de connexion, entrez votre email, puis suivez le lien de reinitialisation."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.connect_campus_wifi"
+msgstr "Ouvrez les parametres WiFi, choisissez le WiFi du campus, connectez-vous avec votre compte universitaire, puis acceptez le certificat si demande."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.computer_not_booting"
+msgstr "Verifiez l'alimentation et la batterie, maintenez le bouton marche/arret 10 secondes, puis redemarrez. Si le probleme continue, ouvrez un ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.install_software"
+msgstr "Ouvrez le Software Center, choisissez l'application, puis cliquez sur Installer. Si l'acces est refuse, faites une demande via ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.printer_not_working"
+msgstr "Verifiez alimentation, cables, papier et toner. Redemarrez l'imprimante. Si le probleme persiste, ouvrez un ticket avec le nom de l'imprimante."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.remote_file_access"
+msgstr "Utilisez le VPN ou le portail distant, connectez-vous avec votre compte universitaire, puis ouvrez votre lecteur reseau."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.black_or_frozen_screen"
+msgstr "Redemarrez l'ordinateur, verifiez le cable ecran, puis mettez a jour le pilote graphique. Si bloque, ouvrez un ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.track_ticket_status"
+msgstr "Allez dans Assistance > Tickets, ouvrez votre ticket, puis consultez le statut et l'historique."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.useful_keyboard_shortcuts"
+msgstr "Raccourcis utiles: Ctrl+C copier, Ctrl+V coller, Ctrl+S sauvegarder, Alt+Tab changer de fenetre."
