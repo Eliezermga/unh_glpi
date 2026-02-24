@@ -131,6 +131,88 @@ class FaqTranslationFallbackTest
         return true;
     }
 
+    public function testEnglishCatalogContainsFaqQuestionsUtf8(): bool
+    {
+        $testName = 'testEnglishCatalogContainsFaqQuestionsUtf8';
+        $filePaths = [
+            dirname(__DIR__) . '/locales/en_US.po',
+            dirname(__DIR__) . '/locales/en_GB.po',
+        ];
+
+        $required = [
+            'msgid "Comment créer un ticket de support ?"',
+            'msgid "Comment réinitialiser mon mot de passe ?"',
+            'msgid "Comment se connecter au WiFi du campus ?"',
+            'msgid "Mon ordinateur ne démarre plus, que faire ?"',
+            'msgid "Comment installer un logiciel ?"',
+            'msgid "L\'imprimante ne fonctionne pas"',
+            'msgid "Comment accéder à mes fichiers à distance ?"',
+            'msgid "Mon écran reste noir ou figé"',
+            'msgid "Comment suivre l\'état de mon ticket ?"',
+            'msgid "Les raccourcis clavier utiles"',
+        ];
+
+        foreach ($filePaths as $filePath) {
+            $content = file_get_contents($filePath);
+            foreach ($required as $entry) {
+                if (strpos($content, $entry) === false) {
+                    $this->testsFailed++;
+                    $this->testResults[$testName] = ['status' => 'FAILED', 'message' => "Missing UTF-8 FAQ title in " . basename($filePath) . ": $entry"];
+                    return false;
+                }
+            }
+        }
+
+        $this->testsPassed++;
+        $this->testResults[$testName] = ['status' => 'PASSED', 'message' => 'UTF-8 FAQ titles are mapped in en_US and en_GB catalogs'];
+        return true;
+    }
+
+    public function testEnglishCatalogContainsFaqAnswerKeys(): bool
+    {
+        $testName = 'testEnglishCatalogContainsFaqAnswerKeys';
+        $filePaths = [
+            dirname(__DIR__) . '/locales/en_US.po',
+            dirname(__DIR__) . '/locales/en_GB.po',
+        ];
+
+        $requiredKeys = [
+            'msgid "faq.answer.create_support_ticket"',
+            'msgid "faq.answer.reset_password"',
+            'msgid "faq.answer.connect_campus_wifi"',
+            'msgid "faq.answer.computer_not_booting"',
+            'msgid "faq.answer.install_software"',
+            'msgid "faq.answer.printer_not_working"',
+            'msgid "faq.answer.remote_file_access"',
+            'msgid "faq.answer.black_or_frozen_screen"',
+            'msgid "faq.answer.track_ticket_status"',
+            'msgid "faq.answer.useful_keyboard_shortcuts"',
+        ];
+
+        foreach ($filePaths as $filePath) {
+            $content = file_get_contents($filePath);
+            foreach ($requiredKeys as $entry) {
+                if (strpos($content, $entry) === false) {
+                    $this->testsFailed++;
+                    $this->testResults[$testName] = ['status' => 'FAILED', 'message' => "Missing FAQ answer key in " . basename($filePath) . ": $entry"];
+                    return false;
+                }
+            }
+        }
+
+        $sourcePath = dirname(__DIR__) . '/src/KnowbaseItemTranslation.php';
+        $source = file_get_contents($sourcePath);
+        if (strpos($source, 'getFaqAnswerTranslationKey') === false) {
+            $this->testsFailed++;
+            $this->testResults[$testName] = ['status' => 'FAILED', 'message' => 'FAQ answer key resolver is missing in KnowbaseItemTranslation'];
+            return false;
+        }
+
+        $this->testsPassed++;
+        $this->testResults[$testName] = ['status' => 'PASSED', 'message' => 'FAQ answer translation keys exist in both English catalogs and resolver is present'];
+        return true;
+    }
+
     public function runAllTests(): array
     {
         echo "===========================================\n";
@@ -141,7 +223,8 @@ class FaqTranslationFallbackTest
         $this->testEnglishFallbackLocalesIncluded();
         $this->testFaqListFallbackCallsTranslationGetter();
         $this->testGettextFallbackIsPresent();
-        $this->testEnglishCatalogContainsFaqQuestions();
+        $this->testEnglishCatalogContainsFaqQuestionsUtf8();
+        $this->testEnglishCatalogContainsFaqAnswerKeys();
 
         foreach ($this->testResults as $name => $result) {
             $status = $result['status'] === 'PASSED' ? "\033[32mPASSED\033[0m" : "\033[31mFAILED\033[0m";

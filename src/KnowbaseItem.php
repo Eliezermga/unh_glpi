@@ -74,11 +74,19 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
 
     public function getName($options = [])
     {
-        if (KnowbaseItemTranslation::canBeTranslated($this)) {
+        if ($this->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($this)) {
             return KnowbaseItemTranslation::getTranslatedValue($this);
         }
 
         return parent::getName();
+    }
+
+    /**
+     * FAQ entries must still use gettext fallback even when KB translations are disabled.
+     */
+    private function shouldUseFaqTranslationFallback(): bool
+    {
+        return ((int)($this->fields['is_faq'] ?? 0) === 1) && ((int)$this->getID() > 0);
     }
 
 
@@ -1216,7 +1224,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
         $out .= "</th></tr>";
 
         $out .= "<tr><td class='left' colspan='4'><h2>" . __('Subject') . "</h2>";
-        if (KnowbaseItemTranslation::canBeTranslated($this)) {
+        if ($this->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($this)) {
             $out .= KnowbaseItemTranslation::getTranslatedValue($this, 'name');
         } else {
             $out .= $this->fields["name"];
@@ -1970,12 +1978,12 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                // Manage translations
                 if (isset($data['transname']) && !empty($data['transname'])) {
                     $name   = $data["transname"];
-                } elseif (KnowbaseItemTranslation::canBeTranslated($item)) {
+                } elseif (((int)$data['is_faq'] === 1) || KnowbaseItemTranslation::canBeTranslated($item)) {
                     $name = KnowbaseItemTranslation::getTranslatedValue($item, 'name');
                 }
                 if (isset($data['transanswer']) && !empty($data['transanswer'])) {
                     $answer = $data["transanswer"];
-                } elseif (KnowbaseItemTranslation::canBeTranslated($item)) {
+                } elseif (((int)$data['is_faq'] === 1) || KnowbaseItemTranslation::canBeTranslated($item)) {
                     $answer = KnowbaseItemTranslation::getTranslatedValue($item, 'answer');
                 }
 
@@ -2233,9 +2241,9 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
 
                 if (isset($data['transname']) && !empty($data['transname'])) {
                     $name = $data['transname'];
-                } elseif (KnowbaseItemTranslation::isKbTranslationActive()) {
+                } elseif (KnowbaseItemTranslation::isKbTranslationActive() || ((int)$data['is_faq'] === 1)) {
                     $item = new self();
-                    if ($item->getFromDB($data['id']) && KnowbaseItemTranslation::canBeTranslated($item)) {
+                    if ($item->getFromDB($data['id']) && ($item->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($item))) {
                         $name = KnowbaseItemTranslation::getTranslatedValue($item, 'name');
                     }
                 }
@@ -2390,7 +2398,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
      */
     public function getAnswer()
     {
-        if (KnowbaseItemTranslation::canBeTranslated($this)) {
+        if ($this->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($this)) {
             $answer = KnowbaseItemTranslation::getTranslatedValue($this, 'answer');
         } else {
             $answer = $this->fields["answer"];

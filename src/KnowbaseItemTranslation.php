@@ -408,8 +408,54 @@ class KnowbaseItemTranslation extends CommonDBChild
             }
         }
 
+        if ($field === 'answer') {
+            $faq_answer_key = self::getFaqAnswerTranslationKey($item);
+            if ($faq_answer_key !== null) {
+                $faq_answer_translation = __($faq_answer_key);
+                if ($faq_answer_translation !== $faq_answer_key) {
+                    self::$translation_cache[$cache_key] = $faq_answer_translation;
+                    return $faq_answer_translation;
+                }
+            }
+        }
+
         self::$translation_cache[$cache_key] = $item->fields[$field];
         return $item->fields[$field];
+    }
+
+    /**
+     * Return gettext key for FAQ answer by canonical FAQ title.
+     */
+    private static function getFaqAnswerTranslationKey(KnowbaseItem $item): ?string
+    {
+        if ((int)($item->fields['is_faq'] ?? 0) !== 1 || !isset($item->fields['name'])) {
+            return null;
+        }
+
+        $name = trim((string)$item->fields['name']);
+        if ($name === '') {
+            return null;
+        }
+
+        $canonical_name = function_exists('mb_strtolower')
+            ? mb_strtolower($name, 'UTF-8')
+            : strtolower($name);
+        $canonical_name = preg_replace('/\s+/u', ' ', $canonical_name);
+
+        $faq_answer_keys = [
+            'comment créer un ticket de support ?'        => 'faq.answer.create_support_ticket',
+            'comment réinitialiser mon mot de passe ?'    => 'faq.answer.reset_password',
+            'comment se connecter au wifi du campus ?'    => 'faq.answer.connect_campus_wifi',
+            'mon ordinateur ne démarre plus, que faire ?' => 'faq.answer.computer_not_booting',
+            'comment installer un logiciel ?'             => 'faq.answer.install_software',
+            "l'imprimante ne fonctionne pas"              => 'faq.answer.printer_not_working',
+            'comment accéder à mes fichiers à distance ?' => 'faq.answer.remote_file_access',
+            'mon écran reste noir ou figé'                => 'faq.answer.black_or_frozen_screen',
+            "comment suivre l'état de mon ticket ?"       => 'faq.answer.track_ticket_status',
+            'les raccourcis clavier utiles'               => 'faq.answer.useful_keyboard_shortcuts',
+        ];
+
+        return $faq_answer_keys[$canonical_name] ?? null;
     }
 
     /**
