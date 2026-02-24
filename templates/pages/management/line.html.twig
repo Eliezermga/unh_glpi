@@ -1,62 +1,71 @@
-{#
- # ---------------------------------------------------------------------
- #
- # GLPI - Gestionnaire Libre de Parc Informatique
- #
- # http://glpi-project.org
- #
- # @copyright 2015-2023 Teclib' and contributors.
- # @copyright 2003-2014 by the INDEPNET Development Team.
- # @licence   https://www.gnu.org/licenses/gpl-3.0.html
- #
- # ---------------------------------------------------------------------
- #
- # LICENSE
- #
- # This file is part of GLPI.
- #
- # This program is free software: you can redistribute it and/or modify
- # it under the terms of the GNU General Public License as published by
- # the Free Software Foundation, either version 3 of the License, or
- # (at your option) any later version.
- #
- # This program is distributed in the hope that it will be useful,
- # but WITHOUT ANY WARRANTY; without even the implied warranty of
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License for more details.
- #
- # You should have received a copy of the GNU General Public License
- # along with this program.  If not, see <https://www.gnu.org/licenses/>.
- #
- # ---------------------------------------------------------------------
- #}
-
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
-{% set params  = params ?? [] %}
 
 {% block more_fields %}
-   {{ fields.autoNameField(
-      'caller_num',
-      item,
-      __('Caller number'),
-      withtemplate
-   ) }}
 
-   {{ fields.autoNameField(
-      'caller_name',
-      item,
-      __('Caller name'),
-      withtemplate
-   ) }}
+<h2 style="color:#b30000">Ligne – Université Nouveaux Horizons</h2>
 
-   {{ fields.dropdownField(
-      'LineOperator',
-      'lineoperators_id',
-      item.fields['lineoperators_id'],
-      'LineOperator'|itemtype_name,
-      {
-         'entity': item.fields['entities_id'],
-      }
-   ) }}
+{{ fields.textField(
+   'name',
+   item.fields['name'],
+   __('Intitulé de la ligne'),
+   {
+      'placeholder': 'Ex: Ligne académique L1 Informatique'
+   }
+) }}
+
+{{ fields.textField(
+   'code',
+   item.fields['code'],
+   __('Code de la ligne'),
+   {
+      'placeholder': 'UNH-LIG-2025'
+   }
+) }}
+
+{{ fields.dropdownArrayField(
+   'line_type',
+   item.fields['line_type'],
+   {
+      1: 'Académique',
+      2: 'Administrative',
+      3: 'Pédagogique',
+      4: 'Organisationnelle'
+   },
+   __('Type de ligne')
+) }}
+
+{{ fields.textField(
+   'faculty',
+   item.fields['faculty'],
+   __('Faculté concernée'),
+   {
+      'placeholder': 'Faculté des Sciences Informatiques'
+   }
+) }}
+
+{{ fields.textField(
+   'academic_year',
+   item.fields['academic_year'],
+   __('Année académique'),
+   {
+      'placeholder': '2024 – 2025'
+   }
+) }}
+
+{{ fields.textField(
+   'responsible',
+   item.fields['responsible'],
+   __('Responsable UNH'),
+   {
+      'placeholder': 'Nom du responsable'
+   }
+) }}
+
+{{ fields.textareaField(
+   'comment',
+   item.fields['comment'],
+   __('Description / Observations')
+) }}
+
 {% endblock %}
