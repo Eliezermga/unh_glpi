@@ -26745,4 +26745,45 @@ msgstr "Note the exact error message if any"
 msgid "Please describe your problem in detail in the form below."
 msgstr "Please describe your problem in detail in the form below."
 
+#. UNH GLPI FAQ questions - EN translations from FR source titles
+#: data/knowbase/faq
+msgid "Comment créer un ticket de support ?"
+msgstr "How do I create a support ticket?"
+
+#: data/knowbase/faq
+msgid "Comment réinitialiser mon mot de passe ?"
+msgstr "How do I reset my password?"
+
+#: data/knowbase/faq
+msgid "Comment se connecter au WiFi du campus ?"
+msgstr "How do I connect to campus Wi-Fi?"
+
+#: data/knowbase/faq
+msgid "Mon ordinateur ne démarre plus, que faire ?"
+msgstr "My computer no longer starts, what should I do?"
+
+#: data/knowbase/faq
+msgid "Comment installer un logiciel ?"
+msgstr "How do I install software?"
+
+#: data/knowbase/faq
+msgid "L'imprimante ne fonctionne pas"
+msgstr "The printer is not working"
+
+#: data/knowbase/faq
+msgid "Comment accéder à mes fichiers à distance ?"
+msgstr "How do I access my files remotely?"
+
+#: data/knowbase/faq
+msgid "Mon écran reste noir ou figé"
+msgstr "My screen stays black or frozen"
+
+#: data/knowbase/faq
+msgid "Comment suivre l'état de mon ticket ?"
+msgstr "How do I track my ticket status?"
+
+#: data/knowbase/faq
+msgid "Les raccourcis clavier utiles"
+msgstr "Useful keyboard shortcuts"
+
 

@@ -99,6 +99,38 @@ class FaqTranslationFallbackTest
         );
     }
 
+    public function testEnglishCatalogContainsFaqQuestions(): bool
+    {
+        $testName = 'testEnglishCatalogContainsFaqQuestions';
+        $filePath = dirname(__DIR__) . '/locales/en_US.po';
+        $content = file_get_contents($filePath);
+
+        $required = [
+            'msgid "Comment créer un ticket de support ?"',
+            'msgid "Comment réinitialiser mon mot de passe ?"',
+            'msgid "Comment se connecter au WiFi du campus ?"',
+            'msgid "Mon ordinateur ne démarre plus, que faire ?"',
+            'msgid "Comment installer un logiciel ?"',
+            'msgid "L\'imprimante ne fonctionne pas"',
+            'msgid "Comment accéder à mes fichiers à distance ?"',
+            'msgid "Mon écran reste noir ou figé"',
+            'msgid "Comment suivre l\'état de mon ticket ?"',
+            'msgid "Les raccourcis clavier utiles"'
+        ];
+
+        foreach ($required as $entry) {
+            if (strpos($content, $entry) === false) {
+                $this->testsFailed++;
+                $this->testResults[$testName] = ['status' => 'FAILED', 'message' => "Missing catalog entry: $entry"];
+                return false;
+            }
+        }
+
+        $this->testsPassed++;
+        $this->testResults[$testName] = ['status' => 'PASSED', 'message' => 'FAQ French source titles are mapped in en_US catalog'];
+        return true;
+    }
+
     public function runAllTests(): array
     {
         echo "===========================================\n";
@@ -109,6 +141,7 @@ class FaqTranslationFallbackTest
         $this->testEnglishFallbackLocalesIncluded();
         $this->testFaqListFallbackCallsTranslationGetter();
         $this->testGettextFallbackIsPresent();
+        $this->testEnglishCatalogContainsFaqQuestions();
 
         foreach ($this->testResults as $name => $result) {
             $status = $result['status'] === 'PASSED' ? "\033[32mPASSED\033[0m" : "\033[31mFAILED\033[0m";

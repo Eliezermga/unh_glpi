@@ -75,7 +75,7 @@ class AssistanceDeploymentParityTest
     {
         $testName = 'testMoFilesAreFreshComparedToPo';
         $root = dirname(__DIR__);
-        $locales = ['fr_FR', 'fr_CA', 'fr_BE'];
+        $locales = ['fr_FR', 'fr_CA', 'fr_BE', 'en_US'];
         $stale = [];
 
         foreach ($locales as $locale) {
