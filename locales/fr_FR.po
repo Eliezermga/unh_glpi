@@ -27539,3 +27539,183 @@ msgid "Manage entities"
 msgstr "Gérer les entités"
 
 
+
+#. =====================================================
+#. UNH GLPI Custom Translations - Inventory Organization (2026 refresh)
+#. =====================================================
+
+msgid "Retour au tableau de bord"
+msgstr "Retour au tableau de bord"
+
+msgid "Gestion des entites"
+msgstr "Gestion des entites"
+
+msgid "Entite creee avec succes."
+msgstr "Entite creee avec succes."
+
+msgid "Creer une nouvelle entite"
+msgstr "Creer une nouvelle entite"
+
+msgid "Nom de l entite"
+msgstr "Nom de l entite"
+
+msgid "Entite parente"
+msgstr "Entite parente"
+
+msgid "Racine"
+msgstr "Racine"
+
+msgid "Creer l entite"
+msgstr "Creer l entite"
+
+msgid "Vous n avez pas les droits pour creer une entite."
+msgstr "Vous n avez pas les droits pour creer une entite."
+
+msgid "Acces rapide"
+msgstr "Acces rapide"
+
+msgid "Liste des entites"
+msgstr "Liste des entites"
+
+msgid "Voir toutes les entites existantes"
+msgstr "Voir toutes les entites existantes"
+
+msgid "Gestion des lieux"
+msgstr "Gestion des lieux"
+
+msgid "Types de materiel"
+msgstr "Types de materiel"
+
+msgid "Guide rapide"
+msgstr "Guide rapide"
+
+msgid "Qu est ce qu une entite ?"
+msgstr "Qu est ce qu une entite ?"
+
+msgid "Hierarchie recommandee"
+msgstr "Hierarchie recommandee"
+
+msgid "UNH > Faculte > Departement"
+msgstr "UNH > Faculte > Departement"
+
+msgid "Entites existantes"
+msgstr "Entites existantes"
+
+msgid "Aucune entite pour le moment"
+msgstr "Aucune entite pour le moment"
+
+msgid "Lieu cree avec succes."
+msgstr "Lieu cree avec succes."
+
+msgid "Creer un nouveau lieu"
+msgstr "Creer un nouveau lieu"
+
+msgid "Nom du lieu"
+msgstr "Nom du lieu"
+
+msgid "Lieu parent"
+msgstr "Lieu parent"
+
+msgid "Aucun (niveau racine)"
+msgstr "Aucun (niveau racine)"
+
+msgid "Batiment"
+msgstr "Batiment"
+
+msgid "Salle"
+msgstr "Salle"
+
+msgid "Creer le lieu"
+msgstr "Creer le lieu"
+
+msgid "Vous n avez pas les droits pour creer un lieu."
+msgstr "Vous n avez pas les droits pour creer un lieu."
+
+msgid "Suggestions de structure"
+msgstr "Suggestions de structure"
+
+msgid "Structure: Campus > Batiment > Etage > Salle"
+msgstr "Structure: Campus > Batiment > Etage > Salle"
+
+msgid "Lieux existants"
+msgstr "Lieux existants"
+
+msgid "Lieux definis"
+msgstr "Lieux definis"
+
+msgid "Liste complete des lieux"
+msgstr "Liste complete des lieux"
+
+msgid "Creer un nouveau type"
+msgstr "Creer un nouveau type"
+
+msgid "Categorie"
+msgstr "Categorie"
+
+msgid "Nom du type"
+msgstr "Nom du type"
+
+msgid "Description du type"
+msgstr "Description du type"
+
+msgid "Creer le type"
+msgstr "Creer le type"
+
+msgid "Types courants"
+msgstr "Types courants"
+
+msgid "Cliquer pour pre-remplir automatiquement :"
+msgstr "Cliquer pour pre-remplir automatiquement :"
+
+msgid "Types existants"
+msgstr "Types existants"
+
+msgid "Configuration de l etiquetage"
+msgstr "Configuration de l etiquetage"
+
+msgid "Format de l etiquette"
+msgstr "Format de l etiquette"
+
+msgid "Nombre de chiffres (padding)"
+msgstr "Nombre de chiffres (padding)"
+
+msgid "Codes des types"
+msgstr "Codes des types"
+
+msgid "Apercu des etiquettes"
+msgstr "Apercu des etiquettes"
+
+msgid "Comment fonctionne l etiquetage"
+msgstr "Comment fonctionne l etiquetage"
+
+msgid "Le format suit la logique suivante :"
+msgstr "Le format suit la logique suivante :"
+
+msgid "Verification de coherence de l inventaire"
+msgstr "Verification de coherence de l inventaire"
+
+msgid "Total des problemes"
+msgstr "Total des problemes"
+
+msgid "Comprendre les niveaux"
+msgstr "Comprendre les niveaux"
+msgid "PC Bureau"
+msgstr "PC Bureau"
+
+msgid "Ordinateur portable"
+msgstr "Ordinateur portable"
+
+msgid "Station de travail"
+msgstr "Station de travail"
+
+msgid "Serveur"
+msgstr "Serveur"
+
+msgid "Projecteur"
+msgstr "Projecteur"
+
+msgid "Jet d encre"
+msgstr "Jet d encre"
+
+msgid "Multifonction"
+msgstr "Multifonction"

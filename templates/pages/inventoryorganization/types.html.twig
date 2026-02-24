@@ -17,7 +17,7 @@
         </h1>
         <a href="inventoryorganization.php" class="btn btn-outline-secondary">
             <i class="ti ti-arrow-left me-1"></i>
-            {{ __('Back to Dashboard') }}
+            {{ __('Retour au tableau de bord') }}
         </a>
     </div>
 
@@ -28,32 +28,32 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="ti ti-plus me-2"></i>
-                        {{ __('Create a New Type') }}
+                        {{ __('Creer un nouveau type') }}
                     </h3>
                 </div>
                 <div class="card-body">
                     {% if error_message %}
                         <div class="alert alert-danger alert-dismissible mb-3" role="alert">
                             {{ error_message }}
-                            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button>
                         </div>
                     {% endif %}
                     
                     {% if success %}
                         <div class="alert alert-success alert-dismissible mb-3" role="alert">
                             <i class="ti ti-check me-2"></i>
-                            {{ __('Type created successfully!') }}
-                            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
+                            {{ __('Type cree avec succes.') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button>
                         </div>
                     {% endif %}
                     
                     {% if can_create %}
                         <form method="post" action="">
-                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
                             <input type="hidden" name="action" value="create_type">
                             
                             <div class="mb-3">
-                                <label class="form-label required">{{ __('Category') }}</label>
+                                <label class="form-label required">{{ __('Categorie') }}</label>
                                 <select class="form-select" name="type_category" required>
                                     {% for key, label in type_categories %}
                                         <option value="{{ key }}">{{ label }}</option>
@@ -62,25 +62,25 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label class="form-label required">{{ __('Type Name') }}</label>
+                                <label class="form-label required">{{ __('Nom du type') }}</label>
                                 <input type="text" class="form-control" name="type_name" required
-                                       placeholder="{{ __('e.g., Desktop PC, Laptop, Laser Printer') }}">
+                                       placeholder="{{ __('Exemple: PC bureau, Laptop, Imprimante laser') }}">
                             </div>
                             
                             <div class="mb-3">
-                                <label class="form-label">{{ __('Comments') }}</label>
+                                <label class="form-label">{{ __('Commentaire') }}</label>
                                 <textarea class="form-control" name="comment" rows="2"
-                                          placeholder="{{ __('Description of this type') }}"></textarea>
+                                          placeholder="{{ __('Description du type') }}"></textarea>
                             </div>
                             
                             <button type="submit" class="btn btn-primary w-100">
                                 <i class="ti ti-plus me-1"></i>
-                                {{ __('Create the Type') }}
+                                {{ __('Creer le type') }}
                             </button>
                         </form>
                     {% else %}
                         <div class="alert alert-info mb-0">
-                            {{ __('You do not have permission to create types.') }}
+                            {{ __('Vous n avez pas la permission de creer des types.') }}
                         </div>
                     {% endif %}
                 </div>
@@ -91,22 +91,24 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="ti ti-bulb me-2"></i>
-                        {{ __('Common Types') }}
+                        {{ __('Types courants') }}
                     </h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted small">{{ __('Click to auto-fill:') }}</p>
+                    <p class="text-muted small mb-2" style="white-space: normal; word-break: normal;">
+                        {{ __('Cliquer pour pre-remplir automatiquement :') }}
+                    </p>
                     <div class="mb-3">
                         <strong class="text-muted small">{{ __('Computers') }}:</strong>
                         <div class="btn-list mt-1">
                             <button type="button" class="btn btn-outline-primary btn-sm" 
-                                    onclick="fillType('computer', 'Desktop PC')">Desktop PC</button>
+                                    onclick="fillType('computer', 'PC Bureau')">{{ __('PC Bureau') }}</button>
                             <button type="button" class="btn btn-outline-primary btn-sm" 
-                                    onclick="fillType('computer', 'Laptop')">Laptop</button>
+                                    onclick="fillType('computer', 'Ordinateur portable')">{{ __('Ordinateur portable') }}</button>
                             <button type="button" class="btn btn-outline-primary btn-sm" 
-                                    onclick="fillType('computer', 'Workstation')">Workstation</button>
+                                    onclick="fillType('computer', 'Station de travail')">{{ __('Station de travail') }}</button>
                             <button type="button" class="btn btn-outline-primary btn-sm" 
-                                    onclick="fillType('computer', 'Server')">Server</button>
+                                    onclick="fillType('computer', 'Serveur')">{{ __('Serveur') }}</button>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -117,7 +119,7 @@
                             <button type="button" class="btn btn-outline-info btn-sm" 
                                     onclick="fillType('monitor', 'LED')">LED</button>
                             <button type="button" class="btn btn-outline-info btn-sm" 
-                                    onclick="fillType('monitor', 'Projector')">Projector</button>
+                                    onclick="fillType('monitor', 'Projecteur')">{{ __('Projecteur') }}</button>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -126,9 +128,9 @@
                             <button type="button" class="btn btn-outline-warning btn-sm" 
                                     onclick="fillType('printer', 'Laser')">Laser</button>
                             <button type="button" class="btn btn-outline-warning btn-sm" 
-                                    onclick="fillType('printer', 'Inkjet')">Inkjet</button>
+                                    onclick="fillType('printer', 'Jet d encre')">{{ __('Jet d encre') }}</button>
                             <button type="button" class="btn btn-outline-warning btn-sm" 
-                                    onclick="fillType('printer', 'Multifunction')">Multifunction</button>
+                                    onclick="fillType('printer', 'Multifonction')">{{ __('Multifonction') }}</button>
                         </div>
                     </div>
                 </div>
@@ -141,7 +143,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="ti ti-list me-2"></i>
-                        {{ __('Existing Types') }}
+                                {{ __('Types existants') }}
                     </h3>
                 </div>
                 <div class="card-body">
@@ -150,7 +152,7 @@
                         <div class="col-md-6 mb-4">
                             <h4 class="mb-3">
                                 <i class="ti ti-device-desktop text-primary me-2"></i>
-                                {{ __('Computer Types') }}
+                                {{ __('Types ordinateurs') }}
                             </h4>
                             {% if types.computer is defined and types.computer|length > 0 %}
                                 <div class="list-group list-group-flush">
@@ -164,7 +166,7 @@
                                             {% if can_create and type.count == 0 %}
                                                 <form method="post" action="" class="d-inline"
                                                       onsubmit="return confirm('{{ __('Delete this type?') }}');">
-                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
                                                     <input type="hidden" name="action" value="delete_type">
                                                     <input type="hidden" name="type_category" value="computer">
                                                     <input type="hidden" name="type_id" value="{{ type.id }}">
@@ -177,7 +179,7 @@
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                <p class="text-muted">{{ __('No computer type defined') }}</p>
+                                <p class="text-muted">{{ __('Aucun type ordinateur defini') }}</p>
                             {% endif %}
                         </div>
                         
@@ -185,7 +187,7 @@
                         <div class="col-md-6 mb-4">
                             <h4 class="mb-3">
                                 <i class="ti ti-device-tv text-info me-2"></i>
-                                {{ __('Monitor Types') }}
+                                {{ __('Types moniteurs') }}
                             </h4>
                             {% if types.monitor is defined and types.monitor|length > 0 %}
                                 <div class="list-group list-group-flush">
@@ -199,7 +201,7 @@
                                             {% if can_create and type.count == 0 %}
                                                 <form method="post" action="" class="d-inline"
                                                       onsubmit="return confirm('{{ __('Delete this type?') }}');">
-                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
                                                     <input type="hidden" name="action" value="delete_type">
                                                     <input type="hidden" name="type_category" value="monitor">
                                                     <input type="hidden" name="type_id" value="{{ type.id }}">
@@ -212,7 +214,7 @@
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                <p class="text-muted">{{ __('No monitor type defined') }}</p>
+                                <p class="text-muted">{{ __('Aucun type moniteur defini') }}</p>
                             {% endif %}
                         </div>
                         
@@ -220,7 +222,7 @@
                         <div class="col-md-6 mb-4">
                             <h4 class="mb-3">
                                 <i class="ti ti-printer text-warning me-2"></i>
-                                {{ __('Printer Types') }}
+                                {{ __('Types imprimantes') }}
                             </h4>
                             {% if types.printer is defined and types.printer|length > 0 %}
                                 <div class="list-group list-group-flush">
@@ -234,7 +236,7 @@
                                             {% if can_create and type.count == 0 %}
                                                 <form method="post" action="" class="d-inline"
                                                       onsubmit="return confirm('{{ __('Delete this type?') }}');">
-                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
                                                     <input type="hidden" name="action" value="delete_type">
                                                     <input type="hidden" name="type_category" value="printer">
                                                     <input type="hidden" name="type_id" value="{{ type.id }}">
@@ -247,7 +249,7 @@
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                <p class="text-muted">{{ __('No printer type defined') }}</p>
+                                <p class="text-muted">{{ __('Aucun type imprimante defini') }}</p>
                             {% endif %}
                         </div>
                     </div>

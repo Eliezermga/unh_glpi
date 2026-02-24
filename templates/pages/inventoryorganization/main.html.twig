@@ -1,22 +1,10 @@
-{#
+﻿{#
  # ---------------------------------------------------------------------
- #
- # GLPI - Gestionnaire Libre de Parc Informatique
- #
- # http://glpi-project.org
- #
- # @copyright 2015-2023 Teclib' and contributors.
- # @licence   https://www.gnu.org/licenses/gpl-3.0.html
- #
- # ---------------------------------------------------------------------
- #
- # Organisation de l'Inventaire - Tableau de Bord Principal
- #
+ # Organisation de l inventaire - Tableau de bord
  # ---------------------------------------------------------------------
  #}
 
 <div class="container-fluid">
-    {# En-tête #}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">
             <i class="ti ti-building-warehouse me-2"></i>
@@ -24,84 +12,73 @@
         </h1>
     </div>
 
-    {# Cartes de Statistiques #}
     <div class="row mb-4">
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-2">
             <div class="card card-sm bg-primary-lt">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <span class="stamp bg-primary me-3">
-                            <i class="ti ti-building"></i>
-                        </span>
+                        <span class="stamp bg-primary me-3"><i class="ti ti-building"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.entities }}</div>
-                            <div class="text-muted">Entités</div>
+                            <div class="text-muted">{{ __('Entites') }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-2">
             <div class="card card-sm bg-success-lt">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <span class="stamp bg-success me-3">
-                            <i class="ti ti-map-pin"></i>
-                        </span>
+                        <span class="stamp bg-success me-3"><i class="ti ti-map-pin"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.locations }}</div>
-                            <div class="text-muted">Lieux</div>
+                            <div class="text-muted">{{ __('Lieux') }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-2">
             <div class="card card-sm bg-info-lt">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <span class="stamp bg-info me-3">
-                            <i class="ti ti-device-desktop"></i>
-                        </span>
+                        <span class="stamp bg-info me-3"><i class="ti ti-device-desktop"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.computers }}</div>
-                            <div class="text-muted">Ordinateurs</div>
+                            <div class="text-muted">{{ __('Ordinateurs') }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-2">
             <div class="card card-sm bg-warning-lt">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <span class="stamp bg-warning me-3">
-                            <i class="ti ti-printer"></i>
-                        </span>
+                        <span class="stamp bg-warning me-3"><i class="ti ti-printer"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.printers }}</div>
-                            <div class="text-muted">Imprimantes</div>
+                            <div class="text-muted">{{ __('Imprimantes') }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-2">
             <div class="card card-sm bg-secondary-lt">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <span class="stamp bg-secondary me-3">
-                            <i class="ti ti-package"></i>
-                        </span>
+                        <span class="stamp bg-secondary me-3"><i class="ti ti-package"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.total_assets }}</div>
-                            <div class="text-muted">Total Actifs</div>
+                            <div class="text-muted">{{ __('Total actifs') }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4 col-lg-2">
             <div class="card card-sm {% if issue_summary.total > 0 %}bg-danger-lt{% else %}bg-success-lt{% endif %}">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -110,7 +87,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ issue_summary.total }}</div>
-                            <div class="text-muted">Problèmes</div>
+                            <div class="text-muted">{{ __('Problemes') }}</div>
                         </div>
                     </div>
                 </div>
@@ -118,39 +95,39 @@
         </div>
     </div>
 
-    {# Actions Rapides - Menu #}
     <h3 class="mb-3">
         <i class="ti ti-rocket me-2"></i>
-        Actions Rapides
+        {{ __('Actions rapides') }}
     </h3>
+
     <div class="row mb-4">
         {% for item in menu_items %}
-            <div class="col-md-4 col-lg-2 mb-3">
-                <a href="{{ item.link }}" class="card card-link h-100" style="text-decoration: none;">
-                    <div class="card-body text-center d-flex flex-column align-items-center" style="min-width: 0;">
-                        <span class="avatar avatar-lg mb-3 bg-{{ item.color }}-lt">
+            <div class="col-md-6 col-lg-4 mb-3">
+                <a href="{{ item.link }}" class="card card-link h-100 text-decoration-none">
+                    <div class="card-body d-flex align-items-start gap-3">
+                        <span class="avatar avatar-lg bg-{{ item.color }}-lt flex-shrink-0">
                             <i class="{{ item.icon }} text-{{ item.color }}"></i>
                         </span>
-                        <h4 class="mb-1" style="width: 100%;">{{ item.title }}</h4>
-                        <p class="text-muted small mb-0" style="width: 100%; word-wrap: break-word;">{{ item.description }}</p>
+                        <div style="min-width: 0;">
+                            <h4 class="mb-1" style="white-space: normal; word-break: normal;">{{ item.title }}</h4>
+                            <p class="text-muted mb-0" style="white-space: normal; word-break: normal;">{{ item.description }}</p>
+                        </div>
                     </div>
                 </a>
             </div>
         {% endfor %}
     </div>
 
-
-    {# Problèmes Récents #}
     {% if issues|length > 0 %}
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="ti ti-alert-circle me-2"></i>
-                    Problèmes de Cohérence Récents
+                    {{ __('Problemes recents de coherence') }}
                 </h3>
                 <div class="card-actions">
                     <a href="inventoryorganization.coherence.php" class="btn btn-outline-primary btn-sm">
-                        Voir Tout
+                        {{ __('Voir tout') }}
                         <i class="ti ti-chevron-right ms-1"></i>
                     </a>
                 </div>
@@ -159,9 +136,9 @@
                 <table class="table table-vcenter card-table">
                     <thead>
                         <tr>
-                            <th>Sévérité</th>
-                            <th>Message</th>
-                            <th>Type d'Actif</th>
+                            <th>{{ __('Severite') }}</th>
+                            <th>{{ __('Message') }}</th>
+                            <th>{{ __('Type d actif') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -169,11 +146,11 @@
                             <tr>
                                 <td>
                                     {% if issue.severity == 'error' %}
-                                        <span class="badge bg-danger">Erreur</span>
+                                        <span class="badge bg-danger">{{ __('Erreur') }}</span>
                                     {% elseif issue.severity == 'warning' %}
-                                        <span class="badge bg-warning">Avertissement</span>
+                                        <span class="badge bg-warning">{{ __('Avertissement') }}</span>
                                     {% else %}
-                                        <span class="badge bg-info">Info</span>
+                                        <span class="badge bg-info">{{ __('Information') }}</span>
                                     {% endif %}
                                 </td>
                                 <td>{{ issue.message|raw }}</td>
@@ -187,11 +164,9 @@
     {% else %}
         <div class="card bg-success-lt">
             <div class="card-body text-center py-5">
-                <span class="avatar avatar-xl mb-3 bg-success">
-                    <i class="ti ti-check"></i>
-                </span>
-                <h3>Tout est en ordre !</h3>
-                <p class="text-muted mb-0">Aucun problème de cohérence détecté dans votre inventaire.</p>
+                <span class="avatar avatar-xl mb-3 bg-success"><i class="ti ti-check"></i></span>
+                <h3>{{ __('Tout est en ordre') }}</h3>
+                <p class="text-muted mb-0">{{ __('Aucun probleme de coherence detecte.') }}</p>
             </div>
         </div>
     {% endif %}
