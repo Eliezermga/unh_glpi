@@ -26625,4 +26625,124 @@ msgstr "Jet d encre"
 msgid "Multifonction"
 msgstr "Multifonction"
 
+#: templates/anonymous_helpdesk.html.twig
+msgid "Select a category"
+msgstr "Select a category"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Choose a category"
+msgstr "Choose a category"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Wi-Fi / Network"
+msgstr "Wi-Fi / Network"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Account / Password"
+msgstr "Account / Password"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Moodle / LMS"
+msgstr "Moodle / LMS"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Hardware / Equipment"
+msgstr "Hardware / Equipment"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Quick tips before submitting:"
+msgstr "Quick tips before submitting:"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "If the tips above don't solve your problem, please fill out the form below."
+msgstr "If the tips above don't solve your problem, please fill out the form below."
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use your university email as username (example: john.doe@university.edu)"
+msgstr "Use your university email as username (example: john.doe@university.edu)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Forget the network and reconnect"
+msgstr "Forget the network and reconnect"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check that Airplane mode is disabled"
+msgstr "Check that Airplane mode is disabled"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Try connecting in a different location on campus"
+msgstr "Try connecting in a different location on campus"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use the \"Forgot password\" link on the login page"
+msgstr "Use the \"Forgot password\" link on the login page"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check that Caps Lock is not enabled"
+msgstr "Check that Caps Lock is not enabled"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Clear your browser cache and cookies"
+msgstr "Clear your browser cache and cookies"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Try with a different browser"
+msgstr "Try with a different browser"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Make sure you are enrolled in the course"
+msgstr "Make sure you are enrolled in the course"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Contact your teacher if the course is not visible"
+msgstr "Contact your teacher if the course is not visible"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use an up-to-date browser (Chrome, Firefox, Edge)"
+msgstr "Use an up-to-date browser (Chrome, Firefox, Edge)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check your internet connection"
+msgstr "Check your internet connection"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the device"
+msgstr "Restart the device"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check all cable connections"
+msgstr "Check all cable connections"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "For printers: check paper and ink levels"
+msgstr "For printers: check paper and ink levels"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Note the equipment label (e.g., SCI-A101-PC01)"
+msgstr "Note the equipment label (e.g., SCI-A101-PC01)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the application"
+msgstr "Restart the application"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check for available updates"
+msgstr "Check for available updates"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the computer"
+msgstr "Restart the computer"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Note the exact error message if any"
+msgstr "Note the exact error message if any"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Please describe your problem in detail in the form below."
+msgstr "Please describe your problem in detail in the form below."
+
 

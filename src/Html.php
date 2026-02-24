@@ -1572,7 +1572,7 @@ HTML;
                 $menu['helpdesk']['content']['faq'] = [
                     'title'    => __('FAQ'),
                     'shortcut' => 'b',
-                    'page'     => '/front/helpdesk.faq.php',
+                    'page'     => '/front/knowbaseitem.php',
                     'icon'     => 'ti ti-book',
                 ];
             }
@@ -1644,9 +1644,9 @@ HTML;
             ];
         }
 
-        if (Session::haveRight('knowbase', KnowbaseItem::READFAQ)) {
+        if (Session::haveRightsOr('knowbase', [READ, KnowbaseItem::READFAQ])) {
             $menu['faq'] = [
-                'default' => '/front/helpdesk.faq.php',
+                'default' => '/front/knowbaseitem.php',
                 'title'   => __('FAQ'),
                 'icon'    => KnowbaseItem::getIcon(),
             ];

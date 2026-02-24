@@ -132,6 +132,25 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
               || ((Session::getLoginUserID() === false) && $CFG_GLPI["use_public_faq"]));
     }
 
+    /**
+     * In helpdesk interface, READFAQ profiles should not be blocked to FAQ-only mode.
+     */
+    private static function isFaqOnlyMode(): bool
+    {
+        if (Session::haveRight(self::$rightname, READ)) {
+            return false;
+        }
+
+        if (
+            Session::getCurrentInterface() === 'helpdesk'
+            && Session::haveRight(self::$rightname, self::READFAQ)
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     public function canViewItem()
     {
@@ -147,7 +166,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                   && $this->haveVisibilityAccess())
                  || ((Session::getLoginUserID() === false) && $this->isPubliclyVisible()));
         }
-        return (Session::haveRight(self::$rightname, READ) && $this->haveVisibilityAccess());
+        return (!self::isFaqOnlyMode() && $this->haveVisibilityAccess());
     }
 
 
@@ -1386,7 +1405,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                 $params[$key] = $val;
             }
         }
-        $faq = !Session::haveRight(self::$rightname, READ);
+        $faq = self::isFaqOnlyMode();
 
        // Category select not for anonymous FAQ
         if (
@@ -1809,7 +1828,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
         $DBread = DBConnection::getReadConnection();
 
        // Default values of parameters
-        $params['faq']                       = !Session::haveRight(self::$rightname, READ);
+        $params['faq']                       = self::isFaqOnlyMode();
         $params["start"]                     = "0";
         $params["knowbaseitemcategories_id"] = null;
         $params["contains"]                  = "";
@@ -2115,7 +2134,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
     {
         global $DB;
 
-        $faq = !Session::haveRight(self::$rightname, READ);
+        $faq = self::isFaqOnlyMode();
 
         $criteria = [
             'SELECT'    => ['glpi_knowbaseitems.*'],
