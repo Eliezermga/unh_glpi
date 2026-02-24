@@ -5,7 +5,7 @@ include ('../../../inc/includes.php');
 Session::checkRight("config", UPDATE);
 
 Html::header(
-    __('Configuration UNH Assets', 'unhassets'),
+    __('UNH Assets Configuration', 'unhassets'),
     $_SERVER['PHP_SELF'],
     "config",
     "plugins"
@@ -13,35 +13,35 @@ Html::header(
 
 echo "<div class='center'>";
 echo "<table class='tab_cadre_fixe'>";
-echo "<tr><th colspan='2'>" . __('Configuration du plugin UNH Assets', 'unhassets') . "</th></tr>";
+echo "<tr><th colspan='2'>" . __('UNH Assets Plugin Configuration', 'unhassets') . "</th></tr>";
 
 echo "<tr class='tab_bg_1'>";
 echo "<td colspan='2'>";
-echo "<h3>" . __('Fonctionnalités actives', 'unhassets') . "</h3>";
+echo "<h3>" . __('Active Features', 'unhassets') . "</h3>";
 echo "<ul>";
-echo "<li>✅ " . __('Gestion centralisée du parc informatique', 'unhassets') . "</li>";
-echo "<li>✅ " . __('Module de réservation de matériel', 'unhassets') . "</li>";
-echo "<li>✅ " . __('Gestion des licences et alertes', 'unhassets') . "</li>";
-echo "<li>✅ " . __('Tableau de bord et rapports', 'unhassets') . "</li>";
+echo "<li>✅ " . __('Centralised IT asset management', 'unhassets') . "</li>";
+echo "<li>✅ " . __('Equipment reservation module', 'unhassets') . "</li>";
+echo "<li>✅ " . __('License management and alerts', 'unhassets') . "</li>";
+echo "<li>✅ " . __('Dashboard and reports', 'unhassets') . "</li>";
 echo "</ul>";
 echo "</td>";
 echo "</tr>";
 
 echo "<tr class='tab_bg_1'>";
 echo "<td colspan='2'>";
-echo "<h3>" . __('Actions automatiques', 'unhassets') . "</h3>";
-echo "<p>" . __('Pour activer les alertes automatiques des licences :', 'unhassets') . "</p>";
+echo "<h3>" . __('Automated Actions', 'unhassets') . "</h3>";
+echo "<p>" . __('To enable automatic license expiry alerts:', 'unhassets') . "</p>";
 echo "<ol>";
-echo "<li>" . __('Aller dans Configuration > Actions automatiques', 'unhassets') . "</li>";
-echo "<li>" . __('Rechercher "checkExpiration"', 'unhassets') . "</li>";
-echo "<li>" . __('Activer la tâche et configurer la fréquence', 'unhassets') . "</li>";
+echo "<li>" . __('Go to Setup > Automatic Actions', 'unhassets') . "</li>";
+echo "<li>" . __('Search for "checkExpiration"', 'unhassets') . "</li>";
+echo "<li>" . __('Enable the task and configure its frequency', 'unhassets') . "</li>";
 echo "</ol>";
 echo "</td>";
 echo "</tr>";
 
 echo "<tr class='tab_bg_1'>";
 echo "<td colspan='2'>";
-echo "<h3>" . __('Statistiques', 'unhassets') . "</h3>";
+echo "<h3>" . __('Statistics', 'unhassets') . "</h3>";
 
 global $DB;
 
@@ -63,9 +63,9 @@ $total_licenses = $DB->request([
 ])->current()['cpt'];
 
 echo "<ul>";
-echo "<li>" . sprintf(__('Total équipements : %d', 'unhassets'), $total_assets) . "</li>";
-echo "<li>" . sprintf(__('Total réservations : %d', 'unhassets'), $total_reservations) . "</li>";
-echo "<li>" . sprintf(__('Total licences : %d', 'unhassets'), $total_licenses) . "</li>";
+echo "<li>" . sprintf(__('Total assets: %d', 'unhassets'), $total_assets) . "</li>";
+echo "<li>" . sprintf(__('Total reservations: %d', 'unhassets'), $total_reservations) . "</li>";
+echo "<li>" . sprintf(__('Total licenses: %d', 'unhassets'), $total_licenses) . "</li>";
 echo "</ul>";
 echo "</td>";
 echo "</tr>";
@@ -73,7 +73,7 @@ echo "</tr>";
 echo "<tr class='tab_bg_1'>";
 echo "<td colspan='2'>";
 echo "<h3>" . __('Support', 'unhassets') . "</h3>";
-echo "<p>" . __('Pour toute question, consulter le fichier README.md du plugin.', 'unhassets') . "</p>";
+echo "<p>" . __('For any questions, refer to the plugin README.md file.', 'unhassets') . "</p>";
 echo "<p><strong>" . __('Version', 'unhassets') . " :</strong> " . PLUGIN_UNHASSETS_VERSION . "</p>";
 echo "</td>";
 echo "</tr>";

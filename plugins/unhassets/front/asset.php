@@ -2,14 +2,13 @@
 
 include ('../../../inc/includes.php');
 
-// Vérifier les droits plugin (évite de masquer les actions si accès obtenu via un "fallback")
 Session::checkRight('plugin_unhassets', READ);
 
 Html::header(
-    __('Parc informatique', 'unhassets'),
+    __('IT Asset Inventory', 'unhassets'),
     $_SERVER['PHP_SELF'],
-    "unhassets",   // menu principal = notre plugin
-    "asset"        // sous-menu = clé dans $menu['options']['asset']
+    "unhassets",
+    "asset"
 );
 
 Search::show('PluginUnhassetsAsset');

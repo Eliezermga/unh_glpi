@@ -1,0 +1,343 @@
+# English (Great Britain) translation for UNH Assets plugin
+# Copyright (C) Université
+# This file is distributed under the same license as the UNH Assets plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: unhassets 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-24 00:00+0000\n"
+"PO-Revision-Date: 2026-02-24 00:00+0000\n"
+"Last-Translator: Université\n"
+"Language-Team: English\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# ── Menu ─────────────────────────────────────────────────────────────────────
+msgid "IT Asset Inventory"
+msgstr "IT Asset Inventory"
+
+# ── Assets ────────────────────────────────────────────────────────────────────
+msgid "Asset"
+msgstr "Asset"
+
+msgid "Assets"
+msgstr "Assets"
+
+msgid "Building"
+msgstr "Building"
+
+msgid "Room"
+msgstr "Room"
+
+msgid "Floor"
+msgstr "Floor"
+
+msgid "Department"
+msgstr "Department"
+
+msgid "Brand"
+msgstr "Brand"
+
+msgid "Model"
+msgstr "Model"
+
+msgid "Serial Number"
+msgstr "Serial Number"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Purchase Date"
+msgstr "Purchase Date"
+
+msgid "Warranty Date"
+msgstr "Warranty Date"
+
+msgid "Comment"
+msgstr "Comment"
+
+msgid "Name"
+msgstr "Name"
+
+# ── Asset statuses ────────────────────────────────────────────────────────────
+msgid "Active"
+msgstr "Active"
+
+msgid "Inactive"
+msgstr "Inactive"
+
+msgid "Under Maintenance"
+msgstr "Under Maintenance"
+
+msgid "Broken"
+msgstr "Broken"
+
+msgid "Retired"
+msgstr "Retired"
+
+# ── Flash messages – Assets ───────────────────────────────────────────────────
+msgid "Asset added successfully"
+msgstr "Asset added successfully"
+
+msgid "Asset updated successfully"
+msgstr "Asset updated successfully"
+
+msgid "Asset deleted successfully"
+msgstr "Asset deleted successfully"
+
+msgid "Asset purged successfully"
+msgstr "Asset purged successfully"
+
+# ── Reservations ──────────────────────────────────────────────────────────────
+msgid "Reservation"
+msgstr "Reservation"
+
+msgid "Reservations"
+msgstr "Reservations"
+
+msgid "Reservation Date"
+msgstr "Reservation Date"
+
+msgid "Start Time"
+msgstr "Start Time"
+
+msgid "End Time"
+msgstr "End Time"
+
+msgid "Purpose"
+msgstr "Purpose"
+
+msgid "Equipment"
+msgstr "Equipment"
+
+msgid "User"
+msgstr "User"
+
+# ── Reservation statuses ──────────────────────────────────────────────────────
+msgid "Pending"
+msgstr "Pending"
+
+msgid "Approved"
+msgstr "Approved"
+
+msgid "Rejected"
+msgstr "Rejected"
+
+msgid "Completed"
+msgstr "Completed"
+
+msgid "Cancelled"
+msgstr "Cancelled"
+
+# ── Flash messages – Reservations ─────────────────────────────────────────────
+msgid "Reservation created successfully"
+msgstr "Reservation created successfully"
+
+msgid "Reservation updated successfully"
+msgstr "Reservation updated successfully"
+
+msgid "Reservation deleted successfully"
+msgstr "Reservation deleted successfully"
+
+# ── Licenses ──────────────────────────────────────────────────────────────────
+msgid "License"
+msgstr "License"
+
+msgid "Licenses"
+msgstr "Licenses"
+
+msgid "Software Licenses"
+msgstr "Software Licenses"
+
+msgid "Software Name"
+msgstr "Software Name"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "License Key"
+msgstr "License Key"
+
+msgid "License Type"
+msgstr "License Type"
+
+msgid "Supplier"
+msgstr "Supplier"
+
+msgid "Expiration Date"
+msgstr "Expiration Date"
+
+msgid "Number of Licenses"
+msgstr "Number of Licenses"
+
+msgid "Used Licenses"
+msgstr "Used Licenses"
+
+msgid "Alert Threshold (days)"
+msgstr "Alert Threshold (days)"
+
+# ── License types ─────────────────────────────────────────────────────────────
+msgid "Perpetual"
+msgstr "Perpetual"
+
+msgid "Subscription"
+msgstr "Subscription"
+
+msgid "Trial"
+msgstr "Trial"
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "OEM"
+msgstr "OEM"
+
+# ── Flash messages – Licenses ─────────────────────────────────────────────────
+msgid "License added successfully"
+msgstr "License added successfully"
+
+msgid "License updated successfully"
+msgstr "License updated successfully"
+
+msgid "License deleted successfully"
+msgstr "License deleted successfully"
+
+msgid "License purged successfully"
+msgstr "License purged successfully"
+
+# ── Dashboard ─────────────────────────────────────────────────────────────────
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Overview"
+msgstr "Overview"
+
+msgid "IT Asset Inventory Overview"
+msgstr "IT Asset Inventory Overview"
+
+msgid "Statistics"
+msgstr "Statistics"
+
+msgid "Alerts"
+msgstr "Alerts"
+
+msgid "Asset Status"
+msgstr "Asset Status"
+
+msgid "Today"
+msgstr "Today"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Expiring soon (30d)"
+msgstr "Expiring soon (30d)"
+
+msgid "Expired"
+msgstr "Expired"
+
+msgid "Alerts & Required Actions"
+msgstr "Alerts & Required Actions"
+
+# ── Dashboard alerts ──────────────────────────────────────────────────────────
+msgid "%d asset(s) broken and require your attention"
+msgstr "%d asset(s) broken and require your attention"
+
+msgid "%d license(s) expired — renewal required"
+msgstr "%d license(s) expired — renewal required"
+
+msgid "%d license(s) expiring within the next 30 days"
+msgstr "%d license(s) expiring within the next 30 days"
+
+msgid "%d reservation(s) awaiting approval"
+msgstr "%d reservation(s) awaiting approval"
+
+# ── Configuration ─────────────────────────────────────────────────────────────
+msgid "UNH Assets Configuration"
+msgstr "UNH Assets Configuration"
+
+msgid "UNH Assets Plugin Configuration"
+msgstr "UNH Assets Plugin Configuration"
+
+msgid "Active Features"
+msgstr "Active Features"
+
+msgid "Centralised IT asset management"
+msgstr "Centralised IT asset management"
+
+msgid "Equipment reservation module"
+msgstr "Equipment reservation module"
+
+msgid "License management and alerts"
+msgstr "License management and alerts"
+
+msgid "Dashboard and reports"
+msgstr "Dashboard and reports"
+
+msgid "Automated Actions"
+msgstr "Automated Actions"
+
+msgid "To enable automatic license expiry alerts:"
+msgstr "To enable automatic license expiry alerts:"
+
+msgid "Go to Setup > Automatic Actions"
+msgstr "Go to Setup > Automatic Actions"
+
+msgid "Search for \"checkExpiration\""
+msgstr "Search for \"checkExpiration\""
+
+msgid "Enable the task and configure its frequency"
+msgstr "Enable the task and configure its frequency"
+
+msgid "Total assets: %d"
+msgstr "Total assets: %d"
+
+msgid "Total reservations: %d"
+msgstr "Total reservations: %d"
+
+msgid "Total licenses: %d"
+msgstr "Total licenses: %d"
+
+msgid "Support"
+msgstr "Support"
+
+msgid "For any questions, refer to the plugin README.md file."
+msgstr "For any questions, refer to the plugin README.md file."
+
+# ── Export ────────────────────────────────────────────────────────────────────
+msgid "Export as PDF"
+msgstr "Export as PDF"
+
+msgid "Export as Excel"
+msgstr "Export as Excel"
+
+msgid "IT Asset Inventory Report"
+msgstr "IT Asset Inventory Report"
+
+msgid "Generated on"
+msgstr "Generated on"
+
+msgid "Total number of assets"
+msgstr "Total number of assets"
+
+msgid "Report date"
+msgstr "Report date"
+
+# ── Generic messages ──────────────────────────────────────────────────────────
+msgid "Added successfully"
+msgstr "Added successfully"
+
+msgid "Updated successfully"
+msgstr "Updated successfully"
+
+msgid "Deleted successfully"
+msgstr "Deleted successfully"
+
+msgid "Reservation conflict detected"
+msgstr "Reservation conflict detected"
