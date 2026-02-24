@@ -1,4 +1,4 @@
-﻿{#
+{#
  # ---------------------------------------------------------------------
  # Organisation de l inventaire - Tableau de bord
  # ---------------------------------------------------------------------
@@ -153,7 +153,7 @@
                                         <span class="badge bg-info">{{ __('Information') }}</span>
                                     {% endif %}
                                 </td>
-                                <td>{{ issue.message|raw }}</td>
+                                <td>{{ issue.message }}</td>
                                 <td>{{ issue.asset_type|default('-') }}</td>
                             </tr>
                         {% endfor %}

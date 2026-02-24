@@ -25,6 +25,7 @@ $error_message = '';
 
 // Handle location creation directly on this page
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
 
     if ($action === 'create_location') {
@@ -69,7 +70,8 @@ function flattenEntities($entities, $level = 0) {
         }
         $result[] = [
             'id' => $entity['id'],
-            'name' => str_repeat('&nbsp;&nbsp;&nbsp;', $level) . $entity['name'],
+            'name' => (string) ($entity['name'] ?? ''),
+            'level' => (int) $level,
         ];
         if (!empty($entity['children'])) {
             $result = array_merge($result, flattenEntities($entity['children'], $level + 1));
@@ -86,7 +88,8 @@ function flattenLocations($locations, $level = 0) {
     foreach ($locations as $location) {
         $result[] = [
             'id' => $location['id'],
-            'name' => str_repeat('&nbsp;&nbsp;&nbsp;', $level) . $location['name'],
+            'name' => (string) ($location['name'] ?? ''),
+            'level' => (int) $level,
             'asset_count' => $location['asset_count'] ?? 0,
         ];
         if (!empty($location['children'])) {

@@ -25,6 +25,7 @@ $error_message = '';
 
 // Handle entity creation directly on this page
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
 
     if ($action === 'create_entity') {
@@ -67,7 +68,8 @@ function flattenEntities($entities, $level = 0) {
         }
         $result[] = [
             'id' => $entity['id'],
-            'name' => str_repeat('&nbsp;&nbsp;&nbsp;', $level) . $entity['name'],
+            'name' => (string) ($entity['name'] ?? ''),
+            'level' => (int) $level,
             'completename' => $entity['completename'] ?? $entity['name'],
         ];
         if (!empty($entity['children'])) {

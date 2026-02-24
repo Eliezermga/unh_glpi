@@ -411,10 +411,18 @@ class KnowbaseItemTranslation extends CommonDBChild
         if ($field === 'answer') {
             $faq_answer_key = self::getFaqAnswerTranslationKey($item);
             if ($faq_answer_key !== null) {
-                $faq_answer_translation = __($faq_answer_key);
-                if ($faq_answer_translation !== $faq_answer_key) {
-                    self::$translation_cache[$cache_key] = $faq_answer_translation;
-                    return $faq_answer_translation;
+                $faq_answer_keys = [$faq_answer_key];
+                $legacy_answer_key = str_replace('faq.static.answer.', 'faq.answer.', $faq_answer_key);
+                if ($legacy_answer_key !== $faq_answer_key) {
+                    $faq_answer_keys[] = $legacy_answer_key;
+                }
+
+                foreach ($faq_answer_keys as $answer_key) {
+                    $faq_answer_translation = __($answer_key);
+                    if ($faq_answer_translation !== $answer_key) {
+                        self::$translation_cache[$cache_key] = $faq_answer_translation;
+                        return $faq_answer_translation;
+                    }
                 }
             }
         }
@@ -428,7 +436,19 @@ class KnowbaseItemTranslation extends CommonDBChild
      */
     private static function getFaqAnswerTranslationKey(KnowbaseItem $item): ?string
     {
-        if ((int)($item->fields['is_faq'] ?? 0) !== 1 || !isset($item->fields['name'])) {
+        if ((int) ($item->fields['is_faq'] ?? 0) !== 1) {
+            return null;
+        }
+
+        $faq_map = self::getFaqQuestionToAnswerMap();
+        foreach (self::getFaqQuestionCandidates($item) as $candidate) {
+            $normalized_candidate = self::normalizeFaqQuestionForLookup($candidate);
+            if ($normalized_candidate !== '' && isset($faq_map[$normalized_candidate])) {
+                return $faq_map[$normalized_candidate];
+            }
+        }
+
+        if (!isset($item->fields['name'])) {
             return null;
         }
 
@@ -456,6 +476,184 @@ class KnowbaseItemTranslation extends CommonDBChild
         ];
 
         return $faq_answer_keys[$canonical_name] ?? null;
+    }
+
+    /**
+     * Return all known question candidates for an FAQ item (base + translations).
+     *
+     * @param KnowbaseItem $item
+     *
+     * @return string[]
+     */
+    private static function getFaqQuestionCandidates(KnowbaseItem $item): array
+    {
+        $candidates = [];
+
+        $base_name = trim((string) ($item->fields['name'] ?? ''));
+        if ($base_name !== '') {
+            $candidates[] = $base_name;
+        }
+
+        $translations = new self();
+        foreach ($translations->find(['knowbaseitems_id' => $item->getID()]) as $translation) {
+            $translated_name = trim((string) ($translation['name'] ?? ''));
+            if ($translated_name !== '') {
+                $candidates[] = $translated_name;
+            }
+        }
+
+        return array_values(array_unique($candidates));
+    }
+
+    /**
+     * Build lookup map from normalized FAQ question aliases to static answer keys.
+     *
+     * @return array<string,string>
+     */
+    private static function getFaqQuestionToAnswerMap(): array
+    {
+        static $faq_map = null;
+
+        if (is_array($faq_map)) {
+            return $faq_map;
+        }
+
+        $faq_pairs = [
+            [
+                'answer_key' => 'faq.static.answer.create_support_ticket',
+                'aliases' => [
+                    'faq.static.question.create_support_ticket',
+                    'comment creer un ticket de support ?',
+                    'how to create a support ticket?',
+                    'how do i create a support ticket?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.reset_password',
+                'aliases' => [
+                    'faq.static.question.reset_password',
+                    'comment reinitialiser mon mot de passe ?',
+                    'how to reset my password?',
+                    'how do i reset my password?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.connect_campus_wifi',
+                'aliases' => [
+                    'faq.static.question.connect_campus_wifi',
+                    'comment se connecter au wifi du campus ?',
+                    'how to connect to campus wifi?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.computer_not_booting',
+                'aliases' => [
+                    'faq.static.question.computer_not_booting',
+                    'mon ordinateur ne demarre plus, que faire ?',
+                    'my computer does not start, what should i do?',
+                    'my computer is not booting, what should i do?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.install_software',
+                'aliases' => [
+                    'faq.static.question.install_software',
+                    'comment installer un logiciel ?',
+                    'how to install software?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.printer_not_working',
+                'aliases' => [
+                    'faq.static.question.printer_not_working',
+                    "l'imprimante ne fonctionne pas",
+                    'printer is not working',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.remote_file_access',
+                'aliases' => [
+                    'faq.static.question.remote_file_access',
+                    'comment acceder a mes fichiers a distance ?',
+                    'how to access my files remotely?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.black_or_frozen_screen',
+                'aliases' => [
+                    'faq.static.question.black_or_frozen_screen',
+                    'mon ecran reste noir ou fige',
+                    'my screen is black or frozen',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.track_ticket_status',
+                'aliases' => [
+                    'faq.static.question.track_ticket_status',
+                    "comment suivre l'etat de mon ticket ?",
+                    'how to track my ticket status?',
+                ],
+            ],
+            [
+                'answer_key' => 'faq.static.answer.useful_keyboard_shortcuts',
+                'aliases' => [
+                    'faq.static.question.useful_keyboard_shortcuts',
+                    'les raccourcis clavier utiles',
+                    'useful keyboard shortcuts',
+                ],
+            ],
+        ];
+
+        $faq_map = [];
+        foreach ($faq_pairs as $pair) {
+            $answer_key = $pair['answer_key'];
+
+            foreach ($pair['aliases'] as $alias) {
+                $normalized_alias = self::normalizeFaqQuestionForLookup((string) $alias);
+                if ($normalized_alias !== '') {
+                    $faq_map[$normalized_alias] = $answer_key;
+                }
+            }
+        }
+
+        return $faq_map;
+    }
+
+    /**
+     * Normalize FAQ question text for stable matching across locale variants.
+     */
+    private static function normalizeFaqQuestionForLookup(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        $value = str_replace(['’', '‘', '`', '´'], "'", $value);
+        $value = function_exists('mb_strtolower')
+            ? mb_strtolower($value, 'UTF-8')
+            : strtolower($value);
+
+        if (class_exists(\Normalizer::class)) {
+            $normalized = \Normalizer::normalize($value, \Normalizer::FORM_D);
+            if (is_string($normalized)) {
+                $value = $normalized;
+            }
+        }
+
+        $value = preg_replace('/\p{Mn}+/u', '', $value) ?? $value;
+
+        if (function_exists('iconv')) {
+            $ascii_value = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value);
+            if (is_string($ascii_value) && $ascii_value !== '') {
+                $value = $ascii_value;
+            }
+        }
+
+        $value = preg_replace('/[^a-z0-9\s\?\']+/i', ' ', $value) ?? $value;
+        $value = preg_replace('/\s+/u', ' ', $value) ?? $value;
+
+        return trim($value);
     }
 
     /**
