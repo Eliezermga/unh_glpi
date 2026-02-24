@@ -26374,3 +26374,84 @@ msgstr ""
 #: templates/layout/parts/profile_selector.html.twig
 msgid "⌥ (option) + ⌘ (command) + E"
 msgstr "⌥ (option) + ⌘ (command) + E"
+
+#. UNH GLPI Static FAQ (DB independent)
+#: src/KnowbaseItem.php
+msgid "faq.static.question.create_support_ticket"
+msgstr "How to create a support ticket?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.reset_password"
+msgstr "How to reset my password?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.connect_campus_wifi"
+msgstr "How to connect to campus WiFi?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.computer_not_booting"
+msgstr "My computer does not start, what should I do?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.install_software"
+msgstr "How to install software?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.printer_not_working"
+msgstr "Printer is not working"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.remote_file_access"
+msgstr "How to access my files remotely?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.black_or_frozen_screen"
+msgstr "My screen is black or frozen"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.track_ticket_status"
+msgstr "How to track my ticket status?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.useful_keyboard_shortcuts"
+msgstr "Useful keyboard shortcuts"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.create_support_ticket"
+msgstr "Go to Assistance > Create ticket, choose a category, describe the issue, and submit."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.reset_password"
+msgstr "Use Forgot password on the login page, enter your email, and follow the reset link."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.connect_campus_wifi"
+msgstr "Open WiFi settings, select campus WiFi, login with your university account, and accept certificate if requested."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.computer_not_booting"
+msgstr "Check power cable and battery, hold the power button for 10 seconds, then restart. If still down, create a support ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.install_software"
+msgstr "Open Software Center, choose the application, and click Install. If access is denied, request approval in a ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.printer_not_working"
+msgstr "Check power, cables, paper, and toner. Restart the printer. If the issue remains, open a ticket with the printer name."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.remote_file_access"
+msgstr "Use VPN or remote portal, login with your university account, then open your network drive."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.black_or_frozen_screen"
+msgstr "Restart the computer, check monitor cable, and update graphics driver. If blocked, open a support ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.track_ticket_status"
+msgstr "Go to Assistance > Tickets, open your ticket, and review status and timeline updates."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.useful_keyboard_shortcuts"
+msgstr "Common shortcuts: Ctrl+C copy, Ctrl+V paste, Ctrl+S save, Alt+Tab switch window."
