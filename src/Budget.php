@@ -137,6 +137,12 @@ class Budget extends CommonDropdown
         echo Html::input('name', ['value' => $this->fields['name']]);
         echo "</td>";
 
+                // AJOUT tache1 :
+        echo "<td>" . __('Référence Annuelle UNH') . "</td>";
+        echo "<td>";
+        echo Html::input('unh_budget_code', ['value' => $this->fields['unh_budget_code'] ?? '']);
+        echo "</td>";
+
         echo "<td>" . _n('Type', 'Types', 1) . "</td>";
         echo "<td>";
         Dropdown::show('BudgetType', ['value' => $this->fields['budgettypes_id']]);

@@ -50,9 +50,7 @@ class Location extends CommonTreeDropdown
 
     public function getAdditionalFields()
     {
-        // Formulaire simplifié pour un contexte universitaire avec un seul site
-        // On garde uniquement les champs essentiels pour la gestion des bâtiments, étages et salles
-        
+
         return [
             [
                 'name'  => $this->getForeignKeyField(),
@@ -60,9 +58,29 @@ class Location extends CommonTreeDropdown
                 'type'  => 'parent',
                 'list'  => false
             ], [
-                'name'   => 'location_type',
-                'label'  => __('Location type'),
-                'type'   => 'location_type',
+                'name'   => 'address',
+                'label'  => __('Address'),
+                'type'   => 'text',
+                'list'   => true
+            ], [
+                'name'   => 'postcode',
+                'label'  => __('Postal code'),
+                'type'   => 'text',
+                'list'   => true
+            ], [
+                'name'   => 'town',
+                'label'  => __('Town'),
+                'type'   => 'text',
+                'list'   => true
+            ], [
+                'name'   => 'state',
+                'label'  => _x('location', 'State'),
+                'type'   => 'text',
+                'list'   => true
+            ], [
+                'name'   => 'country',
+                'label'  => __('Country'),
+                'type'   => 'text',
                 'list'   => true
             ], [
                 'name'  => 'building',
@@ -74,10 +92,27 @@ class Location extends CommonTreeDropdown
                 'label' => __('Room number'),
                 'type'  => 'text',
                 'list'  => true
+            ], [
+                'name'   => 'setlocation',
+                'type'   => 'setlocation',
+                'label'  => __('Location on map'),
+                'list'   => false
+            ], [
+                'name'  => 'latitude',
+                'label' => __('Latitude'),
+                'type'  => 'text',
+                'list'  => true
+            ], [
+                'name'  => 'longitude',
+                'label' => __('Longitude'),
+                'type'  => 'text',
+                'list'  => true
+            ], [
+                'name'  => 'altitude',
+                'label' => __('Altitude'),
+                'type'  => 'text',
+                'list'  => true
             ]
-            // Champs supprimés car non nécessaires pour un site unique :
-            // - address, postcode, town, state, country (même adresse pour tout le site)
-            // - setlocation, latitude, longitude, altitude (optionnel, peut être ajouté plus tard si besoin)
         ];
     }
 
@@ -87,57 +122,10 @@ class Location extends CommonTreeDropdown
         return _n('Location', 'Locations', $nb);
     }
 
-    /**
-     * Get locations filtered by type (useful for building filtering)
-     *
-     * @param string $type Location type (site, building, floor, room, other)
-     * @param int|null $entity_id Entity ID (optional)
-     *
-     * @return array Array of location IDs
-     */
-    public static function getLocationsByType($type, $entity_id = null)
-    {
-        global $DB;
-
-        $where = ['location_type' => $type];
-        
-        if ($entity_id !== null) {
-            $where += getEntitiesRestrictCriteria(self::getTable(), 'entities_id', $entity_id, true);
-        }
-
-        $iterator = $DB->request([
-            'SELECT' => 'id',
-            'FROM'   => self::getTable(),
-            'WHERE'  => $where
-        ]);
-
-        $locations = [];
-        foreach ($iterator as $data) {
-            $locations[] = $data['id'];
-        }
-
-        return $locations;
-    }
-
-    /**
-     * Get building locations (for filtering)
-     *
-     * @param int|null $entity_id Entity ID (optional)
-     *
-     * @return array Array of building location IDs
-     */
-    public static function getBuildings($entity_id = null)
-    {
-        return self::getLocationsByType('building', $entity_id);
-    }
-
 
     public static function rawSearchOptionsToAdd()
     {
         $tab = [];
-
-        // Options de recherche simplifiées pour un contexte universitaire avec un seul site
-        // Utilisé par d'autres objets pour rechercher par lieu
 
         $tab[] = [
             'id'                 => '3',
@@ -147,21 +135,49 @@ class Location extends CommonTreeDropdown
             'datatype'           => 'dropdown'
         ];
 
-        // Ajout du type de lieu pour le filtrage
         $tab[] = [
-            'id'                 => '23',
+            'id'                 => '101',
             'table'              => 'glpi_locations',
-            'field'              => 'location_type',
-            'name'               => __('Location type'),
-            'datatype'           => 'dropdown',
-            'searchtype'         => ['equals', 'notequals'],
-            'values'             => [
-                'site'     => __('Site'),
-                'building' => __('Building'),
-                'etage'    => __('Etage'),
-                'salle'    => __('Salle'),
-                'autre'    => __('Autre')
-            ],
+            'field'              => 'address',
+            'name'               => __('Address'),
+            'massiveaction'      => false,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '102',
+            'table'              => 'glpi_locations',
+            'field'              => 'postcode',
+            'name'               => __('Postal code'),
+            'massiveaction'      => false,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '103',
+            'table'              => 'glpi_locations',
+            'field'              => 'town',
+            'name'               => __('Town'),
+            'massiveaction'      => false,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '104',
+            'table'              => 'glpi_locations',
+            'field'              => 'state',
+            'name'               => _x('location', 'State'),
+            'massiveaction'      => false,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '105',
+            'table'              => 'glpi_locations',
+            'field'              => 'country',
+            'name'               => __('Country'),
+            'massiveaction'      => false,
+            'datatype'           => 'string'
         ];
 
         $tab[] = [
@@ -191,9 +207,23 @@ class Location extends CommonTreeDropdown
             'datatype'           => 'text'
         ];
 
-        // Champs supprimés car non nécessaires pour un site unique :
-        // - address, postcode, town, state, country (même adresse pour tout le site)
-        // - latitude, longitude (optionnel, peut être réactivé si besoin)
+        $tab[] = [
+            'id'                 => '998',
+            'table'              => 'glpi_locations',
+            'field'              => 'latitude',
+            'name'               => __('Latitude'),
+            'massiveaction'      => false,
+            'datatype'           => 'text'
+        ];
+
+        $tab[] = [
+            'id'                 => '999',
+            'table'              => 'glpi_locations',
+            'field'              => 'longitude',
+            'name'               => __('Longitude'),
+            'massiveaction'      => false,
+            'datatype'           => 'text'
+        ];
 
         return $tab;
     }
@@ -202,33 +232,12 @@ class Location extends CommonTreeDropdown
     {
         $tab = parent::rawSearchOptions();
 
-        // Options de recherche simplifiées pour un contexte universitaire avec un seul site
-        // On garde uniquement les champs essentiels cohérents avec le formulaire
-
-        $tab[] = [
-            'id'                 => '10',
-            'table'              => 'glpi_locations',
-            'field'              => 'location_type',
-            'name'               => __('Location type'),
-            'datatype'           => 'dropdown',
-            'searchtype'         => ['equals', 'notequals'],
-            'massiveaction'      => true,
-            'values'             => [
-                'site'     => __('Site'),
-                'building' => __('Building'),
-                'etage'    => __('Etage'),
-                'salle'    => __('Salle'),
-                'autre'    => __('Autre')
-            ],
-        ];
-
         $tab[] = [
             'id'                 => '11',
             'table'              => 'glpi_locations',
             'field'              => 'building',
             'name'               => __('Building number'),
             'datatype'           => 'text',
-            'massiveaction'      => true,
         ];
 
         $tab[] = [
@@ -237,12 +246,101 @@ class Location extends CommonTreeDropdown
             'field'              => 'room',
             'name'               => __('Room number'),
             'datatype'           => 'text',
-            'massiveaction'      => true,
         ];
 
-        // Champs supprimés des filtres car non nécessaires pour un site unique :
-        // - address, postcode, town, state, country (doublons et non utilisés dans le formulaire)
-        // - latitude, longitude, altitude (optionnel, peut être réactivé si besoin)
+        $tab[] = [
+            'id'                 => '15',
+            'table'              => 'glpi_locations',
+            'field'              => 'address',
+            'name'               => __('Address'),
+            'massiveaction'      => false,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '17',
+            'table'              => 'glpi_locations',
+            'field'              => 'postcode',
+            'name'               => __('Postal code'),
+            'massiveaction'      => true,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '18',
+            'table'              => 'glpi_locations',
+            'field'              => 'town',
+            'name'               => __('Town'),
+            'massiveaction'      => true,
+            'datatype'           => 'string'
+        ];
+
+        $tab[] = [
+            'id'                 => '21',
+            'table'              => 'glpi_locations',
+            'field'              => 'latitude',
+            'name'               => __('Latitude'),
+            'massiveaction'      => false,
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '20',
+            'table'              => 'glpi_locations',
+            'field'              => 'longitude',
+            'name'               => __('Longitude'),
+            'massiveaction'      => false,
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '22',
+            'table'              => 'glpi_locations',
+            'field'              => 'altitude',
+            'name'               => __('Altitude'),
+            'massiveaction'      => false,
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '101',
+            'table'              => 'glpi_locations',
+            'field'              => 'address',
+            'name'               => __('Address'),
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '102',
+            'table'              => 'glpi_locations',
+            'field'              => 'postcode',
+            'name'               => __('Postal code'),
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '103',
+            'table'              => 'glpi_locations',
+            'field'              => 'town',
+            'name'               => __('Town'),
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '104',
+            'table'              => 'glpi_locations',
+            'field'              => 'state',
+            'name'               => _x('location', 'State'),
+            'datatype'           => 'string',
+        ];
+
+        $tab[] = [
+            'id'                 => '105',
+            'table'              => 'glpi_locations',
+            'field'              => 'country',
+            'name'               => __('Country'),
+            'datatype'           => 'string',
+        ];
 
         return $tab;
     }
@@ -418,28 +516,6 @@ class Location extends CommonTreeDropdown
         switch ($field['type']) {
             case 'setlocation':
                 $this->showMap();
-                break;
-            case 'location_type':
-                $values = [
-                    ''       => Dropdown::EMPTY_VALUE,
-                    'site'   => __('Site'),
-                    'building' => __('Building'),
-                    'etage'  => __('Etage'),
-                    'salle'   => __('Salle'),
-                    'autre'  => __('Autre')
-                ];
-                
-                $current_value = $this->fields['location_type'] ?? '';
-                
-                Dropdown::showFromArray(
-                    'location_type',
-                    $values,
-                    [
-                        'value'  => $current_value,
-                        'rand'   => $options['rand'] ?? mt_rand(),
-                        'display' => true
-                    ]
-                );
                 break;
             default:
                 throw new \RuntimeException("Unknown {$field['type']}");

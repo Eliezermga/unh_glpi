@@ -1090,7 +1090,16 @@ JAVASCRIPT;
                     'TaskCategory' => null,
                     'TaskTemplate' => null,
                     'SolutionType' => null,
+                    'SolutionTemplate' => null,
                     'RequestType' => null,
+                    'ITILFollowupTemplate' => null,
+                    'ProjectState' => null,
+                    'ProjectType' => null,
+                    'ProjectTaskType' => null,
+                    'ProjectTaskTemplate' => null,
+                    'PlanningExternalEventTemplate' => null,
+                    'PlanningEventCategory' => null,
+                    'PendingReason' => null,
                 ],
 
                 _n('Type', 'Types', Session::getPluralNumber()) => [
@@ -1106,10 +1115,22 @@ JAVASCRIPT;
                     'ContractType' => null,
                     'ContactType' => null,
                     'DeviceGenericType' => null,
+                    'DeviceSensorType' => null,
+                    'DeviceMemoryType' => null,
                     'SupplierType' => null,
                     'InterfaceType' => null,
+                    'DeviceCaseType' => null,
+                    'PhonePowerSupply' => null,
+                    'Filesystem' => null,
                     'CertificateType' => null,
                     'BudgetType' => null,
+                    'DeviceSimcardType' => null,
+                    'LineType' => null,
+                    'RackType' => null,
+                    'PDUType' => null,
+                    'PassiveDCEquipmentType' => null,
+                    'ClusterType' => null,
+                    'DatabaseInstanceType' => null
                 ],
 
                 _n('Model', 'Models', Session::getPluralNumber()) => [
@@ -1119,14 +1140,34 @@ JAVASCRIPT;
                     'MonitorModel' => null,
                     'PeripheralModel' => null,
                     'PhoneModel' => null,
+
+                  // Devices models :
+                    'DeviceCameraModel' => null,
+                    'DeviceCaseModel' => null,
+                    'DeviceControlModel' => null,
+                    'DeviceDriveModel' => null,
                     'DeviceGenericModel' => null,
+                    'DeviceGraphicCardModel' => null,
+                    'DeviceHardDriveModel' => null,
+                    'DeviceMemoryModel' => null,
+                    'DeviceMotherboardModel' => null,
+                    'DeviceNetworkCardModel' => null,
+                    'DevicePciModel' => null,
+                    'DevicePowerSupplyModel' => null,
+                    'DeviceProcessorModel' => null,
+                    'DeviceSoundCardModel' => null,
+                    'DeviceSensorModel' => null,
+                    'RackModel' => null,
+                    'EnclosureModel' => null,
+                    'PDUModel' => null,
+                    'PassiveDCEquipmentModel' => null,
                 ],
 
-                // _n('Virtual machine', 'Virtual machines', Session::getPluralNumber()) => [ // Machines virtuelles - masqué
-                //     'VirtualMachineType' => null,
-                //     'VirtualMachineSystem' => null,
-                //     'VirtualMachineState' => null
-                // ],
+                _n('Virtual machine', 'Virtual machines', Session::getPluralNumber()) => [
+                    'VirtualMachineType' => null,
+                    'VirtualMachineSystem' => null,
+                    'VirtualMachineState' => null
+                ],
 
                 __('Management') => [
                     'DocumentCategory' => null,
@@ -1168,11 +1209,11 @@ JAVASCRIPT;
 
                 ],
 
-                // __('Cable management') => [ // Gestion des câbles - masqué
-                //     'CableType' => null,
-                //     'CableStrand' => null,
-                //     SocketModel::class => null,
-                // ],
+                __('Cable management') => [
+                    'CableType' => null,
+                    'CableStrand' => null,
+                    SocketModel::class => null,
+                ],
 
                 __('Internet') => [
                     'IPNetwork' => null,
@@ -1190,28 +1231,28 @@ JAVASCRIPT;
                     'UserCategory' => null
                 ],
 
-                // __('Authorizations assignment rules') => [ // Règles d'affectation d'habilitations - masqué
-                //     'RuleRightParameter' => null
-                // ],
+                __('Authorizations assignment rules') => [
+                    'RuleRightParameter' => null
+                ],
 
-                // __('Fields unicity') => [ // Unicité des champs - masqué
-                //     'Fieldblacklist' => null
-                // ],
+                __('Fields unicity') => [
+                    'Fieldblacklist' => null
+                ],
 
                 __('External authentications') => [
                     'SsoVariable' => null
                 ],
-                // __('Power management') => [ // Gestion de l'alimentation - masqué
-                //     'Plug' => null
-                // ],
-                // __('Appliances') => [ // Applicatifs - masqué
-                //     'ApplianceType' => null,
-                //     'ApplianceEnvironment' => null,
-                // ],
-                // DeviceCamera::getTypeName(1) => [ // Caméra - masqué
-                //     'Resolution'     => null,
-                //     'ImageFormat'  => null
-                // ],
+                __('Power management') => [
+                    'Plug' => null
+                ],
+                __('Appliances') => [
+                    'ApplianceType' => null,
+                    'ApplianceEnvironment' => null,
+                ],
+                DeviceCamera::getTypeName(1) => [
+                    'Resolution'     => null,
+                    'ImageFormat'  => null
+                ],
                 __('Others') => [
                     'USBVendor' => null,
                     'PCIVendor' => null

@@ -575,30 +575,13 @@ class State extends CommonTreeDropdown
 
     /**
      * Get visibility fields from conf
-     * Adapté pour un contexte universitaire : on ne garde que les types d'équipements couramment utilisés
      */
     protected function getvisibilityFields(): array
     {
         global $CFG_GLPI;
         $fields = [];
-        
-        // Types d'équipements couramment utilisés dans un contexte universitaire
-        $university_state_types = [
-            'Computer',
-            'Monitor',
-            'NetworkEquipment',
-            'Peripheral',
-            'Phone',
-            'Printer',
-            'SoftwareLicense',
-            'Certificate'
-        ];
-        
-        // Filtrer pour ne garder que les types définis dans la config ET utilisés en université
         foreach ($CFG_GLPI['state_types'] as $type) {
-            if (in_array($type, $university_state_types)) {
-                $fields[$type] = 'is_visible_' . strtolower($type);
-            }
+            $fields[$type] = 'is_visible_' . strtolower($type);
         }
         return $fields;
     }
