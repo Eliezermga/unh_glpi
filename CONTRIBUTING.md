@@ -37,4 +37,3 @@ Current repository is not the right place for that. You may try to ask your ques
 ## Coding
 
 If you want to contribute to the project code, please take a time to read the [project coding guidelines](https://glpi-developer-documentation.readthedocs.io).
-
