@@ -741,9 +741,9 @@ class Profile extends CommonDBTM
 
         echo "<tr class='tab_bg_1'><td>" . __('Name') . "</td>";
         echo "<td><input type='text' name='name' class='form-control' value=\"" . $this->fields["name"] . "\" $onfocus></td>";
-        echo "<td rowspan='$rowspan' class='middle right'>" . __('Comments') . "</td>";
-        echo "<td class='center middle' rowspan='$rowspan'>";
-        echo "<textarea class='form-control' rows='4' name='comment' class='form-control'>" . $this->fields["comment"] . "</textarea>";
+        //echo "<td rowspan='$rowspan' class='middle right'>" . __('Comments') . "</td>";
+        //echo "<td class='center middle' rowspan='$rowspan'>";
+        //echo "<textarea class='form-control' rows='4' name='comment' class='form-control'>" . $this->fields["comment"] . "</textarea>";
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'><td>" . __('Default profile') . "</td><td>";
@@ -772,6 +772,28 @@ class Profile extends CommonDBTM
             'checked' => $this->fields['create_ticket_on_login']
         ]);
         echo "</td></tr>\n";
+
+// =============== AJOUTEZ VOTRE CODE ICI ===============
+        echo "<tr class='tab_bg_1'><td>" . __('Type de public', 'university') . "</td><td>";
+        Dropdown::showFromArray(
+        'public_type',
+        [
+            ''                  => __('-- Sélectionnez --', 'university'),
+            'student'           => __('Étudiant', 'university'),
+            'teacher'           => __('Enseignant', 'university'),
+            'admin_staff'       => __('Personnel administratif', 'university'),
+            'tech_staff'        => __('Technicien universitaire', 'university'),
+            'external'          => __('Invité externe', 'university'),
+            'other'             => __('Autre', 'university')
+        ],
+        [
+            'value'     => $this->fields['public_type'] ?? '',
+            'display'   => true,
+            'width'     => '100%'
+        ]
+        );
+        echo "</td></tr>\n";
+// =============== FIN DE VOTRE CODE ===============
 
         $this->showFormButtons($options);
 
