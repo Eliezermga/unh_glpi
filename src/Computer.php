@@ -292,12 +292,36 @@ class Computer extends CommonDBTM
 
     public function prepareInputForAdd($input)
     {
+        // Check mandatory field: Inventory number (otherserial)
+        if (empty($input['otherserial'])) {
+            Session::addMessageAfterRedirect(
+                __('Inventory number is mandatory'),
+                false,
+                ERROR
+            );
+            return false;
+        }
 
         if (isset($input["id"]) && ($input["id"] > 0)) {
             $input["_oldID"] = $input["id"];
         }
         unset($input['id']);
         unset($input['withtemplate']);
+
+        return $input;
+    }
+
+    public function prepareInputForUpdate($input)
+    {
+        // Check mandatory field: Inventory number (otherserial)
+        if (isset($input['otherserial']) && empty($input['otherserial'])) {
+            Session::addMessageAfterRedirect(
+                __('Inventory number is mandatory'),
+                false,
+                ERROR
+            );
+            return false;
+        }
 
         return $input;
     }
