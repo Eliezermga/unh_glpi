@@ -2,18 +2,11 @@
 
 include ('../../../inc/includes.php');
 
-// Vérifier les droits - utiliser config comme fallback
-$canview = Session::haveRight('plugin_unhassets', READ) 
-           || Session::haveRight('config', READ);
-
-if (!$canview) {
-    Html::displayRightError();
-}
+Session::checkRight('plugin_unhassets', READ);
 
 Html::header(
-    __('Parc informatique', 'unhassets'),
+    __('IT Asset Inventory', 'unhassets'),
     $_SERVER['PHP_SELF'],
-    "unhassets",
     "unhassets",
     "asset"
 );
