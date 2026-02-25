@@ -1,0 +1,37 @@
+1771942531
+b5a4531ccace63e1ea2e704f6395f1dc0e53c861
+a:1:{s:53:"bn_count_Profile_770b35e8-68e9-4b4f-9e09-5a11058f069f";s:1101:"      <style>
+         #bn_75572676 {
+            background-color: #e0e0e0;
+            color: #7a7a7a;
+         }
+
+         #bn_75572676:hover {
+            background-color: #bababa;
+            border: 1px solid #949494;
+         }
+
+         .theme-dark #bn_75572676 {
+            background-color: #7a7a7a;
+            color: #e0e0e0;
+         }
+
+         .theme-dark #bn_75572676:hover {
+            background-color: #bababa;
+            color: #7a7a7a;
+            border: 1px solid #949494;
+         }
+      </style>
+      <a href='/unh_glpi/front/profile.php?reset=reset'
+         id="bn_75572676"
+         class="card big-number  filter-dates filter-dates_mod"
+         title="">
+         <span class="content">            <span title="8"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">8</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Profils">Profils</div>
+         <i class="main-icon ti ti-user-check"></i>
+      </a>";}

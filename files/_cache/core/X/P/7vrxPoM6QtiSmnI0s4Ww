@@ -1,0 +1,37 @@
+1771942532
+3117f8cb0e820f6f0ac12e584958459d26835d1f
+a:1:{s:53:"bn_count_Project_4d412ee2-8b79-469b-995f-4c0a05ab849d";s:1112:"      <style>
+         #bn_1228843327 {
+            background-color: #b3b3b3;
+            color: #4d4d4d;
+         }
+
+         #bn_1228843327:hover {
+            background-color: #8d8d8d;
+            border: 1px solid #676767;
+         }
+
+         .theme-dark #bn_1228843327 {
+            background-color: #4d4d4d;
+            color: #b3b3b3;
+         }
+
+         .theme-dark #bn_1228843327:hover {
+            background-color: #8d8d8d;
+            color: #4d4d4d;
+            border: 1px solid #676767;
+         }
+      </style>
+      <a href='/unh_glpi/front/project.php?reset=reset'
+         id="bn_1228843327"
+         class="card big-number  filter-dates filter-dates_mod"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Projet">Projet</div>
+         <i class="main-icon ti ti-layout-kanban"></i>
+      </a>";}

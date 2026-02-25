@@ -1,0 +1,37 @@
+1771942531
+2c3f5dd1144eb98360ace21ddab46c977cd9f97f
+a:1:{s:51:"bn_count_Group_b84a93f2-a26c-49d7-82a4-5446697cc5b0";s:1102:"      <style>
+         #bn_1372817456 {
+            background-color: #e0e0e0;
+            color: #7a7a7a;
+         }
+
+         #bn_1372817456:hover {
+            background-color: #bababa;
+            border: 1px solid #949494;
+         }
+
+         .theme-dark #bn_1372817456 {
+            background-color: #7a7a7a;
+            color: #e0e0e0;
+         }
+
+         .theme-dark #bn_1372817456:hover {
+            background-color: #bababa;
+            color: #7a7a7a;
+            border: 1px solid #949494;
+         }
+      </style>
+      <a href='/unh_glpi/front/group.php?reset=reset'
+         id="bn_1372817456"
+         class="card big-number  filter-dates filter-dates_mod"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Groupe">Groupe</div>
+         <i class="main-icon ti ti-users"></i>
+      </a>";}

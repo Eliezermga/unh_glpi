@@ -1,0 +1,37 @@
+1771942528
+9e8f5a9dc3570fb99961c7f7f2cd169f37d3ef43
+a:1:{s:50:"bn_count_Rack_c6502e0a-5991-46b4-a771-7f355137306b";s:1182:"      <style>
+         #bn_1028366287 {
+            background-color: #0e87a0;
+            color: #86e1f4;
+         }
+
+         #bn_1028366287:hover {
+            background-color: #14c2e6;
+            border: 1px solid #57d6f0;
+         }
+
+         .theme-dark #bn_1028366287 {
+            background-color: #86e1f4;
+            color: #0e87a0;
+         }
+
+         .theme-dark #bn_1028366287:hover {
+            background-color: #14c2e6;
+            color: #86e1f4;
+            border: 1px solid #57d6f0;
+         }
+      </style>
+      <a href='/unh_glpi/front/rack.php?reset=reset'
+         id="bn_1028366287"
+         class="card big-number  filter-dates filter-dates_mod filter-location filter-manufacturer filter-group_tech filter-user_tech filter-state"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Baie">Baie</div>
+         <i class="main-icon ti ti-server"></i>
+      </a>";}

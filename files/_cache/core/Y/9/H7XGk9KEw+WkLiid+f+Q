@@ -1,0 +1,37 @@
+1771942530
+2c6bf218c20136e94d091c59fd71f694ba73a91d
+a:1:{s:53:"bn_count_Printer_517684b0-b064-49dd-943e-fcb6f915e453";s:1193:"      <style>
+         #bn_456614759 {
+            background-color: #365a8f;
+            color: #b0c4e1;
+         }
+
+         #bn_456614759:hover {
+            background-color: #537fbe;
+            border: 1px solid #8ba8d3;
+         }
+
+         .theme-dark #bn_456614759 {
+            background-color: #b0c4e1;
+            color: #365a8f;
+         }
+
+         .theme-dark #bn_456614759:hover {
+            background-color: #537fbe;
+            color: #b0c4e1;
+            border: 1px solid #8ba8d3;
+         }
+      </style>
+      <a href='/unh_glpi/front/printer.php?reset=reset'
+         id="bn_456614759"
+         class="card big-number  filter-dates filter-dates_mod filter-location filter-manufacturer filter-group_tech filter-user_tech filter-state"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Imprimante">Imprimante</div>
+         <i class="main-icon ti ti-printer"></i>
+      </a>";}

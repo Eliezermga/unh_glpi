@@ -1,0 +1,37 @@
+1771942531
+39bcc4a424252f0b1873dbb608727fb35a5b70c1
+a:1:{s:58:"bn_count_KnowbaseItem_a3785a56-bed4-4a30-8387-f251f5365b3b";s:1137:"      <style>
+         #bn_452226457 {
+            background-color: #c9c9c9;
+            color: #636363;
+         }
+
+         #bn_452226457:hover {
+            background-color: #a3a3a3;
+            border: 1px solid #7d7d7d;
+         }
+
+         .theme-dark #bn_452226457 {
+            background-color: #636363;
+            color: #c9c9c9;
+         }
+
+         .theme-dark #bn_452226457:hover {
+            background-color: #a3a3a3;
+            color: #636363;
+            border: 1px solid #7d7d7d;
+         }
+      </style>
+      <a href='/unh_glpi/front/knowbaseitem.php?reset=reset'
+         id="bn_452226457"
+         class="card big-number  filter-dates filter-dates_mod"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Base de connaissances">Base de connaissances</div>
+         <i class="main-icon ti ti-lifebuoy"></i>
+      </a>";}

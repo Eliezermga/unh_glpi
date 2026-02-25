@@ -1,0 +1,37 @@
+1771942532
+af6cb3fb28d8153e42712dc3953ea91d24759dfb
+a:1:{s:54:"bn_count_Document_7dc7f4b8-61ff-4147-b994-5541bddd7b66";s:1109:"      <style>
+         #bn_1178637653 {
+            background-color: #b4b4b4;
+            color: #4e4e4e;
+         }
+
+         #bn_1178637653:hover {
+            background-color: #8e8e8e;
+            border: 1px solid #686868;
+         }
+
+         .theme-dark #bn_1178637653 {
+            background-color: #4e4e4e;
+            color: #b4b4b4;
+         }
+
+         .theme-dark #bn_1178637653:hover {
+            background-color: #8e8e8e;
+            color: #4e4e4e;
+            border: 1px solid #686868;
+         }
+      </style>
+      <a href='/unh_glpi/front/document.php?reset=reset'
+         id="bn_1178637653"
+         class="card big-number  filter-dates filter-dates_mod"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Document">Document</div>
+         <i class="main-icon ti ti-files"></i>
+      </a>";}

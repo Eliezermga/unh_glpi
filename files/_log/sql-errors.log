@@ -1,0 +1,46 @@
+[2026-02-24 16:17:30] glpisqllog.ERROR: DBmysql::query() in C:\xampp1\htdocs\unh_glpi\src\DBmysql.php line 370
+  *** MySQL query error:
+  SQL: INSERT INTO `glpi_locations` (`entities_id`, `name`, `comment`, `locations_id`, `address`, `postcode`, `town`, `state`, `country`, `building`, `room`, `latitude`, `longitude`, `altitude`, `level`, `completename`, `date_creation`, `date_mod`) VALUES ('0', 'Salle B101', '', '0', '', '', '', '', '', '', '', '', '', '', '1', 'Salle B101', '2026-02-24 16:17:30', '2026-02-24 16:17:30')
+  Error: Duplicate entry '0-0-Salle B101' for key 'unicity'
+  Backtrace :
+  src\DBmysql.php:1319                               
+  src\CommonDBTM.php:722                             DBmysql->insert()
+  src\CommonDBTM.php:1317                            CommonDBTM->addToDB()
+  front\dropdown.common.form.php:62                  CommonDBTM->add()
+  front\location.form.php:39                         include()
+  {"user":"2@DESKTOP-CJMBJTV"} 
+[2026-02-24 16:17:48] glpisqllog.ERROR: DBmysql::query() in C:\xampp1\htdocs\unh_glpi\src\DBmysql.php line 370
+  *** MySQL query error:
+  SQL: INSERT INTO `glpi_states` (`entities_id`, `name`, `comment`, `states_id`, `is_visible_computer`, `is_visible_monitor`, `is_visible_networkequipment`, `is_visible_peripheral`, `is_visible_phone`, `is_visible_printer`, `is_visible_softwarelicense`, `is_visible_certificate`, `is_visible_enclosure`, `is_visible_pdu`, `is_visible_line`, `is_visible_rack`, `is_visible_softwareversion`, `is_visible_cluster`, `is_visible_contract`, `is_visible_appliance`, `is_visible_databaseinstance`, `is_visible_cable`, `is_visible_passivedcequipment`, `level`, `completename`, `date_creation`, `date_mod`) VALUES ('0', 'En service', '', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'En service', '2026-02-24 16:17:48', '2026-02-24 16:17:48')
+  Error: Duplicate entry '0-En service' for key 'unicity'
+  Backtrace :
+  src\DBmysql.php:1319                               
+  src\CommonDBTM.php:722                             DBmysql->insert()
+  src\CommonDBTM.php:1317                            CommonDBTM->addToDB()
+  front\dropdown.common.form.php:62                  CommonDBTM->add()
+  front\state.form.php:39                            include()
+  {"user":"2@DESKTOP-CJMBJTV"} 
+[2026-02-24 19:37:04] glpisqllog.ERROR: DBmysql::query() in C:\xampp1\htdocs\unh_glpi\src\DBmysql.php line 370
+  *** MySQL query error:
+  SQL: SELECT COUNT(*) AS count FROM `glpi_users` LEFT JOIN `glpi_profiles_users` ON (`glpi_profiles_users`.`users_id` = `glpi_users`.`id`) WHERE `glpi_users`.`id` = '2' AND `glpi_users`.`is_active` = '1' AND `glpi_users`.`is_deleted` = '0' AND `glpi_profiles_users`.`profiles_id` = '4' AND (`glpi_profiles_users`.`entities_id` = '0')
+  Error: Got error 194 "Tablespace is missing for a table" from storage engine InnoDB
+  Backtrace :
+  src\DBmysqlIterator.php:112                        
+  src\DBmysql.php:1056                               DBmysqlIterator->execute()
+  src\Session.php:898                                DBmysql->request()
+  src\Session.php:1034                               Session::checkValidSessionId()
+  front\plugin.php:38                                Session::checkRight()
+  {"user":"2@DESKTOP-CJMBJTV"} 
+[2026-02-24 19:37:05] glpisqllog.ERROR: DBmysql::query() in C:\xampp1\htdocs\unh_glpi\src\DBmysql.php line 370
+  *** MySQL query error:
+  SQL: SELECT * FROM `glpi_users` WHERE `glpi_users`.`id` = '2' LIMIT 1
+  Error: Got error 194 "Tablespace is missing for a table" from storage engine InnoDB
+  Backtrace :
+  src\DBmysqlIterator.php:112                        
+  src\DBmysql.php:1056                               DBmysqlIterator->execute()
+  src\CommonDBTM.php:302                             DBmysql->request()
+  src\CommonDBTM.php:5868                            CommonDBTM->getFromDB()
+  src\Html.php:2025                                  CommonDBTM::getById()
+  src\Html.php:1743                                  Html::getPageHeaderTplVars()
+  front\plugin.php:45                                Html::header()
+  {"user":"2@DESKTOP-CJMBJTV","mem_usage":"0.295\", 3.69Mio)"} 

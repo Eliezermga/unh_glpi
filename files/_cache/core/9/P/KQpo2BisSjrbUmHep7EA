@@ -1,0 +1,37 @@
+1771942527
+8afb40adb3f09ec9502c933f40679dd5e8f1f1cf
+a:1:{s:61:"bn_count_SoftwareLicense_e755fd06-283e-4479-ba35-2d548f8f8a90";s:1196:"      <style>
+         #bn_1949363721 {
+            background-color: #27ab3c;
+            color: #b1edba;
+         }
+
+         #bn_1949363721:hover {
+            background-color: #49d55f;
+            border: 1px solid #87e496;
+         }
+
+         .theme-dark #bn_1949363721 {
+            background-color: #b1edba;
+            color: #27ab3c;
+         }
+
+         .theme-dark #bn_1949363721:hover {
+            background-color: #49d55f;
+            color: #b1edba;
+            border: 1px solid #87e496;
+         }
+      </style>
+      <a href='/unh_glpi/front/softwarelicense.php?reset=reset'
+         id="bn_1949363721"
+         class="card big-number  filter-dates filter-dates_mod filter-location filter-manufacturer filter-group_tech filter-user_tech filter-state"
+         title="">
+         <span class="content">            <span title="0"
+                  class="formatted-number"
+                  data-precision='0'>
+               <span class="number">0</span>
+               <span class="suffix"></span>
+            </span></span>
+         <div class="label" title="Licence">Licence</div>
+         <i class="main-icon ti ti-key"></i>
+      </a>";}
