@@ -168,8 +168,7 @@ public function showForm($ID, $options = []) {
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('Adresse') . "</td>";
         echo "<td colspan='3'>";
-        echo "<textarea name='address' cols='45' rows='2'>" . ($this->fields['address'] ?? '') . "</textarea>";
-        echo "</td>";
+        echo "<textarea name='address' cols='45' rows='2'>" . htmlspecialchars($this->fields['address'] ?? '', ENT_QUOTES, 'UTF-8') . "</textarea>";
         echo "</tr>";
 
         // --- SECTION 2 : VOS CHAMPS SPÉCIFIQUES UNH ---
@@ -457,7 +456,7 @@ public function showForm($ID, $options = []) {
     {
         global $CFG_GLPI;
 
-        $ret = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        $ret .= htmlspecialchars($this->fields["name"] ?? '', ENT_QUOTES, 'UTF-8');
 
         if ($withname) {
             $ret .= $this->fields["name"];
@@ -655,9 +654,9 @@ public function showForm($ID, $options = []) {
                         echo ((isset($data['is_deleted']) && $data['is_deleted']) ? " tab_bg_2_2'" : "'") . ">";
                         echo $name . "</td>";
                         echo "<td class='center'>" .
-                           (isset($data["serial"]) ? "" . $data["serial"] . "" : "-") . "</td>";
+                           (isset($data["serial"]) ? htmlspecialchars($data["serial"], ENT_QUOTES, 'UTF-8') : "-") . "</td>";
                         echo "<td class='center'>" .
-                           (isset($data["otherserial"]) ? "" . $data["otherserial"] . "" : "-") . "</td>";
+                           (isset($data["otherserial"]) ? htmlspecialchars($data["otherserial"], ENT_QUOTES, 'UTF-8') : "-") . "</td>";
                         echo "</tr>";
                     }
                 }
@@ -676,7 +675,7 @@ public function showForm($ID, $options = []) {
      *
      * @since 9.5
      *
-     * @param $email boolean : also display name ? (false by default)
+     * @param string $email L'adresse e-mail à rechercher.
      **/
     public static function getSuppliersByEmail($email)
     {
