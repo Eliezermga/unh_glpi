@@ -1432,7 +1432,7 @@ HTML;
                 'icon'  => 'ti ti-shield-check'
             ],
             'config' => [
-                'title' => __('Setup'),
+                'title' => __('Configuration UNH'),
                 'types' => [
                     'CommonDropdown', 'CommonDevice', 'Notification',
                     // 'SLM', // Niveaux de services - masqué
