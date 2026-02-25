@@ -59,7 +59,7 @@
                 <div class="card-body">
                     {% if can_create %}
                         <form method="post" action="">
-                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
+                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token(true)) }}">
                             <input type="hidden" name="action" value="create_entity">
 
                             <div class="row">

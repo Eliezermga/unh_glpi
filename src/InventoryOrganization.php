@@ -105,27 +105,27 @@ class InventoryOrganization extends CommonGLPI
             ],
             'options'  => [
                 'entity' => [
-                    'title' => __('Entités'),
+                    'title' => __('Entities'),
                     'page'  => '/front/inventoryorganization.entity.php',
                     'icon'  => 'ti ti-building',
                 ],
                 'location' => [
-                    'title' => __('Lieux'),
+                    'title' => __('Locations'),
                     'page'  => '/front/inventoryorganization.location.php',
                     'icon'  => 'ti ti-map-pin',
                 ],
                 'type' => [
-                    'title' => __('Types de matériel'),
+                    'title' => __('Asset types'),
                     'page'  => '/front/inventoryorganization.type.php',
                     'icon'  => 'ti ti-devices',
                 ],
                 'labeling' => [
-                    'title' => __('Étiquetage'),
+                    'title' => __('Labeling'),
                     'page'  => '/front/inventoryorganization.labeling.php',
                     'icon'  => 'ti ti-tag',
                 ],
                 'coherence' => [
-                    'title' => __('Vérification de cohérence'),
+                    'title' => __('Coherence check'),
                     'page'  => '/front/inventoryorganization.coherence.php',
                     'icon'  => 'ti ti-checkbox',
                 ],

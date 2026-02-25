@@ -26455,3 +26455,59 @@ msgstr "Go to Assistance > Tickets, open your ticket, and review status and time
 #: src/KnowbaseItem.php
 msgid "faq.static.answer.useful_keyboard_shortcuts"
 msgstr "Common shortcuts: Ctrl+C copy, Ctrl+V paste, Ctrl+S save, Alt+Tab switch window."
+
+
+msgid "Entities"
+msgstr "Entities"
+
+
+msgid "Locations"
+msgstr "Locations"
+
+
+msgid "Asset types"
+msgstr "Asset types"
+
+
+msgid "Labeling"
+msgstr "Labeling"
+
+
+msgid "Coherence check"
+msgstr "Coherence check"
+
+
+msgid "Quick actions"
+msgstr "Quick actions"
+
+
+msgid "Total assets"
+msgstr "Total assets"
+
+
+msgid "Recent coherence issues"
+msgstr "Recent coherence issues"
+
+
+msgid "Asset type"
+msgstr "Asset type"
+
+
+msgid "Everything is in order"
+msgstr "Everything is in order"
+
+
+msgid "No coherence issues detected."
+msgstr "No coherence issues detected."
+
+
+msgid "Computers"
+msgstr "Computers"
+
+
+msgid "Printers"
+msgstr "Printers"
+
+
+msgid "Issues"
+msgstr "Issues"

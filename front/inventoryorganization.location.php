@@ -25,7 +25,6 @@ $error_message = '';
 
 // Handle location creation directly on this page
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
 
     if ($action === 'create_location') {
@@ -119,7 +118,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'active_entity'  => Session::getActiveEntity(),
     'success'        => $success,
     'error_message'  => $error_message,
-    'csrf_token_value' => Session::getNewCSRFToken(),
+    'csrf_token_value' => Session::getNewCSRFToken(true),
 ]);
 
 Html::footer();

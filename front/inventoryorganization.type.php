@@ -45,7 +45,6 @@ $error_message = '';
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
     
     if ($action === 'create_type' && InventoryOrganization::canCreate()) {
@@ -145,7 +144,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'success'         => $success,
     'error_message'   => $error_message,
     'can_create'      => InventoryOrganization::canCreate(),
-    'csrf_token_value' => Session::getNewCSRFToken(),
+    'csrf_token_value' => Session::getNewCSRFToken(true),
 ]);
 
 Html::footer();

@@ -25,7 +25,6 @@ $error_message = '';
 
 // Handle entity creation directly on this page
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
 
     if ($action === 'create_entity') {
@@ -81,6 +80,7 @@ function flattenEntities($entities, $level = 0) {
 
 $flat_entities = flattenEntities($entities);
 $active_entity = (int) Session::getActiveEntity();
+$csrf_token_value = Session::getNewCSRFToken(true);
 
 // Display header
 Html::header(
@@ -98,7 +98,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'success'     => $success,
     'error_message' => $error_message,
     'active_entity' => $active_entity,
-    'csrf_token_value' => Session::getNewCSRFToken(),
+    'csrf_token_value' => $csrf_token_value,
 ]);
 
 Html::footer();

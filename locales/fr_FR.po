@@ -27089,3 +27089,39 @@ msgstr "Allez dans Assistance > Tickets, ouvrez votre ticket, puis consultez le 
 #: src/KnowbaseItem.php
 msgid "faq.static.answer.useful_keyboard_shortcuts"
 msgstr "Raccourcis utiles: Ctrl+C copier, Ctrl+V coller, Ctrl+S sauvegarder, Alt+Tab changer de fenetre."
+
+
+msgid "Quick actions"
+msgstr "Actions rapides"
+
+
+msgid "Total assets"
+msgstr "Total actifs"
+
+
+msgid "Recent coherence issues"
+msgstr "Problèmes récents de cohérence"
+
+
+msgid "Asset type"
+msgstr "Type d'actif"
+
+
+msgid "Everything is in order"
+msgstr "Tout est en ordre"
+
+
+msgid "No coherence issues detected."
+msgstr "Aucun problème de cohérence détecté."
+
+
+msgid "Computers"
+msgstr "Ordinateurs"
+
+
+msgid "Printers"
+msgstr "Imprimantes"
+
+
+msgid "Issues"
+msgstr "Problèmes"

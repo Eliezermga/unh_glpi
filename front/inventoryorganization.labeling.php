@@ -48,7 +48,6 @@ $config = InventoryOrganization::getLabelingConfig();
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
     
         if ($action === 'save_config' && InventoryOrganization::canCreate()) {
@@ -112,7 +111,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'success'        => $success,
     'error_message'  => $error_message,
     'can_create'     => InventoryOrganization::canCreate(),
-    'csrf_token_value' => Session::getNewCSRFToken(),
+    'csrf_token_value' => Session::getNewCSRFToken(true),
     'asset_types'    => [
         'computer'   => __('Ordinateur'),
         'laptop'     => __('Ordinateur portable'),

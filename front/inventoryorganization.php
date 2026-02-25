@@ -20,10 +20,6 @@ if (!InventoryOrganization::canView()) {
     Html::displayRightError();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
-}
-
 $summary = InventoryOrganization::getSummary();
 
 Html::header(
