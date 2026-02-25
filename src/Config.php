@@ -607,10 +607,7 @@ class Config extends CommonDBTM
         Html::showToolTip(__('Synchronisation automatique avec l\'annuaire universitaire (LDAP/Active Directory)'));
         echo "</td><td width='20%'>";
         Dropdown::showYesNo("is_users_auto_add", $CFG_GLPI["is_users_auto_add"]);
-        echo "</td><td width='30%'>" . __('Add a user without accreditation from a LDAP directory') .
-           "</td><td width='20%'>";
-        Dropdown::showYesNo("use_noright_users_add", $CFG_GLPI["use_noright_users_add"]);
-        echo "</td></tr>";
+        echo "</td><td colspan='2'></td></tr>";
 
         echo "<tr class='tab_bg_2'>";
         echo "<td> " . __('Action when a user is deleted from the LDAP directory');
@@ -620,11 +617,6 @@ class Config extends CommonDBTM
         echo "</td><td> " . __('Action when a user is restored in the LDAP directory') . "</td><td>";
         AuthLDAP::dropdownUserRestoredActions($CFG_GLPI["user_restored_ldap"]);
         echo "</td></tr>";
-
-        echo "<tr class='tab_bg_2'>";
-        echo "<td> " . __('GLPI server time zone') . "</td><td>";
-        Dropdown::showGMT("time_offset", $CFG_GLPI["time_offset"]);
-        echo "</td><td></td></tr>";
 
         echo "<tr class='tab_bg_2'>";
         echo "<td colspan='4' class='center'>";
