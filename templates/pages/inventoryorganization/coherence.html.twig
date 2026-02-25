@@ -184,7 +184,7 @@
                                 <td>
                                     <span class="text-muted">{{ issue_types[issue.type]|default(issue.type) }}</span>
                                 </td>
-                                <td>{{ issue.message|raw }}</td>
+                                <td>{{ issue.message }}</td>
                                 <td>{{ issue.asset_type|default('-') }}</td>
                                 <td>
                                     {% if issue.asset_name is defined and issue.asset_name %}

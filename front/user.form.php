@@ -1,4 +1,9 @@
 <?php
+/**
+ * UNH GLPI - User Form
+ * Correction : suppression de l'injection JS fragile,
+ * ajout de Session::checkCSRF() et Event::log()
+ */
 
 use Glpi\Event;
 
@@ -12,64 +17,74 @@ $user      = new User();
 $groupuser = new Group_User();
 
 if (isset($_POST["add"])) {
+    // 🔒 CSRF
+    Session::checkCSRF($_POST);
     $user->check(-1, CREATE, $_POST);
-    $user->add($_POST);
+    $newid = $user->add($_POST);
+
+    // 📋 AUDIT LOG
+    if ($newid) {
+        Event::log(
+            $newid,
+            'users',
+            4,
+            'UNH User Management',
+            sprintf(__('%s added user #%d'), $_SESSION['glpiname'], $newid)
+        );
+    }
     Html::redirect("user.php");
 
-} else if (isset($_POST["update"])) {
+} elseif (isset($_POST["update"])) {
+    // 🔒 CSRF
+    Session::checkCSRF($_POST);
     $user->check($_POST['id'], UPDATE);
     $user->update($_POST);
+
+    // 📋 AUDIT LOG
+    Event::log(
+        $_POST['id'],
+        'users',
+        4,
+        'UNH User Management',
+        sprintf(__('%s updated user #%d'), $_SESSION['glpiname'], $_POST['id'])
+    );
     Html::redirect("user.php");
 
-} else if (isset($_POST["delete"])) {
+} elseif (isset($_POST["delete"])) {
+    // 🔒 CSRF
+    Session::checkCSRF($_POST);
     $user->check($_POST['id'], DELETE);
     $user->delete($_POST);
+
+    // 📋 AUDIT LOG
+    Event::log(
+        $_POST['id'],
+        'users',
+        4,
+        'UNH User Management',
+        sprintf(__('%s deleted user #%d'), $_SESSION['glpiname'], $_POST['id'])
+    );
     Html::redirect("user.php");
 
 } else {
-
     $menus = ["admin", "user"];
 
-    Html::header(User::getTypeName(Session::getPluralNumber()), '', $menus[0], $menus[1]);
+    Html::header(
+        User::getTypeName(Session::getPluralNumber()),
+        '',
+        $menus[0],
+        $menus[1]
+    );
 
     User::displayFullPageForItem($_GET["id"], $menus, [
         'formoptions' => "data-track-changes=true"
     ]);
 
-    echo "
-    <div style='margin:15px'>
-        <a class='btn btn-secondary' href='user.php'>⬅ Retour à la liste</a>
-    </div>
-    ";
+    echo "<div style='margin:15px'>
+        <a class='btn btn-secondary' href='user.php'>&#8592; " . __('Back to list') . "</a>
+    </div>";
 
     Html::footer();
 }
-?>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-   let table = document.querySelector("table.tab_cadre_fixe");
-
-   if(table){
-
-      let row = document.createElement("tr");
-
-      row.innerHTML = 
-         <td>Type d'utilisateur</td>
-         <td>
-            <select name="user_type" class="form-control">
-               <option value="">-- Choisir --</option>
-               <option value="Étudiant">Étudiant</option>
-               <option value="Enseignant">Enseignant</option>
-               <option value="Administratif">Administratif</option>
-               <option value="IT">IT</option>
-            </select>
-         </td>
-      ;
-
-      table.appendChild(row);
-   }
-
-});
-</script>
+// NOTE : Le champ user_type est géré directement dans src/User.php
+// via Dropdown::showFromArray() avec __() — NE PAS utiliser d'injection JS.

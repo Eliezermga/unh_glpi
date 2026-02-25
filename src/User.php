@@ -2491,27 +2491,27 @@ HTML;
         } else {
             echo "<tr class='tab_bg_1'><td colspan='2'></td></tr>";
         }
-        echo "<tr class='tab_bg_1'><td>Type d'utilisateur</td><td>";
-
-Dropdown::showFromArray(
-   'user_type',
-   [
-      '' => '-- Sélectionnez --',
-      'student' => 'Étudiant',
-      'teacher' => 'Enseignant',
-      'admin_staff' => 'Personnel administratif',
-      'tech_staff' => 'Technicien universitaire',
-      'external' => 'Invité externe',
-      'other' => 'Autre'
-   ],
-   [
-      'value' => $this->fields['user_type'] ?? '',
-      'width' => '100%'
-   ]
-);
-
-echo "</td></tr>\n";
-// ===================== FIN
+        // UNH - Champ type d'utilisateur (avec traductions correctes)
+        echo "<tr class='tab_bg_1'><td>" . __("Type d'utilisateur") . "</td><td>";
+        Dropdown::showFromArray(
+            'user_type',
+            [
+                ''            => __('-- Sélectionnez --'),
+                'student'     => __('Étudiant'),
+                'teacher'     => __('Enseignant'),
+                'admin_staff' => __('Personnel administratif'),
+                'tech_staff'  => __('Technicien universitaire'),
+                'external'    => __('Invité externe'),
+                'other'       => __('Autre')
+            ],
+            [
+                'value'   => $this->fields['user_type'] ?? '',
+                'width'   => '100%',
+                'display' => true,
+            ]
+        );
+        echo "</td></tr>\n";
+        // ===================== FIN
 
         $surnamerand = mt_rand();
         echo "<tr class='tab_bg_1'><td><label for='textfield_realname$surnamerand'>" . __('Surname') . "</label></td><td>";

@@ -65,7 +65,7 @@
                                     <select class="form-select" name="parent_id">
                                         <option value="0">{{ __('Aucun (niveau racine)') }}</option>
                                         {% for location in flat_locations %}
-                                            <option value="{{ location.id }}">{{ location.name|raw }}</option>
+                                            <option value="{{ location.id }}">{{ location.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -76,7 +76,7 @@
                                     <label class="form-label">{{ __('Entite') }}</label>
                                     <select class="form-select" name="entity_id">
                                         {% for entity in entities %}
-                                            <option value="{{ entity.id }}" {% if entity.id == active_entity %}selected{% endif %}>{{ entity.name|raw }}</option>
+                                            <option value="{{ entity.id }}" {% if entity.id == active_entity %}selected{% endif %}>{{ entity.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -174,7 +174,7 @@
                                     <tr>
                                         <td>
                                             <i class="ti ti-map-pin me-2 text-success"></i>
-                                            {{ location.name|raw }}
+                                            {{ location.name }}
                                         </td>
                                         <td class="text-end">
                                             <span class="badge bg-secondary">{{ location.asset_count }}</span>

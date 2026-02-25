@@ -308,6 +308,13 @@ class Profile extends CommonDBTM
 
     public function prepareInputForUpdate($input)
     {
+        // UNH - Validation et nettoyage du champ public_type
+        if (isset($input['public_type'])) {
+            $allowed = ['', 'student', 'teacher', 'admin_staff', 'tech_staff', 'external', 'other'];
+            if (!in_array($input['public_type'], $allowed)) {
+                $input['public_type'] = '';
+            }
+        }
 
         if (isset($input["_helpdesk_item_types"])) {
             if ((!isset($input["helpdesk_item_type"])) || (!is_array($input["helpdesk_item_type"]))) {
@@ -474,6 +481,13 @@ class Profile extends CommonDBTM
 
     public function prepareInputForAdd($input)
     {
+        // UNH - Validation et nettoyage du champ public_type
+        if (isset($input['public_type'])) {
+            $allowed = ['', 'student', 'teacher', 'admin_staff', 'tech_staff', 'external', 'other'];
+            if (!in_array($input['public_type'], $allowed)) {
+                $input['public_type'] = '';
+            }
+        }
 
         if (isset($input["helpdesk_item_type"])) {
             $input["helpdesk_item_type"] = exportArrayToDB($input["helpdesk_item_type"]);
@@ -774,17 +788,17 @@ class Profile extends CommonDBTM
         echo "</td></tr>\n";
 
 // =============== AJOUTEZ VOTRE CODE ICI ===============
-        echo "<tr class='tab_bg_1'><td>" . __('Type de public', 'university') . "</td><td>";
+        echo "<tr class='tab_bg_1'><td>" . __('Type de public') . "</td><td>";
         Dropdown::showFromArray(
         'public_type',
         [
-            ''                  => __('-- Sélectionnez --', 'university'),
-            'student'           => __('Étudiant', 'university'),
-            'teacher'           => __('Enseignant', 'university'),
-            'admin_staff'       => __('Personnel administratif', 'university'),
-            'tech_staff'        => __('Technicien universitaire', 'university'),
-            'external'          => __('Invité externe', 'university'),
-            'other'             => __('Autre', 'university')
+            ''                  => __('-- Sélectionnez --'),
+            'student'           => __('Étudiant'),
+            'teacher'           => __('Enseignant'),
+            'admin_staff'       => __('Personnel administratif'),
+            'tech_staff'        => __('Technicien universitaire'),
+            'external'          => __('Invité externe'),
+            'other'             => __('Autre')
         ],
         [
             'value'     => $this->fields['public_type'] ?? '',

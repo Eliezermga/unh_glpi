@@ -233,10 +233,10 @@ class Group extends CommonTreeDropdown
         echo "<td>";
         echo Html::input('name', ['value' => $this->fields['name']]);
         echo "</td>";
-        echo "<td rowspan='12' class='middle'>" . __('Comments') . "</td>";
-        echo "<td class='middle' rowspan='12'>";
-        echo "<textarea class='form-control' name='comment' >" . $this->fields["comment"] . "</textarea>";
-        echo "</td></tr>";
+        //echo "<td rowspan='12' class='middle'>" . __('Comments') . "</td>";
+        //echo "<td class='middle' rowspan='12'>";
+       // echo "<textarea class='form-control' name='comment' >" . $this->fields["comment"] . "</textarea>";
+       // echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('As child of') . "</td><td>";
@@ -292,9 +292,9 @@ class Group extends CommonTreeDropdown
         ]);
         echo "</td></tr>";*/
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td class='subheader' colspan='2'>" . __('Visible in a ticket');
-        echo "</td></tr>";
+    //echo "<tr class='tab_bg_1'>";
+        //echo "<td class='subheader' colspan='2'>" . __('Visible in a ticket');
+       // echo "</td></tr>";
 
        /* echo "<tr class='tab_bg_1'>";
         echo "<td>" . _n('Requester', 'Requesters', 1) . "</td>";
@@ -324,9 +324,9 @@ class Group extends CommonTreeDropdown
         Dropdown::showYesNo('is_notify', $this->fields['is_notify']);
         echo "</td></tr>";
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td class='subheader' colspan='2'>" . __('Visible in a project');
-        echo "</td></tr>";
+       // echo "<tr class='tab_bg_1'>";
+       // echo "<td class='subheader' colspan='2'>" . __('Visible in a project');
+       // echo "</td></tr>";
 
         /*echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('Can be manager') . "</td>";
@@ -334,9 +334,9 @@ class Group extends CommonTreeDropdown
         Dropdown::showYesNo('is_manager', $this->fields['is_manager']);
         echo "</td></tr>"; */
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td class='subheader' colspan='2'>" . __('Can contain');
-        echo "</td></tr>";
+       // echo "<tr class='tab_bg_1'>";
+        //echo "<td class='subheader' colspan='2'>" . __('Can contain');
+       // echo "</td></tr>";
 
        /* echo "<tr class='tab_bg_1'>";
         echo "<td>" . _n('Item', 'Items', Session::getPluralNumber()) . "</td>";
@@ -1145,4 +1145,29 @@ class Group extends CommonTreeDropdown
 
         return $this->getLink();
     }
+
+
+    // ---------------------------
+    // Custom fields added
+    // ---------------------------
+
+    protected $group_supervisor;
+    protected $group_type;
+
+    public function setGroupSupervisor($supervisor) {
+        $this->group_supervisor = $supervisor;
+    }
+
+    public function getGroupSupervisor() {
+        return $this->group_supervisor;
+    }
+
+    public function setGroupType($type) {
+        $this->group_type = $type;
+    }
+
+    public function getGroupType() {
+        return $this->group_type;
+    }
+
 }

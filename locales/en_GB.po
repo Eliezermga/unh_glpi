@@ -26142,3 +26142,18 @@ msgstr "you may have to add a network"
 #: templates/layout/parts/profile_selector.html.twig
 msgid "⌥ (option) + ⌘ (command) + E"
 msgstr "⌥ (option) + ⌘ (command) + E"
+
+msgid "Type de public"
+msgstr "Audience type"
+
+msgid "-- Sélectionnez --"
+msgstr "-- Select --"
+
+msgid "Technicien universitaire"
+msgstr "University technician"
+
+msgid "Invité externe"
+msgstr "External guest"
+
+msgid "Personnel administratif"
+msgstr "Administrative staff"
