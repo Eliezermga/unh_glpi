@@ -17710,6 +17710,14 @@ msgstr[2] "Rappels du planning"
 msgid "Planning start date"
 msgstr "Date de début de la planification"
 
+#: src/Config.php:1035
+msgid "Langue par défaut pour étudiants, personnel et enseignants UNH (recommandé : français)."
+msgstr "Langue par défaut pour étudiants, personnel et enseignants UNH (recommandé : français)."
+
+#: src/Config.php:1047
+msgid "Format de date par défaut pour l'interface UNH (ex. JJ/MM/AAAA)."
+msgstr "Format de date par défaut pour l'interface UNH (ex. JJ/MM/AAAA)."
+
 #: src/Config.php:883
 msgid "Planning work days"
 msgstr "Planification des journées ouvrées"
