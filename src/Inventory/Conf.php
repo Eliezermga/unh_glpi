@@ -565,6 +565,11 @@ class Conf extends CommonGLPI
         echo "</td>";
         echo "</tr>";
 
+        // ===== AMÉLIORATION OPTIONNELLE MASQUÉE =====
+        // Ces configurations avancées réseau sont optionnelles
+        // et non critiques pour un projet académique simple
+
+        /*
         echo "<tr class='tab_bg_1'>";
         echo "<th colspan='4'>";
         echo __('Related configurations');
@@ -586,6 +591,7 @@ class Conf extends CommonGLPI
         }
         echo "</tr>";
 
+        // Validation VLAN / Sous-réseaux (optionnel)
         echo "<tr class='tab_bg_1'>";
         echo "<td>";
         echo sprintf(
@@ -595,6 +601,7 @@ class Conf extends CommonGLPI
         );
         echo "</td>";
         echo "</tr>";
+        */
 
         echo "<tr class='tab_bg_1'>";
         echo "<th colspan='4'>";

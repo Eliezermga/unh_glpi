@@ -447,12 +447,16 @@
                      {% endif %}
 
                      {% if item.isField('otherserial') %}
+                        {%- set otherserial_options = field_options -%}
+                        {%- if item_type == 'Computer' -%}
+                           {%- set otherserial_options = field_options|merge({'required': true}) -%}
+                        {%- endif -%}
                         {{ fields.autoNameField(
                            'otherserial',
                            item,
                            __('Inventory number'),
                            withtemplate,
-                           field_options
+                           otherserial_options
                         ) }}
                      {% endif %}
 
