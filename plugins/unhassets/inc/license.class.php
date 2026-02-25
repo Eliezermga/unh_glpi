@@ -154,6 +154,7 @@ class PluginUnhassetsLicense extends CommonDBTM {
 
     public function rawSearchOptions() {
 
+    
         return [
 
             ['id'=>5201,'table'=>$this->getTable(),'field'=>'name','name'=>__('Name','unhassets'),'datatype'=>'itemlink','massiveaction'=>false],
