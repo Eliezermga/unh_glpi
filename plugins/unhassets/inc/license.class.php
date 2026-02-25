@@ -1,173 +1,268 @@
 <?php
 
 if (!defined('GLPI_ROOT')) {
-    die("Sorry. You can't access this file directly");
+   die("Sorry. You can't access this file directly");
 }
 
 class PluginUnhassetsLicense extends CommonDBTM {
 
-    static $rightname = 'plugin_unhassets';
-    
-    static function getTypeName($nb = 0) {
-        return _n('Software License', 'Software Licenses', $nb, 'unhassets');
-    }
+   static $rightname = 'plugin_unhassets';
 
-    public static function getTable($classname = null) {
-        return 'glpi_plugin_unhassets_licenses';
-    }
+   static function getTypeName($nb = 0) {
+      return _n('Licence', 'Licences', $nb, 'unhassets');
+   }
 
-    public static function getSearchURL($full = true) {
-        return Plugin::getWebDir('unhassets', $full) . "/front/license.php";
-    }
+   public static function getTable($classname = null) {
+      return 'glpi_plugin_unhassets_licenses';
+   }
 
-    public static function getFormURL($full = true) {
-        return Plugin::getWebDir('unhassets', $full) . "/front/license.form.php";
-    }
+   public static function getSearchURL($full = true) {
+      return Plugin::getWebDir('unhassets', $full) . "/front/license.php";
+   }
 
-    static function getSearchOptionsToAdd($itemtype = null) {
-        return [];
-    }
+   public static function getFormURL($full = true) {
+      return Plugin::getWebDir('unhassets', $full) . "/front/license.form.php";
+   }
 
-    function showForm($ID, $options = []) {
+   // --- DROITS ---
 
-        $this->initForm($ID, $options);
-        $this->showFormHeader($options);
+   public static function canCreate() {
+      return Session::haveRight(self::$rightname, CREATE)
+         || Session::haveRight(self::$rightname, UPDATE)
+         || Session::haveRight('config', UPDATE);
+   }
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('License Name', 'unhassets')."</td>";
-        echo "<td><input type='text' name='name' value='".($this->fields['name'] ?? '')."' size='40'></td>";
+   public static function canUpdate() {
+      return Session::haveRight(self::$rightname, UPDATE)
+         || Session::haveRight('config', UPDATE);
+   }
 
-        echo "<td>".__('Software', 'unhassets')."</td>";
-        echo "<td><input type='text' name='software_name' value='".($this->fields['software_name'] ?? '')."' size='40'></td>";
-        echo "</tr>";
+   public static function canDelete() {
+      return Session::haveRight(self::$rightname, DELETE)
+         || Session::haveRight(self::$rightname, UPDATE)
+         || Session::haveRight('config', UPDATE);
+   }
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('Version', 'unhassets')."</td>";
-        echo "<td><input type='text' name='version' value='".($this->fields['version'] ?? '')."' size='20'></td>";
+   static function canView() {
+      return Session::haveRight(self::$rightname, READ)
+         || Session::haveRight('config', READ);
+   }
 
-        echo "<td>".__('License Type', 'unhassets')."</td>";
-        echo "<td>";
+   function defineTabs($options = []) {
+      $ong = [];
+      $this->addDefaultFormTab($ong);
+      $this->addStandardTab('Log', $ong, $options);
+      return $ong;
+   }
 
-        $types = [
-            'perpetual'    => __('Perpetual', 'unhassets'),
-            'subscription' => __('Subscription', 'unhassets'),
-            'trial'        => __('Trial', 'unhassets'),
-            'volume'       => __('Volume', 'unhassets'),
-            'oem'          => __('OEM', 'unhassets')
-        ];
+   // --- LOGIQUE MÉTIER ET STATUTS ---
 
-        Dropdown::showFromArray('license_type', $types, [
-            'value' => $this->fields['license_type'] ?? ''
-        ]);
+   public static function getStatuses(): array {
+      return [
+         'active'    => __('Active', 'unhassets'),
+         'expired'   => __('Expirée', 'unhassets'),
+         'inactive'  => __('Inactive', 'unhassets'),
+         'validated' => __('Validée', 'unhassets'),
+      ];
+   }
 
-        echo "</td></tr>";
+   private function normalizeDate($date): string {
+      $date = trim((string)$date);
+      if ($date === '') {
+         return '';
+      }
+      $ts = strtotime($date);
+      return ($ts === false) ? '' : date('Y-m-d', $ts);
+   }
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('License Key', 'unhassets')."</td>";
-        echo "<td><input type='text' name='license_key' value='".($this->fields['license_key'] ?? '')."' size='40'></td>";
+   private function computeStatusFromExpiration(string $expiration_date): ?string {
+      if ($expiration_date === '') {
+         return null;
+      }
+      $exp = strtotime($expiration_date . ' 23:59:59');
+      if ($exp !== false && $exp < time()) {
+         return 'expired';
+      }
+      return null;
+   }
 
-        echo "<td>".__('Supplier', 'unhassets')."</td>";
-        echo "<td><input type='text' name='supplier' value='".($this->fields['supplier'] ?? '')."' size='40'></td>";
-        echo "</tr>";
+   /**
+    * Centralise les règles métiers et corrige l'erreur Deprecated de GLPI 10
+    */
+   private function validateBusinessLogic(array $input): array|false {
+      
+      // 1. Correction Deprecated : Nettoyage conforme GLPI 10
+      if (isset($input['comment'])) {
+         $input['comment'] = \Glpi\RichText\RichText::getSafeHtml($input['comment']);
+      }
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('Purchase Date', 'unhassets')."</td>";
-        echo "<td>";
-        Html::showDateField('purchase_date', [
-            'value' => $this->fields['purchase_date'] ?? ''
-        ]);
-        echo "</td>";
+      // 2. Gestion des dates
+      $purchase_date   = $this->normalizeDate($input['purchase_date'] ?? ($this->fields['purchase_date'] ?? ''));
+      $expiration_date = $this->normalizeDate($input['expiration_date'] ?? ($this->fields['expiration_date'] ?? ''));
 
-        echo "<td>".__('Expiration Date', 'unhassets')."</td>";
-        echo "<td>";
-        Html::showDateField('expiration_date', [
-            'value' => $this->fields['expiration_date'] ?? ''
-        ]);
+      if (array_key_exists('purchase_date', $input)) $input['purchase_date'] = $purchase_date;
+      if (array_key_exists('expiration_date', $input)) $input['expiration_date'] = $expiration_date;
 
-        if (!empty($this->fields['expiration_date'])) {
-            $exp_date  = strtotime($this->fields['expiration_date']);
-            $today     = time();
-            $days_left = floor(($exp_date - $today) / 86400);
+      if ($purchase_date !== '' && $expiration_date !== '') {
+         if (strtotime($purchase_date) >= strtotime($expiration_date)) {
+            Session::addMessageAfterRedirect(__('La date d’achat doit être antérieure à la date d’expiration.', 'unhassets'), false, ERROR);
+            return false;
+         }
+      }
 
-            if ($days_left <= 30 && $days_left > 0) {
-                echo " <span style='color: orange;'>";
-                echo sprintf(__('Expiring in %d days', 'unhassets'), $days_left);
-                echo "</span>";
-            } elseif ($days_left <= 0) {
-                echo " <span style='color: red; font-weight: bold;'>";
-                echo __('EXPIRED', 'unhassets');
-                echo "</span>";
-            }
-        }
+      // 3. Quotas
+      $total = isset($input['number_licenses']) ? (int)$input['number_licenses'] : (int)($this->fields['number_licenses'] ?? 1);
+      $used  = isset($input['used_licenses']) ? (int)$input['used_licenses'] : (int)($this->fields['used_licenses'] ?? 0);
 
-        echo "</td></tr>";
+      if ($total > 0 && $used > $total) {
+         Session::addMessageAfterRedirect(__('Le nombre de licences utilisées ne peut pas dépasser le total.', 'unhassets'), false, ERROR);
+         return false;
+      }
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('Number of Licenses', 'unhassets')."</td>";
-        echo "<td><input type='number' name='number_licenses' value='".($this->fields['number_licenses'] ?? 1)."' min='1'></td>";
+      // 4. Statut automatique
+      $forced = $this->computeStatusFromExpiration($expiration_date);
+      if ($forced === 'expired') {
+         $input['status'] = 'expired';
+      }
 
-        echo "<td>".__('Used Licenses', 'unhassets')."</td>";
-        echo "<td><input type='number' name='used_licenses' value='".($this->fields['used_licenses'] ?? 0)."' min='0'>";
+      return $input;
+   }
 
-        if (isset($this->fields['number_licenses']) && isset($this->fields['used_licenses'])) {
-            $available = $this->fields['number_licenses'] - $this->fields['used_licenses'];
-            echo " <span style='margin-left:10px;'>";
-            echo sprintf(__('Available: %d', 'unhassets'), $available);
-            echo "</span>";
-        }
+   // --- FORMULAIRE ---
 
-        echo "</td></tr>";
+   function showForm($ID, $options = []) {
+      $this->initForm($ID, $options);
+      $this->showFormHeader($options);
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('Department', 'unhassets')."</td>";
-        echo "<td><input type='text' name='department' value='".($this->fields['department'] ?? '')."' size='40'></td>";
+      // Nom et Logiciel
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Nom de la licence', 'unhassets')."</td>";
+      echo "<td><input type='text' name='name' value='".Html::cleanInputText($this->fields['name'] ?? '')."' size='40' required></td>";
+      echo "<td>".__('Logiciel', 'unhassets')."</td>";
+      echo "<td><input type='text' name='software_name' value='".Html::cleanInputText($this->fields['software_name'] ?? '')."' size='40'></td>";
+      echo "</tr>";
 
-        echo "<td>".__('Alert Threshold (days)', 'unhassets')."</td>";
-        echo "<td><input type='number' name='alert_threshold' value='".($this->fields['alert_threshold'] ?? 30)."' min='1'></td>";
-        echo "</tr>";
+      // Version et Type
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Version', 'unhassets')."</td>";
+      echo "<td><input type='text' name='version' value='".Html::cleanInputText($this->fields['version'] ?? '')."' size='20'></td>";
+      echo "<td>".__('Type de licence', 'unhassets')."</td>";
+      echo "<td>";
+      $types = [
+         'perpetual'    => __('Perpétuelle', 'unhassets'),
+         'subscription' => __('Abonnement', 'unhassets'),
+         'trial'        => __('Essai', 'unhassets'),
+         'volume'       => __('Volume', 'unhassets'),
+         'oem'          => __('OEM', 'unhassets')
+      ];
+      Dropdown::showFromArray('license_type', $types, ['value' => $this->fields['license_type'] ?? '']);
+      echo "</td>";
+      echo "</tr>";
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('Status', 'unhassets')."</td>";
-        echo "<td>";
+      // Clé et Fournisseur
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Clé de licence', 'unhassets')."</td>";
+      echo "<td><input type='text' name='license_key' value='".Html::cleanInputText($this->fields['license_key'] ?? '')."' size='40'></td>";
+      echo "<td>".__('Fournisseur', 'unhassets')."</td>";
+      echo "<td><input type='text' name='supplier' value='".Html::cleanInputText($this->fields['supplier'] ?? '')."' size='40'></td>";
+      echo "</tr>";
 
-        $statuses = [
-            'active'   => __('Active', 'unhassets'),
-            'expired'  => __('Expired', 'unhassets'),
-            'inactive' => __('Inactive', 'unhassets')
-        ];
+      // Dates
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Date d\'achat', 'unhassets')."</td>";
+      echo "<td>";
+      Html::showDateField('purchase_date', ['value' => $this->fields['purchase_date'] ?? '']);
+      echo "</td>";
+      echo "<td>".__('Date d\'expiration', 'unhassets')."</td>";
+      echo "<td>";
+      Html::showDateField('expiration_date', ['value' => $this->fields['expiration_date'] ?? '']);
+      
+      if (!empty($this->fields['expiration_date'])) {
+         $days = (int)floor((strtotime($this->fields['expiration_date']) - time()) / 86400);
+         if ($days <= 30 && $days > 0) echo " <span style='color:orange;'>Expire dans $days j</span>";
+         elseif ($days <= 0) echo " <span style='color:red;font-weight:bold;'>EXPIRÉE</span>";
+      }
+      echo "</td>";
+      echo "</tr>";
 
-        Dropdown::showFromArray('status', $statuses, [
-            'value' => $this->fields['status'] ?? 'active'
-        ]);
+      // Quotas
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Total licences', 'unhassets')."</td>";
+      echo "<td><input type='number' name='number_licenses' value='".(int)($this->fields['number_licenses'] ?? 1)."' min='1'></td>";
+      echo "<td>".__('Utilisées', 'unhassets')."</td>";
+      echo "<td><input type='number' name='used_licenses' value='".(int)($this->fields['used_licenses'] ?? 0)."' min='0'>";
+      if (isset($this->fields['number_licenses'])) {
+         $avail = (int)$this->fields['number_licenses'] - (int)($this->fields['used_licenses'] ?? 0);
+         echo " <small>(Dispo: $avail)</small>";
+      }
+      echo "</td>";
+      echo "</tr>";
 
-        echo "</td><td colspan='2'></td></tr>";
+      // Statut et Seuil
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Statut', 'unhassets')."</td>";
+      echo "<td>";
+      Dropdown::showFromArray('status', self::getStatuses(), ['value' => $this->fields['status'] ?? 'active']);
+      echo "</td>";
+      echo "<td>".__('Seuil d\'alerte (jours)', 'unhassets')."</td>";
+      echo "<td><input type='number' name='alert_threshold' value='".(int)($this->fields['alert_threshold'] ?? 30)."' min='1'></td>";
+      echo "</tr>";
 
-        echo "<tr class='tab_bg_1'>";
-        echo "<td>".__('Comment', 'unhassets')."</td>";
-        echo "<td colspan='3'><textarea name='comment' rows='4' cols='80'>".$this->fields['comment'] ?? ''."</textarea></td>";
-        echo "</tr>";
+      // Commentaire (FIX DEPRECATED)
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Commentaire', 'unhassets')."</td>";
+      echo "<td colspan='3'>";
+      echo "<textarea name='comment' rows='4' style='width:97%'>";
+      echo \Glpi\RichText\RichText::getSafeHtml($this->fields['comment'] ?? '');
+      echo "</textarea>";
+      echo "</td>";
+      echo "</tr>";
 
-        $this->showFormButtons($options);
+      // Zone bouton VALIDER
+      if ($ID > 0) {
+         echo "<tr class='tab_bg_2'><td colspan='4' class='center'>";
+         echo "<input type='hidden' name='id' value='".(int)$ID."'>";
+         echo "<input type='submit' name='validate' value=\"".__('Valider cette licence', 'unhassets')."\" class='vsubmit' style='background-color:#28a745;color:#fff;padding:8px 20px;border:none;border-radius:3px;cursor:pointer;font-weight:bold;'>";
+         echo "</td></tr>";
+      }
 
-        return true;
-    }
+      $this->showFormButtons($options);
+      return true;
+   }
 
-    public function rawSearchOptions() {
+   // --- PREPARE INPUT ---
 
-    
-        return [
+   function prepareInputForAdd($input) {
+      $input['entities_id'] = $_SESSION['glpiactive_entity'];
+      $input['date_creation'] = $_SESSION['glpi_currenttime'];
+      return $this->validateBusinessLogic($input);
+   }
 
-            ['id'=>5201,'table'=>$this->getTable(),'field'=>'name','name'=>__('Name','unhassets'),'datatype'=>'itemlink','massiveaction'=>false],
-            ['id'=>5202,'table'=>$this->getTable(),'field'=>'software_name','name'=>__('Software','unhassets'),'datatype'=>'string'],
-            ['id'=>5203,'table'=>$this->getTable(),'field'=>'version','name'=>__('Version','unhassets'),'datatype'=>'string'],
-            ['id'=>5204,'table'=>$this->getTable(),'field'=>'license_type','name'=>__('License Type','unhassets'),'datatype'=>'string'],
-            ['id'=>5205,'table'=>$this->getTable(),'field'=>'supplier','name'=>__('Supplier','unhassets'),'datatype'=>'string'],
-            ['id'=>5206,'table'=>$this->getTable(),'field'=>'expiration_date','name'=>__('Expiration Date','unhassets'),'datatype'=>'date'],
-            ['id'=>5207,'table'=>$this->getTable(),'field'=>'number_licenses','name'=>__('Number of Licenses','unhassets'),'datatype'=>'number'],
-            ['id'=>5208,'table'=>$this->getTable(),'field'=>'used_licenses','name'=>__('Used Licenses','unhassets'),'datatype'=>'number'],
-            ['id'=>5209,'table'=>$this->getTable(),'field'=>'status','name'=>__('Status','unhassets'),'datatype'=>'string'],
-            ['id'=>5210,'table'=>$this->getTable(),'field'=>'department','name'=>__('Department','unhassets'),'datatype'=>'string'],
-            ['id'=>5211,'table'=>$this->getTable(),'field'=>'comment','name'=>__('Comment','unhassets'),'datatype'=>'text'],
-        ];
-    }
+   function prepareInputForUpdate($input) {
+      $input['date_mod'] = $_SESSION['glpi_currenttime'];
+      return $this->validateBusinessLogic($input);
+   }
+
+   // --- RECHERCHE ET CRON ---
+
+   public function rawSearchOptions() {
+      $tab = [];
+      $tab[] = ['id' => '1', 'table' => $this->getTable(), 'field' => 'name', 'name' => __('Nom', 'unhassets'), 'datatype' => 'itemlink'];
+      $tab[] = ['id' => '2', 'table' => $this->getTable(), 'field' => 'software_name', 'name' => __('Logiciel', 'unhassets'), 'datatype' => 'string'];
+      $tab[] = ['id' => '3', 'table' => $this->getTable(), 'field' => 'status', 'name' => __('Statut', 'unhassets'), 'datatype' => 'string'];
+      $tab[] = ['id' => '4', 'table' => $this->getTable(), 'field' => 'expiration_date', 'name' => __('Expiration', 'unhassets'), 'datatype' => 'date'];
+      return $tab;
+   }
+
+   static function cronCheckExpiration($task) {
+      global $DB;
+      $cron_count = 0;
+      $iterator = $DB->request(['FROM' => 'glpi_plugin_unhassets_licenses', 'WHERE' => ['is_deleted' => 0, 'status' => 'active', 'expiration_date' => ['<', date('Y-m-d', strtotime('+30 days'))]]]);
+      foreach ($iterator as $data) {
+         Toolbox::logInFile('unhassets_licenses', "Alerte expiration : ".$data['name']."\n");
+         $cron_count++;
+      }
+      $task->addVolume($cron_count);
+      return 1;
+   }
 }

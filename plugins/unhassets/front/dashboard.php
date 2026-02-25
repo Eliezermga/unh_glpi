@@ -2,10 +2,12 @@
 
 include ('../../../inc/includes.php');
 
+// Vérification des droits
 Session::checkRight("plugin_unhassets", READ);
 
+// Header GLPI
 Html::header(
-    __('Dashboard', 'unhassets'),
+    __('Tableau de bord - UNH Assets', 'unhassets'),
     $_SERVER['PHP_SELF'],
     "unhassets",
     "dashboard"
@@ -13,260 +15,231 @@ Html::header(
 
 global $DB;
 
-echo "<style>
-.dashboard-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin: 20px 0;
-}
-.stat-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex: 1 1 calc(25% - 20px);
-    min-width: 200px;
-}
-.stat-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    color: #555;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-}
-.stat-card .stat-value {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 5px 0;
-}
-.stat-card .stat-value small {
-    font-size: 14px;
-    font-weight: normal;
-    color: #777;
-}
-.stat-card .stat-detail {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-.stat-item {
-    flex: 1 1 auto;
-    background: #f8f9fa;
-    border-radius: 20px;
-    padding: 5px 10px;
-    text-align: center;
-    font-size: 14px;
-}
-.text-green { color: #28a745; }
-.text-orange { color: #fd7e14; }
-.text-red { color: #dc3545; }
-.badge {
-    display: inline-block;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-}
-.badge-green { background: #d4edda; color: #155724; }
-.badge-orange { background: #fff3cd; color: #856404; }
-.badge-red { background: #f8d7da; color: #721c24; }
-.alert-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.alert-list li {
-    padding: 10px;
-    border-left: 4px solid;
-    margin-bottom: 8px;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-.export-buttons {
-    margin: 20px 0;
-    text-align: center;
-}
-.export-buttons a {
-    margin: 0 10px;
-}
-</style>";
+// --- 1. RÉCUPÉRATION DES DONNÉES (LOGIQUE DU CODE 2) ---
 
 // Statistiques par catégorie
-$stats_assets = [];
 $categories = ['PC', 'Imprimante', 'Projecteur', 'Serveur', 'Switch', 'Autre'];
+$stats_assets = [];
 foreach ($categories as $cat) {
-    $count = $DB->request([
+    $res = $DB->request([
         'COUNT' => 'cpt',
         'FROM'  => 'glpi_plugin_unhassets_assets',
-        'WHERE' => [
-            'asset_category' => $cat,
-            'is_deleted'     => 0
-        ]
-    ])->current()['cpt'];
-    $stats_assets[$cat] = $count;
+        'WHERE' => ['asset_category' => $cat, 'is_deleted' => 0]
+    ])->current();
+    $stats_assets[$cat] = $res['cpt'] ?? 0;
 }
 
-$status_stats = [];
+// Statistiques par statut
 $statuses = ['active', 'inactive', 'maintenance', 'broken', 'retired'];
+$status_stats = [];
 foreach ($statuses as $status) {
-    $count = $DB->request([
+    $res = $DB->request([
         'COUNT' => 'cpt',
         'FROM'  => 'glpi_plugin_unhassets_assets',
-        'WHERE' => [
-            'status'     => $status,
-            'is_deleted' => 0
-        ]
-    ])->current()['cpt'];
-    $status_stats[$status] = $count;
+        'WHERE' => ['status' => $status, 'is_deleted' => 0]
+    ])->current();
+    $status_stats[$status] = $res['cpt'] ?? 0;
 }
 
+// Labels traduits pour les statuts
+$status_labels = [
+    'active'      => __('Actif', 'unhassets'),
+    'inactive'    => __('Inactif', 'unhassets'),
+    'maintenance' => __('En maintenance', 'unhassets'),
+    'broken'      => __('En panne', 'unhassets'),
+    'retired'     => __('Retiré', 'unhassets')
+];
+
+// Réservations
 $today = date('Y-m-d');
-$reservations_pending = $DB->request([
-    'COUNT' => 'cpt',
-    'FROM'  => 'glpi_plugin_unhassets_reservations',
-    'WHERE' => ['status' => 'pending']
-])->current()['cpt'];
+$res_pending = $DB->request(['COUNT' => 'cpt', 'FROM' => 'glpi_plugin_unhassets_reservations', 'WHERE' => ['status' => 'pending']])->current();
+$res_today   = $DB->request(['COUNT' => 'cpt', 'FROM' => 'glpi_plugin_unhassets_reservations', 'WHERE' => ['reservation_date' => $today]])->current();
 
-$reservations_today = $DB->request([
-    'COUNT' => 'cpt',
-    'FROM'  => 'glpi_plugin_unhassets_reservations',
-    'WHERE' => [
-        'reservation_date' => $today,
-        'status'          => ['approved', 'pending']
-    ]
-])->current()['cpt'];
+// Licences
+$lic_total = $DB->request(['COUNT' => 'cpt', 'FROM' => 'glpi_plugin_unhassets_licenses', 'WHERE' => ['is_deleted' => 0]])->current();
+$lic_expired = $DB->request(['COUNT' => 'cpt', 'FROM' => 'glpi_plugin_unhassets_licenses', 'WHERE' => ['is_deleted' => 0, 'expiration_date' => ['<', $today]]])->current();
+$lic_warning = $DB->request(['COUNT' => 'cpt', 'FROM' => 'glpi_plugin_unhassets_licenses', 'WHERE' => ['is_deleted' => 0, 'expiration_date' => ['<=', date('Y-m-d', strtotime('+30 days'))], 'expiration_date' => ['>=', $today]]])->current();
 
-$licenses_total = $DB->request([
-    'COUNT' => 'cpt',
-    'FROM'  => 'glpi_plugin_unhassets_licenses',
-    'WHERE' => ['is_deleted' => 0]
-])->current()['cpt'];
+// --- 2. STYLE CSS ---
+echo "
+<style>
+    .unh-dashboard { padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f9; }
+    .unh-title { margin-bottom: 25px; color: #333; font-weight: 600; border-left: 5px solid #4a90e2; padding-left: 15px; }
+    
+    /* Grille de KPI */
+    .kpi-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+    .kpi-card { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-bottom: 4px solid #ddd; transition: transform 0.2s; }
+    .kpi-card:hover { transform: translateY(-5px); }
+    .kpi-card.blue { border-color: #4a90e2; }
+    .kpi-card.green { border-color: #2ecc71; }
+    .kpi-card.orange { border-color: #f39c12; }
+    .kpi-card.red { border-color: #e74c3c; }
+    .kpi-label { font-size: 14px; color: #7f8c8d; text-transform: uppercase; font-weight: bold; }
+    .kpi-value { font-size: 32px; font-weight: bold; color: #2c3e50; margin: 10px 0; }
+    
+    /* Grille Secondaire (Catégories) */
+    .section-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 30px; }
+    .dashboard-box { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .box-title { font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; font-weight: 600; }
+    
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .cat-item { padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center; border: 1px solid #eee; }
+    .cat-name { display: block; font-size: 13px; color: #7f8c8d; }
+    .cat-num { display: block; font-size: 20px; font-weight: bold; color: #2c3e50; }
 
-$licenses_expiring = $DB->request([
-    'COUNT' => 'cpt',
-    'FROM'  => 'glpi_plugin_unhassets_licenses',
-    'WHERE' => [
-        'is_deleted' => 0,
-        'AND' => [
-            ['expiration_date' => ['<=', date('Y-m-d', strtotime('+30 days'))]],
-            ['expiration_date' => ['>', $today]]
-        ]
-    ]
-])->current()['cpt'];
+    /* SECTION GRAPHIQUES (DÉPLACÉE) */
+    .charts-section { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 20px; 
+        margin-bottom: 30px;
+        max-width: 1200px; /* Légèrement élargi pour 3 graphiques */
+    }
+    .chart-container { background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); height: 320px; }
 
-$licenses_expired = $DB->request([
-    'COUNT' => 'cpt',
-    'FROM'  => 'glpi_plugin_unhassets_licenses',
-    'WHERE' => [
-        'is_deleted'      => 0,
-        'expiration_date' => ['<', $today]
-    ]
-])->current()['cpt'];
+    /* Alertes */
+    .alert-box { margin-top: 20px; padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .alert-danger { background: #fdeaea; color: #c0392b; border-left: 5px solid #e74c3c; }
+    .alert-warning { background: #fef5e7; color: #d35400; border-left: 5px solid #f39c12; }
 
-// Affichage
-echo "<div class='dashboard'>";
+    /* Boutons */
+    .actions-bar { text-align: center; margin-top: 30px; padding: 20px; background: #fff; border-radius: 10px; }
+    .btn-export { padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 0 10px; display: inline-block; }
+    .btn-pdf { background: #e74c3c; color: #fff !important; }
+    .btn-excel { background: #27ae60; color: #fff !important; }
+</style>
+";
 
-echo "<h2>" . __('IT Asset Inventory Overview', 'unhassets') . "</h2>";
+echo "<div class='unh-dashboard'>";
 
-// Équipements par catégorie
-echo "<div class='dashboard-stats'>";
-foreach ($stats_assets as $cat => $count) {
-    echo "<div class='stat-card'>";
-    echo "<h3>" . htmlspecialchars($cat) . "</h3>";
-    echo "<div class='stat-value'>" . $count . "</div>";
+echo "<h2 class='unh-title'>" . __('Vue d\'ensemble du parc informatique', 'unhassets') . "</h2>";
+
+// --- 3. AFFICHAGE DES KPI ---
+echo "<div class='kpi-container'>";
+    echo "<div class='kpi-card blue'><div class='kpi-label'>".__('Équipements Actifs', 'unhassets')."</div><div class='kpi-value'>{$status_stats['active']}</div></div>";
+    $res_color = ($res_pending['cpt'] > 0) ? 'orange' : 'green';
+    echo "<div class='kpi-card $res_color'><div class='kpi-label'>".__('Réservations en attente', 'unhassets')."</div><div class='kpi-value'>{$res_pending['cpt']}</div></div>";
+    $lic_color = ($lic_expired['cpt'] > 0) ? 'red' : 'green';
+    echo "<div class='kpi-card $lic_color'><div class='kpi-label'>".__('Licences expirées', 'unhassets')."</div><div class='kpi-value'>{$lic_expired['cpt']}</div></div>";
+    $broken_color = ($status_stats['broken'] > 0) ? 'red' : 'blue';
+    echo "<div class='kpi-card $broken_color'><div class='kpi-label'>".__('Matériel en panne', 'unhassets')."</div><div class='kpi-value'>{$status_stats['broken']}</div></div>";
+echo "</div>";
+
+// --- 4. SECTION CENTRALE (CATÉGORIES ET RÉSUMÉ) ---
+echo "<div class='section-grid'>";
+    echo "<div class='dashboard-box'>";
+        echo "<div class='box-title'>" . __('Équipements par catégorie', 'unhassets') . "</div>";
+        echo "<div class='cat-grid'>";
+        foreach ($stats_assets as $cat => $count) {
+            echo "<div class='cat-item'><span class='cat-name'>$cat</span><span class='cat-num'>$count</span></div>";
+        }
+        echo "</div>";
     echo "</div>";
-}
+
+    echo "<div class='dashboard-box'>";
+        echo "<div class='box-title'>" . __('État de santé du parc', 'unhassets') . "</div>";
+        echo "<ul>
+                <li><strong>{$status_stats['maintenance']}</strong> " . __('En maintenance', 'unhassets') . "</li>
+                <li><strong>{$status_stats['retired']}</strong> " . __('Réformé / Retiré', 'unhassets') . "</li>
+                <li><strong>{$res_today['cpt']}</strong> " . __('Réservations pour aujourd\'hui', 'unhassets') . "</li>
+              </ul>";
+    echo "</div>";
 echo "</div>";
 
-// Équipements par statut
-echo "<div class='dashboard-stats'>";
-echo "<div class='stat-card'>";
-echo "<h3>" . __('Asset Status', 'unhassets') . "</h3>";
-echo "<div class='stat-detail'>";
-echo "<div class='stat-item'><span class='text-green'>●</span> " . __('Active', 'unhassets') . "<br><strong>" . $status_stats['active'] . "</strong></div>";
-echo "<div class='stat-item'>" . __('Inactive', 'unhassets') . "<br><strong>" . $status_stats['inactive'] . "</strong></div>";
-echo "<div class='stat-item'><span class='text-orange'>●</span> " . __('Under Maintenance', 'unhassets') . "<br><strong>" . $status_stats['maintenance'] . "</strong></div>";
-echo "<div class='stat-item'><span class='text-red'>●</span> " . __('Broken', 'unhassets') . "<br><strong>" . $status_stats['broken'] . "</strong></div>";
-echo "<div class='stat-item'>" . __('Retired', 'unhassets') . "<br><strong>" . $status_stats['retired'] . "</strong></div>";
-echo "</div>";
-echo "</div>";
-echo "</div>";
-
-// Réservations & licences
-echo "<div class='dashboard-stats'>";
-
-echo "<div class='stat-card'>";
-echo "<h3>" . __('Reservations', 'unhassets') . "</h3>";
-echo "<div class='stat-detail'>";
-echo "<div class='stat-item'><span class='text-orange'>⏳</span> " . __('Pending', 'unhassets') . "<br><strong>" . $reservations_pending . "</strong></div>";
-echo "<div class='stat-item'>📅 " . __('Today', 'unhassets') . "<br><strong>" . $reservations_today . "</strong></div>";
-echo "</div>";
+// --- 5. NOUVELLE POSITION DES GRAPHIQUES (AVEC LE 3ème GRAPHIQUE) ---
+echo "<div class='charts-section'>";
+    // Graph 1 : Catégories
+    echo "<div class='chart-container'>
+            <div class='box-title'>" . __('Répartition Catégories', 'unhassets') . "</div>
+            <canvas id='chartCategories'></canvas>
+          </div>";
+    // Graph 2 : Statuts
+    echo "<div class='chart-container'>
+            <div class='box-title'>" . __('État du Matériel', 'unhassets') . "</div>
+            <canvas id='chartStatus'></canvas>
+          </div>";
+    // Graph 3 : Licences (Nouveau)
+    echo "<div class='chart-container'>
+            <div class='box-title'>" . __('Suivi des Licences', 'unhassets') . "</div>
+            <canvas id='chartLicenses'></canvas>
+          </div>";
 echo "</div>";
 
-echo "<div class='stat-card'>";
-echo "<h3>" . __('Software Licenses', 'unhassets') . "</h3>";
-echo "<div class='stat-detail'>";
-echo "<div class='stat-item'>" . __('Total', 'unhassets') . "<br><strong>" . $licenses_total . "</strong></div>";
-echo "<div class='stat-item'><span class='text-orange'>⏳</span> " . __('Expiring soon (30d)', 'unhassets') . "<br><strong>" . $licenses_expiring . "</strong></div>";
-echo "<div class='stat-item'><span class='text-red'>⚠</span> " . __('Expired', 'unhassets') . "<br><strong>" . $licenses_expired . "</strong></div>";
-echo "</div>";
-echo "</div>";
-
-echo "</div>";
-
-// Alertes
-if ($status_stats['broken'] > 0 || $licenses_expired > 0 || $licenses_expiring > 0 || $reservations_pending > 0) {
-    echo "<div class='stat-card' style='margin-top:20px;'>";
-    echo "<h3>" . __('Alerts & Required Actions', 'unhassets') . "</h3>";
-    echo "<ul class='alert-list'>";
-
+// --- 6. ALERTES ET ACTIONS REQUISES ---
+if ($status_stats['broken'] > 0 || $lic_expired['cpt'] > 0 || $lic_warning['cpt'] > 0 || $res_pending['cpt'] > 0) {
+    echo "<div class='dashboard-box'>";
+    echo "<div class='box-title'>" . __('Alertes et actions requises', 'unhassets') . "</div>";
     if ($status_stats['broken'] > 0) {
-        echo "<li style='border-left-color: #dc3545;'>";
-        echo "<span class='badge badge-red'>⚠</span> ";
-        echo sprintf(__('%d asset(s) broken and require your attention', 'unhassets'), $status_stats['broken']);
-        echo "</li>";
+        echo "<div class='alert-box alert-danger'><span>⚠</span> " . sprintf(__('%d équipement(s) en panne', 'unhassets'), $status_stats['broken']) . "</div>";
     }
-
-    if ($licenses_expired > 0) {
-        echo "<li style='border-left-color: #dc3545;'>";
-        echo "<span class='badge badge-red'>⚠</span> ";
-        echo sprintf(__('%d license(s) expired — renewal required', 'unhassets'), $licenses_expired);
-        echo "</li>";
+    if ($lic_expired['cpt'] > 0) {
+        echo "<div class='alert-box alert-danger'><span>⚠</span> " . sprintf(__('%d licence(s) expirée(s)', 'unhassets'), $lic_expired['cpt']) . "</div>";
     }
-
-    if ($licenses_expiring > 0) {
-        echo "<li style='border-left-color: #fd7e14;'>";
-        echo "<span class='badge badge-orange'>⚠</span> ";
-        echo sprintf(__('%d license(s) expiring within the next 30 days', 'unhassets'), $licenses_expiring);
-        echo "</li>";
+    if ($lic_warning['cpt'] > 0) {
+        echo "<div class='alert-box alert-warning'><span>⏳</span> " . sprintf(__('%d licence(s) expirant bientôt', 'unhassets'), $lic_warning['cpt']) . "</div>";
     }
-
-    if ($reservations_pending > 0) {
-        echo "<li style='border-left-color: #fd7e14;'>";
-        echo "<span class='badge badge-orange'>⏳</span> ";
-        echo sprintf(__('%d reservation(s) awaiting approval', 'unhassets'), $reservations_pending);
-        echo "</li>";
+    if ($res_pending['cpt'] > 0) {
+        echo "<div class='alert-box alert-warning'><span>📅</span> " . sprintf(__('%d réservation(s) en attente', 'unhassets'), $res_pending['cpt']) . "</div>";
     }
-
-    echo "</ul>";
     echo "</div>";
 }
 
-// Boutons d'export
-echo "<div class='export-buttons'>";
-echo "<a href='" . Plugin::getWebDir('unhassets') . "/front/export.php?type=pdf' class='vsubmit'>";
-echo __('Export as PDF', 'unhassets');
-echo "</a> ";
-echo "<a href='" . Plugin::getWebDir('unhassets') . "/front/export.php?type=excel' class='vsubmit'>";
-echo __('Export as Excel', 'unhassets');
-echo "</a>";
+// --- 7. BARRE D'EXPORTATION ---
+echo "<div class='actions-bar'>";
+    echo "<a href='" . Plugin::getWebDir('unhassets') . "/front/export.php?type=pdf' class='btn-export btn-pdf'>" . __('Exporter en PDF', 'unhassets') . "</a>";
+    echo "<a href='" . Plugin::getWebDir('unhassets') . "/front/export.php?type=excel' class='btn-export btn-excel'>" . __('Exporter en Excel', 'unhassets') . "</a>";
 echo "</div>";
 
 echo "</div>";
+
+// --- SCRIPTS JAVASCRIPT ---
+echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";
+echo "<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Chart Categories
+    new Chart(document.getElementById('chartCategories'), {
+        type: 'doughnut',
+        data: {
+            labels: " . json_encode(array_keys($stats_assets)) . ",
+            datasets: [{
+                data: " . json_encode(array_values($stats_assets)) . ",
+                backgroundColor: ['#4a90e2', '#2ecc71', '#3498db', '#f39c12', '#e74c3c', '#95a5a6']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Chart Status
+    new Chart(document.getElementById('chartStatus'), {
+        type: 'pie',
+        data: {
+            labels: " . json_encode(array_values($status_labels)) . ",
+            datasets: [{
+                data: " . json_encode(array_values($status_stats)) . ",
+                backgroundColor: ['#2ecc71', '#bdc3c7', '#f39c12', '#e74c3c', '#34495e']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Chart Licences (Bar Chart)
+    new Chart(document.getElementById('chartLicenses'), {
+        type: 'bar',
+        data: {
+            labels: ['" . __('Total', 'unhassets') . "', '" . __('Expirées', 'unhassets') . "', '" . __('Alerte', 'unhassets') . "'],
+            datasets: [{
+                label: '" . __('Nombre', 'unhassets') . "',
+                data: [{$lic_total['cpt']}, {$lic_expired['cpt']}, {$lic_warning['cpt']}],
+                backgroundColor: ['#4a90e2', '#e74c3c', '#f39c12']
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
+    });
+});
+</script>";
 
 Html::footer();
-?>
