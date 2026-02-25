@@ -1,11 +1,8 @@
-![GLPI CI](https://github.com/glpi-project/glpi/workflows/GLPI%20CI/badge.svg?branch=9.5%2Fbugfixes)
-[![Github All Releases](https://img.shields.io/github/downloads/glpi-project/glpi/total.svg)](#download)
-[![Twitter Follow](https://img.shields.io/twitter/follow/GLPI_PROJECT.svg?style=social&label=Follow)](https://twitter.com/GLPI_PROJECT)
 
 
 ## About GLPI UNH
 
-GLPI stands for **Gestionnaire Libre de Parc Informatique** is a Free Asset and IT Management Software package, that provides ITIL Service Desk features, licenses tracking and software auditing.
+**GLPI (Gestionnaire Libre de Parc Informatique)** is a comprehensive open-source **IT Service Management (ITSM) and IT asset management software suite**. Designed to centralize, automate, and optimize the management of digital resources and user support, it stands as the ideal all-in-one solution for a higher education institution like the **Université Nouveaux Horizons**.
 
 GLPI features:
 * Inventory of computers, peripherals, network printers and any associated components through an interface, with inventory tools such as: [FusionInventory](http://fusioninventory.org/) or [OCS Inventory](https://www.ocsinventory-ng.org/)
@@ -18,7 +15,6 @@ GLPI features:
 * Knowledge base and Frequently-Asked Questions (FAQ)
 * Asset reservation
 
-Moreover, GLPI supports many [plugins](http://plugins.glpi-project.org) that provide additional features.
 
 ## Demonstration
 

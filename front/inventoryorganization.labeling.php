@@ -78,6 +78,7 @@ Html::header(
     'inventoryorganization'
 );
 
+<<<<<<< HEAD
 Glpi\Application\View\TemplateRenderer::getInstance()->display(
     
     'pages/inventoryorganization/labeling.html.twig',
@@ -99,6 +100,27 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display(
         ],
     ]
 );
+=======
+// Render the labeling configuration template
+Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/labeling.html.twig', [
+    'title'          => __('Configuration de l etiquetage'),
+    'config'         => $config,
+    'preview_labels' => $preview_labels,
+    'success'        => $success,
+    'error_message'  => $error_message,
+    'can_create'     => InventoryOrganization::canCreate(),
+    'csrf_token_value' => Session::getNewCSRFToken(true),
+    'asset_types'    => [
+        'computer'   => __('Ordinateur'),
+        'laptop'     => __('Ordinateur portable'),
+        'monitor'    => __('Moniteur'),
+        'printer'    => __('Imprimante'),
+        'phone'      => __('Telephone'),
+        'projector'  => __('Projecteur'),
+        'peripheral' => __('Peripherique'),
+    ],
+]);
+>>>>>>> origin/pre-product
 
 Html::footer();
 

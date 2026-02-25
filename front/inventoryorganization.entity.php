@@ -67,7 +67,8 @@ function flattenEntities($entities, $level = 0) {
         }
         $result[] = [
             'id' => $entity['id'],
-            'name' => str_repeat('&nbsp;&nbsp;&nbsp;', $level) . $entity['name'],
+            'name' => (string) ($entity['name'] ?? ''),
+            'level' => (int) $level,
             'completename' => $entity['completename'] ?? $entity['name'],
         ];
         if (!empty($entity['children'])) {
@@ -79,6 +80,7 @@ function flattenEntities($entities, $level = 0) {
 
 $flat_entities = flattenEntities($entities);
 $active_entity = (int) Session::getActiveEntity();
+$csrf_token_value = Session::getNewCSRFToken(true);
 
 // Display header
 Html::header(
@@ -96,6 +98,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'success'     => $success,
     'error_message' => $error_message,
     'active_entity' => $active_entity,
+    'csrf_token_value' => $csrf_token_value,
 ]);
 
 Html::footer();

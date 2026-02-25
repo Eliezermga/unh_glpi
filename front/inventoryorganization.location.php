@@ -70,8 +70,14 @@ function flattenEntities($entities, $level = 0) {
             continue;
         }
         $result[] = [
+<<<<<<< HEAD
             'id'   => $entity['id'],
             'name' => str_repeat('   ', $level) . $entity['name'],
+=======
+            'id' => $entity['id'],
+            'name' => (string) ($entity['name'] ?? ''),
+            'level' => (int) $level,
+>>>>>>> origin/pre-product
         ];
         if (!empty($entity['children'])) {
             $result = array_merge($result, flattenEntities($entity['children'], $level + 1));
@@ -84,8 +90,14 @@ function flattenLocations($locations, $level = 0) {
     $result = [];
     foreach ($locations as $location) {
         $result[] = [
+<<<<<<< HEAD
             'id'          => $location['id'],
             'name'        => str_repeat('   ', $level) . $location['name'],
+=======
+            'id' => $location['id'],
+            'name' => (string) ($location['name'] ?? ''),
+            'level' => (int) $level,
+>>>>>>> origin/pre-product
             'asset_count' => $location['asset_count'] ?? 0,
         ];
         if (!empty($location['children'])) {
@@ -105,6 +117,7 @@ Html::header(
     'inventoryorganization'
 );
 
+<<<<<<< HEAD
 Glpi\Application\View\TemplateRenderer::getInstance()->display(
     'pages/inventoryorganization/locations.html.twig',
     [
@@ -119,6 +132,20 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display(
     ]
 );
 
+=======
+// Render the location management template
+Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/locations.html.twig', [
+    'title'          => __('Gestion des lieux'),
+    'locations'      => $locations,
+    'flat_locations' => $flat_locations,
+    'entities'       => $flat_entities,
+    'can_create'     => Location::canCreate(),
+    'active_entity'  => Session::getActiveEntity(),
+    'success'        => $success,
+    'error_message'  => $error_message,
+    'csrf_token_value' => Session::getNewCSRFToken(true),
+]);
+>>>>>>> origin/pre-product
 
 Html::footer();
 

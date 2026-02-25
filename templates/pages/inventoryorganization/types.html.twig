@@ -49,7 +49,7 @@
                     
                     {% if can_create %}
                         <form method="post" action="">
-                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
+                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token(true)) }}">
                             <input type="hidden" name="action" value="create_type">
                             
                             <div class="mb-3">
@@ -166,7 +166,7 @@
                                             {% if can_create and type.count == 0 %}
                                                 <form method="post" action="" class="d-inline"
                                                       onsubmit="return confirm('{{ __('Delete this type?') }}');">
-                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token(true)) }}">
                                                     <input type="hidden" name="action" value="delete_type">
                                                     <input type="hidden" name="type_category" value="computer">
                                                     <input type="hidden" name="type_id" value="{{ type.id }}">
@@ -201,7 +201,7 @@
                                             {% if can_create and type.count == 0 %}
                                                 <form method="post" action="" class="d-inline"
                                                       onsubmit="return confirm('{{ __('Delete this type?') }}');">
-                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token(true)) }}">
                                                     <input type="hidden" name="action" value="delete_type">
                                                     <input type="hidden" name="type_category" value="monitor">
                                                     <input type="hidden" name="type_id" value="{{ type.id }}">
@@ -236,7 +236,7 @@
                                             {% if can_create and type.count == 0 %}
                                                 <form method="post" action="" class="d-inline"
                                                       onsubmit="return confirm('{{ __('Delete this type?') }}');">
-                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token()) }}">
+                                                    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token(true)) }}">
                                                     <input type="hidden" name="action" value="delete_type">
                                                     <input type="hidden" name="type_category" value="printer">
                                                     <input type="hidden" name="type_id" value="{{ type.id }}">

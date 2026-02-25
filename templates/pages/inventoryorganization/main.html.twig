@@ -1,4 +1,4 @@
-﻿{#
+{#
  # ---------------------------------------------------------------------
  # Organisation de l inventaire - Tableau de bord
  # ---------------------------------------------------------------------
@@ -20,7 +20,7 @@
                         <span class="stamp bg-primary me-3"><i class="ti ti-building"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.entities }}</div>
-                            <div class="text-muted">{{ __('Entites') }}</div>
+                            <div class="text-muted">{{ __('Entities') }}</div>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <span class="stamp bg-success me-3"><i class="ti ti-map-pin"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.locations }}</div>
-                            <div class="text-muted">{{ __('Lieux') }}</div>
+                            <div class="text-muted">{{ __('Locations') }}</div>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         <span class="stamp bg-info me-3"><i class="ti ti-device-desktop"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.computers }}</div>
-                            <div class="text-muted">{{ __('Ordinateurs') }}</div>
+                            <div class="text-muted">{{ __('Computers') }}</div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <span class="stamp bg-warning me-3"><i class="ti ti-printer"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.printers }}</div>
-                            <div class="text-muted">{{ __('Imprimantes') }}</div>
+                            <div class="text-muted">{{ __('Printers') }}</div>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         <span class="stamp bg-secondary me-3"><i class="ti ti-package"></i></span>
                         <div>
                             <div class="h1 mb-0">{{ stats.total_assets }}</div>
-                            <div class="text-muted">{{ __('Total actifs') }}</div>
+                            <div class="text-muted">{{ __('Total assets') }}</div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ issue_summary.total }}</div>
-                            <div class="text-muted">{{ __('Problemes') }}</div>
+                            <div class="text-muted">{{ __('Issues') }}</div>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
 
     <h3 class="mb-3">
         <i class="ti ti-rocket me-2"></i>
-        {{ __('Actions rapides') }}
+        {{ __('Quick actions') }}
     </h3>
 
     <div class="row mb-4">
@@ -123,11 +123,11 @@
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="ti ti-alert-circle me-2"></i>
-                    {{ __('Problemes recents de coherence') }}
+                    {{ __('Recent coherence issues') }}
                 </h3>
                 <div class="card-actions">
                     <a href="inventoryorganization.coherence.php" class="btn btn-outline-primary btn-sm">
-                        {{ __('Voir tout') }}
+                        {{ __('See all') }}
                         <i class="ti ti-chevron-right ms-1"></i>
                     </a>
                 </div>
@@ -136,9 +136,9 @@
                 <table class="table table-vcenter card-table">
                     <thead>
                         <tr>
-                            <th>{{ __('Severite') }}</th>
+                            <th>{{ __('Severity') }}</th>
                             <th>{{ __('Message') }}</th>
-                            <th>{{ __('Type d actif') }}</th>
+                            <th>{{ __('Asset type') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,14 +146,14 @@
                             <tr>
                                 <td>
                                     {% if issue.severity == 'error' %}
-                                        <span class="badge bg-danger">{{ __('Erreur') }}</span>
+                                        <span class="badge bg-danger">{{ __('Error') }}</span>
                                     {% elseif issue.severity == 'warning' %}
-                                        <span class="badge bg-warning">{{ __('Avertissement') }}</span>
+                                        <span class="badge bg-warning">{{ __('Warning') }}</span>
                                     {% else %}
                                         <span class="badge bg-info">{{ __('Information') }}</span>
                                     {% endif %}
                                 </td>
-                                <td>{{ issue.message|raw }}</td>
+                                <td>{{ issue.message }}</td>
                                 <td>{{ issue.asset_type|default('-') }}</td>
                             </tr>
                         {% endfor %}
@@ -165,8 +165,8 @@
         <div class="card bg-success-lt">
             <div class="card-body text-center py-5">
                 <span class="avatar avatar-xl mb-3 bg-success"><i class="ti ti-check"></i></span>
-                <h3>{{ __('Tout est en ordre') }}</h3>
-                <p class="text-muted mb-0">{{ __('Aucun probleme de coherence detecte.') }}</p>
+                <h3>{{ __('Everything is in order') }}</h3>
+                <p class="text-muted mb-0">{{ __('No coherence issues detected.') }}</p>
             </div>
         </div>
     {% endif %}

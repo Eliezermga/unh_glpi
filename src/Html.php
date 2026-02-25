@@ -1559,6 +1559,27 @@ HTML;
                 }
             }
 
+<<<<<<< HEAD
+=======
+            // Add Support Technique entry to Assistance menu
+            if (isset($menu['helpdesk']['content'])) {
+                $menu['helpdesk']['content']['support_technique'] = [
+                    'title'    => __('Technical Support'),
+                    'shortcut' => '',
+                    'page'     => '/front/helpdesk.php',
+                    'icon'     => 'ti ti-lifebuoy',
+                ];
+                
+                // Add FAQ / Knowledge Base entry to Assistance menu (Issue #50)
+                $menu['helpdesk']['content']['faq'] = [
+                    'title'    => __('FAQ'),
+                    'shortcut' => 'b',
+                    'page'     => '/front/knowbaseitem.php',
+                    'icon'     => 'ti ti-book',
+                ];
+            }
+
+>>>>>>> origin/pre-product
             $_SESSION['glpimenu'] = $menu;
            // echo 'menu load';
         } else {
@@ -1626,9 +1647,9 @@ HTML;
             ];
         }
 
-        if (Session::haveRight('knowbase', KnowbaseItem::READFAQ)) {
+        if (Session::haveRightsOr('knowbase', [READ, KnowbaseItem::READFAQ])) {
             $menu['faq'] = [
-                'default' => '/front/helpdesk.faq.php',
+                'default' => '/front/knowbaseitem.php',
                 'title'   => __('FAQ'),
                 'icon'    => KnowbaseItem::getIcon(),
             ];

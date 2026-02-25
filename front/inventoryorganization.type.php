@@ -133,6 +133,7 @@ Html::header(
     'inventoryorganization'
 );
 
+<<<<<<< HEAD
 Glpi\Application\View\TemplateRenderer::getInstance()->display(
     
     'pages/inventoryorganization/types.html.twig',
@@ -145,6 +146,18 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display(
         'can_create'      => InventoryOrganization::canCreate(),
     ]
 );
+=======
+// Render the type management template
+Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryorganization/types.html.twig', [
+    'title'           => __('Gestion des types de materiel'),
+    'types'           => $types,
+    'type_categories' => $type_categories,
+    'success'         => $success,
+    'error_message'   => $error_message,
+    'can_create'      => InventoryOrganization::canCreate(),
+    'csrf_token_value' => Session::getNewCSRFToken(true),
+]);
+>>>>>>> origin/pre-product
 
 Html::footer();
 

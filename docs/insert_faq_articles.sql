@@ -16,6 +16,12 @@ SET @user_id = 2;
 -- Date actuelle
 SET @current_date = NOW();
 
+-- Table temporaire pour tracer précisément les IDs insérés
+DROP TEMPORARY TABLE IF EXISTS `tmp_inserted_faq_ids`;
+CREATE TEMPORARY TABLE `tmp_inserted_faq_ids` (
+    `knowbaseitems_id` INT UNSIGNED NOT NULL PRIMARY KEY
+);
+
 -- =====================================================
 -- Article 1: Comment créer un ticket de support ?
 -- =====================================================
@@ -42,6 +48,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 2: Comment réinitialiser mon mot de passe ?
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -63,6 +72,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 3: Comment se connecter au WiFi du campus ?
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -92,6 +104,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 4: Mon ordinateur ne démarre plus
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -117,6 +132,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 5: Comment installer un logiciel ?
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -141,6 +159,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 6: L'imprimante ne fonctionne pas
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -166,6 +187,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 7: Comment accéder à mes fichiers à distance ?
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -190,6 +214,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 8: Mon écran reste noir ou figé
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -214,6 +241,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 9: Comment suivre l'état de mon ticket ?
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -240,6 +270,9 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Article 10: Les raccourcis clavier utiles
 -- =====================================================
 INSERT INTO `glpi_knowbaseitems` 
@@ -267,11 +300,16 @@ VALUES (
 );
 
 -- =====================================================
+SET @last_faq_id = LAST_INSERT_ID();
+INSERT INTO `tmp_inserted_faq_ids` (`knowbaseitems_id`) VALUES (@last_faq_id);
+
 -- Rendre les articles visibles à tous (entité racine)
 -- =====================================================
 -- Insérer la visibilité pour tous les articles créés
 INSERT INTO `glpi_entities_knowbaseitems` (`knowbaseitems_id`, `entities_id`, `is_recursive`)
-SELECT `id`, 0, 1 FROM `glpi_knowbaseitems` WHERE `is_faq` = 1 AND `date_creation` >= DATE_SUB(NOW(), INTERVAL 1 MINUTE);
+SELECT `knowbaseitems_id`, 0, 1 FROM `tmp_inserted_faq_ids`;
+
+DROP TEMPORARY TABLE IF EXISTS `tmp_inserted_faq_ids`;
 
 -- =====================================================
 -- Vérification

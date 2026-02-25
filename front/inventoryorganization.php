@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * ---------------------------------------------------------------------
@@ -20,10 +20,6 @@ if (!InventoryOrganization::canView()) {
     Html::displayRightError();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    Session::checkCSRF($_POST);
-}
-
 $summary = InventoryOrganization::getSummary();
 
 Html::header(
@@ -41,36 +37,36 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'can_create'    => InventoryOrganization::canCreate(),
     'menu_items'    => [
         [
-            'title'       => __('Entites'),
-            'description' => __('Creer et gerer la hierarchie des entites GLPI'),
+            'title'       => __('Entities'),
+            'description' => __('Create and manage the GLPI entity hierarchy'),
             'icon'        => 'ti ti-building',
             'link'        => 'inventoryorganization.entity.php',
             'color'       => 'primary',
         ],
         [
-            'title'       => __('Lieux'),
-            'description' => __('Definir les lieux (campus, batiments, etages, salles)'),
+            'title'       => __('Locations'),
+            'description' => __('Define locations (campus, buildings, floors, rooms)'),
             'icon'        => 'ti ti-map-pin',
             'link'        => 'inventoryorganization.location.php',
             'color'       => 'success',
         ],
         [
-            'title'       => __('Types de materiel'),
-            'description' => __('Creer les types de materiel (PC, laptop, projecteur)'),
+            'title'       => __('Asset types'),
+            'description' => __('Create asset types (PC, laptop, projector)'),
             'icon'        => 'ti ti-devices',
             'link'        => 'inventoryorganization.type.php',
             'color'       => 'info',
         ],
         [
-            'title'       => __('Etiquetage'),
-            'description' => __('Configurer le format UNH-FAC-BAT-TYPE-NNN'),
+            'title'       => __('Labeling'),
+            'description' => __('Configure the format UNH-FAC-BAT-TYPE-NNN'),
             'icon'        => 'ti ti-tag',
             'link'        => 'inventoryorganization.labeling.php',
             'color'       => 'warning',
         ],
         [
-            'title'       => __('Verification de coherence'),
-            'description' => __('Controler la coherence de l inventaire'),
+            'title'       => __('Coherence check'),
+            'description' => __('Check inventory coherence'),
             'icon'        => 'ti ti-checkbox',
             'link'        => 'inventoryorganization.coherence.php',
             'color'       => 'danger',
