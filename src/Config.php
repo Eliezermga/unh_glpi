@@ -838,7 +838,9 @@ class Config extends CommonDBTM
             'rand'  => $rand
         ]);
         echo "</td>";
-        echo "<td width='30%'><label for='dropdown_planning_begin$rand'>" . __('Limit of the schedules for planning') . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_planning_begin$rand'>" . __('Limit of the schedules for planning') . "</label>";
+        echo Html::showTooltip(__('Plages horaires du support UNH (ex. 8h-17h). Adaptez selon les horaires du service assistance étudiant et personnel.'));
+        echo "</td>";
         echo "<td width='20%'>";
         Dropdown::showHours('planning_begin', ['value' => $CFG_GLPI["planning_begin"], 'rand' => $rand]);
         echo "&nbsp;<label for='dropdown_planning_end$rand'>-></label>&nbsp;";
@@ -877,15 +879,20 @@ class Config extends CommonDBTM
         Dropdown::showYesNo('use_check_pref', $CFG_GLPI['use_check_pref'], -1, ['rand' => $rand]);
         echo "</td>";
 
-        echo "<td><label for='dropdown_use_anonymous_helpdesk$rand'>" . __('Allow anonymous ticket creation (helpdesk.receiver)') . "</label></td><td>";
+        echo "<td><label for='dropdown_use_anonymous_helpdesk$rand'>" . __('Allow anonymous ticket creation (helpdesk.receiver)') . "</label>";
+        echo Html::showTooltip(__('Permet aux étudiants de créer des tickets sans connexion (interface simplifiée UNH).'));
+        echo "</td><td>";
         Dropdown::showYesNo("use_anonymous_helpdesk", $CFG_GLPI["use_anonymous_helpdesk"], -1, ['rand' => $rand]);
-        echo "</td></tr><tr class='tab_bg_2'><td><label for='dropdown_use_anonymous_followups$rand'>" . __('Allow anonymous followups (receiver)') . "</label></td><td>";
+        echo "</td></tr><tr class='tab_bg_2'><td><label for='dropdown_use_anonymous_followups$rand'>" . __('Allow anonymous followups (receiver)') . "</label>";
+        echo Html::showTooltip(__('Permet le suivi anonyme des tickets (étudiants, personnel sans compte).'));
+        echo "</td><td>";
         Dropdown::showYesNo("use_anonymous_followups", $CFG_GLPI["use_anonymous_followups"], -1, ['rand' => $rand]);
         echo "</td><td colspan='2'></td></tr>";
 
         echo "<tr>";
         echo "<td>";
         echo "<label for='dropdown_planning_work_days$rand'>" . __('Planning work days') . "</label>";
+        echo Html::showTooltip(__('Jours ouvrés selon le calendrier universitaire UNH (ex. lundi-vendredi hors vacances).'));
         echo "</td>";
         echo "<td colspan='3'>";
         Dropdown::showFromArray(

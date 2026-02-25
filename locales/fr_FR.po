@@ -17678,6 +17678,22 @@ msgstr "Date de début de la planification"
 msgid "Planning work days"
 msgstr "Planification des journées ouvrées"
 
+#: src/Config.php:841
+msgid "Plages horaires du support UNH (ex. 8h-17h). Adaptez selon les horaires du service assistance étudiant et personnel."
+msgstr "Plages horaires du support UNH (ex. 8h-17h). Adaptez selon les horaires du service assistance étudiant et personnel."
+
+#: src/Config.php:891
+msgid "Jours ouvrés selon le calendrier universitaire UNH (ex. lundi-vendredi hors vacances)."
+msgstr "Jours ouvrés selon le calendrier universitaire UNH (ex. lundi-vendredi hors vacances)."
+
+#: src/Config.php:879
+msgid "Permet aux étudiants de créer des tickets sans connexion (interface simplifiée UNH)."
+msgstr "Permet aux étudiants de créer des tickets sans connexion (interface simplifiée UNH)."
+
+#: src/Config.php:884
+msgid "Permet le suivi anonyme des tickets (étudiants, personnel sans compte)."
+msgstr "Permet le suivi anonyme des tickets (étudiants, personnel sans compte)."
+
 #: src/Planning.php:870
 msgid "Plannings"
 msgstr "Calendriers"
