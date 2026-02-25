@@ -5,6 +5,7 @@
  * ajout de Session::checkCSRF() et Event::log()
  */
 
+
 use Glpi\Event;
 
 include('../inc/includes.php');

@@ -6583,6 +6583,7 @@ echo "</td></tr>\n";
 
         return $user;
     }
+    
 
     /**
      * Get name of the user with ID

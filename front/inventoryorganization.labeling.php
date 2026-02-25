@@ -79,6 +79,7 @@ Html::header(
 );
 
 Glpi\Application\View\TemplateRenderer::getInstance()->display(
+    
     'pages/inventoryorganization/labeling.html.twig',
     [
         'title'          => __('Labeling Configuration'),
