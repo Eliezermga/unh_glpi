@@ -9435,6 +9435,22 @@ msgstr "Expiration contrat"
 msgid "End of fiscal year"
 msgstr "Fin de l'année fiscale"
 
+#: src/Config.php:455
+msgid "End of academic year"
+msgstr "Fin d'année académique"
+
+#: src/Config.php:456
+msgid "Date de fin d'année académique UNH (salles, laboratoires, facultés). Utilisée pour le suivi des actifs du parc universitaire."
+msgstr "Date de fin d'année académique UNH (salles, laboratoires, facultés). Utilisée pour le suivi des actifs du parc universitaire."
+
+#: src/Config.php:426
+msgid "Activer les informations financières pour le parc universitaire (équipements des salles, laboratoires)."
+msgstr "Activer les informations financières pour le parc universitaire (équipements des salles, laboratoires)."
+
+#: src/Config.php:524
+msgid "Mise à jour automatique des contacts, utilisateurs, groupes et emplacements (salles, laboratoires, facultés UNH)."
+msgstr "Mise à jour automatique des contacts, utilisateurs, groupes et emplacements (salles, laboratoires, facultés UNH)."
+
 #: src/Cartridge.php:1061
 msgid "End of life"
 msgstr "Fin de vie"
