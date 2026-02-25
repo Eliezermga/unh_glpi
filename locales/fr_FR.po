@@ -25,10 +25,39 @@ msgstr ""
 "Language: fr_FR\\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
+#: src/Config.php:607
+msgid "Synchronisation automatique avec l'annuaire universitaire (LDAP/Active Directory)"
+msgstr "Synchronisation automatique avec l'annuaire universitaire (LDAP/Active Directory)"
+
+#: src/Config.php:617
+msgid "Action lors de la suppression d'un étudiant/personnel de l'annuaire universitaire"
+msgstr "Action lors de la suppression d'un étudiant/personnel de l'annuaire universitaire"
+
 #: src/Config.php:1808 src/Config.php:1830
 #, php-format
 msgid "\"%s\" cache system is used"
 msgstr "Le système de cache de \"%s\" est utilisé"
+
+#: src/Config.php:638
+msgid "University authentication configuration"
+msgstr "Configuration d’authentification universitaire"
+
+#: src/Config.php:642
+msgid "Enable synchronization with university information system"
+msgstr "Activer la synchronisation avec le système d’information universitaire"
+
+#: src/Config.php:649
+msgid "Current university synchronization status: enabled."
+msgstr "Statut actuel de la synchronisation universitaire : activée."
+
+#: src/Config.php:651
+msgid "Current university synchronization status: disabled."
+msgstr "Statut actuel de la synchronisation universitaire : désactivée."
+
+#: src/Config.php:657
+#, php-format
+msgid "Last university synchronization status change: %s"
+msgstr "Dernière modification de l’état de synchronisation universitaire : %s"
 
 #: src/Console/Plugin/InstallCommand.php:70
 msgid "\"-p foo\" will set \"foo\" param value to true"
