@@ -39,6 +39,14 @@ msgstr ""
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
+#: src/Config.php:607
+msgid "Synchronisation automatique avec l'annuaire universitaire (LDAP/Active Directory)"
+msgstr "Synchronisation automatique avec l'annuaire universitaire (LDAP/Active Directory)"
+
+#: src/Config.php:617
+msgid "Action lors de la suppression d'un étudiant/personnel de l'annuaire universitaire"
+msgstr "Action lors de la suppression d'un étudiant/personnel de l'annuaire universitaire"
+
 #: src/Config.php:1808 src/Config.php:1830
 #, php-format
 msgid "\"%s\" cache system is used"
