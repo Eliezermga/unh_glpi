@@ -262,7 +262,7 @@ class ReservationItem extends CommonDBChild
         ];
 
         $tab[] = [
-            'id'                 => '23',
+            'id'                 => '73',
             'table'              => 'glpi_manufacturers',
             'field'              => 'name',
             'name'               => Manufacturer::getTypeName(1),
