@@ -44,8 +44,9 @@
       {# Catégorie du problème avec conseils d'auto-assistance #}
       <div class="mb-3">
          <label class="form-label text-muted">{{ __('Select a category') }}</label>
-         <select name="itilcategories_id" id="category-select" class="form-select" onchange="showSelfHelp(this.value)">
-            <option value="0">-- {{ __('Choose a category') }} --</option>
+         <input type="hidden" name="itilcategories_id" value="0" />
+         <select name="category_help" id="category-select" class="form-select" onchange="showSelfHelp(this.value)">
+            <option value="">-- {{ __('Choose a category') }} --</option>
             <option value="wifi">{{ __('Wi-Fi / Network') }}</option>
             <option value="account">{{ __('Account / Password') }}</option>
             <option value="moodle">{{ __('Moodle / LMS') }}</option>
