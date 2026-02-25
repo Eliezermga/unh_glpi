@@ -1,0 +1,250 @@
+{#
+ # ---------------------------------------------------------------------
+ #
+ # GLPI - Gestionnaire Libre de Parc Informatique
+ #
+ # Inventory Organization - Coherence Check
+ #
+ # ---------------------------------------------------------------------
+ #}
+
+<div class="container-fluid">
+    {# Header #}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-0">
+            <i class="ti ti-checkbox me-2"></i>
+            {{ title }}
+        </h1>
+        <div class="btn-list">
+            <a href="?export=csv" class="btn btn-outline-success">
+                <i class="ti ti-download me-1"></i>
+                {{ __('Exporter CSV') }}
+            </a>
+            <a href="inventoryorganization.php" class="btn btn-outline-secondary">
+                <i class="ti ti-arrow-left me-1"></i>
+                {{ __('Retour au tableau de bord') }}
+            </a>
+        </div>
+    </div>
+
+    {# Summary Cards #}
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card card-sm {% if summary.total == 0 %}bg-success-lt{% else %}bg-secondary-lt{% endif %}">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp {% if summary.total == 0 %}bg-success{% else %}bg-secondary{% endif %} me-3">
+                            <i class="ti ti-list-check"></i>
+                        </span>
+                        <div>
+                            <div class="h1 mb-0">{{ summary.total }}</div>
+                            <div class="text-muted">{{ __('Total des problemes') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-sm {% if summary.errors > 0 %}bg-danger-lt{% else %}bg-success-lt{% endif %}">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp {% if summary.errors > 0 %}bg-danger{% else %}bg-success{% endif %} me-3">
+                            <i class="ti ti-alert-octagon"></i>
+                        </span>
+                        <div>
+                            <div class="h1 mb-0">{{ summary.errors }}</div>
+                            <div class="text-muted">{{ __('Erreurs') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-sm {% if summary.warnings > 0 %}bg-warning-lt{% else %}bg-success-lt{% endif %}">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp {% if summary.warnings > 0 %}bg-warning{% else %}bg-success{% endif %} me-3">
+                            <i class="ti ti-alert-triangle"></i>
+                        </span>
+                        <div>
+                            <div class="h1 mb-0">{{ summary.warnings }}</div>
+                            <div class="text-muted">{{ __('Avertissements') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-sm bg-info-lt">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp bg-info me-3">
+                            <i class="ti ti-info-circle"></i>
+                        </span>
+                        <div>
+                            <div class="h1 mb-0">{{ summary.info }}</div>
+                            <div class="text-muted">{{ __('Informations') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Filters #}
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" action="" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label">{{ __('Type de probleme') }}</label>
+                    <select class="form-select" name="filter_type">
+                        <option value="all" {% if filter_type == 'all' %}selected{% endif %}>{{ __('Tous les types') }}</option>
+                        {% for key, label in issue_types %}
+                            <option value="{{ key }}" {% if filter_type == key %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">{{ __('Severite') }}</label>
+                    <select class="form-select" name="filter_severity">
+                        <option value="all" {% if filter_severity == 'all' %}selected{% endif %}>{{ __('Toutes les severites') }}</option>
+                        <option value="error" {% if filter_severity == 'error' %}selected{% endif %}>{{ __('Erreurs') }}</option>
+                        <option value="warning" {% if filter_severity == 'warning' %}selected{% endif %}>{{ __('Avertissements') }}</option>
+                        <option value="info" {% if filter_severity == 'info' %}selected{% endif %}>{{ __('Informations') }}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ti ti-filter me-1"></i>
+                        {{ __('Appliquer') }}
+                    </button>
+                    <a href="?" class="btn btn-outline-secondary">
+                        <i class="ti ti-x me-1"></i>
+                        {{ __('Reinitialiser') }}
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {# Issues Table or Success Message #}
+    {% if status_ok %}
+        <div class="card bg-success-lt">
+            <div class="card-body text-center py-5">
+                <span class="avatar avatar-xl mb-3 bg-success">
+                    <i class="ti ti-check"></i>
+                </span>
+                <h2 class="text-success">{{ __('Inventaire coherent') }}</h2>
+                <p class="text-muted mb-0">
+                    {{ __('Aucun probleme detecte. La structure de l inventaire est correcte.') }}
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="ti ti-list me-2"></i>
+                    {{ __('Problemes detectes') }}
+                    <span class="badge bg-secondary ms-2">{{ issues|length }}</span>
+                </h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">{{ __('Severite') }}</th>
+                            <th style="width: 150px;">{{ __('Type') }}</th>
+                            <th>{{ __('Message') }}</th>
+                            <th style="width: 150px;">{{ __('Type d actif') }}</th>
+                            <th style="width: 150px;">{{ __('Nom de l actif') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for issue in issues %}
+                            <tr>
+                                <td>
+                                    {% if issue.severity == 'error' %}
+                                        <span class="badge bg-danger">
+                                            <i class="ti ti-alert-octagon me-1"></i>
+                                            {{ __('Erreur') }}
+                                        </span>
+                                    {% elseif issue.severity == 'warning' %}
+                                        <span class="badge bg-warning">
+                                            <i class="ti ti-alert-triangle me-1"></i>
+                                            {{ __('Avertissement') }}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-info">
+                                            <i class="ti ti-info-circle me-1"></i>
+                                            {{ __('Information') }}
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="text-muted">{{ issue_types[issue.type]|default(issue.type) }}</span>
+                                </td>
+                                <td>{{ issue.message }}</td>
+                                <td>{{ issue.asset_type|default('-') }}</td>
+                                <td>
+                                    {% if issue.asset_name is defined and issue.asset_name %}
+                                        <a href="#" class="text-reset">{{ issue.asset_name }}</a>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    {{ __('Aucun probleme ne correspond aux filtres.') }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {# Help Card #}
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="ti ti-help me-2"></i>
+                {{ __('Comprendre les niveaux') }}
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-12">
+                    <h5 class="text-danger">
+                        <i class="ti ti-alert-octagon me-1"></i>
+                        {{ __('Erreurs') }}
+                    </h5>
+                    <p class="text-muted small mb-0" style="white-space: normal; word-break: normal;">
+                        {{ __('Problemes critiques a corriger rapidement (doublons, incoherences de donnees).') }}
+                    </p>
+                </div>
+                <div class="col-12">
+                    <h5 class="text-warning">
+                        <i class="ti ti-alert-triangle me-1"></i>
+                        {{ __('Avertissements') }}
+                    </h5>
+                    <p class="text-muted small mb-0" style="white-space: normal; word-break: normal;">
+                        {{ __('Points a corriger bientot (equipements sans lieu, informations manquantes).') }}
+                    </p>
+                </div>
+                <div class="col-12">
+                    <h5 class="text-info">
+                        <i class="ti ti-info-circle me-1"></i>
+                        {{ __('Informations') }}
+                    </h5>
+                    <p class="text-muted small mb-0" style="white-space: normal; word-break: normal;">
+                        {{ __('Notifications utiles sans blocage, par exemple actif rattache a la racine.') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

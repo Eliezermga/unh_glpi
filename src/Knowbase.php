@@ -126,6 +126,11 @@ class Knowbase extends CommonGLPI
         $ki = new KnowbaseItem();
         $ki->searchForm($_GET);
 
+        if (KnowbaseItem::shouldUseStaticFaqFallback()) {
+            KnowbaseItem::showStaticFaqList((string)($_GET['contains'] ?? ''));
+            return;
+        }
+
         if (!isset($_GET['contains']) || empty($_GET['contains'])) {
             echo "<div><table class='mx-auto' width='950px'><tr class='noHover'><td class='center top'>";
             KnowbaseItem::showRecentPopular("recent");

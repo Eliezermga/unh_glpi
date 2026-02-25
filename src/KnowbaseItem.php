@@ -74,11 +74,19 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
 
     public function getName($options = [])
     {
-        if (KnowbaseItemTranslation::canBeTranslated($this)) {
+        if ($this->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($this)) {
             return KnowbaseItemTranslation::getTranslatedValue($this);
         }
 
         return parent::getName();
+    }
+
+    /**
+     * FAQ entries must still use gettext fallback even when KB translations are disabled.
+     */
+    private function shouldUseFaqTranslationFallback(): bool
+    {
+        return ((int)($this->fields['is_faq'] ?? 0) === 1) && ((int)$this->getID() > 0);
     }
 
 
@@ -132,6 +140,89 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
               || ((Session::getLoginUserID() === false) && $CFG_GLPI["use_public_faq"]));
     }
 
+    /**
+     * Users without global READ right must be restricted to FAQ-only mode.
+     */
+    private static function isFaqOnlyMode(): bool
+    {
+        return !Session::haveRight(self::$rightname, READ);
+    }
+
+    private static function getStaticFaqEntries(): array
+    {
+        return [
+            ['question' => 'faq.static.question.create_support_ticket',  'answer' => 'faq.static.answer.create_support_ticket'],
+            ['question' => 'faq.static.question.reset_password',         'answer' => 'faq.static.answer.reset_password'],
+            ['question' => 'faq.static.question.connect_campus_wifi',    'answer' => 'faq.static.answer.connect_campus_wifi'],
+            ['question' => 'faq.static.question.computer_not_booting',   'answer' => 'faq.static.answer.computer_not_booting'],
+            ['question' => 'faq.static.question.install_software',       'answer' => 'faq.static.answer.install_software'],
+            ['question' => 'faq.static.question.printer_not_working',    'answer' => 'faq.static.answer.printer_not_working'],
+            ['question' => 'faq.static.question.remote_file_access',     'answer' => 'faq.static.answer.remote_file_access'],
+            ['question' => 'faq.static.question.black_or_frozen_screen', 'answer' => 'faq.static.answer.black_or_frozen_screen'],
+            ['question' => 'faq.static.question.track_ticket_status',    'answer' => 'faq.static.answer.track_ticket_status'],
+            ['question' => 'faq.static.question.useful_keyboard_shortcuts', 'answer' => 'faq.static.answer.useful_keyboard_shortcuts'],
+        ];
+    }
+
+    private static function normalizeStaticFaqText(string $value): string
+    {
+        $value = trim(preg_replace('/\s+/u', ' ', $value));
+        return function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
+    }
+
+    public static function shouldUseStaticFaqFallback(): bool
+    {
+        return (int)countElementsInTable(self::getTable(), ['is_faq' => 1]) < 10;
+    }
+
+    public static function showStaticFaqList(string $contains = '', bool $display = true)
+    {
+        $entries = self::getStaticFaqEntries();
+        $query = self::normalizeStaticFaqText($contains);
+        $rows = [];
+
+        foreach ($entries as $entry) {
+            $question = __($entry['question']);
+            $answer = __($entry['answer']);
+            $answer_text = trim(strip_tags($answer));
+
+            if ($query !== '') {
+                $stack = self::normalizeStaticFaqText($question . ' ' . $answer_text);
+                if (strpos($stack, $query) === false) {
+                    continue;
+                }
+            }
+
+            $rows[] = [
+                'question' => $question,
+                'answer'   => $answer_text,
+            ];
+        }
+
+        $output = "<table class='tab_cadrehov'>";
+        $output .= "<tr class='noHover'><th colspan='2'>" . __('FAQ') . "</th></tr>";
+
+        if (count($rows) === 0) {
+            $output .= "<tr class='tab_bg_2'><td class='left' colspan='2'>" . __('No data found') . "</td></tr>";
+        } else {
+            foreach ($rows as $row) {
+                $question = htmlspecialchars($row['question'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $answer = htmlspecialchars($row['answer'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $output .= "<tr class='tab_bg_2'><td class='left' style='width:35%;'><strong>{$question}</strong></td>";
+                $output .= "<td class='left'>{$answer}</td></tr>";
+            }
+        }
+
+        $output .= "</table>";
+
+        if ($display) {
+            echo $output;
+            return null;
+        }
+
+        return $output;
+    }
+
 
     public function canViewItem()
     {
@@ -147,7 +238,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                   && $this->haveVisibilityAccess())
                  || ((Session::getLoginUserID() === false) && $this->isPubliclyVisible()));
         }
-        return (Session::haveRight(self::$rightname, READ) && $this->haveVisibilityAccess());
+        return (!self::isFaqOnlyMode() && $this->haveVisibilityAccess());
     }
 
 
@@ -1197,7 +1288,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
         $out .= "</th></tr>";
 
         $out .= "<tr><td class='left' colspan='4'><h2>" . __('Subject') . "</h2>";
-        if (KnowbaseItemTranslation::canBeTranslated($this)) {
+        if ($this->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($this)) {
             $out .= KnowbaseItemTranslation::getTranslatedValue($this, 'name');
         } else {
             $out .= $this->fields["name"];
@@ -1386,7 +1477,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                 $params[$key] = $val;
             }
         }
-        $faq = !Session::haveRight(self::$rightname, READ);
+        $faq = self::isFaqOnlyMode();
 
        // Category select not for anonymous FAQ
         if (
@@ -1809,7 +1900,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
         $DBread = DBConnection::getReadConnection();
 
        // Default values of parameters
-        $params['faq']                       = !Session::haveRight(self::$rightname, READ);
+        $params['faq']                       = self::isFaqOnlyMode();
         $params["start"]                     = "0";
         $params["knowbaseitemcategories_id"] = null;
         $params["contains"]                  = "";
@@ -1951,9 +2042,13 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
                // Manage translations
                 if (isset($data['transname']) && !empty($data['transname'])) {
                     $name   = $data["transname"];
+                } elseif (((int)$data['is_faq'] === 1) || KnowbaseItemTranslation::canBeTranslated($item)) {
+                    $name = KnowbaseItemTranslation::getTranslatedValue($item, 'name');
                 }
                 if (isset($data['transanswer']) && !empty($data['transanswer'])) {
                     $answer = $data["transanswer"];
+                } elseif (((int)$data['is_faq'] === 1) || KnowbaseItemTranslation::canBeTranslated($item)) {
+                    $answer = KnowbaseItemTranslation::getTranslatedValue($item, 'answer');
                 }
 
                 if ($output_type == Search::HTML_OUTPUT) {
@@ -2115,7 +2210,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
     {
         global $DB;
 
-        $faq = !Session::haveRight(self::$rightname, READ);
+        $faq = self::isFaqOnlyMode();
 
         $criteria = [
             'SELECT'    => ['glpi_knowbaseitems.*'],
@@ -2210,6 +2305,11 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
 
                 if (isset($data['transname']) && !empty($data['transname'])) {
                     $name = $data['transname'];
+                } elseif (KnowbaseItemTranslation::isKbTranslationActive() || ((int)$data['is_faq'] === 1)) {
+                    $item = new self();
+                    if ($item->getFromDB($data['id']) && ($item->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($item))) {
+                        $name = KnowbaseItemTranslation::getTranslatedValue($item, 'name');
+                    }
                 }
                 $output .= "<tr class='tab_bg_2'><td class='left'><div class='kb'>";
                 if ($data['is_faq']) {
@@ -2362,7 +2462,7 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
      */
     public function getAnswer()
     {
-        if (KnowbaseItemTranslation::canBeTranslated($this)) {
+        if ($this->shouldUseFaqTranslationFallback() || KnowbaseItemTranslation::canBeTranslated($this)) {
             $answer = KnowbaseItemTranslation::getTranslatedValue($this, 'answer');
         } else {
             $answer = $this->fields["answer"];

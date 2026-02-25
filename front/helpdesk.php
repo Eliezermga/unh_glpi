@@ -35,11 +35,13 @@
 
 include('../inc/includes.php');
 
-if ((int)$CFG_GLPI['use_anonymous_helpdesk'] === 0) {
+// Keep anonymous users out when anonymous helpdesk is disabled, but allow
+// authenticated users to access the Technical Support page from Assistance.
+if ((int)$CFG_GLPI['use_anonymous_helpdesk'] === 0 && !Session::getLoginUserID()) {
     Html::redirect($CFG_GLPI["root_doc"] . "/front/central.php");
 }
 
 Glpi\Application\View\TemplateRenderer::getInstance()->display('anonymous_helpdesk.html.twig', [
     'card_md_width' => true,
-    'title'         => "Helpdesk",
+    'title'         => __('Technical Support'),
 ]);
