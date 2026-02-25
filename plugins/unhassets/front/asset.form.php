@@ -2,12 +2,12 @@
 
 include ('../../../inc/includes.php');
 
-Session::checkRight("plugin_unhassets", READ);
+Session::checkRight("plugin_unhassets", (isset($_GET['id']) && (int)$_GET['id'] === -1) || isset($_POST['add']) ? CREATE : READ);
 
 $asset = new PluginUnhassetsAsset();
 
 if (isset($_POST['add'])) {
-    $asset->check(-1, UPDATE, $_POST);
+    $asset->check(-1, CREATE, $_POST);
     if ($newID = $asset->add($_POST)) {
         Session::addMessageAfterRedirect(__('Asset added successfully', 'unhassets'));
     }
