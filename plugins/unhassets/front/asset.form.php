@@ -2,18 +2,14 @@
 
 include ('../../../inc/includes.php');
 
-// Sur un formulaire, GLPI utilise généralement id=-1 pour un nouvel objet.
-// On exige CREATE dans ce cas (sinon le lien "Ajouter" mène à une erreur de droits).
-if ((isset($_GET['id']) && (int)$_GET['id'] === -1) || isset($_POST['add'])) {
-    Session::checkRight("plugin_unhassets", CREATE);
-} else {
-    Session::checkRight("plugin_unhassets", READ);
-}
+Session::checkRight("plugin_unhassets", READ);
 
 $asset = new PluginUnhassetsAsset();
 
 if (isset($_POST['add'])) {
-    $asset->check(-1, CREATE, $_POST);
+    // Certains profils peuvent avoir UPDATE (écriture) sans le bit CREATE.
+    // On autorise donc la création via UPDATE.
+    $asset->check(-1, UPDATE, $_POST);
     if ($newID = $asset->add($_POST)) {
         Session::addMessageAfterRedirect(__('Équipement ajouté avec succès', 'unhassets'));
     }
@@ -41,12 +37,11 @@ if (isset($_POST['add'])) {
     Html::redirect($CFG_GLPI["root_doc"]."/plugins/unhassets/front/asset.php");
     
 } else {
-    $id = isset($_GET['id']) ? $_GET['id'] : 0;
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : -1;
     
     Html::header(
         __('Parc informatique', 'unhassets'),
         $_SERVER['PHP_SELF'],
-        "unhassets",
         "unhassets",
         "asset"
     );

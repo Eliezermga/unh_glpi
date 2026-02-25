@@ -12,6 +12,59 @@ class PluginUnhassetsReservation extends CommonDBTM {
         return _n('Réservation', 'Réservations', $nb, 'unhassets');
     }
 
+    public static function getTable($classname = null) {
+      return 'glpi_plugin_unhassets_reservations';
+   }
+
+   public static function getSearchURL($full = true) {
+      return Plugin::getWebDir('unhassets', $full) . "/front/reservation.php";
+   }
+
+   public static function getFormURL($full = true) {
+      return Plugin::getWebDir('unhassets', $full) . "/front/reservation.form.php";
+   }
+
+   /**
+    * Le bouton "+" (Ajouter) dans les listes GLPI n'est affiché que si
+    * canCreate() retourne true.
+    *
+    * Selon la configuration des profils, un plugin expose parfois uniquement
+    * Lecture/Écriture, et "Écriture" est fréquemment mappé sur UPDATE.
+    * On accepte donc CREATE ou UPDATE.
+    *
+    * En Super-Admin, le droit "config" (UPDATE) doit aussi permettre la création
+    * afin d'éviter une UI en lecture seule si le droit plugin n'est pas encore
+    * correctement initialisé sur le profil.
+    */
+   public static function canCreate() {
+      return Session::haveRight(self::$rightname, CREATE)
+         || Session::haveRight(self::$rightname, UPDATE)
+         || Session::haveRight('config', UPDATE);
+   }
+
+   public static function canUpdate() {
+      return Session::haveRight(self::$rightname, UPDATE)
+         || Session::haveRight('config', UPDATE);
+   }
+
+   public static function canDelete() {
+      return Session::haveRight(self::$rightname, DELETE)
+         || Session::haveRight(self::$rightname, UPDATE)
+         || Session::haveRight('config', UPDATE);
+   }
+
+    static function canView() {
+        return Session::haveRight(self::$rightname, READ)
+            || Session::haveRight('config', READ);
+    }
+
+    // Garde défensive : empêche l'injection de nos options de recherche
+    // dans les types natifs (Monitor, Computer...) → évite "Duplicate key 23"
+    static function getSearchOptionsToAdd($itemtype = null) {
+        return [];
+    }
+
+
     function defineTabs($options = []) {
         $ong = [];
         $this->addDefaultFormTab($ong);
@@ -229,69 +282,56 @@ class PluginUnhassetsReservation extends CommonDBTM {
         ]);
     }
 
-    function rawSearchOptions() {
+    public function rawSearchOptions() {
         $tab = [];
 
         $tab[] = [
-            'id'   => 'common',
-            'name' => __('Caractéristiques')
-        ];
-
-        $tab[] = [
-            'id'            => '1',
+            'id'            => 5101,
             'table'         => $this->getTable(),
             'field'         => 'id',
-            'name'          => __('ID'),
+            'name'          => __('ID', 'unhassets'),
+            'datatype'      => 'number',
             'massiveaction' => false,
-            'datatype'      => 'number'
         ];
 
         $tab[] = [
-            'id'       => '2',
-            'table'    => 'glpi_plugin_unhassets_assets',
-            'field'    => 'name',
-            'name'     => __('Équipement', 'unhassets'),
-            'datatype' => 'dropdown'
-        ];
-
-        $tab[] = [
-            'id'       => '3',
-            'table'    => 'glpi_users',
-            'field'    => 'name',
-            'name'     => __('Utilisateur'),
-            'datatype' => 'dropdown'
-        ];
-
-        $tab[] = [
-            'id'       => '4',
+            'id'       => 5102,
             'table'    => $this->getTable(),
             'field'    => 'reservation_date',
-            'name'     => __('Date', 'unhassets'),
-            'datatype' => 'date'
+            'name'     => __('Date de réservation', 'unhassets'),
+            'datatype' => 'date',
         ];
 
         $tab[] = [
-            'id'       => '5',
-            'table'    => $this->getTable(),
-            'field'    => 'start_time',
-            'name'     => __('Début', 'unhassets'),
-            'datatype' => 'datetime'
-        ];
-
-        $tab[] = [
-            'id'       => '6',
-            'table'    => $this->getTable(),
-            'field'    => 'end_time',
-            'name'     => __('Fin', 'unhassets'),
-            'datatype' => 'datetime'
-        ];
-
-        $tab[] = [
-            'id'       => '7',
+            'id'       => 5103,
             'table'    => $this->getTable(),
             'field'    => 'status',
             'name'     => __('Statut', 'unhassets'),
-            'datatype' => 'text'
+            'datatype' => 'string',
+        ];
+
+        $tab[] = [
+            'id'       => 5104,
+            'table'    => $this->getTable(),
+            'field'    => 'purpose',
+            'name'     => __('Objet', 'unhassets'),
+            'datatype' => 'text',
+        ];
+
+        $tab[] = [
+            'id'       => 5105,
+            'table'    => $this->getTable(),
+            'field'    => 'is_approved',
+            'name'     => __('Approuvée', 'unhassets'),
+            'datatype' => 'bool',
+        ];
+
+        $tab[] = [
+            'id'       => 5106,
+            'table'    => $this->getTable(),
+            'field'    => 'comment',
+            'name'     => __('Commentaire', 'unhassets'),
+            'datatype' => 'text',
         ];
 
         return $tab;

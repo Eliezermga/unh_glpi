@@ -1,11 +1,12 @@
 <?php
-include('../../../inc/includes.php');
+
+include ('../../../inc/includes.php');
+
 Session::checkRight("plugin_unhassets", READ);
 
 Html::header(
     __('Tableau de bord', 'unhassets'),
     $_SERVER['PHP_SELF'],
-    "unhassets",
     "unhassets",
     "dashboard"
 );
@@ -14,112 +15,189 @@ global $DB;
 $today = date('Y-m-d');
 
 /* ============================
-   FONCTION SAFE COUNT
+   LOGIQUE & REQUÊTES (Du Code 1)
 ============================ */
-function safeCount($DB, $table, $where = []) {
-    $res = $DB->request([
-        'COUNT'=>'cpt',
-        'FROM'=>$table,
-        'WHERE'=>$where
-    ])->current();
-    return $res['cpt'] ?? 0;
+
+// 1. Statistiques des assets par catégorie
+$stats_assets = [];
+$categories =['PC', 'Imprimante', 'Projecteur', 'Serveur', 'Switch', 'Autre'];
+$assets_total = 0;
+
+foreach ($categories as $cat) {
+    $count = $DB->request([
+        'COUNT' => 'cpt',
+        'FROM'  => 'glpi_plugin_unhassets_assets',
+        'WHERE' =>[
+            'asset_category' => $cat,
+            'is_deleted'     => 0
+        ]
+    ])->current()['cpt'];
+    $stats_assets[$cat] = $count;
+    $assets_total += $count;
 }
 
+// 2. Statistiques par statut
+$status_stats = [];
+$statuses =['active', 'inactive', 'maintenance', 'broken', 'retired'];
+
+foreach ($statuses as $status) {
+    $count = $DB->request([
+        'COUNT' => 'cpt',
+        'FROM'  => 'glpi_plugin_unhassets_assets',
+        'WHERE' =>[
+            'status'     => $status,
+            'is_deleted' => 0
+        ]
+    ])->current()['cpt'];
+    $status_stats[$status] = $count;
+}
+
+// 3. Statistiques des réservations
+$reservations_pending = $DB->request([
+    'COUNT' => 'cpt',
+    'FROM'  => 'glpi_plugin_unhassets_reservations',
+    'WHERE' =>['status' => 'pending']
+])->current()['cpt'];
+
+$reservations_today = $DB->request([
+    'COUNT' => 'cpt',
+    'FROM'  => 'glpi_plugin_unhassets_reservations',
+    'WHERE' =>[
+        'reservation_date' => $today,
+        'status'          => ['approved', 'pending']
+    ]
+])->current()['cpt'];
+
+// 4. Statistiques des licences
+$licenses_total = $DB->request([
+    'COUNT' => 'cpt',
+    'FROM'  => 'glpi_plugin_unhassets_licenses',
+    'WHERE' => ['is_deleted' => 0]
+])->current()['cpt'];
+
+$licenses_expiring = $DB->request([
+    'COUNT' => 'cpt',
+    'FROM'  => 'glpi_plugin_unhassets_licenses',
+    'WHERE' =>[
+        'is_deleted' => 0,
+        'AND' => [
+            ['expiration_date' =>['<=', date('Y-m-d', strtotime('+30 days'))]],['expiration_date' => ['>', $today]]
+        ]
+    ]
+])->current()['cpt'];
+
+$licenses_expired = $DB->request([
+    'COUNT' => 'cpt',
+    'FROM'  => 'glpi_plugin_unhassets_licenses',
+    'WHERE' =>[
+        'is_deleted'      => 0,
+        'expiration_date' => ['<', $today]
+    ]
+])->current()['cpt'];
+
+
 /* ============================
-   DONNÉES INITIALES KPI
+   PRÉPARATION DES DONNÉES KPI
 ============================ */
-$kpi = [
-    'assets_total'        => safeCount($DB,'glpi_plugin_unhassets_assets',['is_deleted'=>0]),
-    'assets_broken'       => safeCount($DB,'glpi_plugin_unhassets_assets',['status'=>4,'is_deleted'=>0]),
-    'reservations_pending'=> safeCount($DB,'glpi_plugin_unhassets_reservations',['status'=>1]),
-    'licenses_expired'    => safeCount($DB,'glpi_plugin_unhassets_licenses',['is_deleted'=>0,'expiration_date<'=>$today]),
-    'incidents_opened'    => safeCount($DB,'glpi_tickets',['status'=>1]),
-    'incidents_resolved'  => safeCount($DB,'glpi_tickets',['status'=>6])
+$kpi =[
+    'assets_total'         => $assets_total,
+    'assets_broken'        => $status_stats['broken'],
+    'reservations_pending' => $reservations_pending,
+    'reservations_today'   => $reservations_today,
+    'licenses_expired'     => $licenses_expired,
+    'licenses_expiring'    => $licenses_expiring
 ];
 
-/* ============================
-   DONNÉES INITIALES GRAPHIQUES
-============================ */
-$categories = ['PC','Imprimante','Projecteur','Serveur','Switch','Autre'];
-$assets_by_category = [];
-foreach ($categories as $cat) {
-    $assets_by_category[] = safeCount(
-        $DB,
-        'glpi_plugin_unhassets_assets',
-        ['asset_category' => $cat, 'is_deleted' => 0]
-    );
-}
-
-$assets_by_status = [];
-for($i=1;$i<=5;$i++){
-    $assets_by_status[] = safeCount($DB,'glpi_plugin_unhassets_assets',['status'=>$i,'is_deleted'=>0]);
-}
 
 /* ============================
-   CSS + Chart.js
+   CSS + Chart.js (Du Code 2)
 ============================ */
 echo "<link rel='stylesheet' href='".Plugin::getWebDir('unhassets')."/css/dashboard.css'>";
 echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";
 
+
 /* ============================
-   DASHBOARD HTML
+   INTERFACE DASHBOARD (Du Code 2)
 ============================ */
 echo "<div class='unh-dashboard'>";
 
-echo "<h1 class='dashboard-title'>Vue d’ensemble du parc informatique</h1>";
+echo "<h1 class='dashboard-title'>" . __('Vue d\'ensemble du parc informatique', 'unhassets') . "</h1>";
 
 // ----------------------
 // FILTRES DYNAMIQUES
 // ----------------------
 echo "<div class='dashboard-filters'>";
 
-// Bâtiment
 echo "<select id='filter-location'>
-        <option value=''>Tous les bâtiments</option>";
-$locations = $DB->request('glpi_locations');
-foreach ($locations as $loc) {
+        <option value=''>" . __('Tous les bâtiments', 'unhassets') . "</option>";
+foreach ($DB->request('glpi_locations') as $loc) {
     echo "<option value='{$loc['id']}'>{$loc['name']}</option>";
 }
 echo "</select>";
 
-// Département
 echo "<select id='filter-department'>
-        <option value=''>Tous les départements</option>";
-$departments = $DB->request('glpi_departments');
-foreach ($departments as $dep) {
+        <option value=''>" . __('Tous les départements', 'unhassets') . "</option>";
+foreach ($DB->request('glpi_departments') as $dep) {
     echo "<option value='{$dep['id']}'>{$dep['name']}</option>";
 }
 echo "</select>";
 
-// Type de matériel
 echo "<select id='filter-category'>
-        <option value=''>Tous les types</option>";
+        <option value=''>" . __('Tous les types', 'unhassets') . "</option>";
 foreach ($categories as $cat) {
     echo "<option value='$cat'>$cat</option>";
 }
 echo "</select>";
 
-echo "<button id='apply-filters'>Appliquer</button>";
+echo "<button id='apply-filters'>" . __('Appliquer', 'unhassets') . "</button>";
 echo "</div>";
 
 // ----------------------
-// KPI
+// ALERTES ET ACTIONS REQUISES
+// (Logique du code 1 adaptée à l'interface moderne)
+// ----------------------
+if ($status_stats['broken'] > 0 || $licenses_expired > 0 || $licenses_expiring > 0 || $reservations_pending > 0) {
+    echo "<div style='margin-bottom: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; color: #856404;'>";
+    echo "<h3 style='margin-top:0; font-size: 16px;'>" . __('⚠ Alertes et actions requises', 'unhassets') . "</h3>";
+    echo "<ul style='margin-bottom:0; padding-left: 20px; list-style-type: disc;'>";
+    
+    if ($status_stats['broken'] > 0) {
+        echo "<li><strong style='color: red;'>" . sprintf(__('%d équipement(s) en panne nécessitent votre attention', 'unhassets'), $status_stats['broken']) . "</strong></li>";
+    }
+    if ($licenses_expired > 0) {
+        echo "<li><strong style='color: red;'>" . sprintf(__('%d licence(s) expirée(s) - renouvellement nécessaire', 'unhassets'), $licenses_expired) . "</strong></li>";
+    }
+    if ($licenses_expiring > 0) {
+        echo "<li><strong style='color: #d39e00;'>" . sprintf(__('%d licence(s) expire(nt) dans les 30 prochains jours', 'unhassets'), $licenses_expiring) . "</strong></li>";
+    }
+    if ($reservations_pending > 0) {
+        echo "<li><strong style='color: #d39e00;'>" . sprintf(__('%d réservation(s) en attente d\'approbation', 'unhassets'), $reservations_pending) . "</strong></li>";
+    }
+    
+    echo "</ul>";
+    echo "</div>";
+}
+
+// ----------------------
+// GRILLE DES KPI (6 blocs)
 // ----------------------
 echo "<div class='kpi-grid'>";
-$titleMap = [
-    'assets_total'=>'Équipements',
-    'assets_broken'=>'Équipements en panne',
-    'reservations_pending'=>'Réservations en attente',
-    'licenses_expired'=>'Licences expirées',
-    'incidents_opened'=>'Incidents ouverts',
-    'incidents_resolved'=>'Incidents résolus'
+
+$titleMap =[
+    'assets_total'         => __('Total Équipements', 'unhassets'),
+    'assets_broken'        => __('Équipements en panne', 'unhassets'),
+    'reservations_pending' => __('Réservations en attente', 'unhassets'),
+    'reservations_today'   => __('Réservations (Aujourd\'hui)', 'unhassets'),
+    'licenses_expired'     => __('Licences expirées', 'unhassets'),
+    'licenses_expiring'    => __('Licences (expirent < 30j)', 'unhassets')
 ];
 
 foreach ($kpi as $key => $value) {
     $class = '';
-    if(in_array($key,['assets_broken','incidents_opened'])) $class='danger';
-    if(in_array($key,['reservations_pending'])) $class='warning';
-    if(in_array($key,['licenses_expired','incidents_resolved'])) $class='info';
+    // Gestion des couleurs selon la criticité
+    if(in_array($key, ['assets_broken', 'licenses_expired'])) $class='danger';
+    if(in_array($key, ['reservations_pending', 'licenses_expiring'])) $class='warning';
+    if(in_array($key,['assets_total', 'reservations_today'])) $class='info';
 
     echo "<a class='kpi-card $class' data-key='$key'>
             <span class='kpi-title'>{$titleMap[$key]}</span>
@@ -129,49 +207,61 @@ foreach ($kpi as $key => $value) {
 echo "</div>";
 
 // ----------------------
-// CHARTS
+// GRAPHIQUES
 // ----------------------
 echo "<div class='charts-grid'>
         <div class='chart-card'>
-          <h3>Équipements par catégorie</h3>
+          <h3>" . __('Équipements par catégorie', 'unhassets') . "</h3>
           <canvas id='chartCategory'></canvas>
         </div>
 
         <div class='chart-card'>
-          <h3>Équipements par statut</h3>
+          <h3>" . __('Équipements par statut', 'unhassets') . "</h3>
           <canvas id='chartStatus'></canvas>
         </div>
 
         <div class='chart-card'>
-          <h3>Suivi des incidents</h3>
-          <canvas id='chartIncidents'></canvas>
+          <h3>" . __('Statistiques Globales', 'unhassets') . "</h3>
+          <canvas id='chartIncidents'></canvas> <!-- Identifiant conservé pour compatibilité avec dashboard.js -->
         </div>
       </div>";
 
 // ----------------------
-// EXPORTS
+// BOUTONS D'EXPORTS
 // ----------------------
 echo "<div class='dashboard-actions'>
-        <a class='vsubmit' href='".Plugin::getWebDir('unhassets')."/front/export.php?type=pdf'>Exporter PDF</a>
-        <a class='vsubmit' href='".Plugin::getWebDir('unhassets')."/front/export.php?type=excel'>Exporter Excel</a>
+        <a class='vsubmit' href='".Plugin::getWebDir('unhassets')."/front/export.php?type=pdf'>" . __('Exporter PDF', 'unhassets') . "</a>
+        <a class='vsubmit' href='".Plugin::getWebDir('unhassets')."/front/export.php?type=excel'>" . __('Exporter Excel', 'unhassets') . "</a>
       </div>";
 
-echo "</div>"; // fin unh-dashboard
+echo "</div>"; // Fin de .unh-dashboard
+
 
 /* ============================
-   DONNÉES JS INIT
+   DONNÉES POUR JAVASCRIPT
 ============================ */
+
+// Traduction des statuts pour le graphique JS
+$translated_statuses =[
+    __('Actif', 'unhassets'),
+    __('Inactif', 'unhassets'),
+    __('En maintenance', 'unhassets'),
+    __('En panne', 'unhassets'),
+    __('Retiré', 'unhassets')
+];
+
 echo "<script>
 window.UNH_DASHBOARD_DATA = {
-  kpi: ".json_encode($kpi).",
-  categories: ".json_encode($categories).",
-  assetsByCategory: ".json_encode($assets_by_category).",
-  assetsByStatus: ".json_encode($assets_by_status)."
+  kpi: " . json_encode($kpi) . ",
+  categories: " . json_encode($categories) . ",
+  assetsByCategory: " . json_encode(array_values($stats_assets)) . ",
+  statuses: " . json_encode($translated_statuses) . ",
+  assetsByStatus: " . json_encode(array_values($status_stats)) . "
 };
 </script>";
 
 // ----------------------
-// JS Dashboard AJAX
+// INCLUSION DU FICHIER JS
 // ----------------------
 echo "<script src='".Plugin::getWebDir('unhassets')."/js/dashboard.js'></script>";
 

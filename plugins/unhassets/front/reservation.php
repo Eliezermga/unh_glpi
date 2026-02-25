@@ -8,7 +8,6 @@ Html::header(
     __('Réservations', 'unhassets'),
     $_SERVER['PHP_SELF'],
     "unhassets",
-    "unhassets",
     "reservation"
 );
 
