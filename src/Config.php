@@ -257,6 +257,41 @@ class Config extends CommonDBTM
             }
         }
 
+        // Validate student ticket response time
+        if (isset($input["student_ticket_response_time"]) && !empty($input["student_ticket_response_time"])) {
+            $response_time = (int)$input["student_ticket_response_time"];
+            if ($response_time < 1 || $response_time > 168) {
+                Session::addMessageAfterRedirect(__('Student ticket response time must be between 1 and 168 hours!'), false, ERROR);
+                return false;
+            }
+        }
+
+        // Validate SIS API URL
+        if (isset($input["sis_api_url"]) && !empty($input["sis_api_url"])) {
+            if (!Toolbox::isValidWebUrl($input["sis_api_url"])) {
+                Session::addMessageAfterRedirect(__('Invalid information system API URL!'), false, ERROR);
+                return false;
+            }
+        }
+
+        // Validate SIS sync frequency
+        if (isset($input["sis_sync_frequency"]) && !empty($input["sis_sync_frequency"])) {
+            $valid_frequencies = ['daily', 'weekly', 'monthly'];
+            if (!in_array($input["sis_sync_frequency"], $valid_frequencies)) {
+                Session::addMessageAfterRedirect(__('Invalid synchronization frequency!'), false, ERROR);
+                return false;
+            }
+        }
+
+        // Validate student session timeout
+        if (isset($input["student_session_timeout"]) && !empty($input["student_session_timeout"])) {
+            $timeout = (int)$input["student_session_timeout"];
+            if ($timeout < 15 || $timeout > 480) {
+                Session::addMessageAfterRedirect(__('Student session timeout must be between 15 and 480 minutes!'), false, ERROR);
+                return false;
+            }
+        }
+
         $input = $this->handleSmtpInput($input);
 
         if (isset($input["proxy_passwd"]) && empty($input["proxy_passwd"])) {
@@ -687,6 +722,40 @@ class Config extends CommonDBTM
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_2'>";
+        echo "<td> " . __('GLPI server time zone') . "</td><td>";
+        Dropdown::showGMT("time_offset", $CFG_GLPI["time_offset"]);
+        echo "</td><td></td></tr>";
+
+        echo "</table>";
+
+        echo "<br><table class='tab_cadre_fixe'>";
+        echo "<tr><th colspan='4'>" . __('University authentication configuration') . "</th></tr>";
+
+        $rand = mt_rand();
+        echo "<tr class='tab_bg_2'>";
+        echo "<td width='30%'><label for='dropdown_enable_sis_sync" . $rand . "'>" . __('Enable synchronization with university information system') . "</label></td>";
+        echo "<td width='20%'>";
+        Dropdown::showYesNo("enable_sis_sync", $CFG_GLPI["enable_sis_sync"] ?? 0, -1, ['rand' => $rand]);
+        echo "</td>";
+        echo "<td width='30%'><label for='sis_api_url'>" . __('Information system API URL') . "</label></td>";
+        echo "<td width='20%'>";
+        echo "<input type='url' name='sis_api_url' id='sis_api_url' value='" . htmlspecialchars($CFG_GLPI["sis_api_url"] ?? '') . "' class='form-control'>";
+        echo "</td></tr>";
+
+        echo "<tr class='tab_bg_2'>";
+        echo "<td><label for='dropdown_sis_sync_frequency" . $rand . "'>" . __('Synchronization frequency') . "</label></td>";
+        echo "<td>";
+        Dropdown::showFromArray('sis_sync_frequency', [
+            'daily' => __('Daily'),
+            'weekly' => __('Weekly'),
+            'monthly' => __('Monthly')
+        ], [
+            'value' => $CFG_GLPI["sis_sync_frequency"] ?? 'daily',
+            'rand' => $rand
+        ]);
+        echo "</td><td colspan='2'></td></tr>";
+
+        echo "<tr class='tab_bg_2'>";
         echo "<td colspan='4' class='center'>";
         echo "<input type='submit' name='update_auth' class='btn btn-primary' value=\"" . _sx('button', 'Save') .
            "\">";
@@ -935,7 +1004,9 @@ class Config extends CommonDBTM
         Dropdown::showYesNo('use_check_pref', $CFG_GLPI['use_check_pref'], -1, ['rand' => $rand]);
         echo "</td>";
 
-        echo "<td><label for='dropdown_use_anonymous_helpdesk$rand'>" . __('Allow anonymous ticket creation (helpdesk.receiver)') . "</label></td><td>";
+        echo "<td><label for='dropdown_use_anonymous_helpdesk$rand'>" . __('Allow anonymous ticket creation (helpdesk.receiver)') . "</label>";
+        Html::showToolTip(__('Permet aux étudiants de créer des tickets sans compte'));
+        echo "</td><td>";
         Dropdown::showYesNo("use_anonymous_helpdesk", $CFG_GLPI["use_anonymous_helpdesk"], -1, ['rand' => $rand]);
         echo "</td></tr><tr class='tab_bg_2'><td><label for='dropdown_use_anonymous_followups$rand'>" . __('Allow anonymous followups (receiver)') . "</label></td><td>";
         Dropdown::showYesNo("use_anonymous_followups", $CFG_GLPI["use_anonymous_followups"], -1, ['rand' => $rand]);
@@ -944,6 +1015,7 @@ class Config extends CommonDBTM
         echo "<tr>";
         echo "<td>";
         echo "<label for='dropdown_planning_work_days$rand'>" . __('Planning work days') . "</label>";
+        Html::showToolTip(__('Jours de travail de l\'université (excluant les vacances)'));
         echo "</td>";
         echo "<td colspan='3'>";
         Dropdown::showFromArray(
@@ -965,6 +1037,53 @@ class Config extends CommonDBTM
         );
         echo "</td>";
         echo "</tr>";
+        echo "</table>";
+
+        echo "<br><table class='tab_cadre_fixe'>";
+        echo "<tr><th colspan='4'>" . __('University assistance configuration') . "</th></tr>";
+
+        echo "<tr class='tab_bg_2'>";
+        echo "<td width='30%'><label for='dropdown_enable_student_tickets$rand'>" . __('Enable tickets for students') . "</label></td>";
+        echo "<td width='20%'>";
+        Dropdown::showYesNo("enable_student_tickets", $CFG_GLPI["enable_student_tickets"] ?? 0, -1, ['rand' => $rand]);
+        echo "</td>";
+        echo "<td width='30%'><label for='dropdown_default_student_ticket_category$rand'>" . __('Default category for student tickets') . "</label></td>";
+        echo "<td width='20%'>";
+        ITILCategory::dropdown([
+            'value' => $CFG_GLPI["default_student_ticket_category"] ?? 0,
+            'name'  => "default_student_ticket_category",
+            'rand'  => $rand,
+            'condition' => ['is_helpdeskvisible' => 1]
+        ]);
+        echo "</td></tr>";
+
+        echo "<tr class='tab_bg_2'>";
+        echo "<td><label for='dropdown_default_student_ticket_priority$rand'>" . __('Default priority for student tickets') . "</label></td>";
+        echo "<td>";
+        Ticket::dropdownPriority([
+            'value' => $CFG_GLPI["default_student_ticket_priority"] ?? 3,
+            'name'  => "default_student_ticket_priority",
+            'rand'  => $rand
+        ]);
+        echo "</td>";
+        echo "<td><label for='dropdown_student_ticket_response_time$rand'>" . __('Maximum response time for student tickets (hours)') . "</label></td>";
+        echo "<td>";
+        Dropdown::showNumber('student_ticket_response_time', [
+            'value' => $CFG_GLPI["student_ticket_response_time"] ?? 24,
+            'min'   => 1,
+            'max'   => 168,
+            'step'  => 1,
+            'rand'  => $rand
+        ]);
+        echo "</td></tr>";
+
+        if ($canedit) {
+            echo "<tr class='tab_bg_2'>";
+            echo "<td colspan='4' class='center'>";
+            echo "<input type='submit' name='update' class='btn btn-primary' value=\"" . _sx('button', 'Save') . "\">";
+            echo "</td></tr>";
+        }
+
         echo "</table>";
 
         echo "<table class='tab_cadre_fixe'>";
@@ -3427,6 +3546,7 @@ HTML;
         echo '<label for="dropdown_password_min_length' . $rand . '">';
         echo __('Password minimum length');
         echo '</label>';
+        Html::showToolTip(__('Longueur minimale requise pour les comptes universitaires'));
         echo '</td>';
         echo '<td>';
         Dropdown::showNumber(
@@ -3516,6 +3636,7 @@ HTML;
         echo '<label for="dropdown_password_expiration_delay' . $rand . '">';
         echo __('Password expiration delay (in days)');
         echo '</label>';
+        Html::showToolTip(__('Durée de validité des mots de passe pour étudiants et personnel'));
         echo '</td>';
         echo '<td>';
         Dropdown::showNumber(
@@ -3570,6 +3691,46 @@ HTML;
         );
         echo '</td>';
         echo '<td colspan="2"></td>';
+        echo '</tr>';
+
+        echo '</table>';
+
+        echo '<br><table class="tab_cadre_fixe">';
+        echo '<tr><th colspan="4">' . __('University security configuration') . '</th></tr>';
+
+        echo '<tr class="tab_bg_2">';
+        echo '<td width="30%">';
+        echo '<label for="dropdown_require_2fa_for_admins' . $rand . '">';
+        echo __('Require two-factor authentication for administrators');
+        echo '</label>';
+        echo '</td>';
+        echo '<td width="20%">';
+        Dropdown::showYesNo(
+            'require_2fa_for_admins',
+            $CFG_GLPI['require_2fa_for_admins'] ?? 0,
+            -1,
+            [
+                'rand' => $rand,
+            ]
+        );
+        echo '</td>';
+        echo '<td width="30%">';
+        echo '<label for="dropdown_student_session_timeout' . $rand . '">';
+        echo __('Default session timeout for students (minutes)');
+        echo '</label>';
+        echo '</td>';
+        echo '<td width="20%">';
+        Dropdown::showNumber(
+            'student_session_timeout',
+            [
+                'value' => $CFG_GLPI['student_session_timeout'] ?? 60,
+                'min'   => 15,
+                'max'   => 480,
+                'step'  => 15,
+                'rand'  => $rand
+            ]
+        );
+        echo '</td>';
         echo '</tr>';
 
         echo '<tr class="tab_bg_2">';
