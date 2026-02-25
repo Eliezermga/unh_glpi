@@ -13933,6 +13933,10 @@ msgstr "Purge des journeaux"
 msgid "Logs purge configuration"
 msgstr "Configuration de la purge des journeaux"
 
+#: src/Config.php:3125
+msgid "Durées de conservation des journaux pour l'audit du parc informatique universitaire UNH et la conformité."
+msgstr "Durées de conservation des journaux pour l'audit du parc informatique universitaire UNH et la conformité."
+
 #: src/NotificationTargetTicket.php:675 src/NotificationTargetTicket.php:723
 #: src/Entity.php:787 src/Location.php:107 src/Location.php:223
 #: src/Location.php:291

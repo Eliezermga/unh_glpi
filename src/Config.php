@@ -3138,6 +3138,9 @@ HTML;
         echo "<table class='tab_cadre_fixe'>";
         echo "<tr class='tab_bg_1'><th colspan='4'>" . __("Logs purge configuration") .
            "</th></tr>";
+        echo "<tr class='tab_bg_1'><td colspan='4'>";
+        echo Html::showTooltip(__('Durées de conservation des journaux pour l\'audit du parc informatique universitaire UNH et la conformité.'));
+        echo "</td></tr>";
         echo "<tr class='tab_bg_1 center'><td colspan='4'><i>" . __("Change all") . "</i>";
         echo Html::scriptBlock("function form_init_all(value) {
          $('#purgelogs_form .purgelog_interval select').val(value).trigger('change');;
