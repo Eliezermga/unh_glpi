@@ -6,7 +6,7 @@ if (!defined('GLPI_ROOT')) {
 
 class PluginUnhassetsMenu extends CommonGLPI {
 
-    static $rightname = 'config';
+    static $rightname = 'plugin_unhassets';
 
     static function getMenuName() {
         return __('UNH Assets', 'unhassets');
