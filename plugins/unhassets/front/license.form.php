@@ -2,12 +2,12 @@
 
 include ('../../../inc/includes.php');
 
-Session::checkRight("plugin_unhassets", READ);
+Session::checkRight("plugin_unhassets", (isset($_GET['id']) && (int)$_GET['id'] === -1) || isset($_POST['add']) ? CREATE : READ);
 
 $license = new PluginUnhassetsLicense();
 
 if (isset($_POST['add'])) {
-    $license->check(-1, UPDATE, $_POST);
+    $license->check(-1, CREATE, $_POST);
     if ($newID = $license->add($_POST)) {
         Session::addMessageAfterRedirect(__('License added successfully', 'unhassets'));
     }
