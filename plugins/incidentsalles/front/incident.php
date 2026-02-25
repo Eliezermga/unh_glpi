@@ -154,6 +154,13 @@ if (count($incidents) == 0) {
       echo "<td style='$days_color'>$days_open jours</td>";
       
       echo "<td>";
+      // Boutons d'action selon le statut
+      if ($incident['status'] == 'nouveau' || $incident['status'] == 'en_cours') {
+         echo "<a href='incident.action.php?id=" . $incident['id'] . "&action=resoudre' style='padding: 5px 10px; background: #4CAF50; color: white; text-decoration: none; border-radius: 3px; font-size: 11px; margin-right: 5px;'>✓ Résolu</a>";
+      }
+      if ($incident['status'] == 'nouveau') {
+         echo "<a href='incident.action.php?id=" . $incident['id'] . "&action=en_cours' style='padding: 5px 10px; background: #FF9800; color: white; text-decoration: none; border-radius: 3px; font-size: 11px; margin-right: 5px;'>⏳ En cours</a>";
+      }
       echo "<a href='incident.form.php?id=" . $incident['id'] . "' style='padding: 5px 10px; background: #2196F3; color: white; text-decoration: none; border-radius: 3px; font-size: 11px;'>🔍 Voir</a>";
       echo "</td>";
       echo "</tr>";
