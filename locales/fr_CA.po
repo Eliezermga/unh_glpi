@@ -26839,3 +26839,253 @@ msgstr "Vous devrez ajouter un réseau"
 #: templates/layout/parts/profile_selector.html.twig
 msgid "⌥ (option) + ⌘ (command) + E"
 msgstr "⌥ (option) + ⌘ (command) + E"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Select a category"
+msgstr "Selectionnez une categorie"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Choose a category"
+msgstr "Choisissez une categorie"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Wi-Fi / Network"
+msgstr "Wi-Fi / Reseau"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Account / Password"
+msgstr "Compte / Mot de passe"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Moodle / LMS"
+msgstr "Moodle / LMS"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Hardware / Equipment"
+msgstr "Materiel / Equipement"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Quick tips before submitting:"
+msgstr "Conseils rapides avant soumission :"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "If the tips above don't solve your problem, please fill out the form below."
+msgstr "Si les conseils ci-dessus ne resolvent pas votre probleme, merci de remplir le formulaire ci-dessous."
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use your university email as username (example: john.doe@university.edu)"
+msgstr "Utilisez votre adresse email universitaire comme identifiant (exemple : john.doe@university.edu)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Forget the network and reconnect"
+msgstr "Oubliez le reseau puis reconnectez-vous"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check that Airplane mode is disabled"
+msgstr "Verifiez que le mode avion est desactive"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Try connecting in a different location on campus"
+msgstr "Essayez de vous connecter depuis un autre endroit du campus"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Forgot password?"
+msgstr "Mot de passe oublie ?"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use the \"Forgot password\" link on the login page"
+msgstr "Utilisez le lien \"Mot de passe oublie\" sur la page de connexion"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check that Caps Lock is not enabled"
+msgstr "Verifiez que la touche Verr Maj n'est pas active"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Clear your browser cache and cookies"
+msgstr "Videz le cache et les cookies du navigateur"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Try with a different browser"
+msgstr "Essayez avec un autre navigateur"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Make sure you are enrolled in the course"
+msgstr "Verifiez que vous etes inscrit au cours"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Contact your teacher if the course is not visible"
+msgstr "Contactez votre enseignant si le cours n'est pas visible"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use an up-to-date browser (Chrome, Firefox, Edge)"
+msgstr "Utilisez un navigateur a jour (Chrome, Firefox, Edge)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check your internet connection"
+msgstr "Verifiez votre connexion internet"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the device"
+msgstr "Redemarrez l'appareil"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check all cable connections"
+msgstr "Verifiez tous les branchements de cables"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "For printers: check paper and ink levels"
+msgstr "Pour les imprimantes : verifiez le papier et le niveau d'encre"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Note the equipment label (e.g., SCI-A101-PC01)"
+msgstr "Notez l'etiquette du materiel (ex. : SCI-A101-PC01)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the application"
+msgstr "Redemarrez l'application"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check for available updates"
+msgstr "Verifiez les mises a jour disponibles"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the computer"
+msgstr "Redemarrez l'ordinateur"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Note the exact error message if any"
+msgstr "Notez le message d'erreur exact s'il y en a un"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Please describe your problem in detail in the form below."
+msgstr "Decrivez votre probleme en detail dans le formulaire ci-dessous."
+
+#: src/Html.php front/helpdesk.php
+msgid "Technical Support"
+msgstr "Support Technique"
+
+#: src/Html.php front/inventoryorganization.php
+msgid "Inventory Organization"
+msgstr "Organisation de l'inventaire"
+
+#. UNH GLPI Custom Translations - Inventory Organization menu
+#: front/inventoryorganization.php
+msgid "Entities"
+msgstr "Entites"
+
+#: front/inventoryorganization.php
+msgid "Create and manage the GLPI entity hierarchy"
+msgstr "Creer et gerer la hierarchie des entites GLPI"
+
+#: front/inventoryorganization.php
+msgid "Locations"
+msgstr "Lieux"
+
+#: front/inventoryorganization.php
+msgid "Define locations (campus, buildings, floors, rooms)"
+msgstr "Definir les lieux (campus, batiments, etages, salles)"
+
+#: front/inventoryorganization.php
+msgid "Asset types"
+msgstr "Types de materiel"
+
+#: front/inventoryorganization.php
+msgid "Create asset types (PC, laptop, projector)"
+msgstr "Creer les types de materiel (PC, laptop, projecteur)"
+
+#: front/inventoryorganization.php
+msgid "Labeling"
+msgstr "Etiquetage"
+
+#: front/inventoryorganization.php
+msgid "Configure the format UNH-FAC-BAT-TYPE-NNN"
+msgstr "Configurer le format UNH-FAC-BAT-TYPE-NNN"
+
+#: front/inventoryorganization.php
+msgid "Coherence check"
+msgstr "Verification de coherence"
+
+#: front/inventoryorganization.php
+msgid "Check inventory coherence"
+msgstr "Controler la coherence de l inventaire"
+
+#. UNH GLPI Static FAQ (DB independent)
+#: src/KnowbaseItem.php
+msgid "faq.static.question.create_support_ticket"
+msgstr "Comment creer un ticket de support ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.reset_password"
+msgstr "Comment reinitialiser mon mot de passe ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.connect_campus_wifi"
+msgstr "Comment se connecter au WiFi du campus ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.computer_not_booting"
+msgstr "Mon ordinateur ne demarre plus, que faire ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.install_software"
+msgstr "Comment installer un logiciel ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.printer_not_working"
+msgstr "L'imprimante ne fonctionne pas"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.remote_file_access"
+msgstr "Comment acceder a mes fichiers a distance ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.black_or_frozen_screen"
+msgstr "Mon ecran reste noir ou fige"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.track_ticket_status"
+msgstr "Comment suivre l'etat de mon ticket ?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.useful_keyboard_shortcuts"
+msgstr "Les raccourcis clavier utiles"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.create_support_ticket"
+msgstr "Allez dans Assistance > Creer ticket, choisissez une categorie, decrivez le probleme, puis envoyez."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.reset_password"
+msgstr "Utilisez Mot de passe oublie sur la page de connexion, entrez votre email, puis suivez le lien de reinitialisation."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.connect_campus_wifi"
+msgstr "Ouvrez les parametres WiFi, choisissez le WiFi du campus, connectez-vous avec votre compte universitaire, puis acceptez le certificat si demande."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.computer_not_booting"
+msgstr "Verifiez l'alimentation et la batterie, maintenez le bouton marche/arret 10 secondes, puis redemarrez. Si le probleme continue, ouvrez un ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.install_software"
+msgstr "Ouvrez le Software Center, choisissez l'application, puis cliquez sur Installer. Si l'acces est refuse, faites une demande via ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.printer_not_working"
+msgstr "Verifiez alimentation, cables, papier et toner. Redemarrez l'imprimante. Si le probleme persiste, ouvrez un ticket avec le nom de l'imprimante."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.remote_file_access"
+msgstr "Utilisez le VPN ou le portail distant, connectez-vous avec votre compte universitaire, puis ouvrez votre lecteur reseau."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.black_or_frozen_screen"
+msgstr "Redemarrez l'ordinateur, verifiez le cable ecran, puis mettez a jour le pilote graphique. Si bloque, ouvrez un ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.track_ticket_status"
+msgstr "Allez dans Assistance > Tickets, ouvrez votre ticket, puis consultez le statut et l'historique."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.useful_keyboard_shortcuts"
+msgstr "Raccourcis utiles: Ctrl+C copier, Ctrl+V coller, Ctrl+S sauvegarder, Alt+Tab changer de fenetre."
