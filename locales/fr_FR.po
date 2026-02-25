@@ -20981,6 +20981,10 @@ msgstr "Préférences"
 msgid "Setup"
 msgstr "Configuration"
 
+#: src/Html.php:1435
+msgid "Configuration UNH"
+msgstr "Configuration UNH"
+
 #: src/NetworkName.php:419
 msgid ""
 "Several network names available! Go to the tab 'Network Name' to manage "
