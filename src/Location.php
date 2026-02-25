@@ -8,7 +8,7 @@
  * http://glpi-project.org
  *
  * @copyright 2015-2023 Teclib' and contributors.
- * @copyright 2003-2014 by the INDEPNET Development Team.
+ * @copyright 2003-2014 by INDEPNET Development Team.
  * @licence   https://www.gnu.org/licenses/gpl-3.0.html
  *
  * ---------------------------------------------------------------------
@@ -60,11 +60,6 @@ class Location extends CommonTreeDropdown
                 'type'  => 'parent',
                 'list'  => false
             ], [
-                'name'   => 'location_type',
-                'label'  => __('Location type'),
-                'type'   => 'location_type',
-                'list'   => true
-            ], [
                 'name'  => 'building',
                 'label' => __('Building number'),
                 'type'  => 'text',
@@ -77,6 +72,7 @@ class Location extends CommonTreeDropdown
             ]
             // Champs supprimés car non nécessaires pour un site unique :
             // - address, postcode, town, state, country (même adresse pour tout le site)
+            // - location_type (n'existe pas en base de données)
             // - setlocation, latitude, longitude, altitude (optionnel, peut être ajouté plus tard si besoin)
         ];
     }
@@ -88,18 +84,17 @@ class Location extends CommonTreeDropdown
     }
 
     /**
-     * Get locations filtered by type (useful for building filtering)
+     * Get building locations (for filtering)
      *
-     * @param string $type Location type (site, building, floor, room, other)
      * @param int|null $entity_id Entity ID (optional)
      *
-     * @return array Array of location IDs
+     * @return array Array of building location IDs
      */
-    public static function getLocationsByType($type, $entity_id = null)
+    public static function getBuildings($entity_id = null)
     {
         global $DB;
 
-        $where = ['location_type' => $type];
+        $where = [];
         
         if ($entity_id !== null) {
             $where += getEntitiesRestrictCriteria(self::getTable(), 'entities_id', $entity_id, true);
@@ -119,18 +114,6 @@ class Location extends CommonTreeDropdown
         return $locations;
     }
 
-    /**
-     * Get building locations (for filtering)
-     *
-     * @param int|null $entity_id Entity ID (optional)
-     *
-     * @return array Array of building location IDs
-     */
-    public static function getBuildings($entity_id = null)
-    {
-        return self::getLocationsByType('building', $entity_id);
-    }
-
 
     public static function rawSearchOptionsToAdd()
     {
@@ -147,22 +130,7 @@ class Location extends CommonTreeDropdown
             'datatype'           => 'dropdown'
         ];
 
-        // Ajout du type de lieu pour le filtrage
-        $tab[] = [
-            'id'                 => '23',
-            'table'              => 'glpi_locations',
-            'field'              => 'location_type',
-            'name'               => __('Location type'),
-            'datatype'           => 'dropdown',
-            'searchtype'         => ['equals', 'notequals'],
-            'values'             => [
-                'site'     => __('Site'),
-                'building' => __('Building'),
-                'etage'    => __('Etage'),
-                'salle'    => __('Salle'),
-                'autre'    => __('Autre')
-            ],
-        ];
+        // Supprimé : location_type (n'existe pas en base de données)
 
         $tab[] = [
             'id'                 => '91',
@@ -205,22 +173,7 @@ class Location extends CommonTreeDropdown
         // Options de recherche simplifiées pour un contexte universitaire avec un seul site
         // On garde uniquement les champs essentiels cohérents avec le formulaire
 
-        $tab[] = [
-            'id'                 => '10',
-            'table'              => 'glpi_locations',
-            'field'              => 'location_type',
-            'name'               => __('Location type'),
-            'datatype'           => 'dropdown',
-            'searchtype'         => ['equals', 'notequals'],
-            'massiveaction'      => true,
-            'values'             => [
-                'site'     => __('Site'),
-                'building' => __('Building'),
-                'etage'    => __('Etage'),
-                'salle'    => __('Salle'),
-                'autre'    => __('Autre')
-            ],
-        ];
+        // Supprimé : location_type (n'existe pas en base de données)
 
         $tab[] = [
             'id'                 => '11',
@@ -303,7 +256,7 @@ class Location extends CommonTreeDropdown
 
 
     /**
-     * Print the HTML array of items for a location
+     * Print HTML array of items for a location
      *
      * @since 0.85
      *
@@ -356,7 +309,7 @@ class Location extends CommonTreeDropdown
 
         $iterator = $DB->request($criteria);
 
-       // Execute a second request to get the total number of rows
+       // Execute a second request to get total number of rows
         unset($criteria['SELECT']);
         unset($criteria['START']);
         unset($criteria['LIMIT']);
@@ -368,7 +321,7 @@ class Location extends CommonTreeDropdown
         echo "<table class='tab_cadre_fixe'>";
         echo "<tr class='tab_bg_1'><th colspan='2'>" . _n('Type', 'Types', 1) . "</th></tr>";
         echo "<tr class='tab_bg_1'><td class='center'>";
-        echo _n('Type', 'Types', 1) . "&nbsp;";
+        echo _n('Type', 'Types', 1) . "&​nbsp;";
         $all_types = array_merge(['0' => '---'], $CFG_GLPI['location_types']);
         Dropdown::showItemType(
             $all_types,
@@ -419,28 +372,7 @@ class Location extends CommonTreeDropdown
             case 'setlocation':
                 $this->showMap();
                 break;
-            case 'location_type':
-                $values = [
-                    ''       => Dropdown::EMPTY_VALUE,
-                    'site'   => __('Site'),
-                    'building' => __('Building'),
-                    'etage'  => __('Etage'),
-                    'salle'   => __('Salle'),
-                    'autre'  => __('Autre')
-                ];
-                
-                $current_value = $this->fields['location_type'] ?? '';
-                
-                Dropdown::showFromArray(
-                    'location_type',
-                    $values,
-                    [
-                        'value'  => $current_value,
-                        'rand'   => $options['rand'] ?? mt_rand(),
-                        'display' => true
-                    ]
-                );
-                break;
+            // Supprimé : case 'location_type' (n'existe pas en base de données)
             default:
                 throw new \RuntimeException("Unknown {$field['type']}");
         }
