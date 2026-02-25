@@ -134,6 +134,7 @@ Html::header(
 );
 
 Glpi\Application\View\TemplateRenderer::getInstance()->display(
+    
     'pages/inventoryorganization/types.html.twig',
     [
         'title'           => __('Material Type Management'),

@@ -6,6 +6,7 @@
 include('../inc/includes.php');
 
 if (!InventoryOrganization::canView()) {
+    
     Html::displayRightError();
 }
 
