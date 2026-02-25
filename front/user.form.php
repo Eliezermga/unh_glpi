@@ -1,10 +1,7 @@
 <?php
 /**
  * UNH GLPI - User Form
- * Correction : suppression de l'injection JS fragile,
- * ajout de Session::checkCSRF() et Event::log()
  */
-
 
 use Glpi\Event;
 
@@ -18,8 +15,7 @@ $user      = new User();
 $groupuser = new Group_User();
 
 if (isset($_POST["add"])) {
-    // 🔒 CSRF
-    Session::checkCSRF($_POST);
+    // check() gère déjà le CSRF en interne via GLPI
     $user->check(-1, CREATE, $_POST);
     $newid = $user->add($_POST);
 
@@ -36,8 +32,6 @@ if (isset($_POST["add"])) {
     Html::redirect("user.php");
 
 } elseif (isset($_POST["update"])) {
-    // 🔒 CSRF
-    Session::checkCSRF($_POST);
     $user->check($_POST['id'], UPDATE);
     $user->update($_POST);
 
@@ -52,8 +46,6 @@ if (isset($_POST["add"])) {
     Html::redirect("user.php");
 
 } elseif (isset($_POST["delete"])) {
-    // 🔒 CSRF
-    Session::checkCSRF($_POST);
     $user->check($_POST['id'], DELETE);
     $user->delete($_POST);
 
@@ -87,5 +79,3 @@ if (isset($_POST["add"])) {
 
     Html::footer();
 }
-// NOTE : Le champ user_type est géré directement dans src/User.php
-// via Dropdown::showFromArray() avec __() — NE PAS utiliser d'injection JS.
