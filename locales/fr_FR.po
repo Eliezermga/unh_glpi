@@ -44,6 +44,27 @@ msgstr ""
 msgid "\"%s\" cache system is used"
 msgstr "\"%s\" du cache système est utilisé"
 
+#: src/Config.php:638
+msgid "University authentication configuration"
+msgstr "Configuration d’authentification universitaire"
+
+#: src/Config.php:642
+msgid "Enable synchronization with university information system"
+msgstr "Activer la synchronisation avec le système d’information universitaire"
+
+#: src/Config.php:649
+msgid "Current university synchronization status: enabled."
+msgstr "Statut actuel de la synchronisation universitaire : activée."
+
+#: src/Config.php:651
+msgid "Current university synchronization status: disabled."
+msgstr "Statut actuel de la synchronisation universitaire : désactivée."
+
+#: src/Config.php:657
+#, php-format
+msgid "Last university synchronization status change: %s"
+msgstr "Dernière modification de l’état de synchronisation universitaire : %s"
+
 #: src/Console/Plugin/InstallCommand.php:70
 msgid "\"-p foo\" will set \"foo\" param value to true"
 msgstr "\"-p foo\" définira la valeur Vrai pour le paramètre \"foo\" "
