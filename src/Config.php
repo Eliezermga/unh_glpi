@@ -423,7 +423,9 @@ class Config extends CommonDBTM
         echo "<tr><th colspan='4'>" . _n('Asset', 'Assets', Session::getPluralNumber()) . "</th></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td width='30%'><label for='dropdown_auto_create_infocoms$rand'>" . __('Enable the financial and administrative information by default') . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_auto_create_infocoms$rand'>" . __('Enable the financial and administrative information by default') . "</label>";
+        echo Html::showTooltip(__('Activer les informations financières pour le parc universitaire (équipements des salles, laboratoires).'));
+        echo "</td>";
         echo "<td  width='20%'>";
         Dropdown::ShowYesNo('auto_create_infocoms', $CFG_GLPI["auto_create_infocoms"], -1, ['rand' => $rand]);
         echo "</td><td width='20%'><label for='dropdown_monitors_management_restrict$rand'>" . __('Restrict monitor management') . "</label></td>";
@@ -450,7 +452,9 @@ class Config extends CommonDBTM
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td><label for='showdate$rand'>" . __('End of fiscal year') . "</label></td><td>";
+        echo "<td><label for='showdate$rand'>" . __('End of academic year') . "</label>";
+        echo Html::showTooltip(__('Date de fin d\'année académique UNH (salles, laboratoires, facultés). Utilisée pour le suivi des actifs du parc universitaire.'));
+        echo "</td><td>";
         Html::showDateField("date_tax", ['value'      => $CFG_GLPI["date_tax"],
             'maybeempty' => false,
             'canedit'    => true,
@@ -517,6 +521,7 @@ class Config extends CommonDBTM
         echo "<br><table class='tab_cadre_fixe'>";
         echo "<tr>";
         echo "<th colspan='4'>" . __('Automatically update of the elements related to the computers');
+        echo Html::showTooltip(__('Mise à jour automatique des contacts, utilisateurs, groupes et emplacements (salles, laboratoires, facultés UNH).'));
         echo "</th><th colspan='2'>" . __('Unit management') . "</th></tr>";
 
         echo "<tr><th>&nbsp;</th>";
