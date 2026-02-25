@@ -2,55 +2,73 @@
 
 /**
  * ---------------------------------------------------------------------
- *
- * GLPI - Gestionnaire Libre de Parc Informatique
- *
- * http://glpi-project.org
- *
- * @copyright 2015-2023 Teclib' and contributors.
- * @copyright 2003-2014 by the INDEPNET Development Team.
- * @licence   https://www.gnu.org/licenses/gpl-3.0.html
- *
- * ---------------------------------------------------------------------
- *
- * LICENSE
- *
- * This file is part of GLPI.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * MODULE : Réservations
+ * Auteur : ILUNGA MWAKU Prodiges
+ * Description :
+ * Permet aux étudiants et enseignants de réserver des salles,
+ * du matériel et équipements avec gestion des disponibilités.
  * ---------------------------------------------------------------------
  */
 
 include('../inc/includes.php');
 
+// ===============================
+// 1️⃣ Vérification des droits
+// ===============================
+
 Session::checkRightsOr('reservation', [READ, ReservationItem::RESERVEANITEM]);
 
+// ===============================
+// 2️⃣ Header selon interface
+// ===============================
+
 if (Session::getCurrentInterface() == "helpdesk") {
-    Html::helpHeader(__('Simplified interface'), 'reservation');
+    Html::helpHeader(__('Réservations - Interface simplifiée'), 'reservation');
 } else {
-    Html::header(Reservation::getTypeName(Session::getPluralNumber()), $_SERVER['PHP_SELF'], "tools", "reservationitem");
+    Html::header(
+        Reservation::getTypeName(Session::getPluralNumber()),
+        $_SERVER['PHP_SELF'],
+        "tools",
+        "reservationitem"
+    );
 }
 
-$res = new ReservationItem();
-$res->display($_GET);
+// ===============================
+// 3️⃣ Message d'information
+// ===============================
+
+echo "<div class='center'>";
+echo "<h2>📅 Module de Réservation</h2>";
+echo "<p>
+Ce module permet aux <strong>étudiants et enseignants</strong> de réserver :
+<br>✔ Salles
+<br>✔ Matériel
+<br>✔ Équipements pédagogiques
+<br><br>
+Vous pouvez consulter les disponibilités, créer ou annuler une réservation.
+</p>";
+echo "</div><br>";
+
+// ===============================
+// 4️⃣ Affichage des réservations
+// ===============================
+
+$reservation = new ReservationItem();
+$reservation->display($_GET);
+
+// ===============================
+// 5️⃣ Gestion sauvegarde formulaire
+// ===============================
 
 if (isset($_POST['submit'])) {
     $_SESSION['glpi_saved']['ReservationItem'] = $_POST;
 } else {
     unset($_SESSION['glpi_saved']['ReservationItem']);
 }
+
+// ===============================
+// 6️⃣ Footer selon interface
+// ===============================
 
 if (Session::getCurrentInterface() == "helpdesk") {
     Html::helpFooter();

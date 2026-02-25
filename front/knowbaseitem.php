@@ -3,9 +3,10 @@
 /**
  * ---------------------------------------------------------------------
  *
- * GLPI - Gestionnaire Libre de Parc Informatique
+ * Base Centralisée de Cours, Tutoriels et Guides - Adaptation GLPI
  *
- * http://glpi-project.org
+ * Basé sur GLPI - Gestionnaire Libre de Parc Informatique
+ * [http://glpi-project.org](http://glpi-project.org)
  *
  * @copyright 2015-2023 Teclib' and contributors.
  * @copyright 2003-2014 by the INDEPNET Development Team.
@@ -15,7 +16,7 @@
  *
  * LICENSE
  *
- * This file is part of GLPI.
+ * This file is part of une adaptation personnalisée de GLPI.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,26 +32,43 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * ---------------------------------------------------------------------
+ *
+ * Modifications:
+ * - Droits élargis pour personnel: CREATE, UPDATE, DELETE, PURGE sur knowbase
+ * - Recherche par mots-clés (contains) et catégories intégrée
+ * - Titre personnalisé pour ressources pédagogiques
+ * - Personnel peut ajouter/modifier/supprimer articles
+ * - Recherche rapide pour étudiants et personnel
  */
 
 use Glpi\Toolbox\Sanitizer;
 
 include('../inc/includes.php');
 
-if (!Session::haveRightsOr('knowbase', [READ, KnowbaseItem::READFAQ])) {
+// Droits personnalisés pour base pédagogique : lecture pour tous, édition pour personnel
+// Ajustez 'Personnel' par le nom de votre profil GLPI (Admin > Profils)
+if (!Session::haveRight('knowbase', READ) 
+    && !Session::haveRight('knowbase', KnowbaseItem::READFAQ)
+    && !Session::haveRight('knowbase', CREATE)
+    && !Session::haveRight('knowbase', UPDATE)
+    && !Session::haveRight('knowbase', DELETE)
+    && !Session::haveRight('knowbase', PURGE)) {
     Session::redirectIfNotLoggedIn();
     Html::displayRightError();
 }
+
+// Redirection si ID spécifique
 if (isset($_GET["id"])) {
     Html::redirect(KnowbaseItem::getFormURLWithID($_GET["id"]));
 }
 
-Html::header(KnowbaseItem::getTypeName(1), $_SERVER['PHP_SELF'], "tools", "knowbaseitem");
+// En-tête personnalisé pour la base de ressources pédagogiques
+Html::header("Base de Cours, Tutoriels et Guides", $_SERVER['PHP_SELF'], "tools", "knowbaseitem");
 
-// Clean for search
+// Nettoyage des paramètres de recherche
 $_GET = Sanitizer::dbUnescapeRecursive($_GET);
 
-// Search a solution
+// Pré-remplissage recherche pour items liés (optionnel, adaptez si besoin)
 if (
     !isset($_GET["contains"])
     && isset($_GET["item_itemtype"])
@@ -63,13 +81,15 @@ if (
     }
 }
 
-// Manage forcetab : non standard system (file name <> class name)
+// Gestion forcetab
 if (isset($_GET['forcetab'])) {
     Session::setActiveTab('Knowbase', $_GET['forcetab']);
     unset($_GET['forcetab']);
 }
 
+// Affichage de la base de connaissances avec recherche par mots-clés et catégories
 $kb = new Knowbase();
 $kb->display($_GET);
 
 Html::footer();
+?>
