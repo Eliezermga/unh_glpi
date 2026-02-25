@@ -69,6 +69,7 @@
         field_options|merge({
             'enable_richtext': true,
             'enable_images': false,
+            'helper': __('Message de bienvenue UNH affiché dans la boîte de connexion (ex. : Bienvenue à l\'Université Nouveaux Horizons).'),
         })
     ) }}
 
@@ -76,14 +77,18 @@
         'helpdesk_doc_url',
         config['helpdesk_doc_url'],
         __('Simplified interface help link'),
-        field_options
+        field_options|merge({
+            'helper': __('Lien vers la documentation UNH pour l\'interface simplifiée (étudiants, personnel).'),
+        })
     ) }}
 
     {{ fields.textField(
         'central_doc_url',
         config['central_doc_url'],
         __('Standard interface help link'),
-        field_options
+        field_options|merge({
+            'helper': __('Lien vers la documentation UNH pour l\'interface standard (administrateurs).'),
+        })
     ) }}
 
     {{ fields.numberField(

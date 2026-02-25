@@ -22285,6 +22285,18 @@ msgstr "En test"
 msgid "Text in the login box"
 msgstr "Texte sur la page de connexion"
 
+#: templates/pages/setup/general/general_setup.html.twig
+msgid "Message de bienvenue UNH affiché dans la boîte de connexion (ex. : Bienvenue à l'Université Nouveaux Horizons)."
+msgstr "Message de bienvenue UNH affiché dans la boîte de connexion (ex. : Bienvenue à l'Université Nouveaux Horizons)."
+
+#: templates/pages/setup/general/general_setup.html.twig
+msgid "Lien vers la documentation UNH pour l'interface simplifiée (étudiants, personnel)."
+msgstr "Lien vers la documentation UNH pour l'interface simplifiée (étudiants, personnel)."
+
+#: templates/pages/setup/general/general_setup.html.twig
+msgid "Lien vers la documentation UNH pour l'interface standard (administrateurs)."
+msgstr "Lien vers la documentation UNH pour l'interface standard (administrateurs)."
+
 #: src/Console/Maintenance/EnableMaintenanceModeCommand.php:59
 msgid "Text to display during maintenance"
 msgstr "Texte à afficher pendant la durée de la maintenance"
