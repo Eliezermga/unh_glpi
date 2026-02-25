@@ -149,7 +149,7 @@ class Location extends CommonTreeDropdown
 
         // Ajout du type de lieu pour le filtrage
         $tab[] = [
-            'id'                 => '23',
+            'id'                 => '94',
             'table'              => 'glpi_locations',
             'field'              => 'location_type',
             'name'               => __('Location type'),
