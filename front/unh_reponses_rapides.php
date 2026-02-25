@@ -18,8 +18,8 @@ echo '<div class="col-12">';
 
 echo '<div class="card">';
 echo '<div class="card-header">';
-echo '<h3>📋 Réponses Rapides - Support UNH</h3>';
-echo '<p class="text-muted">Cliquez sur "Copier" pour utiliser une réponse dans vos tickets</p>';
+echo '<h3>' . __('📋 Réponses Rapides - Support UNH') . '</h3>';
+echo '<p class="text-muted">' . __('Cliquez sur "Copier" pour utiliser une réponse dans vos tickets') . '</p>';
 echo '</div>';
 echo '<div class="card-body">';
 
@@ -75,7 +75,7 @@ foreach ($responses as $index => $response) {
     echo '<div class="card-body">';
     echo '<pre id="response-' . $index . '" style="white-space: pre-wrap; background: #f8f9fa; padding: 15px; border-radius: 4px;">' . htmlspecialchars($response['content']) . '</pre>';
     echo '<button class="btn btn-primary btn-sm" onclick="copyToClipboard(' . $index . ', this)">';
-    echo '<i class="fas fa-copy"></i> Copier';
+    echo '<i class="fas fa-copy"></i> ' . __('Copier');
     echo '</button>';
     echo '</div>';
     echo '</div>';
@@ -95,7 +95,7 @@ function copyToClipboard(index, button) {
     const text = document.getElementById('response-' + index).textContent;
     navigator.clipboard.writeText(text).then(() => {
         const originalHTML = button.innerHTML;
-        button.innerHTML = '<i class="fas fa-check"></i> Copié !';
+        button.innerHTML = '<i class="fas fa-check"></i> <?php echo __('Copié !'); ?>';
         button.classList.remove('btn-primary');
         button.classList.add('btn-success');
         setTimeout(() => {
