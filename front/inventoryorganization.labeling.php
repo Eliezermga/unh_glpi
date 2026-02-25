@@ -101,3 +101,4 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display(
 );
 
 Html::footer();
+
