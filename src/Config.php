@@ -3558,13 +3558,14 @@ HTML;
             echo '<form name="form" action="' . Toolbox::getItemTypeFormURL(__CLASS__) . '" method="post" data-track-changes="true">';
         }
         echo '<table class="tab_cadre_fixe">';
-        echo '<tr><th colspan="4">' . __('Documents setup') . '</th></tr>';
+        echo '<tr><th colspan="4">' . __('Documents UNH') . '</th></tr>';
 
         echo '<tr class="tab_bg_2">';
         echo '<td>';
         echo '<label for="document_max_size' . $rand . '">';
         echo __('Document files maximum size (Mio)');
         echo '</label>';
+        echo Html::showTooltip(__('Taille maximale des documents UNH (mémoires, rapports, supports de cours). Adaptez selon les besoins du parc universitaire.'));
         echo '</td>';
         echo '<td>';
         echo Html::input('document_max_size', [

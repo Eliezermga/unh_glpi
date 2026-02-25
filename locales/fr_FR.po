@@ -8659,6 +8659,14 @@ msgstr ""
 msgid "Documents setup"
 msgstr "Configuration des documents"
 
+#: src/Config.php:3545
+msgid "Documents UNH"
+msgstr "Documents UNH"
+
+#: src/Config.php:3553
+msgid "Taille maximale des documents UNH (mémoires, rapports, supports de cours). Adaptez selon les besoins du parc universitaire."
+msgstr "Taille maximale des documents UNH (mémoires, rapports, supports de cours). Adaptez selon les besoins du parc universitaire."
+
 #: src/NotificationTargetFieldUnicity.php:81
 msgid "Doer"
 msgstr "Auteur de l'action"
