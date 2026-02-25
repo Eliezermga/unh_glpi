@@ -25,8 +25,6 @@ function plugin_init_accesssecurite() {
 
     $PLUGIN_HOOKS['csrf_compliant']['accesssecurite'] = true;
     
-    Plugin::registerClass('PluginAccesssecuriteInstall', ['classname' => 'PluginAccesssecuriteInstall']);
-    
     $PLUGIN_HOOKS['menu_toadd']['accesssecurite'] = ['tools' => 'PluginAccesssecuriteMenu'];
 }
 
