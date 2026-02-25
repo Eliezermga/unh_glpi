@@ -18,11 +18,11 @@
         <div class="btn-list">
             <a href="?export=csv" class="btn btn-outline-success">
                 <i class="ti ti-download me-1"></i>
-                {{ __('Export CSV') }}
+                {{ __('Exporter CSV') }}
             </a>
             <a href="inventoryorganization.php" class="btn btn-outline-secondary">
                 <i class="ti ti-arrow-left me-1"></i>
-                {{ __('Back to Dashboard') }}
+                {{ __('Retour au tableau de bord') }}
             </a>
         </div>
     </div>
@@ -38,7 +38,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.total }}</div>
-                            <div class="text-muted">{{ __('Total Issues') }}</div>
+                            <div class="text-muted">{{ __('Total des problemes') }}</div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.errors }}</div>
-                            <div class="text-muted">{{ __('Errors') }}</div>
+                            <div class="text-muted">{{ __('Erreurs') }}</div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.warnings }}</div>
-                            <div class="text-muted">{{ __('Warnings') }}</div>
+                            <div class="text-muted">{{ __('Avertissements') }}</div>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                         </span>
                         <div>
                             <div class="h1 mb-0">{{ summary.info }}</div>
-                            <div class="text-muted">{{ __('Information') }}</div>
+                            <div class="text-muted">{{ __('Informations') }}</div>
                         </div>
                     </div>
                 </div>
@@ -96,31 +96,31 @@
         <div class="card-body">
             <form method="get" action="" class="row g-3 align-items-end">
                 <div class="col-md-4">
-                    <label class="form-label">{{ __('Issue Type') }}</label>
+                    <label class="form-label">{{ __('Type de probleme') }}</label>
                     <select class="form-select" name="filter_type">
-                        <option value="all" {% if filter_type == 'all' %}selected{% endif %}>{{ __('All Types') }}</option>
+                        <option value="all" {% if filter_type == 'all' %}selected{% endif %}>{{ __('Tous les types') }}</option>
                         {% for key, label in issue_types %}
                             <option value="{{ key }}" {% if filter_type == key %}selected{% endif %}>{{ label }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">{{ __('Severity') }}</label>
+                    <label class="form-label">{{ __('Severite') }}</label>
                     <select class="form-select" name="filter_severity">
-                        <option value="all" {% if filter_severity == 'all' %}selected{% endif %}>{{ __('All Severities') }}</option>
-                        <option value="error" {% if filter_severity == 'error' %}selected{% endif %}>{{ __('Errors') }}</option>
-                        <option value="warning" {% if filter_severity == 'warning' %}selected{% endif %}>{{ __('Warnings') }}</option>
-                        <option value="info" {% if filter_severity == 'info' %}selected{% endif %}>{{ __('Information') }}</option>
+                        <option value="all" {% if filter_severity == 'all' %}selected{% endif %}>{{ __('Toutes les severites') }}</option>
+                        <option value="error" {% if filter_severity == 'error' %}selected{% endif %}>{{ __('Erreurs') }}</option>
+                        <option value="warning" {% if filter_severity == 'warning' %}selected{% endif %}>{{ __('Avertissements') }}</option>
+                        <option value="info" {% if filter_severity == 'info' %}selected{% endif %}>{{ __('Informations') }}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary">
                         <i class="ti ti-filter me-1"></i>
-                        {{ __('Apply Filters') }}
+                        {{ __('Appliquer') }}
                     </button>
                     <a href="?" class="btn btn-outline-secondary">
                         <i class="ti ti-x me-1"></i>
-                        {{ __('Clear') }}
+                        {{ __('Reinitialiser') }}
                     </a>
                 </div>
             </form>
@@ -134,9 +134,9 @@
                 <span class="avatar avatar-xl mb-3 bg-success">
                     <i class="ti ti-check"></i>
                 </span>
-                <h2 class="text-success">{{ __('Inventory is Coherent!') }}</h2>
+                <h2 class="text-success">{{ __('Inventaire coherent') }}</h2>
                 <p class="text-muted mb-0">
-                    {{ __('No issues detected. Your inventory is correctly structured.') }}
+                    {{ __('Aucun probleme detecte. La structure de l inventaire est correcte.') }}
                 </p>
             </div>
         </div>
@@ -145,7 +145,7 @@
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="ti ti-list me-2"></i>
-                    {{ __('Detected Issues') }}
+                    {{ __('Problemes detectes') }}
                     <span class="badge bg-secondary ms-2">{{ issues|length }}</span>
                 </h3>
             </div>
@@ -153,11 +153,11 @@
                 <table class="table table-vcenter card-table table-striped">
                     <thead>
                         <tr>
-                            <th style="width: 100px;">{{ __('Severity') }}</th>
+                            <th style="width: 100px;">{{ __('Severite') }}</th>
                             <th style="width: 150px;">{{ __('Type') }}</th>
                             <th>{{ __('Message') }}</th>
-                            <th style="width: 150px;">{{ __('Asset Type') }}</th>
-                            <th style="width: 150px;">{{ __('Asset Name') }}</th>
+                            <th style="width: 150px;">{{ __('Type d actif') }}</th>
+                            <th style="width: 150px;">{{ __('Nom de l actif') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,24 +167,24 @@
                                     {% if issue.severity == 'error' %}
                                         <span class="badge bg-danger">
                                             <i class="ti ti-alert-octagon me-1"></i>
-                                            {{ __('Error') }}
+                                            {{ __('Erreur') }}
                                         </span>
                                     {% elseif issue.severity == 'warning' %}
                                         <span class="badge bg-warning">
                                             <i class="ti ti-alert-triangle me-1"></i>
-                                            {{ __('Warning') }}
+                                            {{ __('Avertissement') }}
                                         </span>
                                     {% else %}
                                         <span class="badge bg-info">
                                             <i class="ti ti-info-circle me-1"></i>
-                                            {{ __('Info') }}
+                                            {{ __('Information') }}
                                         </span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     <span class="text-muted">{{ issue_types[issue.type]|default(issue.type) }}</span>
                                 </td>
-                                <td>{{ issue.message|raw }}</td>
+                                <td>{{ issue.message }}</td>
                                 <td>{{ issue.asset_type|default('-') }}</td>
                                 <td>
                                     {% if issue.asset_name is defined and issue.asset_name %}
@@ -197,7 +197,7 @@
                         {% else %}
                             <tr>
                                 <td colspan="5" class="text-center text-muted py-4">
-                                    {{ __('No issues match your filters.') }}
+                                    {{ __('Aucun probleme ne correspond aux filtres.') }}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -212,36 +212,36 @@
         <div class="card-header">
             <h3 class="card-title">
                 <i class="ti ti-help me-2"></i>
-                {{ __('Understanding Issues') }}
+                {{ __('Comprendre les niveaux') }}
             </h3>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row g-3">
+                <div class="col-12">
                     <h5 class="text-danger">
                         <i class="ti ti-alert-octagon me-1"></i>
-                        {{ __('Errors') }}
+                        {{ __('Erreurs') }}
                     </h5>
-                    <p class="text-muted small">
-                        {{ __('Critical issues requiring immediate attention, such as duplicate serial numbers or data inconsistencies.') }}
+                    <p class="text-muted small mb-0" style="white-space: normal; word-break: normal;">
+                        {{ __('Problemes critiques a corriger rapidement (doublons, incoherences de donnees).') }}
                     </p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12">
                     <h5 class="text-warning">
                         <i class="ti ti-alert-triangle me-1"></i>
-                        {{ __('Warnings') }}
+                        {{ __('Avertissements') }}
                     </h5>
-                    <p class="text-muted small">
-                        {{ __('Issues that should be resolved, such as assets without assigned location.') }}
+                    <p class="text-muted small mb-0" style="white-space: normal; word-break: normal;">
+                        {{ __('Points a corriger bientot (equipements sans lieu, informations manquantes).') }}
                     </p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12">
                     <h5 class="text-info">
                         <i class="ti ti-info-circle me-1"></i>
-                        {{ __('Information') }}
+                        {{ __('Informations') }}
                     </h5>
-                    <p class="text-muted small">
-                        {{ __('Informational notifications, such as assets in the root entity.') }}
+                    <p class="text-muted small mb-0" style="white-space: normal; word-break: normal;">
+                        {{ __('Notifications utiles sans blocage, par exemple actif rattache a la racine.') }}
                     </p>
                 </div>
             </div>

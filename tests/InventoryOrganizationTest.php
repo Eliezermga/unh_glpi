@@ -243,11 +243,14 @@ class InventoryOrganizationTest
                 "Label: '{$label}'"
             );
             
-            // Check format: PREFIX-TYPE-NUMBER
+            // Check format:
+            // - Legacy: PREFIX-TYPE-NUMBER
+            // - Extended: PREFIX-FAC-BAT-TYPE-NUMBER
             $this->assert(
-                preg_match('/^[A-Z]+-[A-Z]+-\d+$/', $label) === 1,
+                preg_match('/^[A-Z0-9]+-[A-Z0-9]+-\d+$/', $label) === 1
+                    || preg_match('/^[A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+-[A-Z0-9]+-\d+$/', $label) === 1,
                 "generateNextLabel for '{$type}' matches expected format",
-                "Expected format: PREFIX-TYPE-NUMBER"
+                "Expected: PREFIX-TYPE-NUMBER or PREFIX-FAC-BAT-TYPE-NUMBER"
             );
         }
     }
@@ -268,6 +271,8 @@ class InventoryOrganizationTest
             $prefix . '-PC-001',
             $prefix . '-MON-042',
             $prefix . '-IMP-100',
+            $prefix . '-FST-BLK1-PC-001',
+            $prefix . '-SCI-A1-MON-042',
         ];
         
         foreach ($validLabels as $label) {

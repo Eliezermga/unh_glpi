@@ -26446,3 +26446,616 @@ msgstr "Phones"
 #: front/inventoryorganization.type.php
 msgid "Peripherals"
 msgstr "Peripherals"
+
+#. UNH GLPI Custom Translations - Auto sync from fr_FR
+msgid "Retour au tableau de bord"
+msgstr "Retour au tableau de bord"
+
+msgid "Gestion des entites"
+msgstr "Gestion des entites"
+
+msgid "Entite creee avec succes."
+msgstr "Entite creee avec succes."
+
+msgid "Creer une nouvelle entite"
+msgstr "Creer une nouvelle entite"
+
+msgid "Nom de l entite"
+msgstr "Nom de l entite"
+
+msgid "Entite parente"
+msgstr "Entite parente"
+
+msgid "Racine"
+msgstr "Racine"
+
+msgid "Creer l entite"
+msgstr "Creer l entite"
+
+msgid "Vous n avez pas les droits pour creer une entite."
+msgstr "Vous n avez pas les droits pour creer une entite."
+
+msgid "Acces rapide"
+msgstr "Acces rapide"
+
+msgid "Liste des entites"
+msgstr "Liste des entites"
+
+msgid "Voir toutes les entites existantes"
+msgstr "Voir toutes les entites existantes"
+
+msgid "Gestion des lieux"
+msgstr "Gestion des lieux"
+
+msgid "Types de materiel"
+msgstr "Types de materiel"
+
+msgid "Guide rapide"
+msgstr "Guide rapide"
+
+msgid "Qu est ce qu une entite ?"
+msgstr "Qu est ce qu une entite ?"
+
+msgid "Hierarchie recommandee"
+msgstr "Hierarchie recommandee"
+
+msgid "UNH > Faculte > Departement"
+msgstr "UNH > Faculte > Departement"
+
+msgid "Entites existantes"
+msgstr "Entites existantes"
+
+msgid "Aucune entite pour le moment"
+msgstr "Aucune entite pour le moment"
+
+msgid "Lieu cree avec succes."
+msgstr "Lieu cree avec succes."
+
+msgid "Creer un nouveau lieu"
+msgstr "Creer un nouveau lieu"
+
+msgid "Nom du lieu"
+msgstr "Nom du lieu"
+
+msgid "Lieu parent"
+msgstr "Lieu parent"
+
+msgid "Aucun (niveau racine)"
+msgstr "Aucun (niveau racine)"
+
+msgid "Batiment"
+msgstr "Batiment"
+
+msgid "Salle"
+msgstr "Salle"
+
+msgid "Creer le lieu"
+msgstr "Creer le lieu"
+
+msgid "Vous n avez pas les droits pour creer un lieu."
+msgstr "Vous n avez pas les droits pour creer un lieu."
+
+msgid "Suggestions de structure"
+msgstr "Suggestions de structure"
+
+msgid "Structure: Campus > Batiment > Etage > Salle"
+msgstr "Structure: Campus > Batiment > Etage > Salle"
+
+msgid "Lieux existants"
+msgstr "Lieux existants"
+
+msgid "Lieux definis"
+msgstr "Lieux definis"
+
+msgid "Liste complete des lieux"
+msgstr "Liste complete des lieux"
+
+msgid "Creer un nouveau type"
+msgstr "Creer un nouveau type"
+
+msgid "Categorie"
+msgstr "Categorie"
+
+msgid "Nom du type"
+msgstr "Nom du type"
+
+msgid "Description du type"
+msgstr "Description du type"
+
+msgid "Creer le type"
+msgstr "Creer le type"
+
+msgid "Types courants"
+msgstr "Types courants"
+
+msgid "Cliquer pour pre-remplir automatiquement :"
+msgstr "Cliquer pour pre-remplir automatiquement :"
+
+msgid "Types existants"
+msgstr "Types existants"
+
+msgid "Configuration de l etiquetage"
+msgstr "Configuration de l etiquetage"
+
+msgid "Format de l etiquette"
+msgstr "Format de l etiquette"
+
+msgid "Nombre de chiffres (padding)"
+msgstr "Nombre de chiffres (padding)"
+
+msgid "Codes des types"
+msgstr "Codes des types"
+
+msgid "Apercu des etiquettes"
+msgstr "Apercu des etiquettes"
+
+msgid "Comment fonctionne l etiquetage"
+msgstr "Comment fonctionne l etiquetage"
+
+msgid "Le format suit la logique suivante :"
+msgstr "Le format suit la logique suivante :"
+
+msgid "Verification de coherence de l inventaire"
+msgstr "Verification de coherence de l inventaire"
+
+msgid "Total des problemes"
+msgstr "Total des problemes"
+
+msgid "Comprendre les niveaux"
+msgstr "Comprendre les niveaux"
+
+msgid "PC Bureau"
+msgstr "PC Bureau"
+
+msgid "Ordinateur portable"
+msgstr "Ordinateur portable"
+
+msgid "Station de travail"
+msgstr "Station de travail"
+
+msgid "Serveur"
+msgstr "Serveur"
+
+msgid "Projecteur"
+msgstr "Projecteur"
+
+msgid "Jet d encre"
+msgstr "Jet d encre"
+
+msgid "Multifonction"
+msgstr "Multifonction"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Select a category"
+msgstr "Select a category"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Choose a category"
+msgstr "Choose a category"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Wi-Fi / Network"
+msgstr "Wi-Fi / Network"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Account / Password"
+msgstr "Account / Password"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Moodle / LMS"
+msgstr "Moodle / LMS"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Hardware / Equipment"
+msgstr "Hardware / Equipment"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Quick tips before submitting:"
+msgstr "Quick tips before submitting:"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "If the tips above don't solve your problem, please fill out the form below."
+msgstr "If the tips above don't solve your problem, please fill out the form below."
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use your university email as username (example: john.doe@university.edu)"
+msgstr "Use your university email as username (example: john.doe@university.edu)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Forget the network and reconnect"
+msgstr "Forget the network and reconnect"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check that Airplane mode is disabled"
+msgstr "Check that Airplane mode is disabled"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Try connecting in a different location on campus"
+msgstr "Try connecting in a different location on campus"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use the \"Forgot password\" link on the login page"
+msgstr "Use the \"Forgot password\" link on the login page"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check that Caps Lock is not enabled"
+msgstr "Check that Caps Lock is not enabled"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Clear your browser cache and cookies"
+msgstr "Clear your browser cache and cookies"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Try with a different browser"
+msgstr "Try with a different browser"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Make sure you are enrolled in the course"
+msgstr "Make sure you are enrolled in the course"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Contact your teacher if the course is not visible"
+msgstr "Contact your teacher if the course is not visible"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Use an up-to-date browser (Chrome, Firefox, Edge)"
+msgstr "Use an up-to-date browser (Chrome, Firefox, Edge)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check your internet connection"
+msgstr "Check your internet connection"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the device"
+msgstr "Restart the device"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check all cable connections"
+msgstr "Check all cable connections"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "For printers: check paper and ink levels"
+msgstr "For printers: check paper and ink levels"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Note the equipment label (e.g., SCI-A101-PC01)"
+msgstr "Note the equipment label (e.g., SCI-A101-PC01)"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the application"
+msgstr "Restart the application"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Check for available updates"
+msgstr "Check for available updates"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Restart the computer"
+msgstr "Restart the computer"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Note the exact error message if any"
+msgstr "Note the exact error message if any"
+
+#: templates/anonymous_helpdesk.html.twig
+msgid "Please describe your problem in detail in the form below."
+msgstr "Please describe your problem in detail in the form below."
+
+#. UNH GLPI FAQ questions - EN translations from FR source titles
+#: data/knowbase/faq
+msgid "Comment créer un ticket de support ?"
+msgstr "How do I create a support ticket?"
+
+#: data/knowbase/faq
+msgid "Comment réinitialiser mon mot de passe ?"
+msgstr "How do I reset my password?"
+
+#: data/knowbase/faq
+msgid "Comment se connecter au WiFi du campus ?"
+msgstr "How do I connect to campus Wi-Fi?"
+
+#: data/knowbase/faq
+msgid "Mon ordinateur ne démarre plus, que faire ?"
+msgstr "My computer no longer starts, what should I do?"
+
+#: data/knowbase/faq
+msgid "Comment installer un logiciel ?"
+msgstr "How do I install software?"
+
+#: data/knowbase/faq
+msgid "L'imprimante ne fonctionne pas"
+msgstr "The printer is not working"
+
+#: data/knowbase/faq
+msgid "Comment accéder à mes fichiers à distance ?"
+msgstr "How do I access my files remotely?"
+
+#: data/knowbase/faq
+msgid "Mon écran reste noir ou figé"
+msgstr "My screen stays black or frozen"
+
+#: data/knowbase/faq
+msgid "Comment suivre l'état de mon ticket ?"
+msgstr "How do I track my ticket status?"
+
+#: data/knowbase/faq
+msgid "Les raccourcis clavier utiles"
+msgstr "Useful keyboard shortcuts"
+
+#. UNH GLPI FAQ answer translations (keyed by FAQ title)
+#: data/knowbase/faq
+msgid "faq.answer.create_support_ticket"
+msgstr ""
+"<h3>Guide to creating a ticket in UNH GLPI</h3>\n"
+"    <ol>\n"
+"        <li><strong>Log in</strong> to GLPI using your university credentials</li>\n"
+"        <li>Click <strong>Assistance</strong> in the main menu</li>\n"
+"        <li>Select <strong>Technical Support</strong> or <strong>Create a ticket</strong></li>\n"
+"        <li>Fill out the form:\n"
+"            <ul>\n"
+"                <li><strong>Title</strong>: briefly describe your issue</li>\n"
+"                <li><strong>Category</strong>: select the type (Hardware, Software, Network)</li>\n"
+"                <li><strong>Description</strong>: explain in detail</li>\n"
+"            </ul>\n"
+"        </li>\n"
+"        <li>Click <strong>Send</strong></li>\n"
+"    </ol>\n"
+"    <p>✅ You will receive a confirmation email with the ticket number.</p>"
+
+#: data/knowbase/faq
+msgid "faq.answer.reset_password"
+msgstr ""
+"<h3>Reset your GLPI password</h3>\n"
+"    <h4>Option 1: Via the login page</h4>\n"
+"    <ol>\n"
+"        <li>Go to the GLPI login page</li>\n"
+"        <li>Click <strong>Forgot password?</strong></li>\n"
+"        <li>Enter your university email address</li>\n"
+"        <li>Check your mailbox and follow the link</li>\n"
+"    </ol>\n"
+"    <h4>Option 2: Contact support</h4>\n"
+"    <p>If you cannot access your email, create a ticket or contact IT support.</p>\n"
+"    <p>💡 <strong>Tip</strong>: Choose a password with at least 8 characters, including uppercase, lowercase, and digits.</p>"
+
+#: data/knowbase/faq
+msgid "faq.answer.connect_campus_wifi"
+msgstr ""
+"<h3>Connect to UNH Wi-Fi</h3>\n"
+"    <p><strong>Available networks</strong>: <code>UNH-Campus</code> (staff) or <code>UNH-Etudiant</code> (students)</p>\n"
+"    <h4>Connection steps</h4>\n"
+"    <ol>\n"
+"        <li>Enable Wi-Fi on your device</li>\n"
+"        <li>Select the appropriate network</li>\n"
+"        <li>Enter your credentials:\n"
+"            <ul>\n"
+"                <li><strong>Username</strong>: your university ID</li>\n"
+"                <li><strong>Password</strong>: your university password</li>\n"
+"            </ul>\n"
+"        </li>\n"
+"    </ol>\n"
+"    <h4>Common issues</h4>\n"
+"    <ul>\n"
+"        <li>❌ \"Unable to connect\" → Check signal coverage in your area</li>\n"
+"        <li>❌ \"Incorrect password\" → Check uppercase/lowercase characters</li>\n"
+"        <li>❌ Slow connection → Try another access point</li>\n"
+"    </ul>"
+
+#: data/knowbase/faq
+msgid "faq.answer.computer_not_booting"
+msgstr ""
+"<h3>Computer not starting - First diagnostics</h3>\n"
+"    <h4>Basic checks</h4>\n"
+"    <ul>\n"
+"        <li>✅ Is the power cable plugged in?</li>\n"
+"        <li>✅ Is the screen turned on (status light)?</li>\n"
+"        <li>✅ Did you hold the power button for 10 seconds?</li>\n"
+"    </ul>\n"
+"    <h4>Actions based on symptoms</h4>\n"
+"    <table border=\"1\" cellpadding=\"5\">\n"
+"        <tr><th>Symptom</th><th>Action</th></tr>\n"
+"        <tr><td>Completely black screen</td><td>Check power supply</td></tr>\n"
+"        <tr><td>Fan running, black screen</td><td>Possible graphics card issue</td></tr>\n"
+"        <tr><td>Beeps at startup</td><td>Note the number of beeps</td></tr>\n"
+"        <tr><td>Blue screen</td><td>Contact support</td></tr>\n"
+"    </table>"
+
+#: data/knowbase/faq
+msgid "faq.answer.install_software"
+msgstr ""
+"<h3>Software installation on UNH workstations</h3>\n"
+"    <h4>Software available without request</h4>\n"
+"    <ul>\n"
+"        <li>Microsoft Office (Word, Excel, PowerPoint)</li>\n"
+"        <li>Web browsers (Chrome, Firefox)</li>\n"
+"        <li>VLC Media Player, 7-Zip</li>\n"
+"    </ul>\n"
+"    <h4>To install another software package</h4>\n"
+"    <ol>\n"
+"        <li>Go to <strong>Assistance > Technical Support</strong></li>\n"
+"        <li>Category: <strong>Software > Installation</strong></li>\n"
+"        <li>Specify the name, version, and business reason</li>\n"
+"    </ol>\n"
+"    <p>⚠️ <strong>Note</strong>: Installing unauthorized software is prohibited.</p>"
+
+#: data/knowbase/faq
+msgid "faq.answer.printer_not_working"
+msgstr ""
+"<h3>Printing issues - Quick solutions</h3>\n"
+"    <h4>Preliminary checks</h4>\n"
+"    <ol>\n"
+"        <li>Is the printer turned on (green light)?</li>\n"
+"        <li>Is there paper in the tray?</li>\n"
+"        <li>Any error message on the display?</li>\n"
+"    </ol>\n"
+"    <h4>Solutions by issue</h4>\n"
+"    <table border=\"1\" cellpadding=\"5\">\n"
+"        <tr><th>Issue</th><th>Solution</th></tr>\n"
+"        <tr><td>Printer offline</td><td>Restart it, check the cable</td></tr>\n"
+"        <tr><td>Paper jam</td><td>Open the cover, remove the paper</td></tr>\n"
+"        <tr><td>Blurry printing</td><td>Replace cartridge</td></tr>\n"
+"        <tr><td>Queue blocked</td><td>Cancel pending print jobs</td></tr>\n"
+"    </table>"
+
+#: data/knowbase/faq
+msgid "faq.answer.remote_file_access"
+msgstr ""
+"<h3>Remote access to UNH resources</h3>\n"
+"    <h4>Option 1: Web portal</h4>\n"
+"    <ol>\n"
+"        <li>Go to <strong>https://portail.unh.edu</strong></li>\n"
+"        <li>Log in with your credentials</li>\n"
+"        <li>Browse to your files</li>\n"
+"    </ol>\n"
+"    <h4>Option 2: VPN (full access)</h4>\n"
+"    <ol>\n"
+"        <li>Download the VPN client from the portal</li>\n"
+"        <li>Install it on your computer</li>\n"
+"        <li>Launch the VPN and connect</li>\n"
+"    </ol>\n"
+"    <p><strong>VPN configuration</strong>: Server <code>vpn.unh.edu</code>, Type SSL/TLS</p>"
+
+#: data/knowbase/faq
+msgid "faq.answer.black_or_frozen_screen"
+msgstr ""
+"<h3>Black or frozen screen - What to do?</h3>\n"
+"    <h4>Completely black screen</h4>\n"
+"    <ol>\n"
+"        <li>Check that the monitor is powered on</li>\n"
+"        <li>Check the video cable (HDMI, VGA)</li>\n"
+"        <li>Try another port if available</li>\n"
+"    </ol>\n"
+"    <h4>Frozen screen</h4>\n"
+"    <ol>\n"
+"        <li>Wait 2-3 minutes</li>\n"
+"        <li>Try <strong>Ctrl + Alt + Del</strong></li>\n"
+"        <li>Hold the power button for 10 seconds</li>\n"
+"    </ol>\n"
+"    <p>💡 After a blue screen, note the error code and create a ticket.</p>"
+
+#: data/knowbase/faq
+msgid "faq.answer.track_ticket_status"
+msgstr ""
+"<h3>Track your ticket progress</h3>\n"
+"    <h4>Via GLPI</h4>\n"
+"    <ol>\n"
+"        <li>Log in to GLPI</li>\n"
+"        <li>Go to <strong>Assistance > Tickets</strong></li>\n"
+"        <li>Click your ticket</li>\n"
+"    </ol>\n"
+"    <h4>Possible statuses</h4>\n"
+"    <table border=\"1\" cellpadding=\"5\">\n"
+"        <tr><th>Status</th><th>Meaning</th></tr>\n"
+"        <tr><td>🆕 New</td><td>Not processed yet</td></tr>\n"
+"        <tr><td>📋 In progress</td><td>Technician assigned</td></tr>\n"
+"        <tr><td>⏳ Pending</td><td>Waiting for information from you</td></tr>\n"
+"        <tr><td>✅ Resolved</td><td>Waiting for your validation</td></tr>\n"
+"        <tr><td>🔒 Closed</td><td>Completed and archived</td></tr>\n"
+"    </table>"
+
+#: data/knowbase/faq
+msgid "faq.answer.useful_keyboard_shortcuts"
+msgstr ""
+"<h3>Keyboard shortcuts to save time</h3>\n"
+"    <h4>Windows - Essentials</h4>\n"
+"    <table border=\"1\" cellpadding=\"5\">\n"
+"        <tr><th>Shortcut</th><th>Action</th></tr>\n"
+"        <tr><td>Ctrl + C</td><td>Copy</td></tr>\n"
+"        <tr><td>Ctrl + V</td><td>Paste</td></tr>\n"
+"        <tr><td>Ctrl + Z</td><td>Undo</td></tr>\n"
+"        <tr><td>Ctrl + S</td><td>Save</td></tr>\n"
+"        <tr><td>Alt + Tab</td><td>Switch window</td></tr>\n"
+"        <tr><td>Win + L</td><td>Lock session</td></tr>\n"
+"    </table>\n"
+"    <h4>In GLPI</h4>\n"
+"    <table border=\"1\" cellpadding=\"5\">\n"
+"        <tr><td>Alt + B</td><td>Knowledge base</td></tr>\n"
+"        <tr><td>Alt + T</td><td>Create a ticket</td></tr>\n"
+"    </table>\n"
+"    <p>💡 <strong>Tip</strong>: Use <strong>Win + L</strong> to lock your workstation!</p>"
+
+
+
+#. UNH GLPI Static FAQ (DB independent)
+#: src/KnowbaseItem.php
+msgid "faq.static.question.create_support_ticket"
+msgstr "How to create a support ticket?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.reset_password"
+msgstr "How to reset my password?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.connect_campus_wifi"
+msgstr "How to connect to campus WiFi?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.computer_not_booting"
+msgstr "My computer does not start, what should I do?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.install_software"
+msgstr "How to install software?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.printer_not_working"
+msgstr "Printer is not working"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.remote_file_access"
+msgstr "How to access my files remotely?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.black_or_frozen_screen"
+msgstr "My screen is black or frozen"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.track_ticket_status"
+msgstr "How to track my ticket status?"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.question.useful_keyboard_shortcuts"
+msgstr "Useful keyboard shortcuts"
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.create_support_ticket"
+msgstr "Go to Assistance > Create ticket, choose a category, describe the issue, and submit."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.reset_password"
+msgstr "Use Forgot password on the login page, enter your email, and follow the reset link."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.connect_campus_wifi"
+msgstr "Open WiFi settings, select campus WiFi, login with your university account, and accept certificate if requested."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.computer_not_booting"
+msgstr "Check power cable and battery, hold the power button for 10 seconds, then restart. If still down, create a support ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.install_software"
+msgstr "Open Software Center, choose the application, and click Install. If access is denied, request approval in a ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.printer_not_working"
+msgstr "Check power, cables, paper, and toner. Restart the printer. If the issue remains, open a ticket with the printer name."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.remote_file_access"
+msgstr "Use VPN or remote portal, login with your university account, then open your network drive."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.black_or_frozen_screen"
+msgstr "Restart the computer, check monitor cable, and update graphics driver. If blocked, open a support ticket."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.track_ticket_status"
+msgstr "Go to Assistance > Tickets, open your ticket, and review status and timeline updates."
+
+#: src/KnowbaseItem.php
+msgid "faq.static.answer.useful_keyboard_shortcuts"
+msgstr "Common shortcuts: Ctrl+C copy, Ctrl+V paste, Ctrl+S save, Alt+Tab switch window."

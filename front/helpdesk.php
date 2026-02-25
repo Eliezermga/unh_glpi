@@ -43,5 +43,5 @@ if ((int)$CFG_GLPI['use_anonymous_helpdesk'] === 0 && !Session::getLoginUserID()
 
 Glpi\Application\View\TemplateRenderer::getInstance()->display('anonymous_helpdesk.html.twig', [
     'card_md_width' => true,
-    'title'         => "Helpdesk",
+    'title'         => __('Technical Support'),
 ]);

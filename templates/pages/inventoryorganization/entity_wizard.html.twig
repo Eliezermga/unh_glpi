@@ -17,9 +17,21 @@
         </h1>
         <a href="inventoryorganization.php" class="btn btn-outline-secondary">
             <i class="ti ti-arrow-left me-1"></i>
-            {{ __('Back to Dashboard') }}
+            {{ __('Retour au tableau de bord') }}
         </a>
     </div>
+
+    {% if success %}
+        <div class="alert alert-success alert-dismissible mb-4" role="alert">
+            <div class="d-flex">
+                <div>
+                    <i class="ti ti-check me-2"></i>
+                </div>
+                <div>{{ __('Entite creee avec succes.') }}</div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button>
+        </div>
+    {% endif %}
 
     {# Error Message #}
     {% if error_message %}
@@ -30,28 +42,79 @@
                 </div>
                 <div>{{ error_message }}</div>
             </div>
-            <a class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ __('Close') }}"></button>
         </div>
     {% endif %}
 
     <div class="row">
         <div class="col-lg-8">
-            {# Option 1: Native GLPI Form (Recommended) #}
+            {# Inline creation form #}
             <div class="card mb-4">
                 <div class="card-header bg-primary-lt">
                     <h3 class="card-title mb-0">
                         <i class="ti ti-plus me-2"></i>
-                        {{ __('Create a New Entity') }}
+                        {{ __('Creer une nouvelle entite') }}
                     </h3>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-3">
-                        {{ __('Use the standard GLPI form to create an entity with all available fields.') }}
-                    </p>
-                    <a href="entity.form.php" class="btn btn-primary btn-lg">
-                        <i class="ti ti-building-community me-2"></i>
-                        {{ __('Open Creation Form') }}
-                    </a>
+                    {% if can_create %}
+                        <form method="post" action="">
+                            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token_value|default(csrf_token(true)) }}">
+                            <input type="hidden" name="action" value="create_entity">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label required">{{ __('Nom de l entite') }}</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">{{ __('Entite parente') }}</label>
+                                    <select class="form-select" name="parent_id">
+                                        {% for entity in entities %}
+                                            <option value="{{ entity.id }}" {% if entity.id == active_entity %}selected{% endif %}>
+                                                {% set depth = entity.level|default(0) %}
+                                                {% if depth > 0 %}{% for _ in 1..depth %}— {% endfor %}{% endif %}{{ entity.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">{{ __('Adresse') }}</label>
+                                    <input type="text" class="form-control" name="address">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">{{ __('Code postal') }}</label>
+                                    <input type="text" class="form-control" name="postcode">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">{{ __('Ville') }}</label>
+                                    <input type="text" class="form-control" name="town">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('Pays') }}</label>
+                                <input type="text" class="form-control" name="country">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('Commentaire') }}</label>
+                                <textarea class="form-control" name="comment" rows="2"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="ti ti-device-floppy me-1"></i>
+                                {{ __('Creer l entite') }}
+                            </button>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-info mb-0">
+                            {{ __('Vous n avez pas les droits pour creer une entite.') }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -60,7 +123,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="ti ti-external-link me-2"></i>
-                        {{ __('Quick Access') }}
+                        {{ __('Acces rapide') }}
                     </h3>
                 </div>
                 <div class="list-group list-group-flush">
@@ -68,9 +131,11 @@
                         <span class="avatar bg-info-lt me-3">
                             <i class="ti ti-list text-info"></i>
                         </span>
-                        <div class="flex-fill">
-                            <strong>{{ __('Entity List') }}</strong>
-                            <p class="text-muted mb-0 small">{{ __('View all existing GLPI entities') }}</p>
+                        <div class="flex-fill" style="min-width: 0;">
+                            <strong class="d-block">{{ __('Liste des entites') }}</strong>
+                            <p class="text-muted mb-0 small" style="white-space: normal; word-break: normal;">
+                                {{ __('Voir toutes les entites existantes') }}
+                            </p>
                         </div>
                         <i class="ti ti-chevron-right"></i>
                     </a>
@@ -79,9 +144,11 @@
                         <span class="avatar bg-success-lt me-3">
                             <i class="ti ti-map-pin text-success"></i>
                         </span>
-                        <div class="flex-fill">
-                            <strong>{{ __('Manage Locations') }}</strong>
-                            <p class="text-muted mb-0 small">{{ __('Create and organize locations within entities') }}</p>
+                        <div class="flex-fill" style="min-width: 0;">
+                            <strong class="d-block">{{ __('Gestion des lieux') }}</strong>
+                            <p class="text-muted mb-0 small" style="white-space: normal; word-break: normal;">
+                                {{ __('Creer et organiser les lieux dans les entites') }}
+                            </p>
                         </div>
                         <i class="ti ti-chevron-right"></i>
                     </a>
@@ -90,9 +157,11 @@
                         <span class="avatar bg-warning-lt me-3">
                             <i class="ti ti-devices text-warning"></i>
                         </span>
-                        <div class="flex-fill">
-                            <strong>{{ __('Equipment Types') }}</strong>
-                            <p class="text-muted mb-0 small">{{ __('Manage equipment categories') }}</p>
+                        <div class="flex-fill" style="min-width: 0;">
+                            <strong class="d-block">{{ __('Types de materiel') }}</strong>
+                            <p class="text-muted mb-0 small" style="white-space: normal; word-break: normal;">
+                                {{ __('Gerer les categories de materiel') }}
+                            </p>
                         </div>
                         <i class="ti ti-chevron-right"></i>
                     </a>
@@ -106,25 +175,25 @@
                 <div class="card-body">
                     <h4 class="mb-3">
                         <i class="ti ti-bulb me-2"></i>
-                        {{ __('Quick Guide') }}
+                        {{ __('Guide rapide') }}
                     </h4>
-                    <p class="mb-2"><strong>{{ __('What is an entity?') }}</strong></p>
+                    <p class="mb-2"><strong>{{ __('Qu est ce qu une entite ?') }}</strong></p>
                     <p class="text-muted mb-3">
-                        {{ __('Entities are organizational units that allow you to segment your IT assets (by department, site, subsidiary, etc.).') }}
+                        {{ __('Les entites permettent de structurer le parc IT par faculte, departement ou site.') }}
                     </p>
                     
-                    <p class="mb-2"><strong>{{ __('Entity Hierarchy') }}</strong></p>
+                    <p class="mb-2"><strong>{{ __('Hierarchie recommandee') }}</strong></p>
                     <ul class="text-muted mb-3">
-                        <li>{{ __('First create the root entity (e.g., UNH)') }}</li>
-                        <li>{{ __('Then add sub-entities (e.g., Campus, Departments)') }}</li>
-                        <li>{{ __('Permissions are inherited in the tree structure') }}</li>
+                        <li>{{ __('UNH > Faculte > Departement') }}</li>
+                        <li>{{ __('Definir les droits au bon niveau') }}</li>
+                        <li>{{ __('Garder des noms courts et explicites') }}</li>
                     </ul>
                     
-                    <p class="mb-2"><strong>{{ __('Best Practices') }}</strong></p>
+                    <p class="mb-2"><strong>{{ __('Bonnes pratiques') }}</strong></p>
                     <ul class="text-muted mb-0">
-                        <li>{{ __('Use explicit names') }}</li>
-                        <li>{{ __('Limit the number of levels (3-4 max)') }}</li>
-                        <li>{{ __('Align the structure with your organization') }}</li>
+                        <li>{{ __('Eviter les doublons de nom') }}</li>
+                        <li>{{ __('Limiter la profondeur de l arborescence') }}</li>
+                        <li>{{ __('Verifier les droits apres creation') }}</li>
                     </ul>
                 </div>
             </div>
@@ -132,7 +201,7 @@
             {# Existing Entities #}
             <div class="card mt-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">{{ __('Existing Entities') }}</h3>
+                    <h3 class="card-title mb-0">{{ __('Entites existantes') }}</h3>
                     <span class="badge bg-primary">{{ entities|length }}</span>
                 </div>
                 <div class="list-group list-group-flush" style="max-height: 300px; overflow-y: auto;">
@@ -140,19 +209,20 @@
                         {% for entity in entities|slice(0, 15) %}
                             <div class="list-group-item py-2">
                                 <i class="ti ti-building me-2 text-muted"></i>
-                                {{ entity.name|raw }}
+                                {% set depth = entity.level|default(0) %}
+                                {% if depth > 0 %}{% for _ in 1..depth %}— {% endfor %}{% endif %}{{ entity.name }}
                             </div>
                         {% endfor %}
                         {% if entities|length > 15 %}
                             <div class="list-group-item text-muted py-2">
                                 <i class="ti ti-dots me-2"></i>
-                                ... {{ __('and %d more')|format(entities|length - 15) }}
+                                ... {{ __('et %d de plus')|format(entities|length - 15) }}
                             </div>
                         {% endif %}
                     {% else %}
                         <div class="list-group-item text-muted">
                             <i class="ti ti-info-circle me-2"></i>
-                            {{ __('No entities yet') }}
+                            {{ __('Aucune entite pour le moment') }}
                         </div>
                     {% endif %}
                 </div>

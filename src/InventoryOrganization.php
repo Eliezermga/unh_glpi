@@ -52,7 +52,7 @@ class InventoryOrganization extends CommonGLPI
     /**
      * Default labeling format
      */
-    const DEFAULT_LABEL_FORMAT = 'UNH-{TYPE}-{NUM}';
+    const DEFAULT_LABEL_FORMAT = 'UNH-{FAC}-{BAT}-{TYPE}-{NUM}';
 
     /**
      * Get type name
@@ -115,7 +115,7 @@ class InventoryOrganization extends CommonGLPI
                     'icon'  => 'ti ti-map-pin',
                 ],
                 'type' => [
-                    'title' => __('Material Types'),
+                    'title' => __('Asset types'),
                     'page'  => '/front/inventoryorganization.type.php',
                     'icon'  => 'ti ti-devices',
                 ],
@@ -125,7 +125,7 @@ class InventoryOrganization extends CommonGLPI
                     'icon'  => 'ti ti-tag',
                 ],
                 'coherence' => [
-                    'title' => __('Coherence Check'),
+                    'title' => __('Coherence check'),
                     'page'  => '/front/inventoryorganization.coherence.php',
                     'icon'  => 'ti ti-checkbox',
                 ],
@@ -153,10 +153,10 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function canCreate()
     {
-        // Allow if user can create entities OR has config rights OR has ticket update rights
+        // Keep creation rights aligned with real writable resources used by this module.
         return Session::haveRight(Entity::$rightname, CREATE)
-            || Session::haveRight('config', UPDATE) 
-            || Session::haveRight('ticket', UPDATE)
+            || Session::haveRight('config', UPDATE)
+            || Session::haveRight('dropdown', UPDATE)
             || Session::haveRight('location', CREATE);
     }
 
@@ -340,7 +340,8 @@ class InventoryOrganization extends CommonGLPI
         foreach (['glpi_computers', 'glpi_monitors', 'glpi_printers'] as $table) {
             $type_name = $asset_tables[$table];
             $result = $DB->request([
-                'SELECT' => ['serial', 'COUNT' => 'cnt'],
+                'SELECT' => ['serial'],
+                'COUNT'  => 'cnt',
                 'FROM'   => $table,
                 'WHERE'  => [
                     'is_deleted' => 0,
@@ -437,7 +438,11 @@ class InventoryOrganization extends CommonGLPI
 
         // Computer types
         $result = $DB->request([
-            'SELECT' => ['glpi_computertypes.id', 'glpi_computertypes.name', 'COUNT' => 'cnt'],
+            'SELECT' => [
+                'glpi_computertypes.id',
+                'glpi_computertypes.name',
+                'COUNT' => 'glpi_computers.id AS cnt'
+            ],
             'FROM'   => 'glpi_computertypes',
             'LEFT JOIN' => [
                 'glpi_computers' => [
@@ -467,7 +472,11 @@ class InventoryOrganization extends CommonGLPI
 
         // Monitor types
         $result = $DB->request([
-            'SELECT' => ['glpi_monitortypes.id', 'glpi_monitortypes.name', 'COUNT' => 'cnt'],
+            'SELECT' => [
+                'glpi_monitortypes.id',
+                'glpi_monitortypes.name',
+                'COUNT' => 'glpi_monitors.id AS cnt'
+            ],
             'FROM'   => 'glpi_monitortypes',
             'LEFT JOIN' => [
                 'glpi_monitors' => [
@@ -497,7 +506,11 @@ class InventoryOrganization extends CommonGLPI
 
         // Printer types
         $result = $DB->request([
-            'SELECT' => ['glpi_printertypes.id', 'glpi_printertypes.name', 'COUNT' => 'cnt'],
+            'SELECT' => [
+                'glpi_printertypes.id',
+                'glpi_printertypes.name',
+                'COUNT' => 'glpi_printers.id AS cnt'
+            ],
             'FROM'   => 'glpi_printertypes',
             'LEFT JOIN' => [
                 'glpi_printers' => [
@@ -558,6 +571,103 @@ class InventoryOrganization extends CommonGLPI
     }
 
     /**
+     * Build an uppercase token from a label-like source.
+     *
+     * @param string $value
+     * @param string $fallback
+     * @param int $max_len
+     * @return string
+     */
+    private static function buildToken($value, $fallback, $max_len = 4)
+    {
+        $clean = strtoupper((string) $value);
+        $clean = preg_replace('/[^A-Z0-9]/', '', $clean ?? '');
+        if ($clean === '') {
+            return $fallback;
+        }
+
+        return substr($clean, 0, $max_len);
+    }
+
+    /**
+     * Resolve faculty token from entity context.
+     *
+     * @param int $entities_id
+     * @return string
+     */
+    private static function resolveFacultyToken($entities_id = 0)
+    {
+        global $DB;
+
+        $entity_id = (int) $entities_id;
+        if ($entity_id <= 0 && method_exists('Session', 'getActiveEntity')) {
+            $entity_id = (int) Session::getActiveEntity();
+        }
+
+        if ($entity_id <= 0) {
+            return 'FAC';
+        }
+
+        $result = $DB->request([
+            'SELECT' => ['name', 'completename'],
+            'FROM'   => 'glpi_entities',
+            'WHERE'  => ['id' => $entity_id],
+            'LIMIT'  => 1
+        ]);
+
+        if (!($row = $result->current())) {
+            return 'FAC';
+        }
+
+        // Expected hierarchy: UNH > Faculty > Department.
+        $parts = preg_split('/\s*>\s*/', (string) ($row['completename'] ?? ''), -1, PREG_SPLIT_NO_EMPTY);
+        if (count($parts) >= 2) {
+            return self::buildToken($parts[1], 'FAC');
+        }
+
+        return self::buildToken($row['name'] ?? '', 'FAC');
+    }
+
+    /**
+     * Resolve building token from location context.
+     *
+     * @param int $locations_id
+     * @return string
+     */
+    private static function resolveBuildingToken($locations_id = 0)
+    {
+        global $DB;
+
+        $location_id = (int) $locations_id;
+        if ($location_id <= 0) {
+            return 'BAT';
+        }
+
+        $result = $DB->request([
+            'SELECT' => ['name', 'completename', 'building'],
+            'FROM'   => 'glpi_locations',
+            'WHERE'  => ['id' => $location_id],
+            'LIMIT'  => 1
+        ]);
+
+        if (!($row = $result->current())) {
+            return 'BAT';
+        }
+
+        if (!empty($row['building'])) {
+            return self::buildToken($row['building'], 'BAT');
+        }
+
+        // Expected hierarchy: Campus > Building > Floor > Room.
+        $parts = preg_split('/\s*>\s*/', (string) ($row['completename'] ?? ''), -1, PREG_SPLIT_NO_EMPTY);
+        if (count($parts) >= 2) {
+            return self::buildToken($parts[1], 'BAT');
+        }
+
+        return self::buildToken($row['name'] ?? '', 'BAT');
+    }
+
+    /**
      * Save labeling configuration
      *
      * @param array $config Configuration array
@@ -576,7 +686,7 @@ class InventoryOrganization extends CommonGLPI
      * @param string $asset_type Asset type (computer, monitor, etc.)
      * @return string
      */
-    public static function generateNextLabel($asset_type)
+    public static function generateNextLabel($asset_type, $entities_id = 0, $locations_id = 0)
     {
         global $DB;
 
@@ -584,9 +694,18 @@ class InventoryOrganization extends CommonGLPI
         $prefix = $config['prefix'] ?? 'UNH';
         $type_code = $config['types'][$asset_type] ?? strtoupper(substr($asset_type, 0, 3));
         $padding = $config['padding'] ?? 3;
+        $faculty = self::resolveFacultyToken($entities_id);
+        $building = self::resolveBuildingToken($locations_id);
+        $format = $config['format'] ?? self::DEFAULT_LABEL_FORMAT;
+
+        $is_extended = strpos($format, '{FAC}') !== false || strpos($format, '{BAT}') !== false;
 
         // Find the highest number for this type
-        $pattern = $prefix . '-' . $type_code . '-%';
+        if ($is_extended) {
+            $pattern = sprintf('%s-%s-%s-%s-%%', $prefix, $faculty, $building, $type_code);
+        } else {
+            $pattern = $prefix . '-' . $type_code . '-%';
+        }
         
         $tables = [
             'computer'   => 'glpi_computers',
@@ -615,6 +734,10 @@ class InventoryOrganization extends CommonGLPI
         }
 
         $next_num = $max_num + 1;
+        if ($is_extended) {
+            return sprintf('%s-%s-%s-%s-%0' . $padding . 'd', $prefix, $faculty, $building, $type_code, $next_num);
+        }
+
         return sprintf('%s-%s-%0' . $padding . 'd', $prefix, $type_code, $next_num);
     }
 
@@ -629,11 +752,19 @@ class InventoryOrganization extends CommonGLPI
         $config = self::getLabelingConfig();
         $prefix = preg_quote($config['prefix'] ?? 'UNH', '/');
         $type_codes = array_values($config['types'] ?? []);
+        if (empty($type_codes)) {
+            return false;
+        }
         $types_pattern = implode('|', array_map('preg_quote', $type_codes));
-        
-        $pattern = '/^' . $prefix . '-(' . $types_pattern . ')-\d{' . ($config['padding'] ?? 3) . ',}$/';
-        
-        return (bool) preg_match($pattern, $label);
+        $number_pattern = '\d{' . ($config['padding'] ?? 3) . ',}';
+
+        // Backward compatibility:
+        // - Legacy: PREFIX-TYPE-NNN
+        // - Extended: PREFIX-FAC-BAT-TYPE-NNN
+        $legacy_pattern = '/^' . $prefix . '-(' . $types_pattern . ')-' . $number_pattern . '$/';
+        $extended_pattern = '/^' . $prefix . '-[A-Z0-9]{1,4}-[A-Z0-9]{1,4}-(' . $types_pattern . ')-' . $number_pattern . '$/';
+
+        return (bool) preg_match($legacy_pattern, $label) || (bool) preg_match($extended_pattern, $label);
     }
 
     /**
@@ -644,11 +775,24 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function createEntity($data)
     {
+        if (!Entity::canCreate()) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
         $entity = new Entity();
-        
+        $parent_id = (int) ($data['parent_id'] ?? 0);
+        if ($parent_id <= 0 && method_exists('Session', 'getActiveEntity')) {
+            $parent_id = (int) Session::getActiveEntity();
+        }
+        if ($parent_id < 0 || !Session::haveAccessToEntity($parent_id, true)) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
         $input = [
             'name'        => $data['name'] ?? '',
-            'entities_id' => $data['parent_id'] ?? 0,
+            'entities_id' => $parent_id,
             'comment'     => $data['comment'] ?? '',
             'address'     => $data['address'] ?? '',
             'postcode'    => $data['postcode'] ?? '',
@@ -658,7 +802,7 @@ class InventoryOrganization extends CommonGLPI
 
         // Validate
         if (empty($input['name'])) {
-            Session::addMessageAfterRedirect(__('Entity name is required'), false, ERROR);
+            Session::addMessageAfterRedirect(__('Le nom de l entite est requis'), false, ERROR);
             return false;
         }
 
@@ -666,7 +810,7 @@ class InventoryOrganization extends CommonGLPI
 
         if ($entity_id) {
             Session::addMessageAfterRedirect(
-                sprintf(__('Entity "%s" created successfully'), $input['name']),
+                sprintf(__('Entite "%s" creee avec succes'), $input['name']),
                 false,
                 INFO
             );
@@ -683,12 +827,40 @@ class InventoryOrganization extends CommonGLPI
      */
     public static function createLocation($data)
     {
+        if (!Location::canCreate()) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
         $location = new Location();
-        
+        $entity_id = (int) ($data['entity_id'] ?? 0);
+        if ($entity_id <= 0 && method_exists('Session', 'getActiveEntity')) {
+            $entity_id = (int) Session::getActiveEntity();
+        }
+        if ($entity_id < 0 || !Session::haveAccessToEntity($entity_id, true)) {
+            Session::addMessageAfterRedirect(__('The action you have requested is not allowed.'), false, ERROR);
+            return false;
+        }
+
+        $parent_location = (int) ($data['parent_id'] ?? 0);
+        if ($parent_location > 0) {
+            global $DB;
+            $parent = $DB->request([
+                'SELECT' => ['id', 'entities_id'],
+                'FROM'   => 'glpi_locations',
+                'WHERE'  => ['id' => $parent_location],
+                'LIMIT'  => 1
+            ])->current();
+
+            if (!$parent || !Session::haveAccessToEntity((int) ($parent['entities_id'] ?? -1), true)) {
+                $parent_location = 0;
+            }
+        }
+
         $input = [
             'name'         => $data['name'] ?? '',
-            'locations_id' => $data['parent_id'] ?? 0,
-            'entities_id'  => $data['entity_id'] ?? 0,
+            'locations_id' => $parent_location,
+            'entities_id'  => $entity_id,
             'comment'      => $data['comment'] ?? '',
             'building'     => $data['building'] ?? '',
             'room'         => $data['room'] ?? '',
@@ -696,7 +868,7 @@ class InventoryOrganization extends CommonGLPI
 
         // Validate
         if (empty($input['name'])) {
-            Session::addMessageAfterRedirect(__('Location name is required'), false, ERROR);
+            Session::addMessageAfterRedirect(__('Le nom du lieu est requis'), false, ERROR);
             return false;
         }
 
@@ -704,7 +876,7 @@ class InventoryOrganization extends CommonGLPI
 
         if ($location_id) {
             Session::addMessageAfterRedirect(
-                sprintf(__('Location "%s" created successfully'), $input['name']),
+                sprintf(__('Lieu "%s" cree avec succes'), $input['name']),
                 false,
                 INFO
             );
