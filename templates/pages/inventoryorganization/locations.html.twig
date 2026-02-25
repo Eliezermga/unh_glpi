@@ -8,6 +8,7 @@
  # ---------------------------------------------------------------------
  #}
 
+
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="mb-0">
@@ -65,8 +66,12 @@
                                     <select class="form-select" name="parent_id">
                                         <option value="0">{{ __('Aucun (niveau racine)') }}</option>
                                         {% for location in flat_locations %}
+<<<<<<< HEAD
+                                            <option value="{{ location.id }}">{{ location.name }}</option>
+=======
                                             {% set location_depth = location.level|default(0) %}
                                             <option value="{{ location.id }}">{% if location_depth > 0 %}{% for _ in 1..location_depth %}— {% endfor %}{% endif %}{{ location.name }}</option>
+>>>>>>> origin/pre-product
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -77,8 +82,12 @@
                                     <label class="form-label">{{ __('Entite') }}</label>
                                     <select class="form-select" name="entity_id">
                                         {% for entity in entities %}
+<<<<<<< HEAD
+                                            <option value="{{ entity.id }}" {% if entity.id == active_entity %}selected{% endif %}>{{ entity.name }}</option>
+=======
                                             {% set entity_depth = entity.level|default(0) %}
                                             <option value="{{ entity.id }}" {% if entity.id == active_entity %}selected{% endif %}>{% if entity_depth > 0 %}{% for _ in 1..entity_depth %}— {% endfor %}{% endif %}{{ entity.name }}</option>
+>>>>>>> origin/pre-product
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -176,8 +185,12 @@
                                     <tr>
                                         <td>
                                             <i class="ti ti-map-pin me-2 text-success"></i>
+<<<<<<< HEAD
+                                            {{ location.name }}
+=======
                                             {% set location_depth = location.level|default(0) %}
                                             {% if location_depth > 0 %}{% for _ in 1..location_depth %}— {% endfor %}{% endif %}{{ location.name }}
+>>>>>>> origin/pre-product
                                         </td>
                                         <td class="text-end">
                                             <span class="badge bg-secondary">{{ location.asset_count }}</span>
