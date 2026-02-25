@@ -1038,7 +1038,9 @@ class Config extends CommonDBTM
         echo "<tr><th colspan='4'>" . __('Personalization') . "</th></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td width='30%'><label for='dropdown_language$rand'>" . ($userpref ? __('Language') : __('Default language')) . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_language$rand'>" . ($userpref ? __('Language') : __('Default language')) . "</label>";
+        echo Html::showTooltip(__('Langue par défaut pour étudiants, personnel et enseignants UNH (recommandé : français).'));
+        echo "</td>";
         echo "<td width='20%'>";
         if (
             Config::canUpdate()
@@ -1049,7 +1051,9 @@ class Config extends CommonDBTM
             echo "&nbsp;";
         }
 
-        echo "<td width='30%'><label for='dropdown_date_format$rand'>" . __('Date format') . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_date_format$rand'>" . __('Date format') . "</label>";
+        echo Html::showTooltip(__('Format de date par défaut pour l\'interface UNH (ex. JJ/MM/AAAA).'));
+        echo "</td>";
         echo "<td width='20%'>";
         Dropdown::showFromArray('date_format', Toolbox::phpDateFormats(), ['value' => $data["date_format"], 'rand' => $rand]);
         echo "</td></tr>";
