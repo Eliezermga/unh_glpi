@@ -1,62 +1,95 @@
 {#
  # ---------------------------------------------------------------------
- #
- # GLPI - Gestionnaire Libre de Parc Informatique
- #
- # http://glpi-project.org
- #
- # @copyright 2015-2023 Teclib' and contributors.
- # @copyright 2003-2014 by the INDEPNET Development Team.
- # @licence   https://www.gnu.org/licenses/gpl-3.0.html
- #
- # ---------------------------------------------------------------------
- #
- # LICENSE
- #
- # This file is part of GLPI.
- #
- # This program is free software: you can redistribute it and/or modify
- # it under the terms of the GNU General Public License as published by
- # the Free Software Foundation, either version 3 of the License, or
- # (at your option) any later version.
- #
- # This program is distributed in the hope that it will be useful,
- # but WITHOUT ANY WARRANTY; without even the implied warranty of
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License for more details.
- #
- # You should have received a copy of the GNU General Public License
- # along with this program.  If not, see <https://www.gnu.org/licenses/>.
- #
+ # Formulaire : Gestion des Lignes Budgétaires / Projets UNH
+ # Université Nouveaux Horizons
  # ---------------------------------------------------------------------
  #}
 
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
-{% set params  = params ?? [] %}
 
 {% block more_fields %}
-   {{ fields.autoNameField(
-      'caller_num',
-      item,
-      __('Caller number'),
-      withtemplate
-   ) }}
 
-   {{ fields.autoNameField(
-      'caller_name',
-      item,
-      __('Caller name'),
-      withtemplate
-   ) }}
+{# En-tête avec logo ou style UNH (Bleu foncé et Rouge sont souvent les couleurs UNH) #}
+<div class="mb-4 p-2 border-bottom">
+    <h2 style="color:#003366; font-size: 1.5rem;">
+        <i class="fas fa-network-wired me-2"></i>
+        Gestion des Lignes – UNH
+    </h2>
+    <small class="text-muted">Configuration des ressources pour l'année académique en cours.</small>
+</div>
 
-   {{ fields.dropdownField(
-      'LineOperator',
-      'lineoperators_id',
-      item.fields['lineoperators_id'],
-      'LineOperator'|itemtype_name,
-      {
-         'entity': item.fields['entities_id'],
-      }
-   ) }}
+{# 1. Identifiants de la ligne #}
+{{ fields.textField(
+   'name',
+   item.fields['name'],
+   'Intitulé de la ligne UNH',
+   {
+      'placeholder': 'Ex: Ligne Fibre Optique Laboratoire L1'
+   }
+) }}
+
+{{ fields.textField(
+   'code',
+   item.fields['code'],
+   'Référence / Code UNH',
+   {
+      'placeholder': 'Ex: UNH-LOG-2026-001'
+   }
+) }}
+
+{# 2. Classification #}
+{{ fields.dropdownArrayField(
+   'line_type',
+   item.fields['line_type'],
+   {
+      1: 'Académique (Enseignement)',
+      2: 'Administrative (Direction)',
+      3: 'Pédagogique (Labos)',
+      4: 'Infrastructures (Campus)'
+   },
+   'Nature de la ligne'
+) }}
+
+{# 3. Affectation #}
+{{ fields.textField(
+   'faculty',
+   item.fields['faculty'],
+   'Faculté / Département',
+   {
+      'placeholder': 'Ex: Faculté des Sciences Informatiques'
+   }
+) }}
+
+{{ fields.textField(
+   'academic_year',
+   item.fields['academic_year'],
+   'Année Académique',
+   {
+      'placeholder': '2025 – 2026'
+   }
+) }}
+
+{# 4. Responsabilité #}
+{{ fields.textField(
+   'responsible',
+   item.fields['responsible'],
+   'Responsable de la ligne',
+   {
+      'placeholder': 'Prénom et Nom du doyen ou chef de service'
+   }
+) }}
+
+<hr>
+
+{# 5. Notes #}
+{{ fields.textareaField(
+   'comment',
+   item.fields['comment'],
+   'Observations institutionnelles',
+   {
+      'rows': 4
+   }
+) }}
+
 {% endblock %}
