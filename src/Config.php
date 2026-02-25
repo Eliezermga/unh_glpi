@@ -526,7 +526,9 @@ class Config extends CommonDBTM
         echo "<tr><th colspan='4'>" . _n('Asset', 'Assets', Session::getPluralNumber()) . "</th></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td width='30%'><label for='dropdown_auto_create_infocoms$rand'>" . __('Enable the financial and administrative information by default') . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_auto_create_infocoms$rand'>" . __('Enable the financial and administrative information by default') . "</label>";
+        echo Html::showTooltip(__('Activer les informations financières pour le parc universitaire (équipements des salles, laboratoires).'));
+        echo "</td>";
         echo "<td  width='20%'>";
         Dropdown::ShowYesNo('auto_create_infocoms', $CFG_GLPI["auto_create_infocoms"], -1, ['rand' => $rand]);
         echo "</td><td width='20%'><label for='dropdown_monitors_management_restrict$rand'>" . __('Restrict monitor management') . "</label></td>";
@@ -553,7 +555,9 @@ class Config extends CommonDBTM
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td><label for='showdate$rand'>" . __('End of fiscal year') . "</label></td><td>";
+        echo "<td><label for='showdate$rand'>" . __('End of academic year') . "</label>";
+        echo Html::showTooltip(__('Date de fin d\'année académique UNH (salles, laboratoires, facultés). Utilisée pour le suivi des actifs du parc universitaire.'));
+        echo "</td><td>";
         Html::showDateField("date_tax", ['value'      => $CFG_GLPI["date_tax"],
             'maybeempty' => false,
             'canedit'    => true,
@@ -620,6 +624,7 @@ class Config extends CommonDBTM
         echo "<br><table class='tab_cadre_fixe'>";
         echo "<tr>";
         echo "<th colspan='4'>" . __('Automatically update of the elements related to the computers');
+        echo Html::showTooltip(__('Mise à jour automatique des contacts, utilisateurs, groupes et emplacements (salles, laboratoires, facultés UNH).'));
         echo "</th><th colspan='2'>" . __('Unit management') . "</th></tr>";
 
         echo "<tr><th>&nbsp;</th>";
@@ -976,7 +981,9 @@ class Config extends CommonDBTM
             'rand'  => $rand
         ]);
         echo "</td>";
-        echo "<td width='30%'><label for='dropdown_planning_begin$rand'>" . __('Limit of the schedules for planning') . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_planning_begin$rand'>" . __('Limit of the schedules for planning') . "</label>";
+        echo Html::showTooltip(__('Plages horaires du support UNH (ex. 8h-17h). Adaptez selon les horaires du service assistance étudiant et personnel.'));
+        echo "</td>";
         echo "<td width='20%'>";
         Dropdown::showHours('planning_begin', ['value' => $CFG_GLPI["planning_begin"], 'rand' => $rand]);
         echo "&nbsp;<label for='dropdown_planning_end$rand'>-></label>&nbsp;";
@@ -1016,17 +1023,19 @@ class Config extends CommonDBTM
         echo "</td>";
 
         echo "<td><label for='dropdown_use_anonymous_helpdesk$rand'>" . __('Allow anonymous ticket creation (helpdesk.receiver)') . "</label>";
-        Html::showToolTip(__('Permet aux étudiants de créer des tickets sans compte'));
+        echo Html::showTooltip(__('Permet aux étudiants de créer des tickets sans connexion (interface simplifiée UNH).'));
         echo "</td><td>";
         Dropdown::showYesNo("use_anonymous_helpdesk", $CFG_GLPI["use_anonymous_helpdesk"], -1, ['rand' => $rand]);
-        echo "</td></tr><tr class='tab_bg_2'><td><label for='dropdown_use_anonymous_followups$rand'>" . __('Allow anonymous followups (receiver)') . "</label></td><td>";
+        echo "</td></tr><tr class='tab_bg_2'><td><label for='dropdown_use_anonymous_followups$rand'>" . __('Allow anonymous followups (receiver)') . "</label>";
+        echo Html::showTooltip(__('Permet le suivi anonyme des tickets (étudiants, personnel sans compte).'));
+        echo "</td><td>";
         Dropdown::showYesNo("use_anonymous_followups", $CFG_GLPI["use_anonymous_followups"], -1, ['rand' => $rand]);
         echo "</td><td colspan='2'></td></tr>";
 
         echo "<tr>";
         echo "<td>";
         echo "<label for='dropdown_planning_work_days$rand'>" . __('Planning work days') . "</label>";
-        Html::showToolTip(__('Jours de travail de l\'université (excluant les vacances)'));
+        echo Html::showTooltip(__('Jours ouvrés selon le calendrier universitaire UNH (ex. lundi-vendredi hors vacances).'));
         echo "</td>";
         echo "<td colspan='3'>";
         Dropdown::showFromArray(
@@ -1219,7 +1228,9 @@ class Config extends CommonDBTM
         echo "<tr><th colspan='4'>" . __('Personalization') . "</th></tr>";
 
         echo "<tr class='tab_bg_2'>";
-        echo "<td width='30%'><label for='dropdown_language$rand'>" . ($userpref ? __('Language') : __('Default language')) . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_language$rand'>" . ($userpref ? __('Language') : __('Default language')) . "</label>";
+        echo Html::showTooltip(__('Langue par défaut pour étudiants, personnel et enseignants UNH (recommandé : français).'));
+        echo "</td>";
         echo "<td width='20%'>";
         if (
             Config::canUpdate()
@@ -1230,7 +1241,9 @@ class Config extends CommonDBTM
             echo "&nbsp;";
         }
 
-        echo "<td width='30%'><label for='dropdown_date_format$rand'>" . __('Date format') . "</label></td>";
+        echo "<td width='30%'><label for='dropdown_date_format$rand'>" . __('Date format') . "</label>";
+        echo Html::showTooltip(__('Format de date par défaut pour l\'interface UNH (ex. JJ/MM/AAAA).'));
+        echo "</td>";
         echo "<td width='20%'>";
         Dropdown::showFromArray('date_format', Toolbox::phpDateFormats(), ['value' => $data["date_format"], 'rand' => $rand]);
         echo "</td></tr>";
@@ -3315,6 +3328,9 @@ HTML;
         echo "<table class='tab_cadre_fixe'>";
         echo "<tr class='tab_bg_1'><th colspan='4'>" . __("Logs purge configuration") .
            "</th></tr>";
+        echo "<tr class='tab_bg_1'><td colspan='4'>";
+        echo Html::showTooltip(__('Durées de conservation des journaux pour l\'audit du parc informatique universitaire UNH et la conformité.'));
+        echo "</td></tr>";
         echo "<tr class='tab_bg_1 center'><td colspan='4'><i>" . __("Change all") . "</i>";
         echo Html::scriptBlock("function form_init_all(value) {
          $('#purgelogs_form .purgelog_interval select').val(value).trigger('change');;
@@ -3777,13 +3793,14 @@ HTML;
             echo '<form name="form" action="' . Toolbox::getItemTypeFormURL(__CLASS__) . '" method="post" data-track-changes="true">';
         }
         echo '<table class="tab_cadre_fixe">';
-        echo '<tr><th colspan="4">' . __('Documents setup') . '</th></tr>';
+        echo '<tr><th colspan="4">' . __('Documents UNH') . '</th></tr>';
 
         echo '<tr class="tab_bg_2">';
         echo '<td>';
         echo '<label for="document_max_size' . $rand . '">';
         echo __('Document files maximum size (Mio)');
         echo '</label>';
+        echo Html::showTooltip(__('Taille maximale des documents UNH (mémoires, rapports, supports de cours). Adaptez selon les besoins du parc universitaire.'));
         echo '</td>';
         echo '<td>';
         echo Html::input('document_max_size', [

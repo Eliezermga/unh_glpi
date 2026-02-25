@@ -143,25 +143,25 @@
         field_options|merge({
             'enable_richtext': true,
             'enable_images': false,
-            'helper': __('Welcome message for university users. You can use HTML formatting.')
+            'helper': __('Message de bienvenue UNH affiché dans la boîte de connexion (ex. : Bienvenue à l\'Université Nouveaux Horizons).'),
         })
     ) }}
 
     {{ fields.textField(
         'helpdesk_doc_url',
         config['helpdesk_doc_url'],
-        __('Student documentation link'),
+        __('Simplified interface help link'),
         field_options|merge({
-            'helper': __('Link to student documentation (simplified interface)')
+            'helper': __('Lien vers la documentation UNH pour l\'interface simplifiée (étudiants, personnel).'),
         })
     ) }}
 
     {{ fields.textField(
         'central_doc_url',
         config['central_doc_url'],
-        __('Administrative documentation link'),
+        __('Standard interface help link'),
         field_options|merge({
-            'helper': __('Link to administrative documentation (standard interface)')
+            'helper': __('Lien vers la documentation UNH pour l\'interface standard (administrateurs).'),
         })
     ) }}
 
