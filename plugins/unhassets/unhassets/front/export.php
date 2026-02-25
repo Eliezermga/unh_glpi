@@ -24,23 +24,23 @@ if ($type == 'excel') {
     // Export Excel (CSV)
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename=rapport_parc_' . date('Y-m-d') . '.csv');
-
+    
     $output = fopen('php://output', 'w');
-
-    // En-têtes colonnes – traduits via __()
+    
+    // En-têtes
     fputcsv($output, [
-        __('Name', 'unhassets'),
-        __('Category', 'unhassets'),
-        __('Brand', 'unhassets'),
-        __('Model', 'unhassets'),
-        __('Serial Number', 'unhassets'),
-        __('Building', 'unhassets'),
-        __('Room', 'unhassets'),
-        __('Department', 'unhassets'),
-        __('Status', 'unhassets'),
-        __('Purchase Date', 'unhassets'),
+        'Nom',
+        'Catégorie',
+        'Marque',
+        'Modèle',
+        'Numéro de série',
+        'Bâtiment',
+        'Salle',
+        'Département',
+        'Statut',
+        'Date d\'achat'
     ], ';');
-
+    
     // Données
     foreach ($assets_data as $asset) {
         fputcsv($output, [
@@ -56,26 +56,14 @@ if ($type == 'excel') {
             $asset['purchase_date']
         ], ';');
     }
-
+    
     fclose($output);
     exit;
-
+    
 } else {
-    // Export PDF
+    // Export PDF (simple avec HTML)
     require_once(GLPI_ROOT . '/vendor/autoload.php');
-
-    // Chaînes traduites pour le template HTML
-    $lbl_report_title   = __('IT Asset Inventory Report', 'unhassets');
-    $lbl_generated_on   = __('Generated on', 'unhassets');
-    $lbl_name           = __('Name', 'unhassets');
-    $lbl_category       = __('Category', 'unhassets');
-    $lbl_building       = __('Building', 'unhassets');
-    $lbl_room           = __('Room', 'unhassets');
-    $lbl_status         = __('Status', 'unhassets');
-    $lbl_statistics     = __('Statistics', 'unhassets');
-    $lbl_total_assets   = __('Total number of assets', 'unhassets');
-    $lbl_report_date    = __('Report date', 'unhassets');
-
+    
     $html = '
     <html>
     <head>
@@ -93,22 +81,22 @@ if ($type == 'excel') {
     </head>
     <body>
         <div class="header">
-            <h1>' . htmlspecialchars($lbl_report_title) . '</h1>
-            <div class="date">' . htmlspecialchars($lbl_generated_on) . ' ' . date('d/m/Y à H:i') . '</div>
+            <h1>Rapport du Parc Informatique</h1>
+            <div class="date">Généré le ' . date('d/m/Y à H:i') . '</div>
         </div>
-
+        
         <table>
             <thead>
                 <tr>
-                    <th>' . htmlspecialchars($lbl_name) . '</th>
-                    <th>' . htmlspecialchars($lbl_category) . '</th>
-                    <th>' . htmlspecialchars($lbl_building) . '</th>
-                    <th>' . htmlspecialchars($lbl_room) . '</th>
-                    <th>' . htmlspecialchars($lbl_status) . '</th>
+                    <th>Nom</th>
+                    <th>Catégorie</th>
+                    <th>Bâtiment</th>
+                    <th>Salle</th>
+                    <th>Statut</th>
                 </tr>
             </thead>
             <tbody>';
-
+    
     foreach ($assets_data as $asset) {
         $html .= '<tr>
             <td>' . htmlspecialchars($asset['name']) . '</td>
@@ -118,33 +106,34 @@ if ($type == 'excel') {
             <td>' . htmlspecialchars($asset['status']) . '</td>
         </tr>';
     }
-
+    
     $html .= '
             </tbody>
         </table>
-
+        
         <div style="margin-top: 30px; font-size: 10px; color: #666;">
-            <p><strong>' . htmlspecialchars($lbl_statistics) . ' :</strong></p>
+            <p><strong>Statistiques:</strong></p>
             <ul>
-                <li>' . htmlspecialchars($lbl_total_assets) . ' : ' . count($assets_data) . '</li>
-                <li>' . htmlspecialchars($lbl_report_date) . ' : ' . date('d/m/Y') . '</li>
+                <li>Nombre total d\'équipements: ' . count($assets_data) . '</li>
+                <li>Date du rapport: ' . date('d/m/Y') . '</li>
             </ul>
         </div>
     </body>
     </html>';
-
-    if (class_exists('Dompdf\\Dompdf')) {
+    
+    // Utilisation simple de DomPDF si disponible, sinon affichage HTML
+    if (class_exists('Dompdf\Dompdf')) {
         $dompdf = new \Dompdf\Dompdf();
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream('rapport_parc_' . date('Y-m-d') . '.pdf');
     } else {
-        // Fallback : téléchargement HTML
+        // Fallback: téléchargement HTML
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename=rapport_parc_' . date('Y-m-d') . '.html');
         echo $html;
     }
-
+    
     exit;
 }

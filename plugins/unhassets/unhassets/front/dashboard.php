@@ -5,7 +5,7 @@ include ('../../../inc/includes.php');
 Session::checkRight("plugin_unhassets", READ);
 
 Html::header(
-    __('Dashboard', 'unhassets'),
+    __('Tableau de bord', 'unhassets'),
     $_SERVER['PHP_SELF'],
     "unhassets",
     "dashboard"
@@ -13,6 +13,7 @@ Html::header(
 
 global $DB;
 
+// Ajout de styles personnalisés pour améliorer l'apparence
 echo "<style>
 .dashboard-stats {
     display: flex;
@@ -95,7 +96,7 @@ echo "<style>
 }
 </style>";
 
-// Statistiques par catégorie
+// Récupération des statistiques (identique au code original)
 $stats_assets = [];
 $categories = ['PC', 'Imprimante', 'Projecteur', 'Serveur', 'Switch', 'Autre'];
 foreach ($categories as $cat) {
@@ -167,16 +168,17 @@ $licenses_expired = $DB->request([
     ]
 ])->current()['cpt'];
 
-// Affichage
+// Début de l'affichage du tableau de bord
 echo "<div class='dashboard'>";
 
-echo "<h2>" . __('IT Asset Inventory Overview', 'unhassets') . "</h2>";
+// Titre principal
+echo "<h2>" . __('Vue d\'ensemble du parc informatique', 'unhassets') . "</h2>";
 
 // Équipements par catégorie
 echo "<div class='dashboard-stats'>";
 foreach ($stats_assets as $cat => $count) {
     echo "<div class='stat-card'>";
-    echo "<h3>" . htmlspecialchars($cat) . "</h3>";
+    echo "<h3>" . $cat . "</h3>";
     echo "<div class='stat-value'>" . $count . "</div>";
     echo "</div>";
 }
@@ -185,73 +187,75 @@ echo "</div>";
 // Équipements par statut
 echo "<div class='dashboard-stats'>";
 echo "<div class='stat-card'>";
-echo "<h3>" . __('Asset Status', 'unhassets') . "</h3>";
+echo "<h3>" . __('Statut des équipements', 'unhassets') . "</h3>";
 echo "<div class='stat-detail'>";
-echo "<div class='stat-item'><span class='text-green'>●</span> " . __('Active', 'unhassets') . "<br><strong>" . $status_stats['active'] . "</strong></div>";
-echo "<div class='stat-item'>" . __('Inactive', 'unhassets') . "<br><strong>" . $status_stats['inactive'] . "</strong></div>";
-echo "<div class='stat-item'><span class='text-orange'>●</span> " . __('Under Maintenance', 'unhassets') . "<br><strong>" . $status_stats['maintenance'] . "</strong></div>";
-echo "<div class='stat-item'><span class='text-red'>●</span> " . __('Broken', 'unhassets') . "<br><strong>" . $status_stats['broken'] . "</strong></div>";
-echo "<div class='stat-item'>" . __('Retired', 'unhassets') . "<br><strong>" . $status_stats['retired'] . "</strong></div>";
+echo "<div class='stat-item'><span class='text-green'>●</span> " . __('Actif', 'unhassets') . "<br><strong>" . $status_stats['active'] . "</strong></div>";
+echo "<div class='stat-item'>" . __('Inactif', 'unhassets') . "<br><strong>" . $status_stats['inactive'] . "</strong></div>";
+echo "<div class='stat-item'><span class='text-orange'>●</span> " . __('Maintenance', 'unhassets') . "<br><strong>" . $status_stats['maintenance'] . "</strong></div>";
+echo "<div class='stat-item'><span class='text-red'>●</span> " . __('En panne', 'unhassets') . "<br><strong>" . $status_stats['broken'] . "</strong></div>";
+echo "<div class='stat-item'>" . __('Retiré', 'unhassets') . "<br><strong>" . $status_stats['retired'] . "</strong></div>";
 echo "</div>";
 echo "</div>";
 echo "</div>";
 
-// Réservations & licences
+// Réservations et licences
 echo "<div class='dashboard-stats'>";
 
+// Carte Réservations
 echo "<div class='stat-card'>";
-echo "<h3>" . __('Reservations', 'unhassets') . "</h3>";
+echo "<h3>" . __('Réservations', 'unhassets') . "</h3>";
 echo "<div class='stat-detail'>";
-echo "<div class='stat-item'><span class='text-orange'>⏳</span> " . __('Pending', 'unhassets') . "<br><strong>" . $reservations_pending . "</strong></div>";
-echo "<div class='stat-item'>📅 " . __('Today', 'unhassets') . "<br><strong>" . $reservations_today . "</strong></div>";
+echo "<div class='stat-item'><span class='text-orange'>⏳</span> " . __('En attente', 'unhassets') . "<br><strong>" . $reservations_pending . "</strong></div>";
+echo "<div class='stat-item'>📅 " . __('Aujourd\'hui', 'unhassets') . "<br><strong>" . $reservations_today . "</strong></div>";
 echo "</div>";
 echo "</div>";
 
+// Carte Licences
 echo "<div class='stat-card'>";
-echo "<h3>" . __('Software Licenses', 'unhassets') . "</h3>";
+echo "<h3>" . __('Licences logicielles', 'unhassets') . "</h3>";
 echo "<div class='stat-detail'>";
 echo "<div class='stat-item'>" . __('Total', 'unhassets') . "<br><strong>" . $licenses_total . "</strong></div>";
-echo "<div class='stat-item'><span class='text-orange'>⏳</span> " . __('Expiring soon (30d)', 'unhassets') . "<br><strong>" . $licenses_expiring . "</strong></div>";
-echo "<div class='stat-item'><span class='text-red'>⚠</span> " . __('Expired', 'unhassets') . "<br><strong>" . $licenses_expired . "</strong></div>";
+echo "<div class='stat-item'><span class='text-orange'>⏳</span> " . __('Expirent bientôt (30j)', 'unhassets') . "<br><strong>" . $licenses_expiring . "</strong></div>";
+echo "<div class='stat-item'><span class='text-red'>⚠</span> " . __('Expirées', 'unhassets') . "<br><strong>" . $licenses_expired . "</strong></div>";
 echo "</div>";
 echo "</div>";
 
-echo "</div>";
+echo "</div>"; // Fin dashboard-stats
 
 // Alertes
 if ($status_stats['broken'] > 0 || $licenses_expired > 0 || $licenses_expiring > 0 || $reservations_pending > 0) {
     echo "<div class='stat-card' style='margin-top:20px;'>";
-    echo "<h3>" . __('Alerts & Required Actions', 'unhassets') . "</h3>";
+    echo "<h3>" . __('Alertes et actions requises', 'unhassets') . "</h3>";
     echo "<ul class='alert-list'>";
-
+    
     if ($status_stats['broken'] > 0) {
         echo "<li style='border-left-color: #dc3545;'>";
         echo "<span class='badge badge-red'>⚠</span> ";
-        echo sprintf(__('%d asset(s) broken and require your attention', 'unhassets'), $status_stats['broken']);
+        echo sprintf(__('%d équipement(s) en panne nécessitent votre attention', 'unhassets'), $status_stats['broken']);
         echo "</li>";
     }
-
+    
     if ($licenses_expired > 0) {
         echo "<li style='border-left-color: #dc3545;'>";
         echo "<span class='badge badge-red'>⚠</span> ";
-        echo sprintf(__('%d license(s) expired — renewal required', 'unhassets'), $licenses_expired);
+        echo sprintf(__('%d licence(s) expirée(s) - renouvellement nécessaire', 'unhassets'), $licenses_expired);
         echo "</li>";
     }
-
+    
     if ($licenses_expiring > 0) {
         echo "<li style='border-left-color: #fd7e14;'>";
         echo "<span class='badge badge-orange'>⚠</span> ";
-        echo sprintf(__('%d license(s) expiring within the next 30 days', 'unhassets'), $licenses_expiring);
+        echo sprintf(__('%d licence(s) expire(nt) dans les 30 prochains jours', 'unhassets'), $licenses_expiring);
         echo "</li>";
     }
-
+    
     if ($reservations_pending > 0) {
         echo "<li style='border-left-color: #fd7e14;'>";
         echo "<span class='badge badge-orange'>⏳</span> ";
-        echo sprintf(__('%d reservation(s) awaiting approval', 'unhassets'), $reservations_pending);
+        echo sprintf(__('%d réservation(s) en attente d\'approbation', 'unhassets'), $reservations_pending);
         echo "</li>";
     }
-
+    
     echo "</ul>";
     echo "</div>";
 }
@@ -259,14 +263,14 @@ if ($status_stats['broken'] > 0 || $licenses_expired > 0 || $licenses_expiring >
 // Boutons d'export
 echo "<div class='export-buttons'>";
 echo "<a href='" . Plugin::getWebDir('unhassets') . "/front/export.php?type=pdf' class='vsubmit'>";
-echo __('Export as PDF', 'unhassets');
+echo __('Exporter en PDF', 'unhassets');
 echo "</a> ";
 echo "<a href='" . Plugin::getWebDir('unhassets') . "/front/export.php?type=excel' class='vsubmit'>";
-echo __('Export as Excel', 'unhassets');
+echo __('Exporter en Excel', 'unhassets');
 echo "</a>";
 echo "</div>";
 
-echo "</div>";
+echo "</div>"; // Fin dashboard
 
 Html::footer();
 ?>

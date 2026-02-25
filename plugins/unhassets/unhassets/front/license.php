@@ -5,12 +5,12 @@ include ('../../../inc/includes.php');
 Session::checkRight("plugin_unhassets", READ);
 
 Html::header(
-    __('Reservations', 'unhassets'),
+    __('Licences logicielles', 'unhassets'),
     $_SERVER['PHP_SELF'],
     "unhassets",
-    "reservation"
+    "license"
 );
 
-Search::show('PluginUnhassetsReservation');
+Search::show('PluginUnhassetsLicense');
 
 Html::footer();

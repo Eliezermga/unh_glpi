@@ -283,57 +283,57 @@ class PluginUnhassetsReservation extends CommonDBTM {
     }
 
     public function rawSearchOptions() {
+        $tab = [];
 
-        return [
-
-            [
-                'id'            => 5101,
-                'table'         => $this->getTable(),
-                'field'         => 'id',
-                'name'          => __('ID', 'unhassets'),
-                'datatype'      => 'number',
-                'massiveaction' => false,
-            ],
-
-            [
-                'id'       => 5102,
-                'table'    => $this->getTable(),
-                'field'    => 'reservation_date',
-                'name'     => __('Reservation Date', 'unhassets'),
-                'datatype' => 'date',
-            ],
-
-            [
-                'id'       => 5103,
-                'table'    => $this->getTable(),
-                'field'    => 'status',
-                'name'     => __('Status', 'unhassets'),
-                'datatype' => 'string',
-            ],
-
-            [
-                'id'       => 5104,
-                'table'    => $this->getTable(),
-                'field'    => 'purpose',
-                'name'     => __('Purpose', 'unhassets'),
-                'datatype' => 'text',
-            ],
-
-            [
-                'id'       => 5105,
-                'table'    => $this->getTable(),
-                'field'    => 'is_approved',
-                'name'     => __('Approved', 'unhassets'),
-                'datatype' => 'bool',
-            ],
-
-            [
-                'id'       => 5106,
-                'table'    => $this->getTable(),
-                'field'    => 'comment',
-                'name'     => __('Comment', 'unhassets'),
-                'datatype' => 'text',
-            ],
+        $tab[] = [
+            'id'            => 5101,
+            'table'         => $this->getTable(),
+            'field'         => 'id',
+            'name'          => __('ID', 'unhassets'),
+            'datatype'      => 'number',
+            'massiveaction' => false,
         ];
+
+        $tab[] = [
+            'id'       => 5102,
+            'table'    => $this->getTable(),
+            'field'    => 'reservation_date',
+            'name'     => __('Date de réservation', 'unhassets'),
+            'datatype' => 'date',
+        ];
+
+        $tab[] = [
+            'id'       => 5103,
+            'table'    => $this->getTable(),
+            'field'    => 'status',
+            'name'     => __('Statut', 'unhassets'),
+            'datatype' => 'string',
+        ];
+
+        $tab[] = [
+            'id'       => 5104,
+            'table'    => $this->getTable(),
+            'field'    => 'purpose',
+            'name'     => __('Objet', 'unhassets'),
+            'datatype' => 'text',
+        ];
+
+        $tab[] = [
+            'id'       => 5105,
+            'table'    => $this->getTable(),
+            'field'    => 'is_approved',
+            'name'     => __('Approuvée', 'unhassets'),
+            'datatype' => 'bool',
+        ];
+
+        $tab[] = [
+            'id'       => 5106,
+            'table'    => $this->getTable(),
+            'field'    => 'comment',
+            'name'     => __('Commentaire', 'unhassets'),
+            'datatype' => 'text',
+        ];
+
+        return $tab;
     }
 }
