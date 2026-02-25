@@ -112,6 +112,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'success'        => $success,
     'error_message'  => $error_message,
     'can_create'     => InventoryOrganization::canCreate(),
+    'csrf_token_value' => Session::getNewCSRFToken(),
     'asset_types'    => [
         'computer'   => __('Ordinateur'),
         'laptop'     => __('Ordinateur portable'),

@@ -98,6 +98,7 @@ Glpi\Application\View\TemplateRenderer::getInstance()->display('pages/inventoryo
     'success'     => $success,
     'error_message' => $error_message,
     'active_entity' => $active_entity,
+    'csrf_token_value' => Session::getNewCSRFToken(),
 ]);
 
 Html::footer();
