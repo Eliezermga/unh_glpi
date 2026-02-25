@@ -274,8 +274,8 @@ class Config extends CommonDBTM
             }
         }
 
-        // Validate SIS sync frequency
-        if (isset($input["sis_sync_frequency"]) && !empty($input["sis_sync_frequency"])) {
+        // Validate SIS sync frequency (university authentication)
+        if (isset($input["sis_sync_frequency"]) && $input["sis_sync_frequency"] !== '') {
             $valid_frequencies = ['daily', 'weekly', 'monthly'];
             if (!in_array($input["sis_sync_frequency"], $valid_frequencies)) {
                 Session::addMessageAfterRedirect(__('Invalid synchronization frequency!'), false, ERROR);
@@ -736,22 +736,33 @@ class Config extends CommonDBTM
         echo "<td width='30%'><label for='dropdown_enable_sis_sync" . $rand . "'>" . __('Enable synchronization with university information system') . "</label></td>";
         echo "<td width='20%'>";
         Dropdown::showYesNo("enable_sis_sync", $CFG_GLPI["enable_sis_sync"] ?? 0, -1, ['rand' => $rand]);
-        echo "</td>";
-        echo "<td width='30%'><label for='sis_api_url'>" . __('Information system API URL') . "</label></td>";
-        echo "<td width='20%'>";
-        echo "<input type='url' name='sis_api_url' id='sis_api_url' value='" . htmlspecialchars($CFG_GLPI["sis_api_url"] ?? '') . "' class='form-control'>";
+        echo "</td><td colspan='2'></td></tr>";
+
+        echo "<tr class='tab_bg_2'>";
+        echo "<td colspan='4'>";
+        $current_status = !empty($CFG_GLPI["enable_sis_sync"])
+            ? __('Current university synchronization status: enabled.')
+            : __('Current university synchronization status: disabled.');
+        echo "<em>" . $current_status . "</em>";
+        if (!empty($CFG_GLPI["sis_sync_last_update"])) {
+            echo "<br>";
+            echo "<em>" . sprintf(
+                __('Last university synchronization status change: %s'),
+                Html::convDateTime($CFG_GLPI["sis_sync_last_update"])
+            ) . "</em>";
+        }
         echo "</td></tr>";
 
         echo "<tr class='tab_bg_2'>";
         echo "<td><label for='dropdown_sis_sync_frequency" . $rand . "'>" . __('Synchronization frequency') . "</label></td>";
         echo "<td>";
         Dropdown::showFromArray('sis_sync_frequency', [
-            'daily' => __('Daily'),
-            'weekly' => __('Weekly'),
+            'daily'   => __('Daily'),
+            'weekly'  => __('Weekly'),
             'monthly' => __('Monthly')
         ], [
             'value' => $CFG_GLPI["sis_sync_frequency"] ?? 'daily',
-            'rand' => $rand
+            'rand'  => $rand
         ]);
         echo "</td><td colspan='2'></td></tr>";
 
