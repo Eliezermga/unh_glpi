@@ -141,22 +141,11 @@ class KnowbaseItem extends CommonDBVisible implements ExtraVisibilityCriteria
     }
 
     /**
-     * In helpdesk interface, READFAQ profiles should not be blocked to FAQ-only mode.
+     * Users without global READ right must be restricted to FAQ-only mode.
      */
     private static function isFaqOnlyMode(): bool
     {
-        if (Session::haveRight(self::$rightname, READ)) {
-            return false;
-        }
-
-        if (
-            Session::getCurrentInterface() === 'helpdesk'
-            && Session::haveRight(self::$rightname, self::READFAQ)
-        ) {
-            return false;
-        }
-
-        return true;
+        return !Session::haveRight(self::$rightname, READ);
     }
 
     private static function getStaticFaqEntries(): array

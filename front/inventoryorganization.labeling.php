@@ -48,6 +48,7 @@ $config = InventoryOrganization::getLabelingConfig();
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    Session::checkCSRF($_POST);
     $action = $_POST['action'] ?? '';
     
         if ($action === 'save_config' && InventoryOrganization::canCreate()) {
