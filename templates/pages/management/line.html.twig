@@ -1,8 +1,38 @@
+<<<<<<< Updated upstream
+=======
+{#
+ # ---------------------------------------------------------------------
+ # Formulaire FINAL : Université Nouveaux Horizons (UNH)
+ # Module : Gestion des Lignes Budgétaires
+ # ---------------------------------------------------------------------
+ #}
+
+>>>>>>> Stashed changes
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
+{% set params = params ?? [] %}
+
+{% block form_fields %}
+   {# Bannière institutionnelle UNH #}
+   <div class="alert alert-info text-center shadow-sm" style="border-left: 5px solid #003366; background-color: #f0f4f8; color: #003366;">
+      <h4 class="mb-0" style="font-weight: bold;"><i class="fas fa-university"></i> UNIVERSITÉ NOUVEAUX HORIZONS</h4>
+      <small class="text-uppercase fw-bold">{{ __('Gestion des Lignes Budgétaires', 'management') }}</small>
+   </div>
+
+   {# Nom et Statut (Champs standards GLPI hérités) #}
+   {{ parent() }}
+
+   {# Espaceur #}
+   {{ fields.nullField() }}
+{% endblock %}
 
 {% block more_fields %}
+   {# --- SECTION 1 : DÉTAILS TECHNIQUES DE LA LIGNE --- #}
+   <h5 class="mt-4 pb-1" style="color: #003366; border-bottom: 2px solid #003366;">
+      <i class="fas fa-barcode"></i> {{ __('Academic year resources', 'management') }}
+   </h5>
 
+<<<<<<< Updated upstream
 <h2 style="color:#b30000">Ligne – Université Nouveaux Horizons</h2>
 
 {{ fields.textField(
@@ -69,3 +99,46 @@
 ) }}
 
 {% endblock %}
+=======
+   {{ fields.textField('intitule_ligne', item.fields['intitule_ligne'], __('intitule_ligne', 'management')) }}
+   {{ fields.textField('code_ligne', item.fields['code_ligne'], __('code_ligne', 'management')) }}
+
+   {# Type de ligne avec Dropdown (Nature de la ligne) #}
+   {{ fields.dropdownField(
+      __('Nature de la ligne', 'management'),
+      'line_type',
+      item.fields['line_type'],
+      'PluginManagementLineType',
+      {
+         'condition': {'is_deleted': 0}
+      }
+   ) }}
+
+   {# --- SECTION 2 : AFFECTATION INSTITUTIONNELLE --- #}
+   <div class="mt-5 p-4 border rounded shadow-sm" style="background-color: #ffffff; border: 1px solid #dee2e6 !important;">
+      <h5 class="mb-4" style="color: #d9534f; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+         <i class="fas fa-sitemap"></i> {{ __('Informations Institutionnelles UNH', 'management') }}
+      </h5>
+
+      <style>
+         .unh-field-container .row { margin-bottom: 15px; }
+         .unh-field-container label { font-weight: 600 !important; color: #333 !important; }
+         .unh-field-container input, .unh-field-container textarea { border: 1px solid #adb5bd !important; }
+      </style>
+
+      <div class="unh-field-container">
+         {{ fields.textField('faculte_concernee', item.fields['faculte_concernee'], __('faculte_concernee', 'management')) }}
+         {{ fields.textField('annee_academique', item.fields['annee_academique'], __('annee_academique', 'management')) }}
+         {{ fields.textField('responsable_unh', item.fields['responsable_unh'], __('responsable_unh', 'management')) }}
+         
+         <hr>
+         
+         {{ fields.textareaField('observations_institutionnelles', item.fields['observations_institutionnelles'], __('observations_institutionnelles', 'management')) }}
+      </div>
+   </div>
+
+   {% if params['withtemplate'] == 1 %}
+      {{ fields.hiddenField('withtemplate', '1') }}
+   {% endif %}
+{% endblock %}
+>>>>>>> Stashed changes

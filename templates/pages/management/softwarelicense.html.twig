@@ -1,7 +1,15 @@
 {#
+<<<<<<< Updated upstream
  # GLPI - Formulaire Licence Logiciel
  # Université Nouveaux Horizons (UNH)
 #}
+=======
+ # ---------------------------------------------------------------------
+ # Formulaire FINAL : Université Nouveaux Horizons (UNH)
+ # Module : Gestion des Licences Logicielles avec Validation de Date
+ # ---------------------------------------------------------------------
+ #}
+>>>>>>> Stashed changes
 
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
@@ -117,12 +125,19 @@
    }
 ) }}
 
+<<<<<<< Updated upstream
 {# ================= DÉPASSEMENT ================= #}
 {{ fields.dropdownYesNo(
    'allow_overquota',
    item.fields['allow_overquota'],
    __('Autoriser le dépassement')
 ) }}
+=======
+   {# Champ Date d'expiration avec ID pour validation JS #}
+   {{ fields.datetimeField('expire', item.fields['expire'], __('Date d\'expiration', 'management'), {
+      'id': 'unh_expire_date'
+   }) }}
+>>>>>>> Stashed changes
 
 {# ================= RESPONSABLE ================= #}
 {{ fields.dropdownField(
@@ -133,6 +148,7 @@
    {'entity': UNH_ENTITY_ID}
 ) }}
 
+<<<<<<< Updated upstream
 {# ================= GROUPE IT ================= #}
 {{ fields.dropdownField(
    'Group',
@@ -141,6 +157,14 @@
    __('Service informatique'),
    {'entity': UNH_ENTITY_ID}
 ) }}
+=======
+      <style>
+         .unh-field-container .row { margin-bottom: 15px; }
+         .unh-field-container label { font-weight: 600 !important; color: #333 !important; }
+         .unh-field-container input, .unh-field-container textarea { border: 1px solid #adb5bd !important; }
+         .date-error { color: #d9534f; font-size: 0.85em; margin-top: 5px; display: none; }
+      </style>
+>>>>>>> Stashed changes
 
 {# ================= EXPIRATION ================= #}
 {{ fields.datetimeField(
@@ -150,6 +174,7 @@
    {'helper': __('Vide = licence permanente')}
 ) }}
 
+<<<<<<< Updated upstream
 {# ================= COMMENTAIRE ================= #}
 {{ fields.textareaField(
    'comment',
@@ -163,3 +188,29 @@
 {% endif %}
 
 {% endblock %}
+=======
+   {# Script de validation professionnelle de la date #}
+   <script type="text/javascript">
+   $(document).ready(function() {
+      // On écoute le changement sur le champ date d'expiration
+      $('input[name="expire"]').on('change', function() {
+         var selectedDate = new Date($(this).val());
+         var today = new Date();
+         today.setHours(0,0,0,0); // On ne compare que la date, pas l'heure
+
+         if (selectedDate < today) {
+            alert("Erreur UNH : La date d'expiration ne peut pas être une date passée.");
+            $(this).val(''); // On vide le champ
+            $(this).css('border-color', '#d9534f');
+         } else {
+            $(this).css('border-color', '#adb5bd');
+         }
+      });
+   });
+   </script>
+
+   {% if params['withtemplate'] == 1 %}
+      {{ fields.hiddenField('withtemplate', '1') }}
+   {% endif %}
+{% endblock %}
+>>>>>>> Stashed changes
