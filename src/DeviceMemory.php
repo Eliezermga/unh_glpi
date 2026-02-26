@@ -40,7 +40,7 @@ class DeviceMemory extends CommonDevice
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Memory', 'Memory', $nb);
+        return _n('Serveur', 'Serveur', $nb);
     }
 
 
@@ -51,22 +51,18 @@ class DeviceMemory extends CommonDevice
             parent::getAdditionalFields(),
             [
                 [
-                    'name'  => 'size_default',
-                    'label' => __('Size by default'),
-                    'type'  => 'integer',
-                    'min'   => 0,
-                    'unit'  => __('Mio')
+                    'name'  => 'serial_number',
+                    'label' => __('Serial Number'),
+                    'type'  => 'text'
                 ],
                 [
-                    'name'  => 'frequence',
-                    'label' => __('Frequency'),
-                    'type'  => 'integer',
-                    'min'   => 0,
-                    'unit'  => __('MHz')
+                    'name'  => 'commissioning_date',
+                    'label' => __('Commissioning Date'),
+                    'type'  => 'date'
                 ],
                 [
-                    'name'  => 'devicememorytypes_id',
-                    'label' => _n('Type', 'Types', 1),
+                    'name'  => 'status',
+                    'label' => __('Status'),
                     'type'  => 'dropdownValue'
                 ],
                 [
@@ -84,27 +80,27 @@ class DeviceMemory extends CommonDevice
         $tab = parent::rawSearchOptions();
 
         $tab[] = [
-            'id'                 => '11',
+            'id'                 => '15',
             'table'              => $this->getTable(),
-            'field'              => 'size_default',
-            'name'               => __('Size by default'),
-            'datatype'           => 'integer',
+            'field'              => 'serial_number',
+            'name'               => __('Serial Number'),
+            'datatype'           => 'string',
         ];
 
         $tab[] = [
-            'id'                 => '12',
+            'id'                 => '17', // Updated to avoid duplicate ID
             'table'              => $this->getTable(),
-            'field'              => 'frequence',
-            'name'               => __('Frequency'),
-            'datatype'           => 'integer',
+            'field'              => 'commissioning_date',
+            'name'               => __('Commissioning Date'),
+            'datatype'           => 'date',
         ];
 
         $tab[] = [
-            'id'                 => '13',
-            'table'              => 'glpi_devicememorytypes',
-            'field'              => 'name',
-            'name'               => _n('Type', 'Types', 1),
-            'datatype'           => 'dropdown'
+            'id'                 => '18',
+            'table'              => $this->getTable(),
+            'field'              => 'status',
+            'name'               => __('Status'),
+            'datatype'           => 'dropdown',
         ];
 
         $tab[] = [
