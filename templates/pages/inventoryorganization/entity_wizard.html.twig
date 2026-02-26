@@ -7,7 +7,6 @@
  #
  # ---------------------------------------------------------------------
  #}
- 
 
 <div class="container-fluid">
     {# Header #}
@@ -73,12 +72,8 @@
                                     <select class="form-select" name="parent_id">
                                         {% for entity in entities %}
                                             <option value="{{ entity.id }}" {% if entity.id == active_entity %}selected{% endif %}>
-<<<<<<< HEAD
-                                                {{ entity.name }}
-=======
                                                 {% set depth = entity.level|default(0) %}
                                                 {% if depth > 0 %}{% for _ in 1..depth %}— {% endfor %}{% endif %}{{ entity.name }}
->>>>>>> origin/pre-product
                                             </option>
                                         {% endfor %}
                                     </select>
@@ -214,12 +209,8 @@
                         {% for entity in entities|slice(0, 15) %}
                             <div class="list-group-item py-2">
                                 <i class="ti ti-building me-2 text-muted"></i>
-<<<<<<< HEAD
-                                {{ entity.name }}
-=======
                                 {% set depth = entity.level|default(0) %}
                                 {% if depth > 0 %}{% for _ in 1..depth %}— {% endfor %}{% endif %}{{ entity.name }}
->>>>>>> origin/pre-product
                             </div>
                         {% endfor %}
                         {% if entities|length > 15 %}

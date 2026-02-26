@@ -224,7 +224,6 @@ class Group extends CommonTreeDropdown
      **/
     public function showForm($ID, array $options = [])
     {
-        
 
         $this->initForm($ID, $options);
         $this->showFormHeader($options);
@@ -234,10 +233,10 @@ class Group extends CommonTreeDropdown
         echo "<td>";
         echo Html::input('name', ['value' => $this->fields['name']]);
         echo "</td>";
-        //echo "<td rowspan='12' class='middle'>" . __('Comments') . "</td>";
-        //echo "<td class='middle' rowspan='12'>";
-       // echo "<textarea class='form-control' name='comment' >" . $this->fields["comment"] . "</textarea>";
-       // echo "</td></tr>";
+        echo "<td rowspan='12' class='middle'>" . __('Comments') . "</td>";
+        echo "<td class='middle' rowspan='12'>";
+        echo "<textarea class='form-control' name='comment' >" . $this->fields["comment"] . "</textarea>";
+        echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('As child of') . "</td><td>";
@@ -247,77 +246,32 @@ class Group extends CommonTreeDropdown
             'used'   => (($ID > 0) ? getSonsOf($this->getTable(), $ID) : [])
         ]);
         echo "</td></tr>";
-        
-       /* echo "<tr class='tab_bg_1'>";
-        echo "<td>Responsable du groupe</td>";
-        echo "<td>";
-        User::dropdown([
-            'name'  => 'users_id_responsible',
-            'value' => $this->fields['users_id_responsible']
-        ]);
-        echo "</td></tr>";*/
 
-       /* echo "<tr class='tab_bg_1'>";
-        echo "<td>Service</td>";
-        echo "<td>";
-        echo Html::input('service', [
-            'value' => $this->fields['service']
-        ]);
-        echo "</td></tr>"; */
+        echo "<tr class='tab_bg_1'>";
+        echo "<td class='subheader' colspan='2'>" . __('Visible in a ticket');
+        echo "</td></tr>";
 
-        /*echo "<tr class='tab_bg_1'>";
-        echo "<td>Niveau de support</td>";
-        echo "<td>";
-        Dropdown::showFromArray('support_level', [
-            'Niveau 1' => 'Niveau 1',
-            'Niveau 2' => 'Niveau 2',
-            'Niveau 3' => 'Niveau 3'
-        ],     ['value' => $this->fields['support_level']]);
-        echo "</td></tr>"; */
-
-       /* echo "<tr class='tab_bg_1'>";
-        echo "<td>Email du groupe</td>";
-        echo "<td>";
-        echo Html::input('group_email', [
-           'value' => $this->fields['group_email'],
-           'type'  => 'email'
-        ]);
-        echo "</td></tr>"; */
-
-        /*echo "<tr class='tab_bg_1'>";
-        echo "<td>Horaire de travail</td>";
-        echo "<td>";
-        echo Html::input('working_hours', [
-           'value' => $this->fields['working_hours'],
-           'placeholder' => 'Lun–Ven 08h–16h'
-        ]);
-        echo "</td></tr>";*/
-
-    //echo "<tr class='tab_bg_1'>";
-        //echo "<td class='subheader' colspan='2'>" . __('Visible in a ticket');
-       // echo "</td></tr>";
-
-       /* echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
         echo "<td>" . _n('Requester', 'Requesters', 1) . "</td>";
         echo "<td>";
         Dropdown::showYesNo('is_requester', $this->fields['is_requester']);
-        echo "</td></tr>"; */
+        echo "</td></tr>";
 
-       /* echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
         echo "<td>" . _n('Watcher', 'Watchers', 1) . "</td>";
         echo "<td>";
         Dropdown::showYesNo('is_watcher', $this->fields['is_watcher']);
-        echo "</td></tr>"; */
+        echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('Assigned to') . "</td><td>";
         Dropdown::showYesNo('is_assign', $this->fields['is_assign']);
-        echo "</td></tr>"; 
+        echo "</td></tr>";
 
-       /* echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
         echo "<td>" . _n('Task', 'Tasks', 1) . "</td><td>";
         Dropdown::showYesNo('is_task', $this->fields['is_task']);
-        echo "</td></tr>"; */
+        echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('Can be notified') . "</td>";
@@ -325,25 +279,25 @@ class Group extends CommonTreeDropdown
         Dropdown::showYesNo('is_notify', $this->fields['is_notify']);
         echo "</td></tr>";
 
-       // echo "<tr class='tab_bg_1'>";
-       // echo "<td class='subheader' colspan='2'>" . __('Visible in a project');
-       // echo "</td></tr>";
+        echo "<tr class='tab_bg_1'>";
+        echo "<td class='subheader' colspan='2'>" . __('Visible in a project');
+        echo "</td></tr>";
 
-        /*echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
         echo "<td>" . __('Can be manager') . "</td>";
         echo "<td>";
         Dropdown::showYesNo('is_manager', $this->fields['is_manager']);
-        echo "</td></tr>"; */
+        echo "</td></tr>";
 
-       // echo "<tr class='tab_bg_1'>";
-        //echo "<td class='subheader' colspan='2'>" . __('Can contain');
-       // echo "</td></tr>";
+        echo "<tr class='tab_bg_1'>";
+        echo "<td class='subheader' colspan='2'>" . __('Can contain');
+        echo "</td></tr>";
 
-       /* echo "<tr class='tab_bg_1'>";
+        echo "<tr class='tab_bg_1'>";
         echo "<td>" . _n('Item', 'Items', Session::getPluralNumber()) . "</td>";
         echo "<td>";
         Dropdown::showYesNo('is_itemgroup', $this->fields['is_itemgroup']);
-        echo "</td></tr>"; */
+        echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         echo "<td>" . User::getTypeName(Session::getPluralNumber()) . "</td><td>";
@@ -614,22 +568,6 @@ class Group extends CommonTreeDropdown
             'name'               => __('Can be in charge of a task'),
             'datatype'           => 'bool'
         ];
-       /* $tab[] = [
-            'id'    => '90',
-            'table' => $this->getTable(),
-            'field' => 'service',
-            'name'  => 'Service',
-            'datatype' => 'string'
-        ];
-
-        $tab[] = [
-            'id'    => '91',
-            'table' => $this->getTable(),
-            'field' => 'support_level',
-            'name'  => 'Niveau de support',
-            'datatype' => 'string'
-        ];*/
-
 
         return $tab;
     }
@@ -1146,29 +1084,4 @@ class Group extends CommonTreeDropdown
 
         return $this->getLink();
     }
-
-
-    // ---------------------------
-    // Custom fields added
-    // ---------------------------
-
-    protected $group_supervisor;
-    protected $group_type;
-
-    public function setGroupSupervisor($supervisor) {
-        $this->group_supervisor = $supervisor;
-    }
-
-    public function getGroupSupervisor() {
-        return $this->group_supervisor;
-    }
-
-    public function setGroupType($type) {
-        $this->group_type = $type;
-    }
-
-    public function getGroupType() {
-        return $this->group_type;
-    }
-
 }
