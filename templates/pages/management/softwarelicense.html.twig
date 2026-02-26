@@ -139,6 +139,7 @@
    }) }}
 >>>>>>> Stashed changes
 
+<<<<<<< Updated upstream
 {# ================= RESPONSABLE ================= #}
 {{ fields.dropdownField(
    'User',
@@ -147,6 +148,18 @@
    __('Responsable IT'),
    {'entity': UNH_ENTITY_ID}
 ) }}
+=======
+   {# Champ Date d'expiration avec ID pour validation JS #}
+   {{ fields.datetimeField('expire', item.fields['expire'], __('Date d\'expiration', 'management'), {
+      'id': 'unh_expire_date'
+   }) }}
+
+   {# --- SECTION 2 : CHAMPS INSTITUTIONNELS UNH --- #}
+   <div class="mt-5 p-4 border rounded shadow-sm" style="background-color: #ffffff; border: 1px solid #dee2e6 !important;">
+      <h5 class="mb-4" style="color: #d9534f; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+         <i class="fas fa-building"></i> {{ __('Informations Institutionnelles UNH', 'management') }}
+      </h5>
+>>>>>>> Stashed changes
 
 <<<<<<< Updated upstream
 {# ================= GROUPE IT ================= #}
@@ -189,6 +202,26 @@
 
 {% endblock %}
 =======
+   {# Script de validation professionnelle de la date #}
+   <script type="text/javascript">
+   $(document).ready(function() {
+      // On écoute le changement sur le champ date d'expiration
+      $('input[name="expire"]').on('change', function() {
+         var selectedDate = new Date($(this).val());
+         var today = new Date();
+         today.setHours(0,0,0,0); // On ne compare que la date, pas l'heure
+
+         if (selectedDate < today) {
+            alert("Erreur UNH : La date d'expiration ne peut pas être une date passée.");
+            $(this).val(''); // On vide le champ
+            $(this).css('border-color', '#d9534f');
+         } else {
+            $(this).css('border-color', '#adb5bd');
+         }
+      });
+   });
+   </script>
+
    {# Script de validation professionnelle de la date #}
    <script type="text/javascript">
    $(document).ready(function() {
