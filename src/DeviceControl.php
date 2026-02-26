@@ -40,22 +40,21 @@ class DeviceControl extends CommonDevice
 {
     protected static $forward_entity_to = ['Item_DeviceControl', 'Infocom'];
 
-
     public static function getTypeName($nb = 0)
     {
         return _n('Controller', 'Controllers', $nb);
     }
+
 
     public function getAdditionalFields()
     {
 
         return array_merge(
             parent::getAdditionalFields(),
-            [
-                ['name'  => 'is_raid',
-                    'label' => __('RAID'),
-                    'type'  => 'bool'
-                ],
+            [['name'  => 'is_raid',
+                'label' => __('RAID'),
+                'type'  => 'bool'
+            ],
                 ['name'  => 'interfacetypes_id',
                     'label' => __('Interface'),
                     'type'  => 'dropdownValue'

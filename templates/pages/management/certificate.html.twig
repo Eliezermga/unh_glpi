@@ -1,51 +1,60 @@
+{#
+ # ---------------------------------------------------------------------
+ #
+ # GLPI - Gestionnaire Libre de Parc Informatique
+ #
+ # http://glpi-project.org
+ #
+ # @copyright 2015-2023 Teclib' and contributors.
+ # @copyright 2003-2014 by the INDEPNET Development Team.
+ # @licence   https://www.gnu.org/licenses/gpl-3.0.html
+ #
+ # ---------------------------------------------------------------------
+ #
+ # LICENSE
+ #
+ # This file is part of GLPI.
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ #
+ # ---------------------------------------------------------------------
+ #}
+
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
 {% set params  = params ?? [] %}
 
 {% block more_fields %}
+   {{ fields.dropdownYesNo('is_autosign', item.fields['is_autosign'], __('Self-signed')) }}
 
-   {# Signature administrative #}
-   {{ fields.dropdownYesNo(
-      'is_autosign',
-      item.fields['is_autosign'],
-      __('Signature automatique de l’administration')
-   ) }}
-
-   {# Matricule étudiant #}
    {{ fields.autoNameField(
       'dns_name',
       item,
-      __('Matricule de l’étudiant'),
+      __('DNS name'),
       withtemplate
    ) }}
 
-   {# Faculté ou département #}
    {{ fields.autoNameField(
       'dns_suffix',
       item,
-      __('Faculté / Département'),
+      __('DNS suffix'),
       withtemplate
    ) }}
 
-   {# Motif de la demande #}
-   {{ fields.textareaField(
-      'command',
-      item.fields['command'],
-      __('Motif de la demande de certificat')
-   ) }}
+   {{ fields.textareaField('command', item.fields['command'], __('Command used')) }}
 
-   {# Informations académiques #}
-   {{ fields.textareaField(
-      'certificate_request',
-      item.fields['certificate_request'],
-      __('Informations académiques de l’étudiant')
-   ) }}
+   {{ fields.textareaField('certificate_request', item.fields['certificate_request'], __('Certificate request (CSR)')) }}
 
-   {# Certificat généré #}
-   {{ fields.textareaField(
-      'certificate_item',
-      item.fields['certificate_item'],
-      __('Certificat académique généré')
-   ) }}
-
+   {{ fields.textareaField('certificate_item', item.fields['certificate_item'], 'Certificate'|itemtype_name) }}
 {% endblock %}

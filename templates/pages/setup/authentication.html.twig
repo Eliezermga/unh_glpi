@@ -50,7 +50,6 @@
                   <a class="list-group-item list-group-item-action" href="{{ path('front/authldap.php') }}">
                      <i class="fa-fw {{ call('AuthLDAP::getIcon') }} me-1"></i>
                      <span>{{ 'AuthLDAP'|itemtype_name }}</span>
-                     <span class="text-muted small d-block ms-4">{{ __('University directory (LDAP/Active Directory).') }}</span>
                   </a>
                {% else %}
                   <div class="alert alert-important alert-warning m-3">

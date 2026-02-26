@@ -320,10 +320,10 @@ $CFG_GLPI['networkport_instantiations']   = ['NetworkPortEthernet', 'NetworkPort
 
 $CFG_GLPI['device_types']                 = ['DeviceMotherboard', 'DeviceFirmware', 'DeviceProcessor',
     'DeviceMemory', 'DeviceHardDrive', 'DeviceNetworkCard',
-    /*'DeviceDrive',*/ 'DeviceBattery', 'DeviceGraphicCard',
-    'DeviceSoundCard', 'DeviceControl', /*'DevicePci',
-    'DeviceCase', /*'DevicePowerSupply'*/ 'DeviceGeneric',
-    /*'DeviceSimcard'*/ 'DeviceSensor', 'DeviceCamera'
+    'DeviceDrive', 'DeviceBattery', 'DeviceGraphicCard',
+    'DeviceSoundCard', 'DeviceControl', 'DevicePci',
+    'DeviceCase', 'DevicePowerSupply', 'DeviceGeneric',
+    'DeviceSimcard', 'DeviceSensor', 'DeviceCamera'
 ];
 
 

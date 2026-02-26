@@ -1574,17 +1574,8 @@ class Auth extends CommonGLPI
         echo "<div class='card'>";
         echo "<table class='tab_cadre_fixe'>";
 
-        echo "<tr class='tab_bg_1'><td colspan='2' class='center b'>";
-        echo __("Other authentication methods");
-        echo "</td></tr>";
-        echo "<tr class='tab_bg_2'><td colspan='2' class='center'>";
-        echo __("Configure CAS, x509 certificate or SSO for students and staff (e.g. university portal).");
-        echo "</td></tr>";
-
        // CAS config
-        echo "<tr><th>" . __('CAS authentication');
-        Html::showToolTip(__('Single sign-on via university CAS if available.'));
-        echo '</th><th>';
+        echo "<tr><th>" . __('CAS authentication') . '</th><th>';
         if (!empty($CFG_GLPI["cas_host"])) {
             echo _x('authentication', 'Enabled');
         }
@@ -1629,9 +1620,7 @@ class Auth extends CommonGLPI
             echo "</td></tr>";
         }
        // X509 config
-        echo "<tr><th>" . __('x509 certificate authentication');
-        Html::showToolTip(__('Certificate-based authentication (e.g. university certificates).'));
-        echo "</th><th>";
+        echo "<tr><th>" . __('x509 certificate authentication') . "</th><th>";
         if (!empty($CFG_GLPI["x509_email_field"])) {
             echo _x('authentication', 'Enabled');
         }
@@ -1654,9 +1643,7 @@ class Auth extends CommonGLPI
         echo "</td></tr>";
 
        //Other configuration
-        echo "<tr><th>" . __('Other authentication sent in the HTTP request');
-        Html::showToolTip(__('Map SSO variables to GLPI user fields (students and staff).'));
-        echo "</th><th>";
+        echo "<tr><th>" . __('Other authentication sent in the HTTP request') . "</th><th>";
         if (!empty($CFG_GLPI["ssovariables_id"])) {
             echo _x('authentication', 'Enabled');
         }

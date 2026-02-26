@@ -1,113 +1,108 @@
 {#
  # ---------------------------------------------------------------------
  # Formulaire FINAL : Université Nouveaux Horizons (UNH)
- # Version : Conforme à la documentation technique UNH (Champs BD inclus)
+ # Module : Gestion des Licences Logicielles (Version de Production)
  # ---------------------------------------------------------------------
  #}
 
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
-{% set params  = params ?? [] %}
+{% set params = params ?? [] %}
 
 {% block form_fields %}
-   {# Bannière institutionnelle UNH #}
-   <div class="alert alert-info text-center shadow-sm" style="border-left: 5px solid #0056b3; background-color: #f8f9fa;">
-      <h4 class="mb-0" style="color: #0056b3;"><i class="fas fa-university"></i> UNIVERSITÉ NOUVEAUX HORIZONS</h4>
-      <small class="text-uppercase fw-bold">Système de Gestion des Actifs Numériques</small>
+   {# --- BANNIÈRE INSTITUTIONNELLE --- #}
+   <div class="alert alert-info text-center shadow-sm" style="border-left: 5px solid #003366; background-color: #f0f4f8; color: #003366; margin-bottom: 20px;">
+      <h4 class="mb-0" style="font-weight: bold;"><i class="fas fa-university"></i> UNIVERSITÉ NOUVEAUX HORIZONS</h4>
+      <small class="text-uppercase fw-bold">{{ __('Système de Gestion des Actifs Numériques', 'management') }}</small>
    </div>
 
+   {# --- CHAMP RESSOURCE LOGICIELLE --- #}
    {{ fields.dropdownField(
-      'Ressource Logicielle',
+      __('Ressource Logicielle', 'management'),
       'softwares_id',
       item.fields['softwares_id'],
       "Software"|itemtype_name,
       {
          'entity': item.fields['entities_id'],
-         'condition': {
-            'is_template': 0,
-            'is_deleted': 0,
-         },
+         'condition': {'is_template': 0, 'is_deleted': 0},
          'on_change': 'this.form.submit()'
       }
    ) }}
 
    {{ fields.nullField() }}
-
    {{ parent() }}
 {% endblock %}
 
 {% block more_fields %}
-   {# --- SECTION 1 : DONNÉES DE LICENCE CLASSIQUES --- #}
-   <h5 class="mt-2 text-secondary border-bottom pb-1">
-      <i class="fas fa-info-circle"></i> Détails de la Licence
+   {# --- SECTION 1 : DÉTAILS TECHNIQUES --- #}
+   <h5 class="mt-4 pb-1" style="color: #003366; border-bottom: 2px solid #003366;">
+      <i class="fas fa-info-circle"></i> {{ __('Détails de la Licence', 'management') }}
    </h5>
 
-   {% set field_use %}
-      {% do call('SoftwareVersion::dropdownForOneSoftware', [{
-         'name': 'softwareversions_id_use',
-         'softwares_id': item.fields['softwares_id'],
-         'value': item.fields['softwareversions_id_use'],
-         'width': '100%',
-      }]) %}
+   {{ fields.field('softwareversions_id_use', null, __('Software version use', 'management')) }}
+   {{ fields.field('softwareversions_id_buy', null, __('Software version buy', 'management')) }}
+
+   {% set quota_html %}
+      <div class="mt-1">
+         <span class="badge bg-info"><i class="fas fa-check-circle"></i> {{ __('Vérification UNH en cours', 'management') }}</span>
+      </div>
    {% endset %}
-   {{ fields.field('softwareversions_id_use', field_use, 'Version installée') }}
 
-   {% set field_buy %}
-      {% do call('SoftwareVersion::dropdownForOneSoftware', [{
-      'name': 'softwareversions_id_buy',
-      'softwares_id': item.fields['softwares_id'],
-      'value': item.fields['softwareversions_id_buy'],
-      'width': '100%',
-      }]) %}
-   {% endset %}
-   {{ fields.field('softwareversions_id_buy', field_buy, 'Version acquise (Contrat)') }}
-
-   {% set validity_msg = null %}
-   {% if item_type == 'SoftwareLicense' %}
-      {% set validity_msg %}
-         <div class="mt-1">
-            {% if item.fields['is_valid'] %}
-               <span class="badge bg-success"><i class="fas fa-check"></i> Valide</span>
-            {% elseif not item.fields['is_valid'] and item.fields['allow_overquota'] %}
-               <span class="badge bg-warning text-dark"><i class="fas fa-exclamation"></i> Over-Quota</span>
-            {% else %}
-               <span class="badge bg-danger"><i class="fas fa-times"></i> Invalide</span>
-            {% endif %}
-         </div>
-      {% endset %}
-   {% endif %}
-
-   {{ fields.dropdownNumberField('number', item.fields['number'], 'Quantité autorisée', {
-      'min': 1,
-      'max': 10000,
+   {{ fields.dropdownNumberField('number', item.fields['number'], __('Quantité autorisée', 'management'), {
+      'min': -1, 
+      'max': 10000, 
       'step': 1,
-      'toadd': {'-1': 'Licence Campus UNH'},
-      'add_field_html': validity_msg
+      'toadd': {'-1': __('Licence Campus UNH', 'management')},
+      'add_field_html': quota_html
    }) }}
 
-   {{ fields.datetimeField('expire', item.fields['expire'], 'Date d\'expiration', {
-      'helper': 'Planification du budget annuel UNH.'
+   {# Champ Date d'expiration avec ID pour le contrôle de sécurité #}
+   {{ fields.datetimeField('expire', item.fields['expire'], __('Date d\'expiration', 'management'), {
+      'id': 'unh_expire_date'
    }) }}
 
-   {# --- SECTION 2 : CHAMPS SPÉCIFIQUES DOCUMENTATION UNH --- #}
-   <hr class="my-4">
-   <div class="p-3 mb-2 bg-light border rounded">
-      <h5 class="text-primary mb-3">
-         <i class="fas fa-building"></i> Informations Institutionnelles UNH
+   {# --- SECTION 2 : CHAMPS INSTITUTIONNELS UNH (STYLE FORCÉ) --- #}
+   <div class="mt-5 p-4 border rounded shadow-sm" style="background-color: #fdfdfd; border: 1px solid #dee2e6 !important;">
+      <h5 class="mb-4" style="color: #d9534f; font-weight: bold; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+         <i class="fas fa-building"></i> {{ __('Informations Institutionnelles UNH', 'management') }}
       </h5>
 
-      {{ fields.textField('faculte_service', item.fields['faculte_service'], 'Faculté / Service concerné') }}
+      <style>
+         .unh-field-row .row { margin-bottom: 12px; }
+         .unh-field-row label { font-weight: 600 !important; color: #444 !important; }
+         .unh-field-row input, .unh-field-row textarea { border: 1px solid #999 !important; background-color: #ffffff !important; color: #000 !important; }
+      </style>
 
-      {{ fields.textField('responsable_it', item.fields['responsable_it'], 'Responsable IT du service') }}
-
-      {{ fields.textField('service_informatique', item.fields['service_informatique'], 'Service Informatique de rattachement') }}
-
-      {{ fields.textField('version_unh_utilisee', item.fields['version_unh_utilisee'], 'Version réellement utilisée à UNH') }}
-
-      {{ fields.textField('version_unh_achetee', item.fields['version_unh_achetee'], 'Version achetée (Contrat UNH)') }}
-
-      {{ fields.textareaField('observations_institutionnelles', item.fields['observations_institutionnelles'], 'Observations institutionnelles') }}
+      <div class="unh-field-row">
+         {{ fields.textField('faculte_service', item.fields['faculte_service'], __('faculte_service', 'management')) }}
+         {{ fields.textField('responsable_it', item.fields['responsable_it'], __('responsable_it', 'management')) }}
+         {{ fields.textField('service_informatique', item.fields['service_informatique'], __('service_informatique', 'management')) }}
+         {{ fields.textField('version_unh_utilisee', item.fields['version_unh_utilisee'], __('version_unh_utilisee', 'management')) }}
+         {{ fields.textField('version_unh_achetee', item.fields['version_unh_achetee'], __('version_unh_achetee', 'management')) }}
+         {{ fields.textareaField('observations_institutionnelles', item.fields['observations_institutionnelles'], __('observations_institutionnelles', 'management')) }}
+      </div>
    </div>
+
+   {# --- SCRIPT DE VALIDATION DE LA DATE (SÉCURITÉ) --- #}
+   <script type="text/javascript">
+   $(document).ready(function() {
+      // Surveillance du champ date d'expiration
+      $('input[name="expire"]').on('change', function() {
+         var inputDate = new Date($(this).val());
+         var today = new Date();
+         today.setHours(0,0,0,0); 
+
+         if (inputDate < today) {
+            alert("ALERTE UNH : Vous ne pouvez pas sélectionner une date d'expiration déjà passée.");
+            $(this).val(''); // Réinitialisation du champ
+            $(this).focus();
+            $(this).css('border', '2px solid #d9534f');
+         } else {
+            $(this).css('border', '1px solid #999');
+         }
+      });
+   });
+   </script>
 
    {% if params['withtemplate'] == 1 %}
       {{ fields.hiddenField('withtemplate', '1') }}

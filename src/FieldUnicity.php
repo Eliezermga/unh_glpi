@@ -168,11 +168,9 @@ class FieldUnicity extends CommonDropdown
             echo "<input type='hidden' name='itemtype' value='" . $this->fields['itemtype'] . "'>";
         } else {
             $options = [];
-            // Types to exclude from unicity checks (non-actionnable in DHCP networks)
-            $excluded_types = ['IPAddress'];
            //Add criteria : display dropdown
             foreach ($CFG_GLPI['unicity_types'] as $itemtype) {
-                if (!in_array($itemtype, $excluded_types) && ($item = getItemForItemtype($itemtype))) {
+                if ($item = getItemForItemtype($itemtype)) {
                     if ($item->canCreate()) {
                         $options[$itemtype] = $item->getTypeName(1);
                     }
@@ -298,7 +296,7 @@ class FieldUnicity extends CommonDropdown
            //Do not check unicity on fields in DB with theses types
             $blacklisted_types = ['longtext', 'text'];
 
-           //Construct list 
+           //Construct list
             $values = [];
             foreach ($DB->listFields(getTableForItemType($itemtype)) as $field) {
                 $searchOption = $target->getSearchOptionByField('field', $field['Field']);
@@ -497,15 +495,6 @@ class FieldUnicity extends CommonDropdown
      **/
     public static function checkBeforeInsert($input)
     {
-        // Reject IPAddress unicity rules (not applicable in DHCP networks)
-        if ($input['itemtype'] === 'IPAddress') {
-            Session::addMessageAfterRedirect(
-                __('IP Address unicity is not supported'),
-                true,
-                ERROR
-            );
-            return [];
-        }
 
         if (
             !$input['itemtype']
@@ -533,15 +522,6 @@ class FieldUnicity extends CommonDropdown
 
     public function prepareInputForUpdate($input)
     {
-        // Reject IPAddress unicity rules (not applicable in DHCP networks)
-        if (isset($input['itemtype']) && $input['itemtype'] === 'IPAddress') {
-            Session::addMessageAfterRedirect(
-                __('IP Address unicity is not supported'),
-                true,
-                ERROR
-            );
-            return false;
-        }
 
         $input['fields'] = implode(',', $input['_fields']);
         unset($input['_fields']);

@@ -8659,14 +8659,6 @@ msgstr ""
 msgid "Documents setup"
 msgstr "Configuration des documents"
 
-#: src/Config.php:3545
-msgid "Documents UNH"
-msgstr "Documents UNH"
-
-#: src/Config.php:3553
-msgid "Taille maximale des documents UNH (mémoires, rapports, supports de cours). Adaptez selon les besoins du parc universitaire."
-msgstr "Taille maximale des documents UNH (mémoires, rapports, supports de cours). Adaptez selon les besoins du parc universitaire."
-
 #: src/NotificationTargetFieldUnicity.php:81
 msgid "Doer"
 msgstr "Auteur de l'action"
@@ -9442,22 +9434,6 @@ msgstr "Expiration contrat"
 #: src/Config.php:453
 msgid "End of fiscal year"
 msgstr "Fin de l'année fiscale"
-
-#: src/Config.php:455
-msgid "End of academic year"
-msgstr "Fin d'année académique"
-
-#: src/Config.php:456
-msgid "Date de fin d'année académique UNH (salles, laboratoires, facultés). Utilisée pour le suivi des actifs du parc universitaire."
-msgstr "Date de fin d'année académique UNH (salles, laboratoires, facultés). Utilisée pour le suivi des actifs du parc universitaire."
-
-#: src/Config.php:426
-msgid "Activer les informations financières pour le parc universitaire (équipements des salles, laboratoires)."
-msgstr "Activer les informations financières pour le parc universitaire (équipements des salles, laboratoires)."
-
-#: src/Config.php:524
-msgid "Mise à jour automatique des contacts, utilisateurs, groupes et emplacements (salles, laboratoires, facultés UNH)."
-msgstr "Mise à jour automatique des contacts, utilisateurs, groupes et emplacements (salles, laboratoires, facultés UNH)."
 
 #: src/Cartridge.php:1061
 msgid "End of life"
@@ -13933,10 +13909,6 @@ msgstr "Purge des journeaux"
 msgid "Logs purge configuration"
 msgstr "Configuration de la purge des journeaux"
 
-#: src/Config.php:3125
-msgid "Durées de conservation des journaux pour l'audit du parc informatique universitaire UNH et la conformité."
-msgstr "Durées de conservation des journaux pour l'audit du parc informatique universitaire UNH et la conformité."
-
 #: src/NotificationTargetTicket.php:675 src/NotificationTargetTicket.php:723
 #: src/Entity.php:787 src/Location.php:107 src/Location.php:223
 #: src/Location.php:291
@@ -17686,33 +17658,9 @@ msgstr[2] "Rappels de la planification"
 msgid "Planning start date"
 msgstr "Date de début de la planification"
 
-#: src/Config.php:1035
-msgid "Langue par défaut pour étudiants, personnel et enseignants UNH (recommandé : français)."
-msgstr "Langue par défaut pour étudiants, personnel et enseignants UNH (recommandé : français)."
-
-#: src/Config.php:1047
-msgid "Format de date par défaut pour l'interface UNH (ex. JJ/MM/AAAA)."
-msgstr "Format de date par défaut pour l'interface UNH (ex. JJ/MM/AAAA)."
-
 #: src/Config.php:883
 msgid "Planning work days"
 msgstr "Planification des journées ouvrées"
-
-#: src/Config.php:841
-msgid "Plages horaires du support UNH (ex. 8h-17h). Adaptez selon les horaires du service assistance étudiant et personnel."
-msgstr "Plages horaires du support UNH (ex. 8h-17h). Adaptez selon les horaires du service assistance étudiant et personnel."
-
-#: src/Config.php:891
-msgid "Jours ouvrés selon le calendrier universitaire UNH (ex. lundi-vendredi hors vacances)."
-msgstr "Jours ouvrés selon le calendrier universitaire UNH (ex. lundi-vendredi hors vacances)."
-
-#: src/Config.php:879
-msgid "Permet aux étudiants de créer des tickets sans connexion (interface simplifiée UNH)."
-msgstr "Permet aux étudiants de créer des tickets sans connexion (interface simplifiée UNH)."
-
-#: src/Config.php:884
-msgid "Permet le suivi anonyme des tickets (étudiants, personnel sans compte)."
-msgstr "Permet le suivi anonyme des tickets (étudiants, personnel sans compte)."
 
 #: src/Planning.php:870
 msgid "Plannings"
@@ -20973,10 +20921,6 @@ msgstr "Préférences"
 msgid "Setup"
 msgstr "Configuration"
 
-#: src/Html.php:1435
-msgid "Configuration UNH"
-msgstr "Configuration UNH"
-
 #: src/NetworkName.php:419
 msgid ""
 "Several network names available! Go to the tab 'Network Name' to manage "
@@ -22278,18 +22222,6 @@ msgstr "En test"
 #: templates/pages/setup/general/general_setup.html.twig
 msgid "Text in the login box"
 msgstr ""
-
-#: templates/pages/setup/general/general_setup.html.twig
-msgid "Message de bienvenue UNH affiché dans la boîte de connexion (ex. : Bienvenue à l'Université Nouveaux Horizons)."
-msgstr "Message de bienvenue UNH affiché dans la boîte de connexion (ex. : Bienvenue à l'Université Nouveaux Horizons)."
-
-#: templates/pages/setup/general/general_setup.html.twig
-msgid "Lien vers la documentation UNH pour l'interface simplifiée (étudiants, personnel)."
-msgstr "Lien vers la documentation UNH pour l'interface simplifiée (étudiants, personnel)."
-
-#: templates/pages/setup/general/general_setup.html.twig
-msgid "Lien vers la documentation UNH pour l'interface standard (administrateurs)."
-msgstr "Lien vers la documentation UNH pour l'interface standard (administrateurs)."
 
 #: src/Console/Maintenance/EnableMaintenanceModeCommand.php:59
 msgid "Text to display during maintenance"

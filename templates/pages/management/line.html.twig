@@ -1,95 +1,73 @@
 {#
  # ---------------------------------------------------------------------
- # Formulaire : Gestion des Lignes Budgétaires / Projets UNH
- # Université Nouveaux Horizons
+ # Formulaire FINAL : Université Nouveaux Horizons (UNH)
+ # Module : Gestion des Lignes Budgétaires
  # ---------------------------------------------------------------------
  #}
 
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
+{% set params = params ?? [] %}
+
+{% block form_fields %}
+   {# Bannière institutionnelle UNH #}
+   <div class="alert alert-info text-center shadow-sm" style="border-left: 5px solid #003366; background-color: #f0f4f8; color: #003366;">
+      <h4 class="mb-0" style="font-weight: bold;"><i class="fas fa-university"></i> UNIVERSITÉ NOUVEAUX HORIZONS</h4>
+      <small class="text-uppercase fw-bold">{{ __('Gestion des Lignes Budgétaires', 'management') }}</small>
+   </div>
+
+   {# Champs standards hérités (Nom, etc.) #}
+   {{ parent() }}
+
+   {{ fields.nullField() }}
+{% endblock %}
 
 {% block more_fields %}
+   {# --- SECTION 1 : RÉFÉRENCES ACADÉMIQUES --- #}
+   <h5 class="mt-4 pb-1" style="color: #003366; border-bottom: 2px solid #003366;">
+      <i class="fas fa-barcode"></i> {{ __('Academic year resources', 'management') }}
+   </h5>
 
-{# En-tête avec logo ou style UNH (Bleu foncé et Rouge sont souvent les couleurs UNH) #}
-<div class="mb-4 p-2 border-bottom">
-    <h2 style="color:#003366; font-size: 1.5rem;">
-        <i class="fas fa-network-wired me-2"></i>
-        Gestion des Lignes – UNH
-    </h2>
-    <small class="text-muted">Configuration des ressources pour l'année académique en cours.</small>
-</div>
+   <div class="unh-field-container">
+      {{ fields.textField('intitule_ligne', item.fields['intitule_ligne'], __('intitule_ligne', 'management')) }}
+      {{ fields.textField('code_ligne', item.fields['code_ligne'], __('code_ligne', 'management')) }}
+      
+      {# Nature de la ligne (Dropdown) #}
+      {{ fields.dropdownField(
+         __('Nature de la ligne', 'management'),
+         'line_types_id',
+         item.fields['line_types_id'],
+         'PluginManagementLineType',
+         {
+            'condition': {'is_deleted': 0}
+         }
+      ) }}
+   </div>
 
-{# 1. Identifiants de la ligne #}
-{{ fields.textField(
-   'name',
-   item.fields['name'],
-   'Intitulé de la ligne UNH',
-   {
-      'placeholder': 'Ex: Ligne Fibre Optique Laboratoire L1'
-   }
-) }}
+   {# --- SECTION 2 : AFFECTATION ET RESPONSABILITÉ --- #}
+   <div class="mt-5 p-4 border rounded shadow-sm" style="background-color: #ffffff; border: 1px solid #dee2e6 !important;">
+      <h5 class="mb-4" style="color: #d9534f; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+         <i class="fas fa-sitemap"></i> {{ __('Informations Institutionnelles UNH', 'management') }}
+      </h5>
 
-{{ fields.textField(
-   'code',
-   item.fields['code'],
-   'Référence / Code UNH',
-   {
-      'placeholder': 'Ex: UNH-LOG-2026-001'
-   }
-) }}
+      <style>
+         .unh-field-container .row { margin-bottom: 15px; }
+         .unh-field-container label { font-weight: 600 !important; color: #333 !important; }
+         .unh-field-container input, .unh-field-container textarea { border: 1px solid #adb5bd !important; background-color: #fff !important; }
+      </style>
 
-{# 2. Classification #}
-{{ fields.dropdownArrayField(
-   'line_type',
-   item.fields['line_type'],
-   {
-      1: 'Académique (Enseignement)',
-      2: 'Administrative (Direction)',
-      3: 'Pédagogique (Labos)',
-      4: 'Infrastructures (Campus)'
-   },
-   'Nature de la ligne'
-) }}
+      <div class="unh-field-container">
+         {{ fields.textField('faculte_concernee', item.fields['faculte_concernee'], __('faculte_concernee', 'management')) }}
+         {{ fields.textField('annee_academique', item.fields['annee_academique'], __('annee_academique', 'management')) }}
+         {{ fields.textField('responsable_unh', item.fields['responsable_unh'], __('responsable_unh', 'management')) }}
+         
+         <hr>
+         
+         {{ fields.textareaField('observations_institutionnelles', item.fields['observations_institutionnelles'], __('observations_institutionnelles', 'management')) }}
+      </div>
+   </div>
 
-{# 3. Affectation #}
-{{ fields.textField(
-   'faculty',
-   item.fields['faculty'],
-   'Faculté / Département',
-   {
-      'placeholder': 'Ex: Faculté des Sciences Informatiques'
-   }
-) }}
-
-{{ fields.textField(
-   'academic_year',
-   item.fields['academic_year'],
-   'Année Académique',
-   {
-      'placeholder': '2025 – 2026'
-   }
-) }}
-
-{# 4. Responsabilité #}
-{{ fields.textField(
-   'responsible',
-   item.fields['responsible'],
-   'Responsable de la ligne',
-   {
-      'placeholder': 'Prénom et Nom du doyen ou chef de service'
-   }
-) }}
-
-<hr>
-
-{# 5. Notes #}
-{{ fields.textareaField(
-   'comment',
-   item.fields['comment'],
-   'Observations institutionnelles',
-   {
-      'rows': 4
-   }
-) }}
-
+   {% if params['withtemplate'] == 1 %}
+      {{ fields.hiddenField('withtemplate', '1') }}
+   {% endif %}
 {% endblock %}
