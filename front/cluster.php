@@ -42,5 +42,3 @@ Html::header(Cluster::getTypeName(Session::getPluralNumber()), $_SERVER['PHP_SEL
 Search::show('Cluster');
 
 Html::footer();
-
-

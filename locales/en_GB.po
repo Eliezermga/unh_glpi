@@ -26375,23 +26375,6 @@ msgstr ""
 msgid "⌥ (option) + ⌘ (command) + E"
 msgstr "⌥ (option) + ⌘ (command) + E"
 
-<<<<<<< HEAD
-msgid "Type de public"
-msgstr "Audience type"
-
-msgid "-- Sélectionnez --"
-msgstr "-- Select --"
-
-msgid "Technicien universitaire"
-msgstr "University technician"
-
-msgid "Invité externe"
-msgstr "External guest"
-
-msgid "Personnel administratif"
-msgstr "Administrative staff"
-
-=======
 #. UNH GLPI Static FAQ (DB independent)
 #: src/KnowbaseItem.php
 msgid "faq.static.question.create_support_ticket"
@@ -26528,4 +26511,3 @@ msgstr "Printers"
 
 msgid "Issues"
 msgstr "Issues"
->>>>>>> origin/pre-product

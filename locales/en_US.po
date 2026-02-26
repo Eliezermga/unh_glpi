@@ -1492,6 +1492,15 @@ msgstr "%s Installs a Cartridge"
 msgid "%s installs software"
 msgstr "%s Installs Software"
 
+#: src/Console/Database/UpdateCommand.php:182
+#, php-format
+msgid ""
+"%s is not a stable release. Please upgrade manually or add --allow-unstable "
+"option."
+msgstr ""
+"%s is not a stable release. Please upgrade manually or add --allow-unstable "
+"option."
+
 #. TRANS: %s is a directory
 #: src/MailCollector.php:1056
 #, php-format
@@ -1981,6 +1990,14 @@ msgstr "%s: send cartridge alert failed"
 msgid "%s: send consumable alert failed"
 msgstr "%s: send consumable alert failed"
 
+#: src/Search.php:1717
+msgid ""
+"'All' criterion is not usable with this object list, sql query fails (too "
+"many tables). Please use 'Items seen' criterion instead"
+msgstr ""
+"'All' criterion is not usable with this object list, sql query fails (too "
+"many tables). Please use 'Items seen' criterion instead"
+
 #: front/massiveaction.php:84
 #, php-format
 msgid "(%1$d authorizations problems, %2$d failures)"
@@ -2207,6 +2224,14 @@ msgstr "A new version is available: %s."
 msgid "A pdu is required"
 msgstr "A pdu is required"
 
+#: src/Dashboard/Grid.php:857
+msgid ""
+"A personal dashboard is not visible by other administrators unless you "
+"explicitly share the dashboard"
+msgstr ""
+"A personal dashboard is not visible by other administrators unless you "
+"explicitly share the dashboard"
+
 #: src/Item_Rack.php:943 src/Item_Enclosure.php:337 src/PDU_Rack.php:108
 msgid "A position is required"
 msgstr "A position is required"
@@ -2218,6 +2243,14 @@ msgstr "A project task is mandatory"
 #: src/Item_Rack.php:937 src/PDU_Rack.php:104
 msgid "A rack is required"
 msgstr "A rack is required"
+
+#: src/GLPINetwork.php:74
+msgid ""
+"A registration key is needed to use advanced feature (like marketplace) in "
+"GLPI"
+msgstr ""
+"A registration key is needed to use advanced feature (like marketplace) in "
+"GLPI"
 
 #: src/Marketplace/View.php:167
 msgid "A registration, at least a free one, is required to use marketplace!"
@@ -2309,6 +2342,11 @@ msgstr "About"
 msgid "Accepted"
 msgstr "Accepted"
 
+#: src/Change.php:582 src/Problem.php:661
+msgctxt "status"
+msgid "Accepted"
+msgstr "Accepted"
+
 #: src/MailCollector.php:275 src/MailCollector.php:535
 msgid "Accepted mail archive folder (optional)"
 msgstr "Accepted Mail Archive Folder (optional)"
@@ -2326,6 +2364,20 @@ msgstr "Access to timezone database (mysql) is not allowed."
 #: src/System/Requirement/DbTimezones.php:75
 msgid "Access to timezone table (mysql.time_zone_name) is not allowed."
 msgstr "Access to timezone table (mysql.time_zone_name) is not allowed."
+
+#: front/smtp_oauth2_callback.php:103
+msgctxt "oauth"
+msgid ""
+"Access token does not provide a refresh token, please verify application "
+"configuration."
+msgstr ""
+
+#: front/smtp_oauth2_callback.php:94
+msgctxt "oauth"
+msgid ""
+"Access token does not provide an email address, please verify token claims "
+"configuration."
+msgstr ""
 
 #: src/NotificationTargetUser.php:189
 msgid "Account lock date if password is not changed"
@@ -2451,6 +2503,51 @@ msgstr "Ad-hoc (without access point)"
 msgid "Add"
 msgstr "Add"
 
+#: templates/components/dashboard/widget_form.html.twig
+#: templates/components/itilobject/timeline/form_validation.html.twig
+#: templates/components/itilobject/timeline/form_followup.html.twig
+#: templates/components/itilobject/timeline/form_task.html.twig
+#: templates/components/itilobject/timeline/form_solution.html.twig
+#: templates/components/itilobject/add_items.html.twig
+#: templates/components/itilobject/footer.html.twig
+#: templates/components/form/link_existing_or_new.html.twig
+#: templates/components/form/buttons.html.twig src/Change_Item.php:131
+#: src/KnowbaseItem_KnowbaseItemCategory.php:183 src/Project.php:1824
+#: src/Item_Devices.php:736 src/CommonTreeDropdown.php:547
+#: src/Document_Item.php:384 src/Socket.php:939 src/Socket.php:978
+#: src/Rule.php:3081 src/CommonITILTask.php:1479 src/DisplayPreference.php:386
+#: src/DisplayPreference.php:526 src/MassiveAction.php:1278
+#: src/MassiveAction.php:1306 src/Planning.php:1188 src/Planning.php:1232
+#: src/Planning.php:1335 src/Planning.php:1392 src/Group_User.php:215
+#: src/Group_User.php:352 src/PDU_Rack.php:485
+#: src/KnowbaseItem_Comment.php:370 src/ITILTemplateMandatoryField.php:217
+#: src/Contact_Supplier.php:142 src/Contact_Supplier.php:276
+#: src/CommonDBRelation.php:1348 src/ITILTemplateHiddenField.php:201
+#: src/Appliance_Item_Relation.php:264 src/Certificate_Item.php:248
+#: src/Calendar_Holiday.php:123 src/SlaLevel.php:117 src/Item_Problem.php:125
+#: src/Item_Project.php:125 src/OlaLevel.php:122 src/KnowbaseItem_Item.php:170
+#: src/ITILFollowup.php:818 src/ITILTemplatePredefinedField.php:311
+#: src/Item_SoftwareVersion.php:1247 src/CalendarSegment.php:365
+#: src/Appliance_Item.php:166 src/Appliance_Item.php:288
+#: src/ProjectTask.php:1252 src/RuleRight.php:72 src/Link_Itemtype.php:103
+#: src/AuthLdapReplicate.php:110 src/Notepad.php:312
+#: src/Dashboard/Grid.php:663 src/Dashboard/Grid.php:779 src/Pdu_Plug.php:142
+#: src/Calendar.php:117 src/Item_Ticket.php:422 src/Item_Ticket.php:1025
+#: src/Reservation.php:847 src/Profile_User.php:165 src/Profile_User.php:313
+#: src/ManualLink.php:254 src/Notification_NotificationTemplate.php:303
+#: src/Ticket_Contract.php:123 src/Domain_Item.php:228 src/NetworkPort.php:780
+#: src/Contract_Item.php:309 src/Contract_Item.php:591
+#: src/Item_SoftwareLicense.php:601 src/Itil_Project.php:209
+#: src/Itil_Project.php:347 src/CartridgeItem_PrinterModel.php:128
+#: src/Contract_Supplier.php:153 src/Contract_Supplier.php:285
+#: src/DomainRecord.php:575 ajax/visibility.php:147
+#: ajax/dropdownMassiveActionAddValidator.php:60
+#: ajax/dropdownMassiveActionAddValidator.php:149
+#: ajax/dropdownMassiveActionAddActor.php:56 js/modules/Kanban/Kanban.js:2564
+msgctxt "button"
+msgid "Add"
+msgstr "Add"
+
 #: src/Config.php:783
 msgid "Add API client"
 msgstr "Add API client"
@@ -2508,8 +2605,18 @@ msgstr "Add a Component"
 msgid "Add a contact"
 msgstr "Add a Contact"
 
+#: src/Supplier.php:138
+msgctxt "button"
+msgid "Add a contact"
+msgstr "Add a Contact"
+
 #: src/Ticket_Contract.php:80 src/Contract_Item.php:300
 #: src/Contract_Supplier.php:143
+msgid "Add a contract"
+msgstr "Add a Contract"
+
+#: src/Supplier.php:140 src/Contract.php:1699
+msgctxt "button"
 msgid "Add a contract"
 msgstr "Add a Contract"
 
@@ -2531,6 +2638,11 @@ msgid "Add a delegatee"
 msgstr "Add a Delegatee"
 
 #: src/Document_Item.php:579 src/Document_Item.php:673
+msgid "Add a document"
+msgstr "Add a Document"
+
+#: src/Document.php:1729 src/CommonITILObject.php:6595
+msgctxt "button"
 msgid "Add a document"
 msgstr "Add a Document"
 
@@ -2667,6 +2779,11 @@ msgstr "Add a solution"
 msgid "Add a supplier"
 msgstr "Add a Supplier"
 
+#: src/Contact.php:195 src/Contract.php:426
+msgctxt "button"
+msgid "Add a supplier"
+msgstr "Add a Supplier"
+
 #: src/CommonDBVisible.php:229
 msgid "Add a target"
 msgstr "Add a Target"
@@ -2693,6 +2810,11 @@ msgid "Add a ticket"
 msgstr "Add a ticket"
 
 #: src/Group_User.php:335
+msgid "Add a user"
+msgstr "Add a User"
+
+#: src/Group.php:349
+msgctxt "button"
 msgid "Add a user"
 msgstr "Add a User"
 
@@ -2745,6 +2867,12 @@ msgstr "Add an event"
 #: src/Certificate_Item.php:231 src/Item_Problem.php:107
 #: src/Item_Project.php:111 src/Appliance_Item.php:149 src/Item_Ticket.php:398
 #: src/Domain_Item.php:205 src/Contract_Item.php:573
+msgid "Add an item"
+msgstr "Add an item"
+
+#: src/Appliance.php:449 src/Document.php:1735 src/SoftwareLicense.php:914
+#: src/Contract.php:423 src/Ticket.php:2584
+msgctxt "button"
 msgid "Add an item"
 msgstr "Add an item"
 
@@ -2900,6 +3028,11 @@ msgstr "Add to all tickets"
 msgid "Add to an appliance"
 msgstr "Add to an appliance"
 
+#: src/Appliance.php:468
+msgctxt "button"
+msgid "Add to an appliance"
+msgstr "Add to an appliance"
+
 #: src/Reminder.php:722
 msgid "Add to schedule"
 msgstr "Add to Schedule"
@@ -2997,6 +3130,12 @@ msgstr "Administrative Number"
 #: templates/generic_show_form.html.twig src/Contact.php:411
 #: src/Supplier.php:347 src/Entity.php:831 src/Entity.php:1514
 msgctxt "infocom"
+msgid "Administrative number"
+msgstr "Administrative Number"
+
+#: templates/generic_show_form.html.twig src/AuthLDAP.php:939
+#: src/User.php:2681 src/User.php:3174 src/User.php:3743 src/Auth.php:1694
+msgctxt "user"
 msgid "Administrative number"
 msgstr "Administrative Number"
 
@@ -3173,6 +3312,21 @@ msgstr "Alias Port"
 msgid "All"
 msgstr "All"
 
+#: src/CommonITILObject.php:3134
+msgctxt "impact"
+msgid "All"
+msgstr "All"
+
+#: src/CommonITILObject.php:2890
+msgctxt "priority"
+msgid "All"
+msgstr "All"
+
+#: src/CommonITILObject.php:3012
+msgctxt "urgency"
+msgid "All"
+msgstr "All"
+
 #: src/Item_SoftwareVersion.php:1080
 msgid "All categories"
 msgstr "All Categories"
@@ -3279,6 +3433,14 @@ msgstr "Allow response"
 msgid "Allow to login to API and get a session token with user credentials"
 msgstr "Allow to login to API and get a session token with user credentials"
 
+#: src/Config.php:764
+msgid ""
+"Allow to login to API and get a session token with user external token. See "
+"Remote access key in user Settings tab "
+msgstr ""
+"Allow to login to API and get a session token with user external token. See "
+"Remote access key in user Settings tab "
+
 #: src/AuthLDAP.php:488
 msgid "Allow to use RootDN and Password for non-anonymous binds."
 msgstr "Allow using RootDN and Password for non-anonymous binds."
@@ -3325,8 +3487,21 @@ msgstr "Alternate Username"
 msgid "Alternate username number"
 msgstr "Alternate Username Number"
 
+#: src/Computer_Item.php:148 src/Computer.php:266
+msgid ""
+"Alternate username updated. The connected items have been updated using this"
+" alternate username."
+msgstr ""
+"Alternate username updated. The connected items have been updated using this"
+" alternate username."
+
 #: src/NotificationTargetTicket.php:680 src/NotificationTargetTicket.php:724
 #: src/Entity.php:796 src/Location.php:112 src/Location.php:300
+msgid "Altitude"
+msgstr "Altitude"
+
+#: src/Entity.php:1588
+msgctxt "location"
 msgid "Altitude"
 msgstr "Altitude"
 
@@ -3440,6 +3615,12 @@ msgstr "An item type is mandatory"
 #: src/Appliance_Item_Relation.php:116 src/Appliance_Item.php:402
 msgid "An item type is required"
 msgstr "An item type is required"
+
+#: src/System/Requirement/PhpSupportedVersion.php:54
+msgid ""
+"An officially supported PHP version should be used to get the benefits of "
+"security and bug fixes."
+msgstr ""
 
 #: templates/components/itilobject/fields_panel.html.twig src/Problem.php:483
 msgid "Analysis"
@@ -3934,13 +4115,43 @@ msgctxt "impact"
 msgid "At least high"
 msgstr "At least high"
 
+#: src/CommonITILObject.php:2898
+msgctxt "priority"
+msgid "At least high"
+msgstr "At least high"
+
+#: src/CommonITILObject.php:3020
+msgctxt "urgency"
+msgid "At least high"
+msgstr "At least high"
+
 #: src/CommonITILObject.php:3138
 msgctxt "impact"
 msgid "At least low"
 msgstr "At least low"
 
+#: src/CommonITILObject.php:2894
+msgctxt "priority"
+msgid "At least low"
+msgstr "At least low"
+
+#: src/CommonITILObject.php:3016
+msgctxt "urgency"
+msgid "At least low"
+msgstr "At least low"
+
 #: src/CommonITILObject.php:3140
 msgctxt "impact"
+msgid "At least medium"
+msgstr "At least medium"
+
+#: src/CommonITILObject.php:2896
+msgctxt "priority"
+msgid "At least medium"
+msgstr "At least medium"
+
+#: src/CommonITILObject.php:3018
+msgctxt "urgency"
 msgid "At least medium"
 msgstr "At least medium"
 
@@ -3953,8 +4164,28 @@ msgctxt "impact"
 msgid "At least very high"
 msgstr "At least very high"
 
+#: src/CommonITILObject.php:2900
+msgctxt "priority"
+msgid "At least very high"
+msgstr "At least very high"
+
+#: src/CommonITILObject.php:3022
+msgctxt "urgency"
+msgid "At least very high"
+msgstr "At least very high"
+
 #: src/CommonITILObject.php:3136
 msgctxt "impact"
+msgid "At least very low"
+msgstr "At least very low"
+
+#: src/CommonITILObject.php:2892
+msgctxt "priority"
+msgid "At least very low"
+msgstr "At least very low"
+
+#: src/CommonITILObject.php:3014
+msgctxt "urgency"
 msgid "At least very low"
 msgstr "At least very low"
 
@@ -4385,6 +4616,15 @@ msgstr "Begin"
 msgid "Begin date"
 msgstr "Begin Date"
 
+#: src/Console/Ldap/SynchronizeUsersCommand.php:109
+#, php-format
+msgid ""
+"Begin date to apply in \"modifyTimestamp\" filter (see %s for supported "
+"formats)"
+msgstr ""
+"Begin date to apply in \"modifyTimestamp\" filter (see %s for supported "
+"formats)"
+
 #: src/CronTask.php:1694
 msgid "Begin hour of run period"
 msgstr "Begin hour of run period"
@@ -4404,6 +4644,15 @@ msgstr "Beginning of the year"
 #: src/AuthLDAP.php:847
 msgid "Belonging to groups"
 msgstr "Belonging to groups"
+
+#: src/Telemetry.php:447
+#, php-format
+msgid ""
+"Besides, if you appreciate GLPI and its community, please take a minute to "
+"reference your organization by filling %1$s"
+msgstr ""
+"Besides, if you appreciate GLPI and its community, please take a minute to "
+"reference your organization by filling %1$s"
 
 #: src/Marketplace/View.php:406
 msgid "Best notes"
@@ -4704,6 +4953,14 @@ msgstr "Cache context (i.e. 'core' or 'plugin:plugin_name')"
 msgid "Cache context to clear (i.e. 'core' or 'plugin:plugin_name')."
 msgstr "Cache context to clear (i.e. 'core' or 'plugin:plugin_name')."
 
+#: src/Console/Cache/ClearCommand.php:73
+msgid ""
+"Cache context to clear (i.e. 'core' or 'plugin:plugin_name'). All contexts "
+"are cleared by default."
+msgstr ""
+"Cache context to clear (i.e. 'core' or 'plugin:plugin_name'). All contexts "
+"are cleared by default."
+
 #: src/Console/Cache/DebugCommand.php:88
 #, php-format
 msgid "Cache key \"%s\" is not set."
@@ -4717,6 +4974,14 @@ msgstr "Cache key \"%s\" value:"
 #: src/Console/Cache/DebugCommand.php:59
 msgid "Cache key to debug."
 msgstr "Cache key to debug."
+
+#: src/Console/Cache/ConfigureCommand.php:121
+msgid ""
+"Cache namespace can be use to ensure either separation or sharing of "
+"multiple GLPI instances data on same cache system."
+msgstr ""
+"Cache namespace can be used to ensure either separation or sharing of "
+"multiple GLPI instances data on the same cache system."
 
 #: src/Console/Cache/ConfigureCommand.php:89
 msgid "Cache system DSN"
@@ -4802,15 +5067,38 @@ msgstr "Can't connect to the database"
 msgid "Can't connect to the database."
 msgstr "Can't connect to the database."
 
+#: install/install.php:473
+msgid ""
+"Can't create the database connection file, please verify file permissions."
+msgstr ""
+"Can't create the database connection file, please verify file permissions."
+
 #: src/CronTask.php:1070
 msgid "Can't get DB lock"
 msgstr "Can't get DB Lock"
+
+#: src/Profile.php:413
+msgid ""
+"Can't remove update right on this profile as it is the only remaining "
+"profile with this right."
+msgstr ""
+
+#: src/User.php:1068
+msgid ""
+"Can't set user as inactive as it is the only remaining super administrator."
+msgstr ""
 
 #: src/CronTask.php:1046 src/CronTask.php:1058
 msgid "Can't start"
 msgstr "Can't Start"
 
 #: src/KnowbaseItem_Comment.php:379
+msgid "Cancel"
+msgstr "Cancel"
+
+#: templates/components/form/modals_macros.html.twig
+#: src/CommonDropdown.php:632 src/CommonDropdown.php:667 js/glpi_dialog.js:290
+msgctxt "button"
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -4948,6 +5236,14 @@ msgstr "Category Tree"
 msgid "Causes"
 msgstr "Causes"
 
+#: src/CommonDBVisible.php:264
+msgid ""
+"Caution! You are not the author of this element. Delete targets can result "
+"in loss of access to that element."
+msgstr ""
+"Warning! You're not the author of this element. Deleting targets can result "
+"in loss of access to that element."
+
 #: install/update.php:220
 #, php-format
 msgid "Caution! You will update the GLPI database named: %s"
@@ -4998,6 +5294,11 @@ msgstr "Certificates list (deprecated; contains only one element)"
 msgid "Change"
 msgid_plural "Changes"
 msgstr[0] "Changes"
+
+#: src/AuthLDAP.php:3713 src/AuthLDAP.php:3745
+msgctxt "button"
+msgid "Change"
+msgstr "Change"
 
 #: src/Log.php:765
 #, php-format
@@ -5182,6 +5483,13 @@ msgstr ""
 msgid "Check for new updates"
 msgstr "Check for new updates"
 
+#: src/Console/Database/CheckSchemaIntegrityCommand.php:88
+msgid ""
+"Check for schema differences between current database and installation file."
+msgstr ""
+"Check for schema differences between the current database and installation "
+"file."
+
 #: src/Config.php:2095
 msgid "Check if a new version is available"
 msgstr "Check if a New Version is Available"
@@ -5227,6 +5535,14 @@ msgstr "Check tokens related to migration from \"datetime\" to \"timestamp\"."
 msgid "Check tokens related to migration from \"utf8\" to \"utf8mb4\"."
 msgstr "Check tokens related to migration from \"utf8\" to \"utf8mb4\"."
 
+#: src/Console/Database/CheckSchemaIntegrityCommand.php:136
+msgid ""
+"Check tokens related to migration from signed to unsigned integers in "
+"primary/foreign keys."
+msgstr ""
+"Check tokens related to migration from signed to unsigned integers in "
+"primary/foreign keys."
+
 #: templates/components/itilobject/selfservice.html.twig
 msgid "Check your personnal information"
 msgstr "Check your personal information"
@@ -5254,9 +5570,29 @@ msgstr ""
 msgid "Checking document #%s \"%s\" (%s)..."
 msgstr ""
 
+#: templates/install/step1.html.twig
+msgid ""
+"Checking of the compatibility of your environment with the execution of GLPI"
+msgstr ""
+"Checking of the compatibility of your environment with the execution of GLPI"
+
 #: src/Console/Migration/RacksPluginToCoreCommand.php:255
 msgid "Checking plugin version..."
 msgstr "Checking plugin version..."
+
+#: src/System/Requirement/ProtectedWebAccess.php:71
+msgid ""
+"Checking that web access to files directory is protected cannot be done on "
+"CLI context."
+msgstr ""
+"Checking that web access to the files directory is protected cannot be done "
+"in CLI context."
+
+#: src/System/Requirement/SafeDocumentRoot.php:58
+msgid ""
+"Checking web server root directory configuration cannot be done on CLI "
+"context."
+msgstr ""
 
 #: index.php:120
 msgid "Checking write permissions for session files"
@@ -5335,6 +5671,11 @@ msgid "Classic (toolbar on top)"
 msgstr "Classic (toolbar on top)"
 
 #: src/Plugin.php:2840 src/Marketplace/View.php:694
+msgid "Clean"
+msgstr "Clean"
+
+#: src/Plugin.php:2665 src/Plugin.php:2886
+msgctxt "button"
 msgid "Clean"
 msgstr "Clean"
 
@@ -5424,6 +5765,15 @@ msgstr "Clear Status"
 msgid "Click on an element to remove it from the network"
 msgstr "Click on an element to remove it from the network"
 
+#: templates/layout/parts/profile_selector.html.twig
+#, php-format
+msgid ""
+"Click on the %s icon to load the elements of the selected entity, as well as"
+" its sub-entities."
+msgstr ""
+"Click on the %s icon to load the elements of the selected entity, as well as"
+" its sub-entities."
+
 #: src/NotificationMailingSetting.php:275
 msgctxt "oauth"
 msgid "Client ID"
@@ -5438,6 +5788,11 @@ msgstr ""
 msgid "Clone"
 msgstr "Clone"
 
+#: src/MassiveAction.php:772 ajax/dropdownMassiveActionOs.php:49
+msgctxt "button"
+msgid "Clone"
+msgstr "Clone"
+
 #: src/Dashboard/Grid.php:300
 msgid "Clone this dashboard"
 msgstr "Clone this dashboard"
@@ -5448,6 +5803,11 @@ msgstr "Clone this dashboard"
 #: templates/layout/parts/user_header.html.twig js/glpi_dialog.js:113
 #: js/glpi_dialog.js:349 js/modules/Search/GenericView.js:96
 #: js/modules/Kanban/Kanban.js:1771
+msgid "Close"
+msgstr "Close"
+
+#: templates/components/form/modals_macros.html.twig
+msgctxt "button"
 msgid "Close"
 msgstr "Close"
 
@@ -5480,6 +5840,12 @@ msgstr[0] "Close Times"
 #: src/Stat/Data/Sglobal/StatDataTicketNumber.php:67
 #: src/Stat/Data/Graph/StatDataTicketAverageTime.php:64
 #: src/Dashboard/Provider.php:1121 src/Dashboard/Provider.php:1604
+msgid "Closed"
+msgstr "Closed"
+
+#: src/Dashboard/Provider.php:1256 src/Change.php:588 src/Problem.php:667
+#: src/Ticket.php:3797
+msgctxt "status"
 msgid "Closed"
 msgstr "Closed"
 
@@ -5602,6 +5968,14 @@ msgstr "Column \"%s.%s\" contains negative values. Updating them to \"%s\"..."
 msgid "Command execution may take a long time and should not be interrupted."
 msgstr ""
 
+#: src/Console/Database/InstallCommand.php:141
+msgid ""
+"Command input contains configuration options that may override existing "
+"configuration."
+msgstr ""
+"Command input contains configuration options that may override existing "
+"configuration."
+
 #: templates/pages/management/certificate.html.twig src/Certificate.php:165
 msgid "Command used"
 msgstr "Command used"
@@ -5706,6 +6080,14 @@ msgstr "Common Options"
 #: src/SNMPCredential.php:74 src/SNMPCredential.php:90
 msgid "Community"
 msgstr "Community"
+
+#: src/SavedSearch_Alert.php:159
+msgid ""
+"Compare number of results the search returns against the specified value "
+"with selected operator"
+msgstr ""
+"Compare number of results the search returns against the specified value "
+"with selected operator"
 
 #: src/KnowbaseItem_Revision.php:307
 msgctxt "button"
@@ -5891,6 +6273,14 @@ msgid "Connection to LDAP directory failed"
 msgid_plural "Connection to LDAP directories failed"
 msgstr[0] "Connection to LDAP directories failed"
 
+#: install/update.php:267
+msgid ""
+"Connection to database failed, verify the connection parameters included in "
+"config_db.php file"
+msgstr ""
+"Connection to database failed, verify the connection parameters included in "
+"config_db.php file"
+
 #: src/NetworkPort.php:841
 msgid "Connections legend"
 msgstr "Connections legend"
@@ -6063,6 +6453,14 @@ msgstr "Convert \"datetime\" fields to \"timestamp\" to use timezones."
 #: src/Console/Migration/Utf8mb4Command.php:86
 msgid "Convert database character set from \"utf8\" to \"utf8mb4\"."
 msgstr "Convert database character set from \"utf8\" to \"utf8mb4\"."
+
+#: src/Console/Migration/DynamicRowFormatCommand.php:65
+msgid ""
+"Convert database tables to \"Dynamic\" row format (required for \"utf8mb4\" "
+"character support)."
+msgstr ""
+"Convert database tables to \"Dynamic\" row format (required for \"utf8mb4\" "
+"character support)."
 
 #: src/PrinterLog.php:236
 msgid "Copies"
@@ -6412,6 +6810,15 @@ msgstr "Ctrl+Alt+G"
 msgid "Current"
 msgstr "Current"
 
+#: install/install.php:468 src/Console/Database/UpdateCommand.php:153
+#, php-format
+msgid ""
+"Current GLPI version not found for database named \"%s\". Update cannot be "
+"done."
+msgstr ""
+"Current GLPI version is not found for the database named \"%s\". The update "
+"cannot be done."
+
 #: src/Reservation.php:1118
 msgid "Current and future reservations"
 msgstr "Current & Future Reservations"
@@ -6606,6 +7013,23 @@ msgid_plural "Databases"
 msgstr[0] "Database"
 msgstr[1] "Databases"
 
+#: src/Console/Database/InstallCommand.php:295
+msgid ""
+"Database already contains \"glpi_*\" tables. Use --force option to override "
+"existing database."
+msgstr ""
+"Database already contains \"glpi_*\" tables. Use --force option to override "
+"existing database."
+
+#: src/Console/Database/AbstractConfigureCommand.php:208
+#: src/Console/Database/InstallCommand.php:169
+msgid ""
+"Database configuration already exists. Use --reconfigure option to override "
+"existing configuration."
+msgstr ""
+"Database configuration already exists. Use --reconfigure option to override "
+"existing configuration."
+
 #: src/System/Requirement/DbConfiguration.php:91
 msgid "Database configuration is OK."
 msgstr "Database configuration is OK."
@@ -6699,6 +7123,14 @@ msgstr "Database name defined by --db-name option cannot be empty."
 msgid "Database name:"
 msgstr "Database name:"
 
+#: src/Console/Database/AbstractConfigureCommand.php:119
+msgid ""
+"Database password (will be prompted for value if option passed without "
+"value)"
+msgstr ""
+"Database password (will be prompted for value if option passed without "
+"value)"
+
 #: src/Console/Database/AbstractConfigureCommand.php:158
 msgid "Database password:"
 msgstr "Database password:"
@@ -6706,6 +7138,13 @@ msgstr "Database password:"
 #: src/Console/Database/AbstractConfigureCommand.php:127
 msgid "Database port"
 msgstr "Database port"
+
+#: src/Console/Database/UpdateCommand.php:247
+#, php-format
+msgid ""
+"Database schema integrity check skipped as version \"%s\" is not supported "
+"by checking process."
+msgstr ""
 
 #: src/Console/Database/CheckSchemaIntegrityCommand.php:215
 #: src/Console/Database/UpdateCommand.php:280
@@ -7035,6 +7474,11 @@ msgstr "Delegatee"
 msgid "Delete"
 msgstr "Delete"
 
+#: src/ManualLink.php:287 src/ManualLink.php:289
+msgctxt "button"
+msgid "Delete"
+msgstr "Delete"
+
 #: src/Log.php:1097
 msgid "Delete a component"
 msgstr "Delete a Component"
@@ -7090,6 +7534,34 @@ msgid "Delete instance"
 msgstr "Delete instance"
 
 #: src/Item_Ticket.php:1036 src/NetworkPort.php:1501
+msgid "Delete permanently"
+msgstr "Delete Permanently"
+
+#: templates/components/itilobject/timeline/sub_documents.html.twig
+#: templates/components/itilobject/timeline/form_validation.html.twig
+#: templates/components/itilobject/timeline/form_followup.html.twig
+#: templates/components/itilobject/timeline/form_task.html.twig
+#: templates/components/itilobject/timeline/form_document_item.html.twig
+#: templates/components/itilobject/linked_tickets.html.twig
+#: templates/components/itilobject/service_levels.html.twig
+#: templates/components/itilobject/footer.html.twig
+#: templates/components/infocom.html.twig
+#: templates/components/form/buttons.html.twig src/Socket.php:773
+#: src/Socket.php:1010 src/Rule.php:3126 src/CommonDBVisible.php:259
+#: src/DisplayPreference.php:449 src/DisplayPreference.php:600
+#: src/DisplayPreference.php:648 src/MassiveAction.php:755
+#: src/MassiveAction.php:797 src/CommonDBRelation.php:1351
+#: src/LevelAgreement.php:494 src/Transfer.php:3895 src/Transfer.php:3901
+#: src/Transfer.php:3919 src/Transfer.php:3927 src/Lock.php:914
+#: src/Item_SoftwareVersion.php:712 src/Item_SoftwareVersion.php:1107
+#: src/Item_SoftwareVersion.php:1322 src/CommonDBTM.php:5268
+#: src/CommonDBTM.php:5360 src/Change_Ticket.php:293 src/Consumable.php:586
+#: src/Notepad.php:390 src/Dashboard/Grid.php:1499 src/Problem_Ticket.php:324
+#: src/Reservation.php:860 src/Profile_User.php:369 src/Profile.php:1822
+#: src/Profile.php:1834 src/Profile.php:1845 src/Ticket_Contract.php:138
+#: src/Item_SoftwareLicense.php:800 src/Cartridge.php:778
+#: src/Cartridge.php:1068
+msgctxt "button"
 msgid "Delete permanently"
 msgstr "Delete Permanently"
 
@@ -7530,6 +8002,12 @@ msgstr "Difference between main and replica"
 msgid "Digit"
 msgstr "Digit"
 
+#: src/Config.php:1461
+msgid ""
+"Direct Notification (requester for unlock will be the notification sender)"
+msgstr ""
+"Direct Notification (requester for unlock will be the notification sender)"
+
 #: src/Transfer.php:3993
 msgid "Direct connections"
 msgstr "Direct Connections"
@@ -7548,6 +8026,11 @@ msgstr "Directory"
 
 #: src/AuthLDAP.php:4076 src/AuthLDAP.php:4077 src/AuthLDAP.php:4078
 #: src/Plugin.php:2837 src/Marketplace/View.php:804
+msgid "Disable"
+msgstr "Disable"
+
+#: src/Plugin.php:2556 src/Plugin.php:2878
+msgctxt "button"
 msgid "Disable"
 msgstr "Disable"
 
@@ -7679,6 +8162,12 @@ msgstr "DisplayPort"
 msgid "Dissociate"
 msgstr "Dissociate"
 
+#: src/CommonDBConnexity.php:521 src/CommonDBConnexity.php:649
+#: src/NetworkPort_Vlan.php:380 src/Domain.php:410 src/NetworkName.php:446
+msgctxt "button"
+msgid "Dissociate"
+msgstr "Dissociate"
+
 #: src/NetworkPort.php:1507
 msgid "Dissociate a VLAN"
 msgstr "Dissociate a VLAN"
@@ -7786,6 +8275,11 @@ msgstr "Do you want to send \"usage statistics\"?"
 msgid "Document"
 msgid_plural "Documents"
 msgstr[0] "Documents"
+
+#: src/CommonITILObject.php:6596
+msgctxt "button"
+msgid "Document"
+msgstr "Document"
 
 #. TRANS: Default document to files attached to tickets : %d is the ticket id
 #: src/CommonDBTM.php:5508
@@ -7898,6 +8392,12 @@ msgstr "Domains close is expiring"
 msgid "Domains expired"
 msgstr "Domains have expired"
 
+#: templates/pages/setup/general/general_setup.html.twig
+msgid ""
+"Don't show search engine in dropdowns if the number of items is less than"
+msgstr ""
+"Don't show search engine in dropdowns if the number of items is less than"
+
 #: templates/components/itilobject/timeline/timeline.html.twig
 #: templates/components/itilobject/timeline/form_task.html.twig
 #: src/Planning.php:247 src/Planning.php:265
@@ -7941,6 +8441,13 @@ msgstr "Download URL"
 #: src/Marketplace/View.php:701
 msgid "Download again"
 msgstr "Download again"
+
+#: src/Marketplace/View.php:730
+#, php-format
+msgid ""
+"Download archive manually, you must uncompress it in plugins directory (%s)"
+msgstr ""
+"Download archive manually, you must uncompress it in plugins directory (%s)"
 
 #: src/Console/Marketplace/DownloadCommand.php:53
 msgid "Download plugin from the GLPI marketplace"
@@ -8105,6 +8612,13 @@ msgstr "East"
 #: templates/components/itilobject/timeline/main_description.html.twig
 #: src/KnowbaseItem.php:265 src/KnowbaseItemTranslation.php:91
 #: src/CommonITILValidation.php:971
+msgid "Edit"
+msgstr "Edit"
+
+#: templates/components/itilobject/timeline/sub_documents.html.twig
+#: templates/components/itilobject/timeline/form_document_item.html.twig
+#: src/KnowbaseItem_Comment.php:374
+msgctxt "button"
 msgid "Edit"
 msgstr "Edit"
 
@@ -8321,6 +8835,11 @@ msgstr "Empty login or password"
 msgid "Enable"
 msgstr "Enable"
 
+#: src/Plugin.php:890 src/Plugin.php:2587 src/Plugin.php:2870
+msgctxt "button"
+msgid "Enable"
+msgstr "Enable"
+
 #: src/Entity.php:2510
 msgid "Enable CSS customization"
 msgstr "Enable CSS customization"
@@ -8373,6 +8892,15 @@ msgstr "Enable login with external token"
 msgid "Enable maintenance mode"
 msgstr "Enable maintenance mode"
 
+#: src/Console/Migration/RacksPluginToCoreCommand.php:199
+#, php-format
+msgid ""
+"Enable migration without plugin files (we cannot validate that plugin data "
+"are compatible with supported %s version)"
+msgstr ""
+"Enable migration without plugin files (we cannot validate that plugin data "
+"is compatible with the supported %s version)"
+
 #: src/Entity.php:915 src/Entity.php:2076
 msgid "Enable notifications by default"
 msgstr "Enable notifications by default"
@@ -8394,6 +8922,14 @@ msgstr "Enable the Financial & Administrative Information by Default"
 msgid "Enable timezones usage."
 msgstr "Enable timezones usage."
 
+#: src/System/RequirementsManager.php:115
+msgid ""
+"Enable usage of ChaCha20-Poly1305 encryption required by GLPI. This is "
+"provided by libsodium 1.0.12 and newer."
+msgstr ""
+"Enable usage of ChaCha20-Poly1305 encryption required by GLPI. This is "
+"provided by libsodium 1.0.12 and newer."
+
 #: src/System/RequirementsManager.php:158
 msgid "Enable usage of authentication through remote LDAP server."
 msgstr "Enable usage of authentication through remote LDAP server."
@@ -8404,6 +8940,11 @@ msgstr "Enable usage of timezones."
 
 #: src/Auth.php:1580 src/Auth.php:1625 src/Auth.php:1648
 msgctxt "authentication"
+msgid "Enabled"
+msgstr "Enabled"
+
+#: src/Plugin.php:2321 src/Plugin.php:2725
+msgctxt "plugin"
 msgid "Enabled"
 msgstr "Enabled"
 
@@ -8512,6 +9053,15 @@ msgstr "End at %s"
 #: ajax/resaperiod.php:59 ajax/resaperiod.php:83
 msgid "End date"
 msgstr "End date"
+
+#: src/Console/Ldap/SynchronizeUsersCommand.php:119
+#, php-format
+msgid ""
+"End date to apply in \"modifyTimestamp\" filter (see %s for supported "
+"formats)"
+msgstr ""
+"End date to apply in \"modifyTimestamp\" filter (see %s for supported "
+"formats)"
 
 #: src/CronTask.php:1704
 msgid "End hour of run period"
@@ -8684,6 +9234,14 @@ msgstr "Error during message parsing (%s). Check-in \"%s\" for more details"
 msgid "Error in creating database!"
 msgstr "Error in creating database!"
 
+#: src/CommonITILTask.php:317 src/CommonITILTask.php:529
+#: src/Reservation.php:193 src/Reservation.php:317
+#: src/Features/PlanningEvent.php:160 src/Features/PlanningEvent.php:219
+msgid ""
+"Error in entering dates. The starting date is later than the ending date"
+msgstr ""
+"Error in entering dates. The starting date is later than the ending date"
+
 #: src/NotificationEventMailing.php:393
 msgid "Error in sending the email"
 msgstr "Error in sending the email"
@@ -8722,6 +9280,14 @@ msgstr "Error retrieving RSS feed"
 #, php-format
 msgid "Error was: %s"
 msgstr "Error was: %s"
+
+#: src/Toolbox.php:2517
+msgid ""
+"Error when parsing HTTP_REFERER. Reload previous page before doing action "
+"again."
+msgstr ""
+"Error when parsing HTTP_REFERER. Reload previous page before doing action "
+"again."
 
 #: src/Console/Ldap/SynchronizeUsersCommand.php:310
 #, php-format
@@ -8901,6 +9467,22 @@ msgstr "Execution"
 msgid "Execution error"
 msgstr "Execution error"
 
+#: src/Console/Task/UnlockCommand.php:67
+msgid ""
+"Execution time (in cycles) from which the task is considered as stuck (delay"
+" = task frequency * cycle)"
+msgstr ""
+"Execution time (in cycles) from which the task is considered as stuck (delay"
+" = task frequency * cycle)"
+
+#: src/Console/Task/UnlockCommand.php:75
+msgid ""
+"Execution time (in seconds) from which the task is considered as stuck "
+"(default: 1800)"
+msgstr ""
+"Execution time (in seconds) from which the task is considered as stuck "
+"(default: 1800)"
+
 #: src/System/Diagnostic/DatabaseSchemaIntegrityChecker.php:168
 msgid "Expected database schema"
 msgstr ""
@@ -8951,6 +9533,14 @@ msgid "Expiring domains"
 msgstr "Expiring domains"
 
 #: templates/components/logs.html.twig
+msgid "Export"
+msgstr "Export"
+
+#: templates/pages/admin/rules_list.html.twig
+#: templates/components/search/controls.html.twig src/Dropdown.php:2515
+#: src/Dropdown.php:2516 src/Rule.php:616 src/Planning.php:1064
+#: src/Planning.php:1068 src/Planning.php:1072 src/RuleCollection.php:975
+msgctxt "button"
 msgid "Export"
 msgstr "Export"
 
@@ -9072,6 +9662,15 @@ msgstr "Failed to connect to the proxy server (%s)"
 #, php-format
 msgid "Failed to create recurrent item %s"
 msgstr "Failed to create reoccurring item %s"
+
+#: src/Document.php:1530
+#, php-format
+msgid ""
+"Failed to create the directory %s. Verify that you have the correct "
+"permission"
+msgstr ""
+"Failed to create the directory %s. Verify that you have the correct "
+"permission"
 
 #: src/Document.php:1215 src/Document.php:1327 src/Document.php:1435
 #, php-format
@@ -9538,10 +10137,25 @@ msgstr[1] "Followup Templates"
 msgid "For security reasons, SELinux mode should be Enforcing."
 msgstr "For security reasons, SELinux mode should be Enforcing."
 
+#: src/Central.php:476
+#, php-format
+msgid ""
+"For security reasons, please change the password for the default users: %s"
+msgstr ""
+"For security reasons, please change the password for the default users: %s"
+
 #: src/Central.php:483
 #, php-format
 msgid "For security reasons, please remove file: %s"
 msgstr "For security reasons, please remove file: %s"
+
+#: src/Infocom.php:1127
+msgid ""
+"For this type of item, the financial and administrative information are only"
+" a model for the items which you should add."
+msgstr ""
+"For this type of item, the Financial & Administrative Information are only "
+"for the items model which you should add."
 
 #: ajax/ticketsatisfaction.php:101
 msgid "For tickets closed after"
@@ -9572,6 +10186,14 @@ msgstr ""
 #: src/Console/Database/InstallCommand.php:110
 msgid "Force execution of installation, overriding existing database"
 msgstr "Force execution of installation, overriding existing database"
+
+#: src/Console/Database/UpdateCommand.php:113
+msgid ""
+"Force execution of update from v-1 version of GLPI even if schema did not "
+"changed"
+msgstr ""
+"Force execution of update from v-1 version of GLPI even if schema did not "
+"change"
 
 #: src/Console/Ldap/SynchronizeUsersCommand.php:126
 #, php-format
@@ -9617,6 +10239,13 @@ msgstr[0] "Formats"
 #: src/NotificationTargetCommonITILObject.php:820
 msgid "Former technician in charge of the ticket"
 msgstr "Former technician in charge of the ticket"
+
+#: src/Console/Security/ChangekeyCommand.php:73
+#, php-format
+msgid ""
+"Found %1$s field(s) and %2$s configuration entries requiring migration."
+msgstr ""
+"Found %1$s field(s) and %2$s configuration entries requiring migration."
 
 #: src/Console/Diagnostic/CheckHtmlEncodingCommand.php:132
 #, php-format
@@ -9721,6 +10350,12 @@ msgstr "Full name"
 msgid "Fullscreen"
 msgstr "Fullscreen"
 
+#: src/FQDN.php:60
+msgid ""
+"Fully Qualified Domain Name. Use the classical notation (labels separated by"
+" dots). For example: indepnet.net"
+msgstr "Fully Qualified Domain Name - Example: somehost.example.com"
+
 #: src/Inventory/Asset/Cartridge.php:61
 msgid "Fuser kit"
 msgstr "Fuser kit"
@@ -9739,6 +10374,13 @@ msgstr "GLPI cache reset successfully"
 
 #: src/System/Requirement/DataDirectoriesProtectedPath.php:120
 msgid "GLPI data directories are located in a secured path."
+msgstr ""
+
+#: src/System/Requirement/DataDirectoriesProtectedPath.php:75
+msgid ""
+"GLPI data directories should be placed outside web root directory. It can be"
+" achieved by redefining corresponding constants. See installation "
+"documentation for more details."
 msgstr ""
 
 #: src/Console/Database/UpdateCommand.php:167
@@ -9788,6 +10430,11 @@ msgstr "Gbps"
 #: src/RuleImportAsset.php:197 src/CommonGLPI.php:108
 #: src/CommonITILObject.php:6274 src/Config.php:3141 src/Ticket.php:5070
 #: src/Ticket.php:5719
+msgid "General"
+msgstr "General"
+
+#: src/Config.php:95
+msgctxt "setup"
 msgid "General"
 msgstr "General"
 
@@ -10088,6 +10735,15 @@ msgstr "Has backup"
 msgid "Having the status"
 msgstr "Having the status"
 
+#: src/GLPINetwork.php:294
+#, php-format
+msgid ""
+"Having troubles setting up an advanced GLPI module?\n"
+"We can help you solve them. Sign up for support on %s."
+msgstr ""
+"Having troubles setting up an advanced GLPI module?\n"
+"We can help you solve them. Sign up for support on %s."
+
 #: templates/components/itilobject/timeline/form_document_item.html.twig
 #: src/NotificationTargetProjectTask.php:616 src/KnowbaseItem.php:1225
 #: src/Document_Item.php:677 src/Document_Item.php:761 src/Document.php:470
@@ -10132,6 +10788,16 @@ msgstr[0] "Hidden Fields"
 
 #: src/CommonITILObject.php:3121
 msgctxt "impact"
+msgid "High"
+msgstr "High"
+
+#: src/CommonITILObject.php:2877
+msgctxt "priority"
+msgid "High"
+msgstr "High"
+
+#: templates/anonymous_helpdesk.html.twig src/CommonITILObject.php:2999
+msgctxt "urgency"
 msgid "High"
 msgstr "High"
 
@@ -10311,6 +10977,14 @@ msgid "IP network"
 msgid_plural "IP networks"
 msgstr[0] "IP Networks"
 
+#: templates/components/form/networkname.html.twig
+msgid ""
+"IP network is not included in the database. However, you can see current "
+"available networks."
+msgstr ""
+"IP network is not included in the database. However, you can see current "
+"available networks."
+
 #. TRANS: %1$s is address, %2$s is netmask
 #: ajax/dropdownShowIPNetwork.php:57
 #, php-format
@@ -10391,6 +11065,14 @@ msgstr "If documents are no longer used"
 msgid "If monitors are no longer used"
 msgstr "If monitors are no longer used"
 
+#: src/MailCollector.php:246
+msgid ""
+"If name is a valid email address, it will be automatically added to "
+"blacklisted senders."
+msgstr ""
+"If the name is a valid email address, it will be automatically be added to "
+"the blacklisted senders."
+
 #: src/NotificationMailingSetting.php:378
 msgid "If not set, main administrator email will be used."
 msgstr "If not set, main administrator email will be used."
@@ -10408,6 +11090,13 @@ msgstr "If not set, main or entity administrator email name will be used."
 #: src/NotificationMailingSetting.php:142
 msgid "If not set, main or entity administrator name will be used."
 msgstr "If not set, main or entity administrator name will be used."
+
+#: src/Console/Rules/ReplayDictionnaryRulesCommand.php:67
+msgid ""
+"If option is set, only items having given manufacturer ID will be processed."
+msgstr ""
+"If the option is set, only items having given manufacturer ID will be "
+"processed."
 
 #: src/Transfer.php:4030
 msgid "If phones are no longer used"
@@ -10445,6 +11134,16 @@ msgstr "If synced or read-only account"
 msgid "If the cartridge types are no longer used"
 msgstr "If the cartridge types are no longer used"
 
+#: src/User.php:5500 src/Api/API.php:2175
+msgid ""
+"If the given email address match an exisiting GLPI user, you will receive an"
+" email containing the informations required to reset your password. Please "
+"contact your administrator if you do not receive any email."
+msgstr ""
+"If the given email address matches an existing GLPI user, you will receive "
+"an email containing the information required to reset your password. Please "
+"contact your administrator if you do not receive any email."
+
 #: src/Project.php:2481
 msgctxt "filters"
 msgid "If the item is deleted or not"
@@ -10455,9 +11154,23 @@ msgctxt "filters"
 msgid "If the item represents a milestone or not"
 msgstr "If the item represents a milestone or not"
 
+#: src/CommonDropdown.php:621
+msgid ""
+"If you confirm the deletion, all uses of this dropdown will be blanked."
+msgstr ""
+"If you confirm the deletion, all uses of this dropdown will be blanked."
+
 #: src/ITILFollowup.php:399
 msgid "If you reject the solution, you must specify a reason"
 msgstr "If you reject the solution, you must specify a reason"
+
+#: src/Marketplace/View.php:360
+msgid ""
+"If you want to ease the plugins download, please check permissions and "
+"ownership of this directory."
+msgstr ""
+"If you want to ease the plugins download, please check the permissions and "
+"ownership of this directory."
 
 #: src/ITILFollowup.php:392
 msgid "If you want to reopen this item, you must specify a reason"
@@ -10556,6 +11269,14 @@ msgstr "Implementation error!"
 
 #: src/Inventory/Conf.php:1079 src/NetworkPortType.php:59
 #: src/NetworkPortType.php:86
+msgid "Import"
+msgstr "Import"
+
+#: templates/pages/admin/rules_list.html.twig src/AuthLDAP.php:1736
+#: src/AuthLDAP.php:2284 src/RuleCollection.php:973
+#: src/RuleCollection.php:1125 src/NotImportedEmail.php:79
+#: src/NotImportedEmail.php:97
+msgctxt "button"
 msgid "Import"
 msgstr "Import"
 
@@ -10871,6 +11592,14 @@ msgstr "Incorrect username or password"
 msgid "Incorrect value for date field."
 msgstr "Incorrect value for the date field."
 
+#: src/Console/Application.php:151
+msgid ""
+"Increase the verbosity of messages: 1 for normal output, 2 for more verbose "
+"output and 3 for debug"
+msgstr ""
+"Increase the verbosity of messages: 1 for normal output, 2 for more verbose "
+"output, and 3 for debug"
+
 #: src/CronTask.php:656
 msgid "Infinite"
 msgstr "Infinite"
@@ -10967,6 +11696,13 @@ msgid "Insert an item here"
 msgstr "Insert an item here"
 
 #: src/Plugin.php:2828 src/Marketplace/View.php:786
+msgid "Install"
+msgstr "Install"
+
+#: templates/install/step0.html.twig src/Computer.php:352
+#: src/Item_SoftwareVersion.php:1044 src/Item_SoftwareVersion.php:1319
+#: src/Plugin.php:2619 src/Plugin.php:2854 src/Cartridge.php:1041
+msgctxt "button"
 msgid "Install"
 msgstr "Install"
 
@@ -11418,12 +12154,28 @@ msgstr "Is private"
 msgid "Is up to date"
 msgstr "Is up to date"
 
+#: templates/pages/admin/inventory/upload_form.html.twig
+msgid ""
+"It is also possible to upload a compressed archive directly with a "
+"collection of inventory files."
+msgstr ""
+"It is also possible to upload a compressed archive directly with a "
+"collection of inventory files."
+
 #: src/Console/Migration/RacksPluginToCoreCommand.php:217
 #: src/Console/Migration/AppliancesPluginToCoreCommand.php:162
 #: src/Console/Migration/AbstractPluginToCoreCommand.php:106
 msgid "It is better to make a backup of your existing data before continuing."
 msgstr ""
 "It is better to make a backup of your existing data before continuing."
+
+#: src/Rule.php:1078
+msgid ""
+"It is possible to affect the result of a regular expression using the string"
+" #0"
+msgstr ""
+"It is possible to affect the result of a regular expression using the string"
+" #0"
 
 #: src/Update.php:187
 #, php-format
@@ -11815,6 +12567,13 @@ msgstr "LDAP filter associated to the entity (if necessary)"
 msgid "LDAP server"
 msgstr "LDAP server"
 
+#: src/Console/Ldap/SynchronizeUsersCommand.php:266
+#, php-format
+msgid ""
+"LDAP server \"%s\" is inactive, no synchronization will be done against it."
+msgstr ""
+"LDAP server \"%s\" is inactive, no synchronization will be done against it."
+
 #: src/Console/Ldap/SynchronizeUsersCommand.php:305
 #, php-format
 msgid "LDAP server \"%s\" size limit exceeded."
@@ -12086,6 +12845,11 @@ msgstr "Later"
 msgid "Latitude"
 msgstr "Latitude"
 
+#: src/Entity.php:1582
+msgctxt "location"
+msgid "Latitude"
+msgstr "Latitude"
+
 #: src/CronTask.php:1014
 msgid "Launch"
 msgstr "Launch"
@@ -12101,6 +12865,12 @@ msgstr "Left"
 #: src/DeviceCamera.php:76 src/DeviceCamera.php:127
 msgid "Lensfacing"
 msgstr "Lens facing"
+
+#: src/Console/Traits/TelemetryActivationTrait.php:103 src/Telemetry.php:432
+msgid ""
+"Let us know your usage to improve future versions of GLPI and its plugins!"
+msgstr ""
+"Let us know your usage to improve future versions of GLPI and its plugins!"
 
 #: templates/pages/admin/events_list.html.twig src/Event.php:383
 msgid "Level"
@@ -12184,6 +12954,11 @@ msgstr "Linear"
 msgid "Link"
 msgid_plural "Links"
 msgstr[0] "Links"
+
+#: src/Ticket.php:2717
+msgctxt "button"
+msgid "Link"
+msgstr "Link"
 
 #: src/Contact_Supplier.php:49
 msgid "Link Contact/Supplier"
@@ -12440,6 +13215,12 @@ msgstr "Location doesn't seem geolocalized!"
 msgid "Location tree"
 msgstr "Location Tree"
 
+#: src/Computer_Item.php:117 src/Computer.php:284
+msgid ""
+"Location updated. The connected items have been moved in the same location."
+msgstr ""
+"Location updated. The connected items have been moved in the same location."
+
 #: src/Lock.php:54
 msgid "Lock"
 msgid_plural "Locks"
@@ -12591,8 +13372,23 @@ msgstr "Logs purge configuration"
 msgid "Longitude"
 msgstr "Longitude"
 
+#: src/Entity.php:1576
+msgctxt "location"
+msgid "Longitude"
+msgstr "Longitude"
+
 #: src/CommonITILObject.php:3127
 msgctxt "impact"
+msgid "Low"
+msgstr "Low"
+
+#: src/CommonITILObject.php:2883
+msgctxt "priority"
+msgid "Low"
+msgstr "Low"
+
+#: templates/anonymous_helpdesk.html.twig src/CommonITILObject.php:3005
+msgctxt "urgency"
 msgid "Low"
 msgstr "Low"
 
@@ -12729,6 +13525,15 @@ msgstr "Make a Reservation"
 #: src/ReservationItem.php:341
 msgid "Make available"
 msgstr "Make Available"
+
+#: src/System/Requirement/ProtectedWebAccess.php:123
+#, php-format
+msgid ""
+"Make sure access to %s (%s) is forbidden; otherwise review .htaccess file "
+"and web server configuration."
+msgstr ""
+"Make sure access to %s (%s) is forbidden; otherwise review the .htaccess "
+"file and web server configuration."
 
 #: src/ReservationItem.php:331
 msgid "Make unavailable"
@@ -13010,6 +13815,16 @@ msgctxt "impact"
 msgid "Medium"
 msgstr "Medium"
 
+#: src/CommonITILObject.php:2880
+msgctxt "priority"
+msgid "Medium"
+msgstr "Medium"
+
+#: templates/anonymous_helpdesk.html.twig src/CommonITILObject.php:3002
+msgctxt "urgency"
+msgid "Medium"
+msgstr "Medium"
+
 #: src/Project.php:1852 src/Project.php:2530 src/ProjectTask.php:1279
 msgid "Member"
 msgid_plural "Members"
@@ -13051,6 +13866,11 @@ msgid "Mentionned user"
 msgstr "Mentioned user"
 
 #: src/Software.php:975
+msgid "Merge"
+msgstr "Merge"
+
+#: src/CommonDropdown.php:853 src/ITILTemplate.php:545 src/Ticket.php:2704
+msgctxt "button"
 msgid "Merge"
 msgstr "Merge"
 
@@ -13191,6 +14011,31 @@ msgstr "Migration Cleaner"
 #: src/Console/Database/UpdateCommand.php:213
 msgid "Migration done."
 msgstr "Migration done."
+
+#: src/Console/Migration/UnsignedKeysCommand.php:190
+#, php-format
+msgid ""
+"Migration of column \"%s.%s\" cannot be done as it contains negative values."
+msgstr ""
+"Migration of column \"%s.%s\" cannot be done as it contains negative values."
+
+#: src/Console/Migration/UnsignedKeysCommand.php:113
+#, php-format
+msgid ""
+"Migration of column \"%s.%s\" cannot be done as it is referenced in "
+"CONSTRAINT \"%s\" of table \"%s.%s\"."
+msgstr ""
+"Migration of column \"%s.%s\" cannot be done as it is referenced in "
+"CONSTRAINT \"%s\" of table \"%s.%s\"."
+
+#: src/Console/Migration/UnsignedKeysCommand.php:135
+#, php-format
+msgid ""
+"Migration of column \"%s.%s\" cannot be done as its default value is "
+"negative."
+msgstr ""
+"Migration of column \"%s.%s\" cannot be done as its default value is "
+"negative."
 
 #: src/Console/Migration/UnsignedKeysCommand.php:218
 #, php-format
@@ -13435,6 +14280,13 @@ msgstr "Mount Point"
 msgid "Move"
 msgstr "Move"
 
+#: src/CommonTreeDropdown.php:664 src/Rule.php:661 src/Group.php:387
+#: src/Item_SoftwareVersion.php:711 src/NetworkPort.php:1850
+#: src/Item_SoftwareLicense.php:805
+msgctxt "button"
+msgid "Move"
+msgstr "Move"
+
 #: src/User.php:3403
 msgid "Move to group"
 msgstr "Move to Group"
@@ -13631,6 +14483,14 @@ msgstr "NOT"
 #: src/Database.php:458
 msgid "Name"
 msgstr "Name"
+
+#: src/Console/Plugin/InstallCommand.php:81
+msgid ""
+"Name of user used during installation script (among other things to set "
+"plugin admin rights)"
+msgstr ""
+"Name of the user used during installation script (among other things is used"
+" to set plugin admin rights)"
 
 #: src/NotificationMailingSetting.php:105
 msgid "Name to use in from for sent emails."
@@ -13834,6 +14694,29 @@ msgstr "Never Expire"
 msgid "New"
 msgstr "New"
 
+#: src/Cartridge.php:400 src/Cartridge.php:702
+msgctxt "cartridge"
+msgid "New"
+msgid_plural "New"
+msgstr[0] "New"
+
+#: src/Consumable.php:489
+msgctxt "consumable"
+msgid "New"
+msgid_plural "New"
+msgstr[0] "New"
+
+#: src/Plugin.php:2318 src/Plugin.php:2724 src/Dashboard/Provider.php:1236
+#: src/Change.php:579 src/Problem.php:660 src/Ticket.php:3792
+msgctxt "status"
+msgid "New"
+msgstr "New"
+
+#: install/migrations/update_0.84.x_to_0.85.0.php:2250
+msgctxt "ticket"
+msgid "New"
+msgstr "New"
+
 #: src/MassiveAction.php:1300
 msgid "New Note"
 msgstr "New note"
@@ -14029,6 +14912,14 @@ msgstr "No"
 #: src/Event.php:276
 msgid "No Event"
 msgstr "No Event"
+
+#: src/Toolbox.php:2509
+msgid ""
+"No HTTP_REFERER found in request. Reload previous page before doing action "
+"again."
+msgstr ""
+"No HTTP_REFERER found in request. Reload previous page before doing action "
+"again."
 
 #: src/IPAddress.php:306
 msgid "No IP address found"
@@ -14499,6 +15390,27 @@ msgstr "Non-existent Function"
 msgid "None"
 msgstr "None"
 
+#: src/Reservation.php:819
+msgctxt "periodicity"
+msgid "None"
+msgstr "None"
+
+#: src/Toolbox.php:2532
+msgid ""
+"None or Invalid host in HTTP_REFERER. Reload previous page before doing "
+"action again."
+msgstr ""
+"None or Invalid host in HTTP_REFERER. Reload previous page before doing "
+"action again."
+
+#: src/Toolbox.php:2546
+msgid ""
+"None or Invalid path in HTTP_REFERER. Reload previous page before doing "
+"action again."
+msgstr ""
+"None or Invalid path in HTTP_REFERER. Reload previous page before doing "
+"action again."
+
 #: src/User.php:3202
 msgid "Normal"
 msgstr "Normal"
@@ -14675,6 +15587,27 @@ msgstr "Now"
 msgid "Number"
 msgstr "Number"
 
+#: src/Stat/Data/Sglobal/StatDataTicketNumber.php:76
+#: src/Stat/Data/Graph/StatDataTicketAverageTime.php:73
+msgctxt "Quantity"
+msgid "Number"
+msgstr "Number"
+
+#: templates/pages/management/contract.html.twig
+#: src/NotificationTargetContract.php:175 src/Contract.php:504
+#: src/Contract.php:1722 src/Contract_Item.php:341
+#: src/Contract_Supplier.php:182
+msgctxt "phone"
+msgid "Number"
+msgstr "Number"
+
+#: templates/pages/management/softwarelicense.html.twig
+#: src/SoftwareLicense.php:942 src/Stat.php:479 src/FieldUnicity.php:627
+#: src/CronTask.php:1371 src/CronTask.php:1437
+msgctxt "quantity"
+msgid "Number"
+msgstr "Number"
+
 #: src/Config.php:1052
 msgid "Number format"
 msgstr "Number Format"
@@ -14813,6 +15746,15 @@ msgctxt "quantity"
 msgid "Number of linked tickets"
 msgstr "Number of Linked Tickets"
 
+#: src/MailCollector.php:965
+#, php-format
+msgid ""
+"Number of messages: available=%1$d, already imported=%2$d, retrieved=%3$d, "
+"refused=%4$d, errors=%5$d, blacklisted=%6$d"
+msgstr ""
+"Number of messages: available=%1$d, already imported=%2$d, received=%3$d, "
+"refused=%4$d, errors=%5$d, blacklisted=%6$d"
+
 #: src/Monitor.php:482
 msgctxt "quantity"
 msgid "Number of monitors"
@@ -14905,6 +15847,14 @@ msgid "Number of threads"
 msgstr "Number of Treads"
 
 #: src/Stat.php:1627
+msgid "Number of tickets"
+msgstr "Number of Tickets"
+
+#: src/NotificationTargetProjectTask.php:577 src/Project.php:790
+#: src/NotificationTargetProblem.php:199 src/Search.php:8117
+#: src/ITILCategory.php:253 src/NotificationTargetChange.php:272
+#: src/Problem.php:534 src/NotificationTargetProject.php:694
+msgctxt "quantity"
 msgid "Number of tickets"
 msgstr "Number of Tickets"
 
@@ -15008,6 +15958,12 @@ msgstr "OR NOT"
 msgid "OS and PHP are relying on 64 bits integers."
 msgstr ""
 
+#: src/System/Requirement/IntegerSize.php:51
+msgid ""
+"OS or PHP is not relying on 64 bits integers, operations on IP addresses may"
+" produce unexpected results."
+msgstr ""
+
 #: src/NotificationMailingSetting.php:245
 msgid "Oauth provider"
 msgstr ""
@@ -15042,6 +15998,14 @@ msgstr "On left"
 msgid "On right"
 msgstr "On right"
 
+#: templates/pages/management/softwarelicense.html.twig
+msgid ""
+"On search engine, use \"Expiration contains NULL\" to search licenses with "
+"no expiration date"
+msgstr ""
+"On search engine, use \"Expiration contains NULL\" to search licenses with "
+"no expiration date"
+
 #: src/Dashboard/Provider.php:560 src/Dashboard/Provider.php:704
 msgid "On time"
 msgstr "On time"
@@ -15049,6 +16013,20 @@ msgstr "On time"
 #: templates/components/form/support_hours.html.twig
 msgid "On week"
 msgstr "On week"
+
+#: src/Console/Traits/TelemetryActivationTrait.php:102 src/Telemetry.php:431
+msgid ""
+"Once sent, usage statistics are aggregated and made available to a broad "
+"range of GLPI developers."
+msgstr ""
+"Once sent, usage statistics are aggregated and made available to a broad "
+"range of GLPI developers."
+
+#: src/NotificationMailingSetting.php:239
+msgid ""
+"Once the form has been validated, you will be redirected to your supplierʼs "
+"authentication page if necessary."
+msgstr ""
 
 #: js/modules/Kanban/Kanban.js:1835
 msgid "One item per line"
@@ -15105,6 +16083,14 @@ msgstr ""
 #: src/Stat.php:560 src/Stat/Data/Sglobal/StatDataSatisfaction.php:56
 #: src/Stat/Data/Graph/StatDataSatisfactionSurvey.php:53
 msgctxt "survey"
+msgid "Opened"
+msgid_plural "Opened"
+msgstr[0] "Opened"
+
+#: src/Stat.php:530 src/Stat/Data/Sglobal/StatDataTicketNumber.php:58
+#: src/Stat/Data/Graph/StatDataTicketAverageTime.php:55
+#: src/Dashboard/Provider.php:1059
+msgctxt "ticket"
 msgid "Opened"
 msgid_plural "Opened"
 msgstr[0] "Opened"
@@ -15175,6 +16161,12 @@ msgid "Option --all is not compatible with usage of directory argument."
 msgstr ""
 "Option --all is not compatible with the usage of the directory argument."
 
+#: src/Console/Ldap/SynchronizeUsersCommand.php:493
+msgid ""
+"Option --begin-date value has to be lower than option --end-date value."
+msgstr ""
+"Option --begin-date value has to be lower than the option --end-date value."
+
 #: src/Console/Task/UnlockCommand.php:187
 msgid "Option --cycle has to be an integer."
 msgstr "Option --cycle has to be an integer."
@@ -15190,6 +16182,14 @@ msgstr "Option --delay has to be an integer."
 #: src/Console/Assets/CleanSoftwareCommand.php:87
 msgid "Option --max must be an integer."
 msgstr "Option --max must be an integer."
+
+#: src/Console/Ldap/SynchronizeUsersCommand.php:455
+msgid ""
+"Option --only-create-new is not compatible with option --only-update-"
+"existing."
+msgstr ""
+"Option --only-create-new is not compatible with option --only-update-"
+"existing."
 
 #: templates/layout/parts/goto_button.html.twig
 msgid "Option+Command+G"
@@ -15214,6 +16214,14 @@ msgstr "Optional reply to address."
 #: src/NotificationMailingSetting.php:124
 msgid "Optionnal reply to name."
 msgstr "Optional reply to name."
+
+#: src/Console/Ldap/SynchronizeUsersCommand.php:488
+msgid ""
+"Options --begin-date and --end-date can only be used with --only-create-new "
+"or --only-update-existing option."
+msgstr ""
+"Options --begin-date and --end-date can only be used with --only-create-new "
+"or --only-update-existing option."
 
 #: js/modules/Kanban/Kanban.js:1905
 msgid "Or add a new status"
@@ -15284,6 +16292,14 @@ msgstr[0] "Other component models"
 msgid "Other equipments"
 msgstr "Other equipments"
 
+#: src/Report.php:87
+msgid ""
+"Other financial and administrative information (licenses, cartridges, "
+"consumables)"
+msgstr ""
+"Other Financial & Administrative Information (licenses, cartridges, "
+"consumables)"
+
 #: src/CommonDBTM.php:4379
 msgid "Other item exist"
 msgstr "Other item exist"
@@ -15295,6 +16311,14 @@ msgstr "Other items do not exist in the GLPI core."
 #: src/IPAddress.php:272
 msgid "Other kind of items"
 msgstr "Other Kind of Items"
+
+#: src/Console/Migration/RacksPluginToCoreCommand.php:435
+msgid ""
+"Other models and items cannot be migrated when --no-interaction option is "
+"used."
+msgstr ""
+"Other models and items cannot be migrated when --no-interaction option is "
+"used."
 
 #: templates/dropdown_form.html.twig
 msgid "Other pictures"
@@ -15318,6 +16342,14 @@ msgstr "Others"
 msgid "Others authentication methods"
 msgstr "Others authentication methods"
 
+#: src/Marketplace/View.php:362
+msgid ""
+"Otherwise, you will need to download and unzip the plugins archives "
+"manually."
+msgstr ""
+"Otherwise, you will need to download and unzip the plugins archives "
+"manually."
+
 #: src/Config.php:1772
 msgid "Out of memory restart"
 msgstr "Out of Memory Restart"
@@ -15325,6 +16357,14 @@ msgstr "Out of Memory Restart"
 #: src/NetworkPortMetrics.php:210
 msgid "Output errors"
 msgstr "Output errors"
+
+#: src/Console/Application.php:193
+msgid ""
+"Output language (default value is existing GLPI \"language\" configuration "
+"or \"en_GB\")"
+msgstr ""
+"Output language (default value is existing GLPI \"language\" configuration "
+"or \"en_GB\")"
 
 #: src/NetworkPortMetrics.php:206
 msgid "Output megabytes"
@@ -15372,6 +16412,13 @@ msgstr[0] "PDU types"
 msgid "PHP"
 msgstr "PHP"
 
+#: src/System/Requirement/PhpSupportedVersion.php:68
+#, php-format
+msgid ""
+"PHP %s official support has ended. An upgrade to a more recent PHP version "
+"is recommended."
+msgstr ""
+
 #: front/config.form.php:71
 msgid "PHP OPcache reset successful"
 msgstr "PHP OPcache reset successfully"
@@ -15383,6 +16430,24 @@ msgstr "PHP Parser"
 #: src/System/RequirementsManager.php:83
 msgid "PHP core extensions"
 msgstr "PHP core extensions"
+
+#: src/System/Requirement/SessionsSecurityConfiguration.php:64
+msgid ""
+"PHP directive \"session.cookie_httponly\" should be set to \"on\" to prevent"
+" client-side script to access cookie values."
+msgstr ""
+
+#: src/System/Requirement/SessionsSecurityConfiguration.php:79
+msgid ""
+"PHP directive \"session.cookie_samesite\" should be set, at least, to "
+"\"Lax\", to prevent cookie to be sent on cross-origin POST requests."
+msgstr ""
+
+#: src/System/Requirement/SessionsSecurityConfiguration.php:60
+msgid ""
+"PHP directive \"session.cookie_secure\" should be set to \"on\" when GLPI "
+"can be accessed on HTTPS protocol."
+msgstr ""
 
 #: src/System/RequirementsManager.php:177
 msgid "PHP emulated extensions"
@@ -15610,6 +16675,12 @@ msgstr "Past Reservations"
 msgid "Path"
 msgstr ""
 
+#: src/Console/Diagnostic/CheckHtmlEncodingCommand.php:116
+msgid ""
+"Path of file where will be stored SQL queries that can be used to rollback "
+"changes"
+msgstr ""
+
 #: src/Dashboard/Provider.php:1248 src/Dashboard/Provider.php:1589
 #: src/CommonITILObject.php:5153 src/CommonITILObject.php:6438
 #: src/Change.php:583 src/Problem.php:664 src/Ticket.php:3795
@@ -15784,6 +16855,11 @@ msgid "Phone"
 msgid_plural "Phones"
 msgstr[0] "Phones"
 
+#: src/AuthLDAP.php:961 src/AuthLDAP.php:1152 src/AuthLDAP.php:3808
+msgctxt "ldap"
+msgid "Phone"
+msgstr "Phone"
+
 #: templates/generic_show_form.html.twig src/Dropdown.php:588
 #: src/AuthLDAP.php:964 src/AuthLDAP.php:1161 src/AuthLDAP.php:3809
 #: src/User.php:2666 src/User.php:3139 src/User.php:3594
@@ -15930,6 +17006,14 @@ msgid "Please choose LDAP directory to import users and groups from"
 msgstr "Please choose LDAP directory to import users and groups from"
 
 #: templates/password_form.html.twig
+msgid ""
+"Please enter your email address. An email will be sent to you and you will "
+"be able to choose a new password."
+msgstr ""
+"Please enter your email address. An email will be sent to you & you will be "
+"able to choose a new password."
+
+#: templates/password_form.html.twig
 msgid "Please enter your new password."
 msgstr "Please enter your new password."
 
@@ -15972,6 +17056,12 @@ msgstr "Please select a software!"
 #: front/item_softwareversion.form.php:70
 msgid "Please select a version!"
 msgstr "Please select a version!"
+
+#: src/System/Requirement/InstallationNotOverriden.php:88
+msgid ""
+"Please update GLPI by following the procedure described in the installation "
+"documentation."
+msgstr ""
 
 #: src/Plug.php:41
 msgid "Plug"
@@ -16049,10 +17139,26 @@ msgstr "Plugin \"%s\" installation failed."
 msgid "Plugin \"%s\" is already active."
 msgstr "Plugin \"%s\" is already active."
 
+#: src/Console/Marketplace/DownloadCommand.php:77
+#, php-format
+msgid ""
+"Plugin \"%s\" is already downloaded. Use --force to force it to re-download."
+msgstr ""
+"Plugin \"%s\" is already downloaded. Use --force to force it to re-download."
+
 #: src/Console/Plugin/DeactivateCommand.php:147
 #, php-format
 msgid "Plugin \"%s\" is already inactive."
 msgstr "Plugin \"%s\" is already inactive."
+
+#: src/Console/Plugin/InstallCommand.php:314
+#, php-format
+msgid ""
+"Plugin \"%s\" is already installed. Use --force option to force "
+"reinstallation."
+msgstr ""
+"Plugin \"%s\" is already installed. Use --force option to force "
+"reinstallation."
 
 #: src/Console/Plugin/UninstallCommand.php:175
 #, php-format
@@ -16116,6 +17222,12 @@ msgstr ""
 msgid "Plugin %1$s has been installed!"
 msgstr "Plugin %1$s has been installed!"
 
+#: src/Plugin.php:560
+#, php-format
+msgid ""
+"Plugin %1$s has been replaced by %2$s and therefore has been deactivated."
+msgstr ""
+
 #: src/Plugin.php:832
 #, php-format
 msgid "Plugin %1$s has been uninstalled by %2$s."
@@ -16146,6 +17258,13 @@ msgstr "Plugin %1$s is not CSRF compliant!"
 #, php-format
 msgid "Plugin %1$s not found!"
 msgstr "Plugin %1$s not found!"
+
+#: src/Plugin.php:623
+#, php-format
+msgid ""
+"Plugin %1$s version changed. It has been deactivated as its update process "
+"has to be launched."
+msgstr ""
 
 #: src/Console/Marketplace/DownloadCommand.php:86
 #, php-format
@@ -16180,6 +17299,15 @@ msgstr "Plugin database field \"%s\" is missing."
 msgid "Plugin directory"
 msgstr "Plugin directory"
 
+#: src/Marketplace/View.php:344
+#, php-format
+msgid ""
+"Plugin list may be truncated due to %s services website unavailability. "
+"Please try again later."
+msgstr ""
+"Plugin list may be truncated due to %s services website unavailability. "
+"Please try again later."
+
 #: src/Console/Migration/RacksPluginToCoreCommand.php:318
 #, php-format
 msgid "Plugin migration to %s version failed."
@@ -16204,6 +17332,12 @@ msgstr "Plugin old version number"
 #: src/Plugin.php:975
 msgid "Plugin prerequisites are not matching, it cannot be activated."
 msgstr "Plugin prerequisites are not matching, it cannot be activated."
+
+#: src/Console/Database/CheckSchemaIntegrityCommand.php:143
+msgid ""
+"Plugin to check. If option is not used, checks will be done on GLPI core "
+"database tables."
+msgstr ""
 
 #: src/Html.php:1637 src/Config.php:3177
 msgid "Plugins"
@@ -16310,6 +17444,12 @@ msgstr "Submit"
 msgid "Postal code"
 msgstr "Zip Code"
 
+#: src/Document.php:1461
+msgid ""
+"Potential upload attack or file too large. Moving temporary file failed."
+msgstr ""
+"Potential upload attack or file too large. Moving temporary file failed."
+
 #: src/Item_Rack.php:491 src/DevicePowerSupply.php:57
 #: src/DevicePowerSupply.php:85
 msgid "Power"
@@ -16386,6 +17526,15 @@ msgstr "Previous (arrow left)"
 #: src/System/Requirement/InstallationNotOverriden.php:64
 msgid "Previous GLPI version files detection"
 msgstr ""
+
+#: src/Console/Migration/AbstractPluginToCoreCommand.php:134
+#, php-format
+msgid ""
+"Previously installed installed plugin %s version was %s. Minimal version "
+"supported by migration is %s."
+msgstr ""
+"Previously installed plugin %s version was %s. The minimal version supported"
+" by migration is %s."
 
 #: src/Cartridge.php:1106
 msgid "Printed pages"
@@ -16510,6 +17659,12 @@ msgstr "Problems on Pending Status"
 #: src/Problem.php:880 src/Problem.php:929
 msgid "Problems to be processed"
 msgstr "Problems to be Processed"
+
+#: src/Console/Rules/ProcessSoftwareCategoryRulesCommand.php:57
+msgid ""
+"Process rule for all software, even those having already a defined category"
+msgstr ""
+"Process rule for all software, even those having already a defined category"
 
 #: src/Console/Rules/ProcessSoftwareCategoryRulesCommand.php:51
 msgid "Process software category rules"
@@ -16730,6 +17885,15 @@ msgstr "Publish in the FAQ"
 msgid "Publisher"
 msgstr "Publisher"
 
+#: src/Infocom.php:447
+#, php-format
+msgid ""
+"Purchase date incompatible with the associated budget. %1$s not in budget "
+"period: %2$s / %3$s"
+msgstr ""
+"Purchase date incompatible with the associated budget. %1$s not in budget "
+"period: %2$s / %3$s"
+
 #: templates/pages/management/softwarelicense.html.twig
 #: src/SoftwareLicense.php:401 src/SoftwareLicense.php:945
 msgid "Purchase version"
@@ -16757,6 +17921,13 @@ msgid "Put asset in trashbin"
 msgstr ""
 
 #: src/AuthLDAP.php:4074
+msgid "Put in trashbin"
+msgstr "Put in Trash Bin"
+
+#: templates/components/itilobject/footer.html.twig
+#: templates/components/form/buttons.html.twig src/MassiveAction.php:791
+#: src/Transfer.php:3900 src/CommonDBTM.php:5368
+msgctxt "button"
 msgid "Put in trashbin"
 msgstr "Put in Trash Bin"
 
@@ -16828,6 +17999,23 @@ msgstr "Racked"
 #: src/Item_Rack.php:138
 msgid "Racked items"
 msgstr "Racked items"
+
+#: src/Console/Migration/RacksPluginToCoreCommand.php:329
+#, php-format
+msgid ""
+"Racks plugin data has to be updated to %s version. It can be done using the "
+"--update-plugin option."
+msgstr ""
+"Racks plugin data has to be updated to %s version. It can be done using the "
+"--update-plugin option."
+
+#: src/Console/Migration/RacksPluginToCoreCommand.php:263
+msgid ""
+"Racks plugin is not part of GLPI plugin list. It has never been installed or"
+" has been cleaned."
+msgstr ""
+"Racks plugin is not part of the GLPI plugin list. It has never been "
+"installed or has been cleaned."
 
 #: src/Console/Migration/RacksPluginToCoreCommand.php:369
 #, php-format
@@ -17096,6 +18284,17 @@ msgctxt "solution"
 msgid "Refused"
 msgstr "Refused"
 
+#: src/Change.php:590
+msgctxt "status"
+msgid "Refused"
+msgstr "Refused"
+
+#: templates/components/itilobject/timeline/form_solution.html.twig
+#: src/CommonITILValidation.php:534
+msgctxt "validation"
+msgid "Refused"
+msgstr "Refused"
+
 #: src/NotImportedEmail.php:63
 msgid "Refused email"
 msgid_plural "Refused emails"
@@ -17162,6 +18361,13 @@ msgstr "Related configurations"
 msgid "Relation"
 msgstr "Relation"
 
+#: src/Appliance_Item_Relation.php:48
+msgctxt "appliance"
+msgid "Relation"
+msgid_plural "Relations"
+msgstr[0] "Relation"
+msgstr[1] "Relations"
+
 #: src/Config.php:1371
 msgid "Relative"
 msgstr ""
@@ -17193,6 +18399,11 @@ msgstr "Remember me"
 msgid "Reminder"
 msgid_plural "Reminders"
 msgstr[0] "Reminders"
+
+#: src/Planning.php:1631 src/Reminder.php:749
+msgctxt "Planning"
+msgid "Reminder"
+msgstr "Reminder"
 
 #: src/Entity.php:2111
 msgid "Reminders frequency for alarms on cartridges"
@@ -17268,6 +18479,12 @@ msgstr "Remove from an appliance"
 #: js/impact.js:1347
 msgid "Remove from group"
 msgstr "Remove from group"
+
+#: src/CleanSoftwareCron.php:54
+msgid ""
+"Remove software versions with no installation and software with no version"
+msgstr ""
+"Remove software versions with no installation and software with no version"
 
 #: src/Auth.php:1667
 msgid "Remove the domain of logins like login@domain"
@@ -17475,6 +18692,11 @@ msgid "Request source"
 msgid_plural "Request sources"
 msgstr[0] "Request Sources"
 
+#: src/Item_SoftwareVersion.php:99 src/Item_SoftwareLicense.php:110
+msgctxt "software"
+msgid "Request source"
+msgstr "Request source"
+
 #: src/RequestType.php:73 src/RequestType.php:140
 msgid "Request source visible for followups"
 msgstr "Request source visible for followups"
@@ -17577,6 +18799,14 @@ msgstr "Required argument missing!"
 msgid "Required for XML handling."
 msgstr "Required for XML handling."
 
+#: src/System/RequirementsManager.php:109
+msgid ""
+"Required for handling of compressed communication with inventory agents, "
+"installation of gzip packages from marketplace and PDF generation."
+msgstr ""
+"Required for the handling of compressed communication with inventory agents,"
+" installation of gzip packages from the marketplace, and PDF generation."
+
 #: src/System/RequirementsManager.php:94
 msgid "Required for images handling."
 msgstr "Required for image handling."
@@ -17584,6 +18814,14 @@ msgstr "Required for image handling."
 #: src/System/RequirementsManager.php:99
 msgid "Required for internationalization."
 msgstr "Required for internationalization."
+
+#: src/System/RequirementsManager.php:89
+msgid ""
+"Required for remote access to resources (inventory agent requests, "
+"marketplace, RSS feeds, ...)."
+msgstr ""
+"Required for remote access to resources (inventory agent requests, "
+"marketplace, RSS feeds, ...)."
 
 #: src/CommonDCModelDropdown.php:76 src/CommonDCModelDropdown.php:149
 msgid "Required units"
@@ -17661,6 +18899,18 @@ msgstr "Reset rules"
 msgid "Resolution"
 msgstr "Resolution"
 
+#: src/Item_DeviceCamera_ImageResolution.php:46
+msgctxt "camera"
+msgid "Resolution"
+msgid_plural "Resolutions"
+msgstr[0] "Resolutions"
+
+#: src/ImageResolution.php:42
+msgctxt "image"
+msgid "Resolution"
+msgid_plural "Resolutions"
+msgstr[0] "Resolutions"
+
 #: templates/components/itilobject/fields_panel.html.twig
 #: src/ContentTemplates/Parameters/CommonITILObjectParameters.php:68
 #: src/CommonITILObject.php:3864 src/CommonITILObject.php:5105
@@ -17702,6 +18952,12 @@ msgid "Rest API"
 msgstr "Rest API"
 
 #: js/modules/Kanban/Kanban.js:486
+msgid "Restore"
+msgstr "Restore"
+
+#: templates/components/itilobject/footer.html.twig
+#: templates/components/form/buttons.html.twig src/MassiveAction.php:759
+msgctxt "button"
 msgid "Restore"
 msgstr "Restore"
 
@@ -18196,6 +19452,33 @@ msgstr "Saturday"
 msgid "Save"
 msgstr "Save"
 
+#: templates/pages/setup/general/base_form.html.twig
+#: templates/components/itilobject/timeline/form_validation.html.twig
+#: templates/components/itilobject/timeline/simple_form.html.twig
+#: templates/components/itilobject/timeline/form_followup.html.twig
+#: templates/components/itilobject/timeline/form_task.html.twig
+#: templates/components/itilobject/timeline/form_solution.html.twig
+#: templates/components/itilobject/footer.html.twig
+#: templates/components/infocom.html.twig
+#: templates/components/form/buttons.html.twig src/Item_Devices.php:754
+#: src/User.php:3276 src/Inventory/Conf.php:989 src/CommonGLPI.php:1392
+#: src/DomainRecordType.php:412 src/ReservationItem.php:415
+#: src/Entity.php:1599 src/Entity.php:1687 src/Entity.php:1928
+#: src/Entity.php:2461 src/Entity.php:2561 src/Entity.php:3175
+#: src/Dashboard/Grid.php:304 src/PlanningRecall.php:361
+#: src/Reservation.php:873 src/CommonITILValidation.php:899
+#: src/CommonITILActor.php:229 src/CommonITILActor.php:293 src/Config.php:578
+#: src/Config.php:628 src/Config.php:702 src/Config.php:772 src/Config.php:978
+#: src/Config.php:1503 src/Config.php:2077 src/Config.php:3272
+#: src/Config.php:3514 src/Config.php:3567 src/Profile.php:917
+#: src/Profile.php:976 src/Profile.php:1072 src/Profile.php:1202
+#: src/Profile.php:1287 src/Profile.php:1501 src/Profile.php:1613
+#: src/Profile.php:1730 src/Profile.php:1913 src/Profile.php:2063
+#: src/Profile.php:2122 src/GLPINetwork.php:129
+msgctxt "button"
+msgid "Save"
+msgstr "Save"
+
 #: templates/components/itilobject/timeline/form_followup.html.twig
 #: templates/components/itilobject/timeline/form_task.html.twig
 #: templates/components/itilobject/timeline/form_solution.html.twig
@@ -18254,6 +19537,13 @@ msgstr "Scheduled"
 #: templates/layout/parts/context_links.html.twig
 #: templates/layout/parts/profile_selector.html.twig front/search.php:39
 #: src/MapGeolocation.php:92 js/modules/Kanban/Kanban.js:1045
+msgid "Search"
+msgstr "Search"
+
+#: front/find_num.php:84 src/KnowbaseItem.php:1348 src/AuthLDAP.php:1510
+#: src/AuthLDAP.php:3858 src/Search.php:2533 src/Planning.php:476
+#: src/ReservationItem.php:476 src/Knowbase.php:66
+msgctxt "button"
 msgid "Search"
 msgstr "Search"
 
@@ -18451,6 +19741,12 @@ msgstr "See Tickets Created by my Groups"
 msgid "See what would be sent..."
 msgstr "See what would be sent..."
 
+#: templates/install/step0.html.twig
+msgid ""
+"Select 'Upgrade' to update your version of GLPI from an earlier version"
+msgstr ""
+"Select 'Upgrade' to update your version of GLPI from an earlier version"
+
 #: src/CommonDBConnexity.php:639
 #, php-format
 msgid "Select a peer for %s:"
@@ -18531,6 +19827,11 @@ msgstr "Self-signed"
 msgid "Send"
 msgstr "Send"
 
+#: src/QueuedNotification.php:95
+msgctxt "button"
+msgid "Send"
+msgstr "Send"
+
 #: src/Telemetry.php:426
 msgid "Send \"usage statistics\""
 msgstr "Send \"usage statistics\""
@@ -18583,6 +19884,12 @@ msgstr "Send Alarms on Receiver Errors"
 #: src/RuleTicket.php:975 src/CommonITILValidation.php:940
 msgid "Send an approval request"
 msgstr "Send an approval request"
+
+#: src/PendingReasonCron.php:52
+msgid ""
+"Send automated follow-ups on pending tickets and solve them if necessary"
+msgstr ""
+"Send automated follow-ups on pending tickets and solve them if necessary"
 
 #: src/Entity.php:2336
 msgid "Send certificates alarms before"
@@ -18804,6 +20111,13 @@ msgstr "Settings"
 msgid "Setup"
 msgstr "Setup"
 
+#: src/NetworkName.php:419
+msgid ""
+"Several network names available! Go to the tab 'Network Name' to manage "
+"them."
+msgstr ""
+"Several hostnames are available! Go to the 'Hostnames' tab to manage them."
+
 #: templates/components/photoswipe.html.twig src/RichText/RichText.php:438
 msgid "Share"
 msgstr "Share"
@@ -18938,6 +20252,16 @@ msgstr "Simplified Interface"
 msgid "Simplified interface help link"
 msgstr "Simplified interface help link"
 
+#: src/Console/Traits/TelemetryActivationTrait.php:101 src/Telemetry.php:430
+msgid ""
+"Since GLPI 9.2, we’ve introduced a new statistics feature called "
+"“Telemetry”, that anonymously with your permission, sends data to our "
+"telemetry website."
+msgstr ""
+"Since GLPI 9.2, we’ve introduced a new statistics feature called "
+"“Telemetry”, that anonymously with your permission, sends data to our "
+"telemetry website."
+
 #: src/NetworkPortEthernet.php:262
 msgid "Single mode fiber"
 msgstr "Single Mode Fiber"
@@ -19044,6 +20368,11 @@ msgid "Solution"
 msgid_plural "Solutions"
 msgstr[0] "Solutions"
 
+#: src/CommonITILObject.php:6586
+msgctxt "button"
+msgid "Solution"
+msgstr "Solution"
+
 #: src/ITILFollowup.php:377
 msgid "Solution approved"
 msgstr "Solution Approved"
@@ -19079,6 +20408,19 @@ msgstr "Solve Tickets"
 #: src/Dashboard/Provider.php:1599
 msgid "Solved"
 msgstr "Solved"
+
+#: src/Dashboard/Provider.php:1252 src/Problem.php:665 src/Ticket.php:3796
+msgctxt "status"
+msgid "Solved"
+msgstr "Solved"
+
+#: src/Stat.php:533 src/Stat/Data/Sglobal/StatDataTicketNumber.php:61
+#: src/Stat/Data/Graph/StatDataTicketAverageTime.php:58
+#: src/Dashboard/Provider.php:1078
+msgctxt "ticket"
+msgid "Solved"
+msgid_plural "Solved"
+msgstr[0] "Solved"
 
 #: src/Stat/Data/Location/StatDataSolved.php:51
 #, php-format
@@ -19130,6 +20472,14 @@ msgstr "Son of"
 #, php-format
 msgid "Sons of %s"
 msgstr "Sons of %s"
+
+#: templates/maintenance.html.twig
+msgid ""
+"Sorry for the inconvenience but we’re performing some maintenance at the "
+"moment. We’ll be back online shortly!"
+msgstr ""
+"Sorry for the inconvenience but we’re performing some maintenance at the "
+"moment. We’ll be back online shortly!"
 
 #: src/NotificationAjaxSetting.php:73 src/NotificationAjaxSetting.php:74
 #: src/NotificationAjaxSetting.php:75 src/NotificationAjaxSetting.php:76
@@ -19267,6 +20617,31 @@ msgid_plural "States"
 msgstr[0] "State"
 msgstr[1] "States"
 
+#: templates/pages/tools/project_task.html.twig
+#: src/NotificationTargetProjectTask.php:528
+#: src/NotificationTargetProjectTask.php:543 src/ProjectTaskTemplate.php:58
+#: src/ProjectTaskTemplate.php:120 src/Project.php:929 src/Project.php:1617
+#: src/ProjectTask.php:769 src/Consumable.php:631
+#: src/CommonITILValidation.php:882 src/CommonITILValidation.php:921
+#: src/NotificationTargetProject.php:646 src/NotificationTargetProject.php:659
+#: src/Cartridge.php:815
+msgctxt "item"
+msgid "State"
+msgstr "State"
+
+#: templates/generic_show_form.html.twig src/Contact.php:319
+#: src/Supplier.php:210
+#: src/ContentTemplates/Parameters/SupplierParameters.php:73
+#: src/NotificationTargetTicket.php:700 src/Entity.php:760 src/Entity.php:1553
+#: src/NotificationTargetCommonITILObject.php:1764
+#: src/NotificationTargetCommonITILObject.php:1787
+#: src/NotificationTargetCommonITILObject.php:1823
+#: src/NotificationTargetCommonITILObject.php:1939 src/Location.php:77
+#: src/Location.php:169 src/Location.php:333
+msgctxt "location"
+msgid "State"
+msgstr "State"
+
 #: src/VirtualMachineState.php:41
 msgid "State of the virtual machine"
 msgid_plural "States of the virtual machine"
@@ -19327,6 +20702,12 @@ msgstr[0] "Statuses of items"
 msgid "Status of the approval request"
 msgstr "Status of the approval request"
 
+#: src/Computer_Item.php:159 src/Computer.php:278
+msgid ""
+"Status updated. The connected items have been updated using this status."
+msgstr ""
+"Status updated. The connected items have been updated using this status."
+
 #: src/NotificationTargetTicket.php:952
 #: src/NotificationTargetCommonITILObject.php:2100
 msgid "Status value in database"
@@ -19355,6 +20736,12 @@ msgstr "Step for the hours (minutes)"
 
 #: src/NotificationTargetConsumableItem.php:99
 #: src/NotificationTargetCartridgeItem.php:99
+msgid "Stock target"
+msgstr "Stock target"
+
+#: templates/pages/assets/cartridgeitem.html.twig
+#: templates/pages/assets/consumableitem.html.twig
+msgctxt "quantity"
 msgid "Stock target"
 msgstr "Stock target"
 
@@ -19449,6 +20836,11 @@ msgstr "Sum of total effective durations of tasks"
 msgid "Summary"
 msgstr "Summary"
 
+#: src/ContentTemplates/TemplateDocumentation.php:92
+msgctxt "Documentation"
+msgid "Summary"
+msgstr "Summary"
+
 #: src/Dashboard/Widget.php:233
 msgid "Summary numbers"
 msgstr "Summary numbers"
@@ -19484,6 +20876,12 @@ msgstr "Support"
 #: templates/components/form/support_hours.html.twig
 msgid "Support hours"
 msgstr "Support Hours"
+
+#: src/System/Requirement/IntegerSize.php:43
+msgid ""
+"Support of 64 bits integers is required for IP addresses related operations "
+"(network inventory, API clients IP filtering, ...)."
+msgstr ""
 
 #: templates/generic_show_form.html.twig src/AuthLDAP.php:929
 #: src/AuthLDAP.php:1134 src/AuthLDAP.php:3806 src/User.php:2496
@@ -19694,6 +21092,11 @@ msgid_plural "Tasks"
 msgstr[0] "Task"
 msgstr[1] "Tasks"
 
+#: src/CommonITILObject.php:6576
+msgctxt "button"
+msgid "Task"
+msgstr "Task"
+
 #: src/Console/Task/UnlockCommand.php:130
 #, php-format
 msgid "Task \"%s\" is still running but not in the whitelist."
@@ -19896,6 +21299,13 @@ msgstr ""
 msgid "Test"
 msgstr "Test"
 
+#: src/Rule.php:978 src/Rule.php:983 src/Rule.php:2835 src/AuthLDAP.php:761
+#: src/AuthLDAP.php:903 src/AuthLDAP.php:4219 src/RuleCollection.php:1696
+#: src/AuthMail.php:240 src/AuthMail.php:354
+msgctxt "button"
+msgid "Test"
+msgstr "Test"
+
 #: src/AuthMail.php:230
 msgid "Test connection to email server"
 msgstr "Test connection to email server"
@@ -19943,6 +21353,11 @@ msgstr "Test of %s succeeded."
 msgid "Testing"
 msgstr "Testing"
 
+#: src/Change.php:584
+msgctxt "change"
+msgid "Testing"
+msgstr "Testing"
+
 #: templates/pages/setup/general/general_setup.html.twig
 msgid "Text in the login box"
 msgstr "Text in the login box"
@@ -19969,6 +21384,14 @@ msgstr "The \"%s\" cache extension is installed"
 msgid "The \"%s\" extension is installed"
 msgstr "The \"%s\" extension is installed"
 
+#: src/Auth.php:1614
+msgid ""
+"The CAS lib isn't available, GLPI doesn't package it anymore for license "
+"compatibility issue."
+msgstr ""
+"The CAS lib isn't available, GLPI doesn't package it anymore for license "
+"compatibility issue."
+
 #: src/Auth.php:1610
 msgid "The CURL extension for your PHP parser isn't installed"
 msgstr "The CURL extension for your PHP parser isn't installed"
@@ -19978,6 +21401,12 @@ msgstr "The CURL extension for your PHP parser isn't installed"
 #: src/Console/Marketplace/InfoCommand.php:59
 msgid "The GLPI Network registration key is missing or invalid"
 msgstr "The GLPI Network registration key is missing or invalid"
+
+#: inc/config.php:191 inc/config.php:233 src/Console/Application.php:253
+msgid ""
+"The GLPI codebase has been updated. The update of the GLPI database is "
+"necessary."
+msgstr ""
 
 #: templates/pages/setup/authentication.html.twig
 msgid "The LDAP extension of your PHP parser isn’t installed"
@@ -19990,6 +21419,46 @@ msgstr "The PHP mail function is unknown or is not activated on your system."
 #: src/Session.php:1534 src/Session.php:1537
 msgid "The action you have requested is not allowed."
 msgstr "The action you have requested is not allowed."
+
+#: src/Toolbox.php:2555
+msgid ""
+"The action you have requested is not allowed. Reload previous page before "
+"doing action again."
+msgstr ""
+"The action you have requested is not allowed. Reload previous page before "
+"doing action again."
+
+#: src/SLA.php:64
+msgid ""
+"The assignment of a SLA to a ticket causes the recalculation of the date."
+msgstr ""
+"The assignment of a SLA to a ticket causes the recalculation of the date."
+
+#: src/OLA.php:64
+msgid ""
+"The assignment of an OLA to a ticket causes the recalculation of the date."
+msgstr ""
+"The assignment of an OLA to a ticket causes the recalculation of the date."
+
+#: src/User.php:5429
+msgid ""
+"The authentication method configuration doesn't allow you to change your "
+"password."
+msgstr ""
+"The authentication method configuration doesn't allow you to change your "
+"password."
+
+#: src/Lock.php:324
+msgid ""
+"The automatic inventory will no longer handle this item, unless you unlock "
+"it."
+msgstr ""
+
+#: src/Lock.php:81
+msgid ""
+"The automatic inventory will no longer modify this field, unless you unlock "
+"it."
+msgstr ""
 
 #: src/CommonITILObject.php:8961
 msgctxt "filters"
@@ -20024,6 +21493,12 @@ msgstr "The content of the item"
 msgid "The database schema is not consistent with the current GLPI version."
 msgstr "The database schema is not consistent with the current GLPI version."
 
+#: src/Console/Database/UpdateCommand.php:262
+#, php-format
+msgid ""
+"The database schema is not consistent with the installed GLPI version (%s)."
+msgstr ""
+
 #: src/System/Requirement/DirectoryWriteAccess.php:132
 #, php-format
 msgid "The directory could not be created in %s."
@@ -20033,6 +21508,14 @@ msgstr "The directory could not be created in %s."
 #, php-format
 msgid "The directory was created in %s but could not be removed."
 msgstr "The directory was created in %s but could not be removed."
+
+#: js/planning.js:528
+msgid ""
+"The dragged event is a recurring event. Do you want to move the serie or "
+"instance ?"
+msgstr ""
+"The dragged event is a recurring event. Do you want to move the series or "
+"just the instance?"
 
 #: src/RuleCollection.php:437
 msgid "The engine passes the result of a rule to the following one."
@@ -20064,6 +21547,12 @@ msgstr "The file is valid. Upload is successful."
 msgid "The file was created in %s but can't be deleted."
 msgstr "The file was created in %s but can't be deleted."
 
+#: src/NotificationTargetCronTask.php:104
+msgid ""
+"The following automatic actions are in error. They require intervention."
+msgstr ""
+"The following automatic actions are in error. They require intervention."
+
 #: src/System/Requirement/DataDirectoriesProtectedPath.php:124
 msgid "The following directories do not exist and cannot be tested:"
 msgstr ""
@@ -20084,6 +21573,17 @@ msgstr "The internal time is recalculated when assigning the OLA"
 #: src/ITILSolution.php:227
 msgid "The item is already solved, did anyone pushed a solution before you?"
 msgstr "The item is already solved, did anyone pushed a solution before you?"
+
+#: install/update.php:167 src/Console/Database/UpdateCommand.php:193
+#, php-format
+msgid ""
+"The key file \"%s\" used to encrypt/decrypt sensitive data is missing. You "
+"should retrieve it from your previous installation or encrypted data will be"
+" unreadable."
+msgstr ""
+"The key file \"%s\" used to encrypt/decrypt sensitive data is missing. You "
+"should retrieve it from your previous installation or encrypted data will be"
+" unreadable."
 
 #: src/System/Requirement/LogsWriteAccess.php:71
 #, php-format
@@ -20114,10 +21614,24 @@ msgstr "The pdu will be"
 msgid "The plugin has an available update but its directory is not writable."
 msgstr "The plugin has an available update but its directory is not writable."
 
+#: src/Marketplace/View.php:744
+msgid ""
+"The plugin has an available update but its local directory contains source "
+"versioning."
+msgstr ""
+"The plugin has an available update but its local directory contains source "
+"versioning."
+
 #: src/Console/Marketplace/DownloadCommand.php:55
 #: src/Console/Marketplace/InfoCommand.php:53
 msgid "The plugin key"
 msgstr "The plugin key"
+
+#: src/System/Requirement/InstallationNotOverriden.php:65
+msgid ""
+"The presence of source files from previous versions of GLPI can lead to "
+"security issues or bugs."
+msgstr ""
 
 #: src/GLPINetwork.php:256
 msgid "The registration key is invalid."
@@ -20131,6 +21645,14 @@ msgstr "The registration key is valid."
 msgid "The registration key refers to a terminated subscription."
 msgstr "The registration key refers to a terminated subscription."
 
+#: js/modules/Kanban/Kanban.js:2242
+msgid ""
+"The regular expression you entered is invalid. Please check it and try "
+"again."
+msgstr ""
+"The regular expression you entered is invalid. Please check it and try "
+"again."
+
 #: src/NotificationTargetDBConnection.php:95
 msgid "The replica database is desynchronized. The difference is of:"
 msgstr "The replica database is desynchronized. The difference is of:"
@@ -20139,9 +21661,26 @@ msgstr "The replica database is desynchronized. The difference is of:"
 msgid "The required item is already reserved for this timeframe"
 msgstr "The required item is already reserved for this time frame"
 
+#: js/planning.js:485
+msgid ""
+"The resized event is a recurring event. Do you want to change the serie or "
+"instance ?"
+msgstr ""
+"The resized event is a recurring event. Do you want to change the series or "
+"the instance?"
+
 #: src/Console/Marketplace/SearchCommand.php:56
 msgid "The search term"
 msgstr "The search term"
+
+#: src/CommonITILValidation.php:356
+#, php-format
+msgid ""
+"The selected user (%s) has no valid email address. The request has been "
+"created, without email confirmation."
+msgstr ""
+"The selected user (%s) has no valid email address. The request has been "
+"created, without email confirmation."
 
 #: templates/install/step3.html.twig install/install.php:292
 #: install/install.php:373
@@ -20162,6 +21701,14 @@ msgstr "The two passwords do not match"
 msgctxt "filters"
 msgid "The type of the item"
 msgstr "The type of the item"
+
+#: src/GLPIUploadHandler.php:50
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form"
+msgstr ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form"
 
 #: src/GLPIUploadHandler.php:74
 msgid "The uploaded file exceeds the post_max_size directive in php.ini"
@@ -20197,9 +21744,25 @@ msgstr "The user is not active."
 msgid "There are some tickets awaiting approval"
 msgstr "There are some tickets awaiting approval"
 
+#: src/Api/API.php:200
+msgid ""
+"There isn't an active API client matching your IP address in the "
+"configuration"
+msgstr ""
+"There isn't an active API client matching your IP address in the "
+"configuration"
+
 #: src/DropdownTranslation.php:103 src/DropdownTranslation.php:118
 msgid "There's already a translation for this field in this language"
 msgstr "There's already a translation for this field in this language"
+
+#: src/Entity.php:1635
+msgid ""
+"These parameters are used as actions in generic rules for assignment to "
+"entities"
+msgstr ""
+"These parameters are used as actions in generic rules for assignment to "
+"entities"
 
 #: src/Transfer.php:4109
 msgid "Think of making a backup before transferring items."
@@ -20230,6 +21793,14 @@ msgstr "This category contains "
 msgid "This category contains articles"
 msgstr "This category contains articles"
 
+#: js/modules/Kanban/Kanban.js:2108
+msgid ""
+"This column cannot support showing cards due to how many cards would be "
+"shown. You can still drag cards into this column."
+msgstr ""
+"This column cannot support showing cards due to how many cards would be "
+"shown. You can still drag cards into this column."
+
 #: src/User.php:6409
 msgid "This is a special user used for automated actions. "
 msgstr "This is a special user used for automated actions. "
@@ -20237,6 +21808,13 @@ msgstr "This is a special user used for automated actions. "
 #: src/NotificationMailing.php:107
 msgid "This is a test email."
 msgstr "This is a test email."
+
+#: src/NotificationMailingSetting.php:264
+msgctxt "oauth"
+msgid ""
+"This is the callback URL that you will have to declare in your provider "
+"application."
+msgstr ""
 
 #: src/KnowbaseItem.php:990 src/KnowbaseItem.php:1302
 msgid "This item is not part of the FAQ"
@@ -20251,6 +21829,14 @@ msgstr "This item is not published yet"
 #: src/KnowbaseItem.php:2220
 msgid "This item is part of the FAQ"
 msgstr "This item is part of the FAQ"
+
+#: src/CommonITILValidation.php:1610
+msgid ""
+"This item is waiting for approval, do you really want to resolve or close "
+"it?"
+msgstr ""
+"This item is waiting for approval, do you really want to resolve or close "
+"it?"
 
 #: src/CommonITILValidation.php:1651
 msgid "This item is waiting for approval."
@@ -20323,6 +21909,24 @@ msgstr "This will only affect plugins ready to be cleaned"
 #: src/Item_DeviceProcessor.php:71
 msgid "Threads"
 msgstr "Threads"
+
+#: src/CartridgeItem.php:437
+#, php-format
+msgid ""
+"Threshold of alarm reached for the type of cartridge: %1$s - Reference %2$s "
+"- Remaining %3$d"
+msgstr ""
+"Threshold of alarm reached for the type of cartridge: %1$s - Reference %2$s "
+"- Remaining %3$d"
+
+#: src/ConsumableItem.php:360
+#, php-format
+msgid ""
+"Threshold of alarm reached for the type of consumable: %1$s - Reference %2$s"
+" - Remaining %3$d"
+msgstr ""
+"Threshold of alarm reached for the type of consumable: %1$s - Reference %2$s"
+" - Remaining %3$d"
 
 #: src/Toolbox.php:2216 src/Config.php:892 src/Features/PlanningEvent.php:798
 msgid "Thursday"
@@ -20467,6 +22071,11 @@ msgid "Time"
 msgid_plural "Times"
 msgstr[0] "Times"
 
+#: src/LevelAgreement.php:654
+msgctxt "hour"
+msgid "Time"
+msgstr "Time"
+
 #: src/CommonITILCost.php:159 src/CommonITILCost.php:237
 #: src/CommonITILCost.php:452 src/CommonITILCost.php:595
 #: src/NotificationTargetCommonITILObject.php:1832
@@ -20580,6 +22189,14 @@ msgstr "Timezone usage has not been activated."
 msgid "Timezones seems loaded in database."
 msgstr "Timezones seems loaded in database."
 
+#: src/System/Requirement/DbTimezones.php:88
+msgid ""
+"Timezones seems not loaded, see https://glpi-"
+"install.readthedocs.io/en/latest/timezones.html."
+msgstr ""
+"Timezones are not loaded, see https://glpi-"
+"install.readthedocs.io/en/latest/timezones.html."
+
 #: src/Console/Migration/TimestampsCommand.php:211
 #: src/Console/Database/EnableTimezonesCommand.php:81
 #: src/Console/Database/AbstractConfigureCommand.php:459
@@ -20616,6 +22233,16 @@ msgstr "Tip: You can call this modal with %s keys combination"
 msgid "Title"
 msgstr "Title"
 
+#: templates/components/user/info_card.html.twig front/stat.tracking.php:91
+#: front/stat.graph.php:241 src/AuthLDAP.php:971 src/AuthLDAP.php:1179
+#: src/AuthLDAP.php:3811 src/User.php:2692 src/Auth.php:1743
+#: src/NotificationTargetCommonITILObject.php:1752
+#: src/NotificationTargetCommonITILObject.php:1776
+#: src/NotificationTargetCommonITILObject.php:1812
+msgctxt "person"
+msgid "Title"
+msgstr "Title"
+
 #: src/CommonITILObject.php:6327
 #, php-format
 msgid "To %s"
@@ -20628,6 +22255,14 @@ msgstr "To answer by email, write above this line"
 #: src/NotificationTargetTicket.php:105
 msgid "To answer by email, write under this line"
 msgstr "To answer by email, write under this line"
+
+#: src/Marketplace/View.php:745 src/Console/Marketplace/DownloadCommand.php:75
+msgid ""
+"To avoid overwriting a potential branch under development, downloading is "
+"disabled."
+msgstr ""
+"To avoid overwriting a potential branch under development, downloading is "
+"disabled."
 
 #: src/Ticket.php:6201
 msgid "To be in charge of a ticket"
@@ -20657,6 +22292,14 @@ msgstr "To Email Header"
 #: src/Transfer.php:4187
 msgid "To empty the list of elements to be transferred"
 msgstr "To empty the list of elements to be transferred"
+
+#: src/Html.php:2696
+msgid ""
+"To increase the limit: change max_input_vars or suhosin.post.max_vars in php"
+" configuration."
+msgstr ""
+"To increase the limit: change max_input_vars or suhosin.post.max_vars in php"
+" configuration."
 
 #: src/NotificationTargetConsumableItem.php:100
 #: src/NotificationTargetCartridgeItem.php:100
@@ -21141,9 +22784,24 @@ msgstr "Unable to add. The user already exists."
 msgid "Unable to affect the email to an entity"
 msgstr "Unable to affect the email to an entity"
 
+#: src/CronTask.php:1845
+#, php-format
+msgid ""
+"Unable to archive log file: %1$s. %2$s already exists. Wait till next day."
+msgstr ""
+"Unable to archive log file: %1$s. %2$s already exists. Wait till next day."
+
 #: src/Console/Security/ChangekeyCommand.php:84
 msgid "Unable to change security key!"
 msgstr "Unable to change the security key!"
+
+#: templates/pages/setup/setup_notifications.html.twig
+msgid ""
+"Unable to configure notifications: please configure at least one followup "
+"type using the above configuration."
+msgstr ""
+"Unable to configure notifications: please configure at least one followup "
+"type using the above configuration."
 
 #: src/Console/AbstractCommand.php:108
 msgid "Unable to connect to database."
@@ -21205,6 +22863,13 @@ msgstr "Unable to create the datacenter."
 msgid "Unable to create default room."
 msgstr "Unable to create the default room."
 
+#: src/Update.php:349
+#, php-format
+msgid ""
+"Unable to create security key file! You have to run the \"%s\" command to "
+"manually create this file."
+msgstr ""
+
 #: src/CronTask.php:1823
 #, php-format
 msgid "Unable to delete archived log file: %s"
@@ -21223,6 +22888,15 @@ msgstr "Unable to extract plugin archive."
 msgctxt "oauth"
 msgid "Unable to fetch authorization code. Error is: %s"
 msgstr ""
+
+#: src/Marketplace/View.php:343
+#, php-format
+msgid ""
+"Unable to fetch plugin list due to %s services website unavailability. "
+"Please try again later."
+msgstr ""
+"Unable to fetch plugin list due to %s services website unavailability. "
+"Please try again later."
 
 #: src/GLPINetwork.php:240
 msgid "Unable to fetch registration information."
@@ -21479,6 +23153,11 @@ msgstr "Unexpected error."
 msgid "Uninstall"
 msgstr "Uninstall"
 
+#: src/Plugin.php:2649 src/Plugin.php:2862
+msgctxt "button"
+msgid "Uninstall"
+msgstr "Uninstall"
+
 #: src/Log.php:1113
 msgid "Uninstall a software"
 msgstr "Uninstall a Software"
@@ -21544,6 +23223,11 @@ msgid "Unlimited"
 msgstr "Unlimited"
 
 #: src/ObjectLock.php:643
+msgid "Unlock"
+msgstr "Unlock"
+
+#: src/Lock.php:911
+msgctxt "button"
 msgid "Unlock"
 msgstr "Unlock"
 
@@ -21613,6 +23297,13 @@ msgstr "Unpublished"
 msgid "Unset as default"
 msgstr "Unset as default"
 
+#: src/Console/Cache/ConfigureCommand.php:96
+msgid ""
+"Unset cache configuration to use default filesystem cache for given context"
+msgstr ""
+"Unset cache configuration to use default filesystem cache for the given "
+"context"
+
 #: ajax/ticketsatisfaction.php:95
 msgid "Unspecified"
 msgstr "Unspecified"
@@ -21650,6 +23341,24 @@ msgstr "Up to date"
 #: src/Profile.php:1056 src/Profile.php:1808 src/Profile.php:1820
 #: src/Profile.php:1831 src/Profile.php:1843 src/Profile.php:1959
 #: src/Profile.php:2104 src/RuleAsset.php:75 src/RuleAsset.php:79
+msgid "Update"
+msgstr "Update"
+
+#. TRANS: select action 'update' (before doing it)
+#: templates/components/dashboard/widget_form.html.twig src/Socket.php:772
+#: src/Rule.php:3125 src/MassiveAction.php:769 src/LevelAgreement.php:493
+#: src/Notepad.php:412 src/ManualLink.php:273 src/ManualLink.php:275
+#: src/NotificationTarget.php:432 src/Cartridge.php:84
+#: ajax/dropdownMassiveActionOs.php:48
+msgctxt "button"
+msgid "Update"
+msgstr "Update"
+
+#: templates/components/logs.html.twig src/Csv/LogCsvExport.php:77
+#: src/NotificationTargetProjectTask.php:575
+#: src/NotificationTargetCommonITILObject.php:2041
+#: src/NotificationTargetProject.php:690
+msgctxt "name"
 msgid "Update"
 msgstr "Update"
 
@@ -21895,6 +23604,11 @@ msgstr "Updating profiles..."
 msgid "Upgrade"
 msgstr "Upgrade"
 
+#: templates/install/step0.html.twig inc/config.php:234 src/Plugin.php:2617
+msgctxt "button"
+msgid "Upgrade"
+msgstr "Upgrade"
+
 #: templates/pages/admin/inventory/upload_form.html.twig
 msgctxt "button"
 msgid "Upload"
@@ -21920,6 +23634,14 @@ msgstr "Uppercase"
 #: src/NotificationTargetCommonITILObject.php:1736 src/Config.php:930
 msgid "Urgency"
 msgstr "Urgency"
+
+#: src/RuleTicket.php:113
+msgid ""
+"Urgency or impact used in actions, think to add Priority: recompute action "
+"if needed."
+msgstr ""
+"Urgency or impact used in actions, think to add Priority: recompute action "
+"if needed."
 
 #: src/ContentTemplates/TemplateDocumentation.php:134
 msgid "Usage"
@@ -22004,6 +23726,14 @@ msgstr "Use rule for"
 msgid "Use server configuration"
 msgstr "Use server configuration"
 
+#: src/Console/Database/AbstractConfigureCommand.php:148
+msgid ""
+"Use strict configuration, to enforce warnings triggering on deprecated or "
+"discouraged usages"
+msgstr ""
+"Use strict configuration, to enforce warnings triggering on deprecated or "
+"discouraged usage"
+
 #: src/Config.php:680
 msgid "Use the replica for the search engine"
 msgstr "Use the replica for the search engine"
@@ -22019,6 +23749,18 @@ msgstr "Use the values found from an already refused equipment"
 #: src/Inventory/Asset/Cartridge.php:86
 msgid "Used"
 msgstr "Used"
+
+#: src/Cartridge.php:403 src/Cartridge.php:458 src/Cartridge.php:705
+msgctxt "cartridge"
+msgid "Used"
+msgid_plural "Used"
+msgstr[0] "Used"
+
+#: src/Consumable.php:491
+msgctxt "consumable"
+msgid "Used"
+msgid_plural "Used"
+msgstr[0] "Used"
 
 #: src/Cartridge.php:1084
 msgid "Used cartridges"
@@ -22126,6 +23868,14 @@ msgstr "User not found or several users found"
 msgid "User of project team"
 msgstr "User of Project Team"
 
+#: src/Computer_Item.php:134 src/Computer.php:272
+msgid ""
+"User or group updated. The connected items have been moved in the same "
+"values."
+msgstr ""
+"User or group updated. The connected items have been moved in the same "
+"values."
+
 #: src/UserTitle.php:41
 msgid "User title"
 msgid_plural "Users titles"
@@ -22158,6 +23908,11 @@ msgstr "Valid"
 
 #: templates/pages/management/softwarelicense.html.twig
 msgctxt "adjective"
+msgid "Valid"
+msgstr "Valid"
+
+#: templates/pages/management/softwarelicense.html.twig
+msgctxt "adjective"
 msgid "Valid (Over Quota)"
 msgstr "Valid (Over Quota)"
 
@@ -22165,6 +23920,16 @@ msgstr "Valid (Over Quota)"
 #, php-format
 msgid "Valid cache systems are: %s."
 msgstr "Valid cache systems are: %s."
+
+#: src/DomainRecordType.php:313
+msgid ""
+"Valid field descriptor properties are: key (string, mandatory), label "
+"(string, mandatory), placeholder (string, optionnal), quote_value (boolean, "
+"optional), is_fqdn (boolean, optional)."
+msgstr ""
+"Valid field descriptor properties are: key (string, mandatory), label "
+"(string, mandatory), a placeholder (string, optional), quote_value (boolean,"
+" optional), is_fqdn (boolean, optional)."
 
 #: src/Item_SoftwareVersion.php:1132
 msgid "Valid license"
@@ -22222,6 +23987,11 @@ msgid_plural "Validations"
 msgstr[0] "Validation"
 msgstr[1] "Validations"
 
+#: src/CommonITILObject.php:6607
+msgctxt "button"
+msgid "Validation"
+msgstr "Validation"
+
 #: templates/components/itilobject/timeline/form_validation.html.twig
 #: src/NotificationTargetChange.php:54 src/NotificationTargetChange.php:344
 #: src/NotificationTargetTicket.php:141 src/NotificationTargetTicket.php:875
@@ -22242,6 +24012,13 @@ msgstr "Validation Request Answer"
 #: src/Printer_CartridgeInfo.php:73 src/Config.php:3594
 #: src/Fieldblacklist.php:79 src/Fieldblacklist.php:121
 #: src/SavedSearch_Alert.php:167 src/SavedSearch_Alert.php:275
+msgid "Value"
+msgstr "Value"
+
+#: templates/components/infocom.html.twig front/report.infocom.php:170
+#: src/Budget.php:146 src/Budget.php:266 src/Budget.php:360
+#: src/Infocom.php:1366 src/Infocom.php:1606
+msgctxt "price"
 msgid "Value"
 msgstr "Value"
 
@@ -22321,8 +24098,28 @@ msgctxt "impact"
 msgid "Very high"
 msgstr "Very High"
 
+#: src/CommonITILObject.php:2874
+msgctxt "priority"
+msgid "Very high"
+msgstr "Very High"
+
+#: templates/anonymous_helpdesk.html.twig src/CommonITILObject.php:2996
+msgctxt "urgency"
+msgid "Very high"
+msgstr "Very High"
+
 #: src/CommonITILObject.php:3130
 msgctxt "impact"
+msgid "Very low"
+msgstr "Very Low"
+
+#: src/CommonITILObject.php:2886
+msgctxt "priority"
+msgid "Very low"
+msgstr "Very Low"
+
+#: templates/anonymous_helpdesk.html.twig src/CommonITILObject.php:3008
+msgctxt "urgency"
 msgid "Very low"
 msgstr "Very Low"
 
@@ -22496,10 +24293,34 @@ msgstr "Warning State Color"
 msgid "Warning state threshold"
 msgstr "Warning State Threshold"
 
+#: src/RuleDictionnarySoftwareCollection.php:89
+msgid ""
+"Warning! This operation can put merged software in the trashbin.<br>Sure to "
+"notify your users."
+msgstr ""
+"Warning! This operation can put merged software in the trash.<br>Sure to "
+"notify your users."
+
+#: src/AuthLDAP.php:1683
+msgid ""
+"Warning: The request exceeds the limit of the directory. The results are "
+"only partial."
+msgstr ""
+"Warning: The request exceeds the limit of the directory. The results are "
+"only partial."
+
 #: src/NotificationEventMailing.php:402
 #, php-format
 msgid "Warning: an email was undeliverable to %s with %d retries remaining"
 msgstr "Warning: an email was undeliverable to %s with %d retries remaining"
+
+#: templates/components/itilobject/timeline/form_solution.html.twig
+msgid ""
+"Warning: non closed children tickets depends on current ticket. Are you sure"
+" you want to close it?"
+msgstr ""
+"Warning: non closed children tickets depends on current ticket. Are you sure"
+" you want to close it?"
 
 #: src/ObjectLock.php:316
 msgid "Warning: read-only!"
@@ -22573,6 +24394,15 @@ msgstr "We can't write on the markeplace directory (%s)."
 msgid "We detected files of previous versions of GLPI."
 msgstr ""
 
+#: src/Console/Migration/RacksPluginToCoreCommand.php:518
+#, php-format
+msgid ""
+"We found %d models for other items. For each, we will ask you where you want"
+" to import it."
+msgstr ""
+"We found %d models for other items. For each, we will ask you where you want"
+" to import it."
+
 #: src/NotificationTargetUser.php:196
 msgid "We inform you that your password has expired."
 msgstr "We inform you that your password has expired."
@@ -22585,9 +24415,27 @@ msgstr "We inform you that your password will expire soon."
 msgid "We need your help to improve GLPI and the plugins ecosystem!"
 msgstr "We need your help to improve GLPI and the plugins ecosystem!"
 
+#: ajax/telemetry.php:49
+msgid ""
+"We only collect the following data: plugins usage, performance and "
+"responsiveness statistics about user interface features, memory, and "
+"hardware configuration."
+msgstr ""
+"We only collected the following data: plugins usage, performance and "
+"responsiveness statistics about the user interface features, memory, and "
+"hardware configurations."
+
 #: src/Supplier.php:388
 msgid "Web"
 msgstr "Web"
+
+#: src/System/Requirement/ProtectedWebAccess.php:58
+msgid ""
+"Web access to GLPI var directories should be disabled to prevent "
+"unauthorized access to them."
+msgstr ""
+"Web access to GLPI var directories should be disabled to prevent "
+"unauthorized access to them."
 
 #: src/System/Requirement/ProtectedWebAccess.php:117
 msgid "Web access to files directory is protected"
@@ -22596,6 +24444,14 @@ msgstr "Web access to files directory is protected"
 #: src/System/Requirement/ProtectedWebAccess.php:113
 msgid "Web access to the files directory should not be allowed"
 msgstr "Web access to the files directory should not be allowed"
+
+#: src/System/Requirement/ProtectedWebAccess.php:121
+msgid ""
+"Web access to the files directory should not be allowed but this cannot be "
+"checked automatically on this instance."
+msgstr ""
+"Web access to the files directory should not be allowed but this cannot be "
+"checked automatically on this instance."
 
 #: src/NotificationTargetProjectTask.php:627 src/Document_Item.php:760
 #: src/Document.php:484 src/Document.php:1016
@@ -22608,8 +24464,21 @@ msgstr "Web link"
 msgid "Web link to approval the solution"
 msgstr "Web link to approval the solution"
 
+#: src/System/Requirement/SafeDocumentRoot.php:69
+msgid ""
+"Web server root directory configuration is not safe as it permits access to "
+"non-public files. See installation documentation for more details."
+msgstr ""
+
 #: src/System/Requirement/SafeDocumentRoot.php:66
 msgid "Web server root directory configuration seems safe."
+msgstr ""
+
+#: src/System/Requirement/SafeDocumentRoot.php:47
+#, php-format
+msgid ""
+"Web server root directory should be `%s` to ensure non-public files cannot "
+"be accessed."
 msgstr ""
 
 #: src/Planning.php:1068
@@ -22645,6 +24514,22 @@ msgstr "Weight"
 #: templates/pages/assets/rack.html.twig
 msgid "West"
 msgstr "West"
+
+#: src/Project.php:1645
+msgid ""
+"When automatic computation is active, percentage is computed based on the "
+"average of all child project and task percent done."
+msgstr ""
+"When automatic computation is active, percentage is computed based on the "
+"average of all child project and task percent done."
+
+#: templates/pages/tools/project_task.html.twig
+msgid ""
+"When automatic computation is active, percentage is computed based on the "
+"average of all child task percent done."
+msgstr ""
+"When automatic computation is active, percentage is computed based on the "
+"average of all child task percent done."
 
 #: src/Config.php:532
 msgid "When connecting or updating"
@@ -22721,6 +24606,14 @@ msgstr "Wifi Port"
 #: src/NetworkPortWifi.php:172
 msgid "Wifi protocol version"
 msgstr "Wifi Protocol Version"
+
+#: src/Inventory/Conf.php:665
+msgid ""
+"Will attempt to create components from VM information sent from host, do not"
+" use if you plan to inventory any VM directly!"
+msgstr ""
+"Will attempt to create components from VM information sent from the host, do"
+" not use if you plan to inventory any VM directly!"
 
 #: templates/pages/assets/socket.html.twig src/Socket.php:453
 #: src/Socket.php:515 src/Socket.php:795 src/Socket.php:928 src/Socket.php:967
@@ -22878,6 +24771,31 @@ msgstr "Yesterday"
 msgid "You are about to delete this item. Do you confirm?"
 msgstr "You are about to delete this item. Are you sure?"
 
+#: src/Console/Migration/AbstractPluginToCoreCommand.php:105
+#, php-format
+msgid ""
+"You are about to launch migration of \"%s\" plugin data into GLPI core "
+"tables."
+msgstr ""
+"You are about to launch the migration of \"%s\" plugin data into GLPI core "
+"tables."
+
+#: src/Console/Migration/AppliancesPluginToCoreCommand.php:160
+msgid ""
+"You are about to launch migration of Appliances plugin data into GLPI core "
+"tables."
+msgstr ""
+"You are about to launch the migration of Appliances plugin data into GLPI "
+"core tables."
+
+#: src/Console/Migration/RacksPluginToCoreCommand.php:216
+msgid ""
+"You are about to launch migration of Racks plugin data into GLPI core "
+"tables."
+msgstr ""
+"You are about to launch the migration of Racks plugin data into GLPI core "
+"tables."
+
 #: templates/layout/parts/page_header_empty.html.twig
 #: templates/layout/parts/page_header.html.twig
 msgid "You are bypassing a needed update"
@@ -22900,6 +24818,16 @@ msgstr "You are not allowed to edit this type of record"
 msgid "You are not allowed to use this type of records"
 msgstr "You are not allowed to use this type of record"
 
+#: inc/config.php:242
+msgid ""
+"You are trying to use GLPI with outdated files compared to the version of "
+"the database. Please install the correct GLPI files corresponding to the "
+"version of your database."
+msgstr ""
+"You are trying to use GLPI with outdated files compared to the version of "
+"the database. Please install the correct GLPI files corresponding to the "
+"version of your database."
+
 #: src/Config.php:3063
 msgid "You are using a development version, be careful!"
 msgstr "You are using a development version, be careful!"
@@ -22911,6 +24839,14 @@ msgstr "You are using a pre-release version, be careful!"
 #: src/CommonDropdown.php:635
 msgid "You can also replace all uses of this dropdown by another."
 msgstr "You can also replace all uses of this dropdown by another."
+
+#: src/Transfer.php:4108
+msgid ""
+"You can continue to add elements to be transferred or execute the transfer "
+"now"
+msgstr ""
+"You can continue to add elements to be transferred or execute the transfer "
+"now"
 
 #: src/CommonDBTM.php:5614
 msgid "You can define an autofill template"
@@ -22924,13 +24860,41 @@ msgstr "You can delete or modify these accounts as well as the initial data."
 msgid "You can delete this migration error"
 msgstr "You can delete this migration error"
 
+#: src/System/Requirement/DataDirectoriesProtectedPath.php:139
+#, php-format
+msgid ""
+"You can ignore this suggestion if your web server root directory is \"%s\"."
+msgstr ""
+
 #: src/User.php:6411
 msgid "You can set its name to your organisation's name. "
 msgstr "You can set its name to your organization's name. "
 
+#: src/Config.php:1801
+msgid ""
+"You can use \"php bin/console cache:configure\" command to configure cache "
+"system."
+msgstr ""
+"You can use \"php bin/console cache:configure\" command to configure the "
+"cache system."
+
 #: src/AuthLDAP.php:994
 msgid "You can use a field name or an expression using various %{fieldname}"
 msgstr "You can use a field name or an expression using various %{fieldname}"
+
+#: templates/pages/admin/inventory/upload_form.html.twig
+#, php-format
+msgid ""
+"You can use this menu to upload one or several inventory files. Files must "
+"have a known extension (%1$s).\n"
+msgstr ""
+
+#: src/NotificationMailingSetting.php:336
+msgctxt "oauth"
+msgid ""
+"You can use this option to force redirection to the OAuth authentication "
+"process. This will trigger generation of a new OAuth token."
+msgstr ""
 
 #: src/ITILFollowup.php:354
 msgid "You can't add a followup without description"
@@ -22943,6 +24907,12 @@ msgstr "You can't add a task without a description."
 #: src/Entity.php:302
 msgid "You can't add an entity without name"
 msgstr "You can't add an entity without name"
+
+#: src/MassiveAction.php:1480
+msgid ""
+"You can't delete that item by massive actions, because it has sub-items"
+msgstr ""
+"You can't delete that item by massive actions, because it has sub-items"
 
 #: src/CommonDropdown.php:609
 msgid "You can't delete that item, because it has sub-items"
@@ -22990,6 +24960,14 @@ msgstr "You do not have rights to delete %s item."
 msgid "You do not have rights to restore %s item."
 msgstr "You do not have rights to restore %s item."
 
+#: src/Session.php:185
+msgid ""
+"You don't have access to this application because your account was "
+"deactivated or removed"
+msgstr ""
+"You don't have access to this application because your account was "
+"deactivated or removed"
+
 #: src/Html.php:643 src/Api/API.php:1052 src/Api/API.php:1835
 #: src/Api/API.php:1972 src/Api/API.php:2106 src/Api/API.php:2711
 msgid "You don't have permission to perform this action."
@@ -23011,6 +24989,29 @@ msgstr "You don't need the \"Migration Cleaner\" tool anymore..."
 msgid "You have been made a request to reset your account password."
 msgstr "You have been made a request to reset your account password."
 
+#: front/ticket_user.form.php:74 front/group_ticket.form.php:67
+#: front/group_problem.form.php:67 front/problem_user.form.php:79
+#: front/change_user.form.php:76 front/change_group.form.php:67
+msgid ""
+"You have been redirected because you no longer have access to this item"
+msgstr ""
+"You have been redirected because you no longer have access to this item"
+
+#: front/itilfollowup.form.php:139 front/itilsolution.form.php:110
+#: front/ticket.form.php:121 front/commonitiltask.form.php:149
+msgid ""
+"You have been redirected because you no longer have access to this ticket"
+msgstr ""
+"You have been redirected because you no longer have access to this ticket"
+
+#: front/crontask.php:78
+msgid ""
+"You have more automatic actions which need to run each minute than the "
+"number allow each run. Increase this config."
+msgstr ""
+"You have more automatic actions which need to run each minute than the "
+"number allowed each run. Increase this configuration."
+
 #: templates/layout/parts/saved_searches_list.html.twig
 msgid "You have not recorded any saved searches yet"
 msgstr "You have not recorded any saved searches yet"
@@ -23018,6 +25019,21 @@ msgstr "You have not recorded any saved searches yet"
 #: src/Toolbox.php:1150
 msgid "You have the latest available version"
 msgstr "You have the latest available version"
+
+#: src/Console/Migration/RacksPluginToCoreCommand.php:266
+#: src/Console/Migration/RacksPluginToCoreCommand.php:281
+#, php-format
+msgid ""
+"You have to install Racks plugin files in version %s to be able to continue."
+msgstr ""
+"You have to install the Racks plugin files in version %s to be able to "
+"continue."
+
+#: src/Console/Task/UnlockCommand.php:209
+msgid ""
+"You have to specify which tasks to unlock using --all or --task options."
+msgstr ""
+"You have to specify which tasks to unlock using --all or --task options."
 
 #: index.php:116
 msgid "You must accept cookies to reach this application"
@@ -23070,9 +25086,32 @@ msgstr "You need a superior GLPI-Network offer to access to this plugin (%s)"
 msgid "You need at least the %s subscription level to get this plugin"
 msgstr "You need at least the %s subscription level to get this plugin"
 
+#: src/GLPINetwork.php:283
+#, php-format
+msgid ""
+"You need help to integrate GLPI in your IT, have a bug fixed or benefit from pre-configured rules or dictionaries?\n"
+"\n"
+"We provide the %s space for you.\n"
+"GLPI-Network is a commercial service that includes a subscription for tier 3 support, ensuring the correction of bugs encountered with a commitment time.\n"
+"\n"
+"In this same space, you will be able to <b>contact an official partner</b> to help you with your GLPI integration."
+msgstr ""
+"Do you need help to integrate GLPI in your IT, have a bug fixed, or benefit from pre-configured rules or dictionaries?\n"
+"\n"
+"We provide the %s space for you.\n"
+"GLPI-Network is a commercial service that includes a subscription for tier 3 support, ensuring the correction of bugs encountered with a commitment time.\n"
+"\n"
+"In this same space, you will be able to <b>contact an official partner</b> to help you with your GLPI integration."
+
 #: js/impact.js:2481
 msgid "You need to select at least 2 assets to make a group"
 msgstr "You need to select at least 2 assets to make a group"
+
+#: src/Console/Migration/UnsignedKeysCommand.php:259
+msgid ""
+"You should try to update these plugins to their latest version and run the "
+"command again."
+msgstr ""
 
 #: templates/layout/parts/user_header.html.twig
 msgid "You will find it on the GLPI-PROJECT.org site."
@@ -23105,6 +25144,14 @@ msgstr "Your comment has been edited"
 msgid "Your database engine version seems too old: %s."
 msgstr "Your database engine version seems too old: %s."
 
+#: src/MailCollector.php:2043
+msgid ""
+"Your email could not be processed.\n"
+"If the problem persists, contact the administrator"
+msgstr ""
+"Your email could not be processed.\n"
+"If the problem persists, contact the administrator"
+
 #: src/Ticket.php:4771 src/Ticket.php:4928
 msgid "Your observed tickets"
 msgstr "Your Observed Tickets"
@@ -23116,6 +25163,12 @@ msgstr "Your password has been successfully updated."
 #: src/User.php:5287
 msgid "Your password has expired. You must change it to be able to login."
 msgstr "Your password has expired. You must change it to be able to log in."
+
+#: templates/password_form.html.twig src/User.php:5404
+msgid ""
+"Your password reset request has expired or is invalid. Please renew it."
+msgstr ""
+"Your password reset request has expired or is invalid. Please renew it."
 
 #: front/helpdesk.public.php:107 src/Central.php:456
 #, php-format
@@ -23845,8 +25898,16 @@ msgid "Create a New Type"
 msgstr "Create a New Type"
 
 #: templates/pages/inventoryorganization/types.html.twig
+msgid "Category"
+msgstr "Category"
+
+#: templates/pages/inventoryorganization/types.html.twig
 msgid "Type Name"
 msgstr "Type Name"
+
+#: templates/pages/inventoryorganization/types.html.twig
+msgid "Comments"
+msgstr "Comments"
 
 #: templates/pages/inventoryorganization/types.html.twig
 msgid "Create the Type"
@@ -23913,6 +25974,10 @@ msgid "Warnings"
 msgstr "Warnings"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Information"
+msgstr "Information"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Issue Type"
 msgstr "Issue Type"
 
@@ -23933,6 +25998,10 @@ msgid "Apply Filters"
 msgstr "Apply Filters"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Clear"
+msgstr "Clear"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Inventory is Coherent!"
 msgstr "Inventory is Coherent!"
 
@@ -23943,6 +26012,10 @@ msgstr "No issues detected. Your inventory is correctly structured."
 #: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Detected Issues"
 msgstr "Detected Issues"
+
+#: templates/pages/inventoryorganization/coherence.html.twig
+msgid "Message"
+msgstr "Message"
 
 #: templates/pages/inventoryorganization/coherence.html.twig
 msgid "Asset Type"
@@ -24007,6 +26080,10 @@ msgstr "How Labels Work"
 #: templates/pages/inventoryorganization/labeling.html.twig
 msgid "Type Code"
 msgstr "Type Code"
+
+#: templates/pages/inventoryorganization/labeling.html.twig
+msgid "Number"
+msgstr "Number"
 
 #: templates/pages/inventoryorganization/entity_wizard.html.twig
 msgid "Create a New Entity"
@@ -24149,6 +26226,14 @@ msgid "View All"
 msgstr "View All"
 
 #: templates/pages/inventoryorganization/locations.html.twig
+msgid "Name"
+msgstr "Name"
+
+#: templates/pages/inventoryorganization/locations.html.twig
+msgid "Assets"
+msgstr "Assets"
+
+#: templates/pages/inventoryorganization/locations.html.twig
 msgid "No locations defined yet"
 msgstr "No locations defined yet"
 
@@ -24261,8 +26346,24 @@ msgid "Delete this type?"
 msgstr "Delete this type?"
 
 #: common
+msgid "Close"
+msgstr "Close"
+
+#: common
+msgid "Error"
+msgstr "Error"
+
+#: common
+msgid "Warning"
+msgstr "Warning"
+
+#: common
 msgid "Info"
 msgstr "Info"
+
+#: common
+msgid "Type"
+msgstr "Type"
 
 #. UNH GLPI Custom Translations - Inventory Organization (PHP front files)
 #: front/inventoryorganization.type.php
@@ -24348,211 +26449,181 @@ msgstr "Peripherals"
 
 #. UNH GLPI Custom Translations - Auto sync from fr_FR
 msgid "Retour au tableau de bord"
-msgstr "Back to Dashboard"
+msgstr "Retour au tableau de bord"
 
 msgid "Gestion des entites"
-msgstr "Entity Management"
+msgstr "Gestion des entites"
 
 msgid "Entite creee avec succes."
-msgstr "Entity created successfully."
+msgstr "Entite creee avec succes."
 
 msgid "Creer une nouvelle entite"
-msgstr "Create a New Entity"
+msgstr "Creer une nouvelle entite"
 
 msgid "Nom de l entite"
-msgstr "Entity Name"
+msgstr "Nom de l entite"
 
 msgid "Entite parente"
-msgstr "Parent Entity"
+msgstr "Entite parente"
 
 msgid "Racine"
-msgstr "Root"
+msgstr "Racine"
 
 msgid "Creer l entite"
-msgstr "Create Entity"
+msgstr "Creer l entite"
 
 msgid "Vous n avez pas les droits pour creer une entite."
-msgstr "You do not have permission to create an entity."
+msgstr "Vous n avez pas les droits pour creer une entite."
 
 msgid "Acces rapide"
-msgstr "Quick Access"
+msgstr "Acces rapide"
 
 msgid "Liste des entites"
-msgstr "Entity List"
+msgstr "Liste des entites"
 
 msgid "Voir toutes les entites existantes"
-msgstr "View all existing entities"
+msgstr "Voir toutes les entites existantes"
 
 msgid "Gestion des lieux"
-msgstr "Location Management"
+msgstr "Gestion des lieux"
 
 msgid "Types de materiel"
-msgstr "Equipment Types"
+msgstr "Types de materiel"
 
 msgid "Guide rapide"
-msgstr "Quick Guide"
+msgstr "Guide rapide"
 
 msgid "Qu est ce qu une entite ?"
-msgstr "What is an entity?"
+msgstr "Qu est ce qu une entite ?"
 
 msgid "Hierarchie recommandee"
-msgstr "Recommended Hierarchy"
+msgstr "Hierarchie recommandee"
 
 msgid "UNH > Faculte > Departement"
-msgstr "UNH > Faculty > Department"
+msgstr "UNH > Faculte > Departement"
 
 msgid "Entites existantes"
-msgstr "Existing Entities"
+msgstr "Entites existantes"
 
 msgid "Aucune entite pour le moment"
-msgstr "No entities yet"
+msgstr "Aucune entite pour le moment"
 
 msgid "Lieu cree avec succes."
-msgstr "Location created successfully."
+msgstr "Lieu cree avec succes."
 
 msgid "Creer un nouveau lieu"
-msgstr "Create a New Location"
+msgstr "Creer un nouveau lieu"
 
 msgid "Nom du lieu"
-msgstr "Location Name"
+msgstr "Nom du lieu"
 
 msgid "Lieu parent"
-msgstr "Parent Location"
+msgstr "Lieu parent"
 
 msgid "Aucun (niveau racine)"
-msgstr "None (root level)"
+msgstr "Aucun (niveau racine)"
 
 msgid "Batiment"
-msgstr "Building"
+msgstr "Batiment"
 
 msgid "Salle"
-msgstr "Room"
+msgstr "Salle"
 
 msgid "Creer le lieu"
-msgstr "Create Location"
+msgstr "Creer le lieu"
 
 msgid "Vous n avez pas les droits pour creer un lieu."
-msgstr "You do not have permission to create a location."
+msgstr "Vous n avez pas les droits pour creer un lieu."
 
 msgid "Suggestions de structure"
-msgstr "Structure Suggestions"
+msgstr "Suggestions de structure"
 
 msgid "Structure: Campus > Batiment > Etage > Salle"
-msgstr "Structure: Campus > Building > Floor > Room"
+msgstr "Structure: Campus > Batiment > Etage > Salle"
 
 msgid "Lieux existants"
-msgstr "Existing Locations"
+msgstr "Lieux existants"
 
 msgid "Lieux definis"
-msgstr "Defined Locations"
+msgstr "Lieux definis"
 
 msgid "Liste complete des lieux"
-msgstr "Complete Location List"
+msgstr "Liste complete des lieux"
 
 msgid "Creer un nouveau type"
-msgstr "Create a New Type"
+msgstr "Creer un nouveau type"
 
 msgid "Categorie"
-msgstr "Category"
+msgstr "Categorie"
 
 msgid "Nom du type"
-msgstr "Type Name"
+msgstr "Nom du type"
 
 msgid "Description du type"
-msgstr "Type Description"
+msgstr "Description du type"
 
 msgid "Creer le type"
-msgstr "Create Type"
+msgstr "Creer le type"
 
 msgid "Types courants"
-msgstr "Common Types"
+msgstr "Types courants"
 
 msgid "Cliquer pour pre-remplir automatiquement :"
-msgstr "Click to auto-fill:"
+msgstr "Cliquer pour pre-remplir automatiquement :"
 
 msgid "Types existants"
-msgstr "Existing Types"
+msgstr "Types existants"
 
 msgid "Configuration de l etiquetage"
-msgstr "Labeling Configuration"
+msgstr "Configuration de l etiquetage"
 
 msgid "Format de l etiquette"
-msgstr "Label Format"
+msgstr "Format de l etiquette"
 
 msgid "Nombre de chiffres (padding)"
-msgstr "Number of digits (padding)"
+msgstr "Nombre de chiffres (padding)"
 
 msgid "Codes des types"
-msgstr "Type Codes"
+msgstr "Codes des types"
 
 msgid "Apercu des etiquettes"
-msgstr "Label Preview"
+msgstr "Apercu des etiquettes"
 
 msgid "Comment fonctionne l etiquetage"
-msgstr "How Labeling Works"
+msgstr "Comment fonctionne l etiquetage"
 
 msgid "Le format suit la logique suivante :"
-msgstr "The format follows this logic:"
+msgstr "Le format suit la logique suivante :"
 
 msgid "Verification de coherence de l inventaire"
-msgstr "Inventory Coherence Check"
+msgstr "Verification de coherence de l inventaire"
 
 msgid "Total des problemes"
-msgstr "Total Issues"
+msgstr "Total des problemes"
 
 msgid "Comprendre les niveaux"
-msgstr "Understanding Severity Levels"
+msgstr "Comprendre les niveaux"
 
 msgid "PC Bureau"
-msgstr "Desktop PC"
+msgstr "PC Bureau"
 
 msgid "Ordinateur portable"
-msgstr "Laptop"
+msgstr "Ordinateur portable"
 
 msgid "Station de travail"
-msgstr "Workstation"
+msgstr "Station de travail"
 
 msgid "Serveur"
-msgstr "Server"
+msgstr "Serveur"
 
 msgid "Projecteur"
-msgstr "Projector"
+msgstr "Projecteur"
 
 msgid "Jet d encre"
-msgstr "Inkjet Printer"
+msgstr "Jet d encre"
 
 msgid "Multifonction"
-msgstr "Multifunction Printer"
-
-
-
-#. UNH GLPI - Profile & User field translations
-msgid "Type de public"
-msgstr "Audience Type"
-
-msgid "-- Sélectionnez --"
-msgstr "-- Select --"
-
-msgid "Étudiant"
-msgstr "Student"
-
-msgid "Enseignant"
-msgstr "Teacher"
-
-msgid "Personnel administratif"
-msgstr "Administrative Staff"
-
-msgid "Technicien universitaire"
-msgstr "University Technician"
-
-msgid "Invité externe"
-msgstr "External Guest"
-
-msgid "Autre"
-msgstr "Other"
-
-msgid "Type d'utilisateur"
-msgstr "User Type"
+msgstr "Multifonction"
 
 #: templates/anonymous_helpdesk.html.twig
 msgid "Select a category"

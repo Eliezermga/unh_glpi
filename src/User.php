@@ -2491,27 +2491,6 @@ HTML;
         } else {
             echo "<tr class='tab_bg_1'><td colspan='2'></td></tr>";
         }
-        // UNH - Champ type d'utilisateur (avec traductions correctes)
-        echo "<tr class='tab_bg_1'><td>" . __("Type d'utilisateur") . "</td><td>";
-        Dropdown::showFromArray(
-            'user_type',
-            [
-                ''            => __('-- Sélectionnez --'),
-                'student'     => __('Étudiant'),
-                'teacher'     => __('Enseignant'),
-                'admin_staff' => __('Personnel administratif'),
-                'tech_staff'  => __('Technicien universitaire'),
-                'external'    => __('Invité externe'),
-                'other'       => __('Autre')
-            ],
-            [
-                'value'   => $this->fields['user_type'] ?? '',
-                'width'   => '100%',
-                'display' => true,
-            ]
-        );
-        echo "</td></tr>\n";
-        // ===================== FIN
 
         $surnamerand = mt_rand();
         echo "<tr class='tab_bg_1'><td><label for='textfield_realname$surnamerand'>" . __('Surname') . "</label></td><td>";
@@ -2522,14 +2501,7 @@ HTML;
                 'id'    => "textfield_realname$surnamerand",
             ]
         );
-        //echo "</td></tr>";
-        //echo "<tr class='tab_bg_1'><td>" . __('Ticket creation form on login') . "</td><td>";
-Html::showCheckbox([
-   'name'    => 'create_ticket_on_login',
-   'checked' => $this->fields['create_ticket_on_login'] ?? 0
-]);
-
-echo "</td></tr>\n";
+        echo "</td></tr>";
 
         $firstnamerand = mt_rand();
         echo "<tr class='tab_bg_1'><td><label for='textfield_firstname$firstnamerand'>" . __('First name') . "</label></td><td>";
@@ -2541,13 +2513,13 @@ echo "</td></tr>\n";
             ]
         );
         echo "</td></tr>";
+
        //do some rights verification
         if (
             self::canUpdate()
             && (!$extauth || empty($ID))
             && $caneditpassword
-        )   
-        {
+        ) {
             echo "<tr class='tab_bg_1'>";
             echo "<td><label for='password'>" . __('Password') . "</label></td>";
             echo "<td><input id='password' type='password' name='password' value='' size='20'
@@ -2575,9 +2547,25 @@ echo "</td></tr>\n";
 
         if ($DB->use_timezones || Session::haveRight("config", READ)) {
             echo "<tr class='tab_bg_1'>";
-            //------echo "<td><label for='timezone'>" . __('Time zone') . "</label></td><td>";
-         
-            //echo "</td></tr>";
+            echo "<td><label for='timezone'>" . __('Time zone') . "</label></td><td>";
+            if ($DB->use_timezones) {
+                $timezones = $DB->getTimezones();
+                Dropdown::showFromArray(
+                    'timezone',
+                    $timezones,
+                    [
+                        'value'                 => $this->fields["timezone"],
+                        'display_emptychoice'   => true,
+                        'emptylabel'            => __('Use server configuration')
+                    ]
+                );
+            } else if (Session::haveRight("config", READ)) {
+               // Display a warning but only if user is more or less an admin
+                echo __('Timezone usage has not been activated.')
+                . ' '
+                . sprintf(__('Run the "%1$s" command to activate it.'), 'php bin/console database:enable_timezones');
+            }
+            echo "</td></tr>";
         }
 
         echo "<tr class='tab_bg_1'>";
@@ -2655,7 +2643,7 @@ echo "</td></tr>\n";
             echo "<td colspan='2'><input type='hidden' name='authtype' value='1'></td>";
         }
 
-        /*echo "</tr>";
+        echo "</tr>";
 
         $mobilerand = mt_rand();
         echo "<tr class='tab_bg_1'>";
@@ -2666,8 +2654,8 @@ echo "</td></tr>\n";
                 'value' => $this->fields['mobile'],
                 'id'    => "textfield_mobile$mobilerand",
             ]
-        );*/
-        /*echo "</td>";
+        );
+        echo "</td>";
         $catrand = mt_rand();
         echo "<td><label for='dropdown_usercategories_id$catrand'>" . _n('Category', 'Categories', 1) . "</label></td><td>";
         UserCategory::dropdown(['value' => $this->fields["usercategories_id"], 'rand' => $catrand]);
@@ -2682,12 +2670,12 @@ echo "</td></tr>\n";
                 'value' => $this->fields['phone2'],
                 'id'    => "textfield_phone2$phone2rand",
             ]
-        );*/
-        /*echo "</td>";
+        );
+        echo "</td>";
         echo "<td rowspan='4' class='middle'><label for='comment'>" . __('Comments') . "</label></td>";
         echo "<td class='center middle' rowspan='4'>";
         echo "<textarea class='form-control' id='comment' name='comment' >" . $this->fields["comment"] . "</textarea>";
-        echo "</td></tr>";*/
+        echo "</td></tr>";
 
         $admnumrand = mt_rand();
         echo "<tr class='tab_bg_1'><td><label for='textfield_registration_number$admnumrand'>" . _x('user', 'Administrative number') . "</label></td><td>";
@@ -2698,12 +2686,12 @@ echo "</td></tr>\n";
                 'id'    => "textfield_registration_number$admnumrand",
             ]
         );
-        /*echo "</td></tr>";
+        echo "</td></tr>";
 
         $titlerand = mt_rand();
         echo "<tr class='tab_bg_1'><td><label for='dropdown_usertitles_id$titlerand'>" . _x('person', 'Title') . "</label></td><td>";
         UserTitle::dropdown(['value' => $this->fields["usertitles_id"], 'rand' => $titlerand]);
-        echo "</td></tr>";*/
+        echo "</td></tr>";
 
         echo "<tr class='tab_bg_1'>";
         if (!empty($ID)) {
@@ -2723,7 +2711,7 @@ echo "</td></tr>\n";
 
         if (empty($ID)) {
             echo "<tr class='tab_bg_1'>";
-           // echo "<th colspan='2'>" . _n('Authorization', 'Authorizations', 1) . "</th>";
+            echo "<th colspan='2'>" . _n('Authorization', 'Authorizations', 1) . "</th>";
             $recurrand = mt_rand();
             echo "<td><label for='dropdown__is_recursive$recurrand'>" .  __('Recursive') . "</label></td><td>";
             Dropdown::showYesNo("_is_recursive", 0, -1, ['rand' => $recurrand]);
@@ -3053,7 +3041,7 @@ echo "</td></tr>\n";
 
             if ($DB->use_timezones || Session::haveRight("config", READ)) {
                 echo "<tr class='tab_bg_1'>";
-                /*echo "<td><label for='timezone'>" . __('Time zone') . "</label></td><td>";
+                echo "<td><label for='timezone'>" . __('Time zone') . "</label></td><td>";
                 if ($DB->use_timezones) {
                     $timezones = $DB->getTimezones();
                     Dropdown::showFromArray(
@@ -3071,7 +3059,7 @@ echo "</td></tr>\n";
                     . ' '
                     . sprintf(__('Run the "%1$s" command to activate it.'), 'php bin/console database:enable_timezones');
                 }
-                echo "</td>";*/
+                echo "</td>";
                 if (
                     $extauth
                     || !Session::haveRight("password_update", "1")
@@ -3757,7 +3745,7 @@ echo "</td></tr>\n";
         ];
 
         $tab[] = [
-            'id'                 => '231',
+            'id'                 => '23',
             'table'              => $this->getTable(),
             'field'              => 'date_sync',
             'datatype'           => 'datetime',
@@ -6583,7 +6571,6 @@ echo "</td></tr>\n";
 
         return $user;
     }
-    
 
     /**
      * Get name of the user with ID

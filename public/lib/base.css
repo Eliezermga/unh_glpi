@@ -4093,6 +4093,8 @@ readers do not read off random characters that represent icons */
 .fa-neuter::before {
   content: "\f22c"; }
 
+.fa-newspaper::before {
+  content: "\f1ea"; }
 
 .fa-not-equal::before {
   content: "\f53e"; }
