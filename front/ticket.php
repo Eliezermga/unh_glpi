@@ -55,6 +55,28 @@ JS;
 
 echo Html::manageRefreshPage(false, $refresh_callback);
 
+// UNH - Lien vers réponses rapides
+if (Session::haveRight('ticket', READ)) {
+// Affichage du bloc d'astuce avec lien vers les réponses rapides
+echo '<div class="alert alert-info" style="margin: 10px 0;">';
+echo '<i class="fas fa-lightbulb"></i> ';
+echo '<strong>' . __('Astuce :') . '</strong> ';
+$link = '<a href="' . $CFG_GLPI['root_doc'] . '/front/unh_reponses_rapides.php" class="btn btn-sm btn-primary" target="_blank">' .
+        '<i class="fas fa-comments"></i> ' . __('Réponses Rapides UNH') .
+        '</a>';
+echo sprintf(__('Utilisez les %s pour répondre plus rapidement aux tickets courants.'), $link);
+echo '</div>';
+
+    echo '<div class="alert alert-info" style="margin: 10px 0;">';
+    echo '<i class="fas fa-lightbulb"></i> ';
+    echo '<strong>Astuce :</strong> Utilisez les ';
+    echo '<a href="' . $CFG_GLPI['root_doc'] . '/front/unh_reponses_rapides.php" class="btn btn-sm btn-primary" target="_blank">';
+    echo '<i class="fas fa-comments"></i> Réponses Rapides UNH';
+    echo '</a>';
+    echo ' pour répondre plus rapidement aux tickets courants.';
+    echo '</div>';
+}
+
 Search::show('Ticket');
 
 if (Session::getCurrentInterface() == "helpdesk") {
