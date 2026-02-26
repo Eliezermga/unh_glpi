@@ -1,0 +1,51 @@
+{% extends "generic_show_form.html.twig" %}
+{% import 'components/form/fields_macros.html.twig' as fields %}
+{% set params  = params ?? [] %}
+
+{% block more_fields %}
+
+   {# Signature administrative #}
+   {{ fields.dropdownYesNo(
+      'is_autosign',
+      item.fields['is_autosign'],
+      __('Signature automatique de l’administration')
+   ) }}
+
+   {# Matricule étudiant #}
+   {{ fields.autoNameField(
+      'dns_name',
+      item,
+      __('Matricule de l’étudiant'),
+      withtemplate
+   ) }}
+
+   {# Faculté ou département #}
+   {{ fields.autoNameField(
+      'dns_suffix',
+      item,
+      __('Faculté / Département'),
+      withtemplate
+   ) }}
+
+   {# Motif de la demande #}
+   {{ fields.textareaField(
+      'command',
+      item.fields['command'],
+      __('Motif de la demande de certificat')
+   ) }}
+
+   {# Informations académiques #}
+   {{ fields.textareaField(
+      'certificate_request',
+      item.fields['certificate_request'],
+      __('Informations académiques de l’étudiant')
+   ) }}
+
+   {# Certificat généré #}
+   {{ fields.textareaField(
+      'certificate_item',
+      item.fields['certificate_item'],
+      __('Certificat académique généré')
+   ) }}
+
+{% endblock %}
