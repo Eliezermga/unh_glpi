@@ -1,0 +1,113 @@
+{% extends "generic_show_form.html.twig" %}
+{% import 'components/form/fields_macros.html.twig' as fields %}
+{% set params  = params ?? [] %}
+
+{% block more_fields %}
+
+   {# Numéro du contrat académique #}
+   {{ fields.autoNameField(
+      'num',
+      item,
+      __('Numéro du contrat académique'),
+      withtemplate
+   ) }}
+
+   {# Durée du contrat #}
+   {{ fields.dropdownNumberField(
+      'duration',
+      item.fields['duration'],
+      __('Durée du contrat (en mois)'),
+      {
+         'rand': rand,
+         'min': 1,
+         'max': 120,
+         'step': 1,
+         'toadd': [constant('Dropdown::EMPTY_VALUE')],
+         'unit': 'month'
+      }
+   ) }}
+
+   {# Délai de préavis #}
+   {{ fields.dropdownNumberField(
+      'notice',
+      item.fields['notice'],
+      __('Délai de préavis (en mois)'),
+      {
+         'rand': rand,
+         'min': 0,
+         'max': 12,
+         'step': 1,
+         'unit': 'month'
+      }
+   ) }}
+
+   {# Code administratif du contrat #}
+   {{ fields.autoNameField(
+      'accounting_number',
+      item,
+      __('Code administratif du contrat'),
+      withtemplate
+   ) }}
+
+   {# Période de renouvellement #}
+   {{ fields.dropdownNumberField(
+      'periodicity',
+      item.fields['periodicity'],
+      __('Période de renouvellement'),
+      {
+         'rand': rand,
+         'min': 12,
+         'max': 60,
+         'step': 12,
+         'unit': 'month'
+      }
+   ) }}
+
+   {# Période de paiement #}
+   {{ fields.dropdownNumberField(
+      'billing',
+      item.fields['billing'],
+      __('Période de paiement'),
+      {
+         'rand': rand,
+         'min': 12,
+         'max': 60,
+         'step': 12,
+         'unit': 'month'
+      }
+   ) }}
+
+   {# Mode de reconduction #}
+   {{ fields.dropdownArrayField(
+      'renewal',
+      item.fields['renewal'],
+      {
+         (constant('Contract::RENEWAL_NEVER')): __('Sans reconduction'),
+         (constant('Contract::RENEWAL_TACIT')): __('Reconduction tacite'),
+         (constant('Contract::RENEWAL_EXPRESS')): __('Reconduction expresse')
+      },
+      __('Mode de reconduction du contrat')
+   ) }}
+
+   {# Nombre maximum de bénéficiaires #}
+   {{ fields.dropdownNumberField(
+      'max_links_allowed',
+      item.fields['max_links_allowed'],
+      __('Nombre maximum de bénéficiaires'),
+      {
+         'min': 1,
+         'max': 1000,
+         'step': 1,
+         'toadd': {0: __('Illimité')}
+      }
+   ) }}
+
+   {# Alertes administratives #}
+   {{ fields.dropdownArrayField(
+      'alert',
+      item.fields['alert'],
+      item.getAlertName(),
+      __('Alertes administratives par email')
+   ) }}
+
+{% endblock %}
