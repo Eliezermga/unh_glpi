@@ -1,18 +1,12 @@
 {#
  # ---------------------------------------------------------------------
-<<<<<<< HEAD
  # Formulaire FINAL : Université Nouveaux Horizons (UNH)
  # Module : Gestion des Lignes Budgétaires
-=======
- # Formulaire : Gestion des Lignes Budgétaires / Projets UNH
- # Université Nouveaux Horizons
->>>>>>> ef8c6cbf4a4455a4ce60b226f78c842bc1fa28ae
  # ---------------------------------------------------------------------
  #}
 
 {% extends "generic_show_form.html.twig" %}
 {% import 'components/form/fields_macros.html.twig' as fields %}
-<<<<<<< HEAD
 {% set params = params ?? [] %}
 
 {% block form_fields %}
@@ -76,91 +70,4 @@
    {% if params['withtemplate'] == 1 %}
       {{ fields.hiddenField('withtemplate', '1') }}
    {% endif %}
-=======
-
-{% block more_fields %}
-
-{# En-tête avec logo ou style UNH (Bleu foncé et Rouge sont souvent les couleurs UNH) #}
-<div class="mb-4 p-2 border-bottom">
-    <h2 style="color:#003366; font-size: 1.5rem;">
-        <i class="fas fa-network-wired me-2"></i>
-        Gestion des Lignes – UNH
-    </h2>
-    <small class="text-muted">Configuration des ressources pour l'année académique en cours.</small>
-</div>
-
-{# 1. Identifiants de la ligne #}
-{{ fields.textField(
-   'name',
-   item.fields['name'],
-   'Intitulé de la ligne UNH',
-   {
-      'placeholder': 'Ex: Ligne Fibre Optique Laboratoire L1'
-   }
-) }}
-
-{{ fields.textField(
-   'code',
-   item.fields['code'],
-   'Référence / Code UNH',
-   {
-      'placeholder': 'Ex: UNH-LOG-2026-001'
-   }
-) }}
-
-{# 2. Classification #}
-{{ fields.dropdownArrayField(
-   'line_type',
-   item.fields['line_type'],
-   {
-      1: 'Académique (Enseignement)',
-      2: 'Administrative (Direction)',
-      3: 'Pédagogique (Labos)',
-      4: 'Infrastructures (Campus)'
-   },
-   'Nature de la ligne'
-) }}
-
-{# 3. Affectation #}
-{{ fields.textField(
-   'faculty',
-   item.fields['faculty'],
-   'Faculté / Département',
-   {
-      'placeholder': 'Ex: Faculté des Sciences Informatiques'
-   }
-) }}
-
-{{ fields.textField(
-   'academic_year',
-   item.fields['academic_year'],
-   'Année Académique',
-   {
-      'placeholder': '2025 – 2026'
-   }
-) }}
-
-{# 4. Responsabilité #}
-{{ fields.textField(
-   'responsible',
-   item.fields['responsible'],
-   'Responsable de la ligne',
-   {
-      'placeholder': 'Prénom et Nom du doyen ou chef de service'
-   }
-) }}
-
-<hr>
-
-{# 5. Notes #}
-{{ fields.textareaField(
-   'comment',
-   item.fields['comment'],
-   'Observations institutionnelles',
-   {
-      'rows': 4
-   }
-) }}
-
->>>>>>> ef8c6cbf4a4455a4ce60b226f78c842bc1fa28ae
 {% endblock %}
